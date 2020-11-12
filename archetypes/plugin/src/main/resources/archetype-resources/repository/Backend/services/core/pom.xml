@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>${groupId}</groupId>
+    <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-backend-services</artifactId>
+    <version>${version}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>${artifactId}</artifactId>
+  <packaging>jar</packaging>
+
+  <name>${artifactId}</name>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+  <dependencies>
+
+    <!-- provided -->
+
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-remote-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.alfresco</groupId>
+      <artifactId>alfresco-repository</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-alfresco-fixes</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-alfresco-module</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-fixes</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-module</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-config</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- compile -->
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-core</artifactId>
+    </dependency>
+
+  </dependencies>
+
+</project>

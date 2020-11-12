@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+    name="edu_sharing-plugin"
+    xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0
+                        http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd">
+<requiredProperties>
+    <requiredProperty key="groupId">
+      <defaultValue>org.edu_sharing</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="version">
+      <defaultValue>git</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="gitignore">
+      <defaultValue>.gitignore</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="gitattributes">
+      <defaultValue>.gitattributes</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  <fileSets>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory>.mvn</directory>
+      <includes>
+        <include>settings.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>.mvn</directory>
+      <includes>
+        <include>*.xml</include>
+      </includes>
+      <excludes>
+        <exclude>settings.xml</exclude>
+      </excludes>
+    </fileSet>
+    <fileSet filtered="true" encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>README.md</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>__gitattributes__</include>
+        <include>__gitignore__</include>
+        <include>.gitlab-ci.yml</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <modules>
+    <module id="edu_sharing-plugin-${rootArtifactId}-deploy" dir="deploy" name="edu_sharing-plugin-${rootArtifactId}-deploy">
+      <modules>
+        <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker" dir="docker" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker">
+          <fileSets>
+            <fileSet filtered="true" encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>README.md</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>deploy.sh</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+          <modules>
+            <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-deploy" dir="deploy" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-deploy">
+              <fileSets>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+            <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering" dir="rendering" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering">
+              <fileSets>
+                <fileSet filtered="true" encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>README.md</include>
+                  </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>.env.sample</include>
+                    <include>deploy.sh</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+              <modules>
+                <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-build" dir="build" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-build">
+                  <modules>
+                    <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-build-init" dir="init" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-build-init">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-build-service" dir="service" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-build-service">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                  </modules>
+                </module>
+                <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-deploy" dir="deploy" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-rendering-deploy">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+            <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository" dir="repository" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository">
+              <fileSets>
+                <fileSet filtered="true" encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>README.md</include>
+                  </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>.env.sample</include>
+                    <include>deploy.sh</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+              <modules>
+                <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build" dir="build" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build">
+                  <modules>
+                    <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build-search" dir="search" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build-search">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build-service" dir="service" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build-service">
+                      <fileSets>
+                        <fileSet filtered="true" encoding="UTF-8">
+                          <directory>src/main/build</directory>
+                          <includes>
+                            <include>Dockerfile</include>
+                          </includes>
+                        </fileSet>
+                        <fileSet encoding="UTF-8">
+                          <directory>src/main/build</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                          <excludes>
+                            <exclude>Dockerfile</exclude>
+                          </excludes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build-transform" dir="transform" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-build-transform">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                  </modules>
+                </module>
+                <module id="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-deploy" dir="deploy" name="edu_sharing-plugin-${rootArtifactId}-deploy-docker-repository-deploy">
+                  <fileSets>
+                    <fileSet filtered="true" encoding="UTF-8">
+                      <directory>src/main/deploy</directory>
+                      <includes>
+                        <include>repository-debug.yml</include>
+                      </includes>
+                    </fileSet>
+                    <fileSet encoding="UTF-8">
+                      <directory>src/main/deploy</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                      <excludes>
+                        <exclude>repository-debug.yml</exclude>
+                      </excludes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+          </modules>
+        </module>
+        <module id="edu_sharing-plugin-${rootArtifactId}-deploy-installer" dir="installer" name="edu_sharing-plugin-${rootArtifactId}-deploy-installer">
+          <modules>
+            <module id="edu_sharing-plugin-${rootArtifactId}-deploy-installer-rendering" dir="rendering" name="edu_sharing-plugin-${rootArtifactId}-deploy-installer-rendering">
+              <fileSets>
+                <fileSet filtered="true" encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>README.md</include>
+                  </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>deploy.sh</include>
+                  </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+            <module id="edu_sharing-plugin-${rootArtifactId}-deploy-installer-repository" dir="repository" name="edu_sharing-plugin-${rootArtifactId}-deploy-installer-repository">
+              <fileSets>
+                <fileSet filtered="true" encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>README.md</include>
+                  </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>deploy.sh</include>
+                  </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+          </modules>
+        </module>
+      </modules>
+    </module>
+    <module id="edu_sharing-plugin-${rootArtifactId}-repository" dir="repository" name="edu_sharing-plugin-${rootArtifactId}-repository">
+      <modules>
+        <module id="edu_sharing-plugin-${rootArtifactId}-repository-backend" dir="Backend" name="edu_sharing-plugin-${rootArtifactId}-repository-backend">
+          <modules>
+            <module id="edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco" dir="alfresco" name="edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco">
+              <modules>
+                <module id="edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-fixes" dir="fixes" name="edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-fixes">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module id="edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-module" dir="module" name="edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-module">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory></directory>
+                      <includes>
+                        <include>__gitignore__</include>
+                      </includes>
+                    </fileSet>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+            <module id="edu_sharing-plugin-${rootArtifactId}-repository-backend-services" dir="services" name="edu_sharing-plugin-${rootArtifactId}-repository-backend-services">
+              <modules>
+                <module id="edu_sharing-plugin-${rootArtifactId}-repository-backend-services-core" dir="core" name="edu_sharing-plugin-${rootArtifactId}-repository-backend-services-core">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+            <module id="edu_sharing-plugin-${rootArtifactId}-repository-backend-webapp" dir="webapp" name="edu_sharing-plugin-${rootArtifactId}-repository-backend-webapp">
+              <fileSets>
+                <fileSet encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>__gitignore__</include>
+                  </includes>
+                </fileSet>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+          </modules>
+        </module>
+        <module id="edu_sharing-plugin-${rootArtifactId}-repository-config" dir="config" name="edu_sharing-plugin-${rootArtifactId}-repository-config">
+          <fileSets>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>__gitignore__</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory>src</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+        </module>
+        <module id="edu_sharing-plugin-${rootArtifactId}-repository-webapp" dir="webapp" name="edu_sharing-plugin-${rootArtifactId}-repository-webapp">
+          <fileSets>
+            <fileSet encoding="UTF-8">
+              <directory>src</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+        </module>
+      </modules>
+    </module>
+  </modules>
+</archetype-descriptor>

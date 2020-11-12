@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>${groupId}</groupId>
+    <artifactId>edu_sharing-extension-${rootArtifactId}-repository-backend</artifactId>
+    <version>${version}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>${artifactId}</artifactId>
+  <packaging>war</packaging>
+
+  <name>${artifactId}</name>
+
+  <build>
+
+    <finalName>edu-sharing</finalName>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>verify</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>add-third-party</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <outputDirectory>src/main/webapp</outputDirectory>
+              <thirdPartyFilename>THIRD-PARTY.txt</thirdPartyFilename>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+  <dependencies>
+
+    <!-- compile -->
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-webapp</artifactId>
+      <type>war</type>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-extension-${rootArtifactId}-repository-backend-services-core</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+
+    <profile>
+
+      <id>plugin-cluster</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.PLUGIN_CLUSTER_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-plugin-cluster-repository-backend-services-core</artifactId>
+          <exclusions>
+            <exclusion>
+              <groupId>log4j</groupId>
+              <artifactId>log4j</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-api</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>plugin-logineo-idm</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.PLUGIN_LOGINEO_IDM_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-plugin-logineo-idm-repository-backend-services-core</artifactId>
+          <exclusions>
+            <exclusion>
+              <groupId>log4j</groupId>
+              <artifactId>log4j</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-api</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>plugin-remote</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.PLUGIN_REMOTE_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-plugin-remote-repository-backend-services-core</artifactId>
+          <exclusions>
+            <exclusion>
+              <groupId>log4j</groupId>
+              <artifactId>log4j</artifactId>
+            </exclusion>
+            <exclusion>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-api</artifactId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+  </profiles>
+
+</project>

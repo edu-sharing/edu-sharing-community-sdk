@@ -1,4 +1,7 @@
+#set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+
 FROM docker.io/tomcat:${symbol_dollar}{repository.tomcat.version}-jdk8
 
 ########################################################################################################################
@@ -28,15 +31,16 @@ ENV PATH $ALF_HOME/bin:$PATH
 
 WORKDIR $ALF_HOME
 
+RUN set -eux \
+    && ln -sf /usr/local/tomcat tomcat
+
 COPY assets/entrypoint.sh bin/
 
 RUN set -eux \
     && chmod +x bin/entrypoint.sh
 
-RUN useradd -ms /bin/bash worker
-
 RUN set -eux \
-    && ln -sf /usr/local/tomcat tomcat \
+    && adduser --uid=1000 --home=$ALF_HOME --disabled-password --gecos "" --shell=/bin/bash worker \
     && chown -RL worker:worker . \
     && chown -RL worker:worker /tmp
 
@@ -53,7 +57,7 @@ RUN set -eux \
         's|^[#]*\s*shared\.loader=.*|shared.loader=${symbol_dollar}{catalina.base}/shared/classes,${symbol_dollar}{catalina.base}/shared/lib/*.jar|' \
         tomcat/conf/catalina.properties
 
-COPY artifacts/postgresql-${symbol_dollar}{repository.postgres.client.version}.jar tomcat/lib/
+COPY artifacts/postgresql-${symbol_dollar}{repository.postgresql.client.version}.jar tomcat/lib/
 COPY artifacts/redisson-all-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
 COPY artifacts/redisson-tomcat-7-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
 
@@ -197,7 +201,6 @@ CMD ["catalina.sh", "run"]
 
 ########################################################################################################################
 
-LABEL community.version=${symbol_dollar}{community.repository.version}
 LABEL git.branch=${symbol_dollar}{git.branch}
 LABEL git.closest.tag.name=${symbol_dollar}{git.closest.tag.name}
 LABEL git.commit.id=${symbol_dollar}{git.commit.id}

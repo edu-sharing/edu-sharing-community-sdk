@@ -1,4 +1,7 @@
+#set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+
 # edu-sharing plugin ${rootArtifactId} - deploy docker rendering
 
 Prerequisites

@@ -1,16 +1,24 @@
+#set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                               https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
   <mirrors>
+
     <mirror>
       <id>mirror</id>
       <url>https://artifacts.edu-sharing.com/repository/public-releases/</url>
       <mirrorOf>central</mirrorOf>
     </mirror>
+
   </mirrors>
+
   <servers>
+
     <server>
       <id>edu-sharing.plugin.cluster.releases</id>
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
@@ -21,6 +29,7 @@
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
       <password>${symbol_dollar}{env.MAVEN_REPO_PASS}</password>
     </server>
+
     <server>
       <id>edu-sharing.plugin.logineo-idm.releases</id>
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
@@ -31,6 +40,7 @@
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
       <password>${symbol_dollar}{env.MAVEN_REPO_PASS}</password>
     </server>
+
     <server>
       <id>edu-sharing.plugin.remote.releases</id>
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
@@ -38,6 +48,12 @@
     </server>
     <server>
       <id>edu-sharing.plugin.remote.snapshots</id>
+      <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
+      <password>${symbol_dollar}{env.MAVEN_REPO_PASS}</password>
+    </server>
+
+    <server>
+      <id>edu-sharing.extension.${rootArtifactId}.helm</id>
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
       <password>${symbol_dollar}{env.MAVEN_REPO_PASS}</password>
     </server>
@@ -51,10 +67,13 @@
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
       <password>${symbol_dollar}{env.MAVEN_REPO_PASS}</password>
     </server>
+
     <server>
       <id>${rootArtifactId}.docker.edu-sharing.com</id>
       <username>${symbol_dollar}{env.MAVEN_REPO_USER}</username>
       <password>${symbol_dollar}{env.MAVEN_REPO_PASS}</password>
     </server>
+
   </servers>
+
 </settings>

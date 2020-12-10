@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -95,13 +98,61 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-rendering-deploy</artifactId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_elasticsearch</artifactId>
         <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-deploy</artifactId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_mariadb</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_postgresql</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rediscluster</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rendering_service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_search_solr4</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_transform</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-rendering-compose</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-compose</artifactId>
         <version>${project.version}</version>
       </dependency>
 

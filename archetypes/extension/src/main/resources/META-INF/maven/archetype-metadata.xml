@@ -66,6 +66,7 @@
             <fileSet encoding="UTF-8">
               <directory></directory>
               <includes>
+                <include>.env.sample</include>
                 <include>deploy.sh</include>
               </includes>
             </fileSet>
@@ -88,6 +89,17 @@
                 </module>
                 <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-build-mariadb" dir="mariadb"
                         name="edu_sharing-extension-${rootArtifactId}-deploy-docker-build-mariadb">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-build-minideb" dir="minideb"
+                        name="edu_sharing-extension-${rootArtifactId}-deploy-docker-build-minideb">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>
@@ -205,9 +217,33 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rendering"
+                        dir="edusharing_rendering"
+                        name="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rendering">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rendering_service"
                         dir="edusharing_rendering_service"
                         name="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rendering_service">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository"
+                        dir="edusharing_repository"
+                        name="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>
@@ -233,18 +269,6 @@
                 <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_service"
                         dir="edusharing_repository_service"
                         name="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_service">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-                <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_transform"
-                        dir="edusharing_repository_transform"
-                        name="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_transform">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>

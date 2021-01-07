@@ -27,8 +27,8 @@
 
   <properties>
 
-    <community.rendering.version>feature-maven-${project.parent.version}</community.rendering.version>
-    <community.repository.version>feature-maven-${project.parent.version}</community.repository.version>
+    <community.rendering.version>feature-maven-${project.version}</community.rendering.version>
+    <community.repository.version>feature-maven-${project.version}</community.repository.version>
 
   </properties>
 

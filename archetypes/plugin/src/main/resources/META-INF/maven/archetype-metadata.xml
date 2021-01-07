@@ -66,6 +66,7 @@
             <fileSet encoding="UTF-8">
               <directory></directory>
               <includes>
+                <include>.env.sample</include>
                 <include>deploy.sh</include>
               </includes>
             </fileSet>

@@ -174,18 +174,18 @@ purge() {
 }
 
 logs() {
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		logs -f || exit
 }
 
 up() {
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		-f "repository-image-remote.yml" \
 		pull || exit
 
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		-f "repository-image-remote.yml" \
 		-f "repository-network-prd.yml" \
@@ -193,13 +193,13 @@ up() {
 }
 
 down() {
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		down || exit
 }
 
 it() {
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		-f "repository-network-dev.yml" \
 		up -d || exit
@@ -223,6 +223,20 @@ build() {
 	COMMUNITY_PATH=$(pwd)
 	export COMMUNITY_PATH
 	popd >/dev/null || exit
+
+	echo "Checking artifact-id ..."
+
+	EXPECTED_ARTIFACTID="edu_sharing-community-repository"
+
+	pushd "${COMMUNITY_PATH}" >/dev/null || exit
+	PROJECT_ARTIFACTID=$($MVN_EXEC -q -ff -nsu -N help:evaluate -Dexpression=project.artifactId -DforceStdout)
+	echo "- repository         [ ${PROJECT_ARTIFACTID} ]"
+	popd >/dev/null || exit
+
+	[[ "${EXPECTED_ARTIFACTID}" != "${PROJECT_ARTIFACTID}" ]] && {
+		echo "Error: expected artifact-id [ ${EXPECTED_ARTIFACTID} ] is different."
+		exit
+	}
 
 	echo "Checking version ..."
 
@@ -253,6 +267,9 @@ build() {
 	popd >/dev/null || exit
 
 	echo "- docker"
+	pushd "${BUILD_PATH}/../build" >/dev/null || exit
+	$MVN_EXEC $MVN_EXEC_OPTS -Dmaven.test.skip=true clean install || exit
+	popd >/dev/null || exit
 	pushd "${BUILD_PATH}" >/dev/null || exit
 	$MVN_EXEC $MVN_EXEC_OPTS -Dmaven.test.skip=true clean install || exit
 	popd >/dev/null || exit
@@ -269,7 +286,7 @@ debug() {
 		exit
 	}
 
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		-f "repository-network-dev.yml" \
 		-f "repository-debug.yml" \
@@ -410,12 +427,12 @@ reload-alfresco() {
 	echo "Restarting ..."
 	echo "- extension          [ Backend/alfresco ]"
 
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		exec repository-service \
 		java -jar bin/alfresco-mmt.jar install amps tomcat/webapps/alfresco -directory -nobackup -force || exit
 
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		exec repository-service \
 		touch tomcat/webapps/alfresco/WEB-INF/web.xml || exit
@@ -443,7 +460,7 @@ reload-services() {
 	echo "Restarting ..."
 	echo "- extension          [ Backend/services ]"
 
-	docker-compose \
+	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		exec repository-service \
 		touch tomcat/webapps/edu-sharing/WEB-INF/web.xml || exit

@@ -27,8 +27,8 @@
 
   <properties>
 
-    <community.rendering.version>feature-maven-${project.parent.version}</community.rendering.version>
-    <community.repository.version>feature-maven-${project.parent.version}</community.repository.version>
+    <community.rendering.version>feature-maven-${project.version}</community.rendering.version>
+    <community.repository.version>feature-maven-${project.version}</community.repository.version>
 
   </properties>
 
@@ -122,7 +122,19 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rendering</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
         <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_rendering_service</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository</artifactId>
         <version>${project.version}</version>
       </dependency>
 
@@ -135,12 +147,6 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_service</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_transform</artifactId>
         <version>${project.version}</version>
       </dependency>
 
@@ -228,7 +234,7 @@
 
       <properties>
 
-        <plugin.cluster.repository.version>feature-maven-${project.parent.version}</plugin.cluster.repository.version>
+        <plugin.cluster.repository.version>feature-maven-${project.version}</plugin.cluster.repository.version>
 
       </properties>
 
@@ -276,7 +282,7 @@
 
       <properties>
 
-        <plugin.logineo-idm.repository.version>${project.parent.version}</plugin.logineo-idm.repository.version>
+        <plugin.logineo-idm.repository.version>${project.version}</plugin.logineo-idm.repository.version>
 
       </properties>
 
@@ -324,7 +330,7 @@
 
       <properties>
 
-        <plugin.remote.repository.version>${project.parent.version}</plugin.remote.repository.version>
+        <plugin.remote.repository.version>${project.version}</plugin.remote.repository.version>
 
       </properties>
 

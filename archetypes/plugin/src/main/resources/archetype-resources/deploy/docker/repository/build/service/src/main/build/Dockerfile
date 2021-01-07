@@ -11,6 +11,7 @@ RUN set -eux \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
 	    ffmpeg \
+	    redis-tools \
     && apt-get install -y --no-install-recommends -t stretch-backports \
         exiftool \
 	    ghostscript \

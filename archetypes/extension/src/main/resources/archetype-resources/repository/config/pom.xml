@@ -36,16 +36,14 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <execution>
+            <id>config</id>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
             <phase>initialize</phase>
             <configuration>
               <includeArtifactIds>
-                edu_sharing-community-repository-config,
-                edu_sharing-plugin-cluster-repository-config,
-                edu_sharing-plugin-logineo-idm-repository-config,
-                edu_sharing-plugin-remote-repository-config
+                edu_sharing-community-repository-config
               </includeArtifactIds>
               <excludes>META-INF/**</excludes>
               <outputDirectory>src/generated/resources</outputDirectory>
@@ -100,84 +98,5 @@
     </dependency>
 
   </dependencies>
-
-  <profiles>
-
-    <profile>
-
-      <id>plugin-cluster</id>
-
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>env.PLUGIN_CLUSTER_ENABLED</name>
-          <value>true</value>
-        </property>
-      </activation>
-
-      <dependencies>
-
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>edu_sharing-plugin-cluster-repository-config</artifactId>
-          <classifier>sources</classifier>
-          <scope>provided</scope>
-        </dependency>
-
-      </dependencies>
-
-    </profile>
-
-    <profile>
-
-      <id>plugin-logineo-idm</id>
-
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>env.PLUGIN_LOGINEO_IDM_ENABLED</name>
-          <value>true</value>
-        </property>
-      </activation>
-
-      <dependencies>
-
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>edu_sharing-plugin-logineo-idm-repository-config</artifactId>
-          <classifier>sources</classifier>
-          <scope>provided</scope>
-        </dependency>
-
-      </dependencies>
-
-    </profile>
-
-    <profile>
-
-      <id>plugin-remote</id>
-
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>env.PLUGIN_REMOTE_ENABLED</name>
-          <value>true</value>
-        </property>
-      </activation>
-
-      <dependencies>
-
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>edu_sharing-plugin-remote-repository-config</artifactId>
-          <classifier>sources</classifier>
-          <scope>provided</scope>
-        </dependency>
-
-      </dependencies>
-
-    </profile>
-
-  </profiles>
 
 </project>

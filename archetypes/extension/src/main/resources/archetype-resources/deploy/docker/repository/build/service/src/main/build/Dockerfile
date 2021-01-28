@@ -53,21 +53,36 @@ RUN set -eux \
     && mkdir -p tomcat/shared/classes/alfresco \
     && mkdir -p tomcat/shared/lib \
     && mkdir -p tomcat/logs \
-    && touch tomcat/logs/catalina.out \
+    && touch tomcat/logs/catalina.out
+
+COPY --chown=worker:worker artifacts/postgresql-${symbol_dollar}{repository.postgresql.client.version}.jar tomcat/lib/
+COPY --chown=worker:worker artifacts/redisson-all-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
+COPY --chown=worker:worker artifacts/redisson-tomcat-7-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
+
+COPY --chown=worker:worker assets/tomcat/logging.properties tomcat/conf/logging.properties
+COPY --chown=worker:worker assets/tomcat/redisson.yaml tomcat/conf/redisson.yaml
+
+RUN set -eux \
     && sed -i -r \
-        's|^[#]*\s*shared\.loader=.*|shared.loader=${symbol_dollar}{catalina.base}/shared/classes,${symbol_dollar}{catalina.base}/shared/lib/*.jar|' \
-        tomcat/conf/catalina.properties
-
-COPY artifacts/postgresql-${symbol_dollar}{repository.postgresql.client.version}.jar tomcat/lib/
-COPY artifacts/redisson-all-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
-COPY artifacts/redisson-tomcat-7-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
-
-COPY assets/tomcat/logging.properties tomcat/conf/logging.properties
-COPY assets/tomcat/redisson.yaml tomcat/conf/redisson.yaml
+        's|^[#]*\s*shared\.loader=.*|shared.loader=${catalina.base}/shared/classes,${catalina.base}/shared/lib/*.jar|' \
+        tomcat/conf/catalina.properties \
+    && xmlstarlet ed -L \
+        -d '/Context/Manager[@className="org.redisson.tomcat.RedissonSessionManager"]' \
+        -s '/Context' -t elem -n "Manager" -v "" \
+        --var redis '$prev' \
+        -i '$redis' -t attr -n "className" -v "org.redisson.tomcat.RedissonSessionManager" \
+        -i '$redis' -t attr -n "configPath" -v "tomcat/conf/redisson.yaml" \
+        -i '$redis' -t attr -n "readMode" -v "REDIS" \
+        -i '$redis' -t attr -n "updateMode" -v "DEFAULT" \
+        -i '$redis' -t attr -n "broadcastSessionEvents" -v "false" \
+        tomcat/conf/context.xml \
+    && xmlstarlet ed -L \
+        -i '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t attr -n 'className' -v 'org.edu_sharing.catalina.core.OrderedHost' \
+        tomcat/conf/server.xml
 
 ### Alfresco Platform ##################################################################################################
 
-COPY artifacts/alfresco-platform-community-distributionzip-${symbol_dollar}{repository.alfresco.platform.version}.zip \
+COPY --chown=worker:worker artifacts/alfresco-platform-community-distributionzip-${symbol_dollar}{repository.alfresco.platform.version}.zip \
     /tmp/alfresco-platform-community-distributionzip.zip
 
 RUN set -eux \
@@ -79,7 +94,17 @@ RUN set -eux \
     && mv /tmp/install/alfresco-platform/licenses . \
     && mv /tmp/install/alfresco-platform/README.txt . \
     && cp -rf /tmp/install/alfresco-platform/bin/* bin \
+    && rm -f /tmp/install/alfresco-platform/web-server/lib/postgresql* \
     && cp -rf /tmp/install/alfresco-platform/web-server/* tomcat/ \
+    && xmlstarlet ed -L \
+        -i '/Context' -t attr -n 'docBase' -v 'alfresco' \
+        /tmp/install/alfresco-platform/web-server/conf/Catalina/localhost/alfresco.xml \
+    && xmlstarlet ed -L \
+        -s '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t elem -n 'Context' -v '' \
+        --var ctx '$prev' \
+        -i '$ctx' -t attr -n 'docBase' -v 'alfresco' \
+        tomcat/conf/server.xml \
+    && sed -i -r "s|<Context docBase=\"alfresco\"/>|$(xmlstarlet sel -t -m '/' -c './Context' -n /tmp/install/alfresco-platform/web-server/conf/Catalina/localhost/alfresco.xml | tr -d '\n')|" tomcat/conf/server.xml \
     && rm -rf /tmp/install/alfresco-platform \
     && mkdir -p tomcat/webapps/alfresco \
     && unzip tomcat/webapps/alfresco.war -d tomcat/webapps/alfresco -x "WEB-INF/lib/hazelcast*" \
@@ -116,11 +141,12 @@ RUN set -eux \
     && echo 'ftp.enabled=false' >> \
         tomcat/shared/classes/alfresco-global.properties
 
-COPY assets/alfresco/log4j.properties tomcat/webapps/alfresco/WEB-INF/classes/log4j.properties
+COPY --chown=worker:worker assets/alfresco/log4j.properties tomcat/webapps/alfresco/WEB-INF/classes/log4j.properties
+COPY --chown=worker:worker assets/alfresco/web-scripts-config-custom.xml tomcat/shared/classes/alfresco/extension/web-scripts-config-custom.xml
 
 ### Alfresco Share #####################################################################################################
 
-COPY artifacts/alfresco-content-services-share-distribution-${symbol_dollar}{repository.alfresco.share.version}.zip \
+COPY --chown=worker:worker artifacts/alfresco-content-services-share-distribution-${symbol_dollar}{repository.alfresco.share.version}.zip \
     /tmp/alfresco-content-services-share-distribution.zip
 
 RUN set -eux \
@@ -132,16 +158,26 @@ RUN set -eux \
         tomcat/webapps/alfresco -nobackup -force \
     && mv /tmp/install/alfresco-share/web-extension* tomcat/shared/classes/alfresco/web-extension \
     && cp -rf /tmp/install/alfresco-share/web-server/* tomcat/ \
+    && xmlstarlet ed -L \
+        -i '/Context' -t attr -n 'docBase' -v 'share' \
+        /tmp/install/alfresco-share/web-server/conf/Catalina/localhost/share.xml \
+    && xmlstarlet ed -L \
+        -s '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t elem -n 'Context' -v '' \
+        --var ctx '$prev' \
+        -i '$ctx' -t attr -n 'docBase' -v 'share' \
+        tomcat/conf/server.xml \
+    && sed -i -r "s|<Context docBase=\"share\"/>|$(xmlstarlet sel -t -m '/' -c './Context' -n /tmp/install/alfresco-platform/web-server/conf/Catalina/localhost/share.xml | tr -d '\n')|" tomcat/conf/server.xml \
     && rm -rf /tmp/install/alfresco-share \
     && mkdir -p tomcat/webapps/share \
     && unzip tomcat/webapps/share.war -d tomcat/webapps/share \
     && rm -f tomcat/webapps/share.war
 
-COPY assets/alfresco/log4j.properties tomcat/webapps/share/WEB-INF/classes/log4j.properties
+COPY --chown=worker:worker assets/share/log4j.properties tomcat/webapps/share/WEB-INF/classes/log4j.properties
+COPY --chown=worker:worker assets/share/share-config-custom.xml tomcat/shared/classes/alfresco/web-extension/share-config-custom.xml
 
 ### Alfresco PDF Renderer ##############################################################################################
 
-COPY artifacts/alfresco-pdf-renderer-${symbol_dollar}{repository.alfresco.pdf-renderer.version}-linux.tgz /tmp/alfresco-pdf-renderer.tgz
+COPY --chown=worker:worker artifacts/alfresco-pdf-renderer-${symbol_dollar}{repository.alfresco.pdf-renderer.version}-linux.tgz /tmp/alfresco-pdf-renderer.tgz
 
 RUN set -eux \
 	&& mkdir -p /tmp/install/alfresco-pdf-renderer \
@@ -156,39 +192,49 @@ RUN set -eux \
 
 ### edu-sharing tomcat #################################################################################################
 
-COPY artifacts/edu_sharing-community-repository-backend-tomcat-${symbol_dollar}{community.repository.version}.jar tomcat/lib/
-
-### edu-sharing config #################################################################################################
-
-COPY artifacts/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar tomcat/shared/lib/
-
-RUN set -eux \
-	&& unzip tomcat/shared/lib/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar \
-	    -d tomcat/shared/classes -x META-INF/* \
-	&& rm -f tomcat/shared/lib/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar
-
-### edu-sharing alresco ################################################################################################
-
-COPY amps/* amps/
-
-RUN set -eux \
-    && java -jar bin/alfresco-mmt.jar install amps tomcat/webapps/alfresco -directory -nobackup -force
+COPY --chown=worker:worker artifacts/edu_sharing-community-repository-backend-tomcat-${symbol_dollar}{community.repository.version}.jar tomcat/lib/
 
 ### edu-sharing webapp #################################################################################################
 
-COPY artifacts/edu_sharing-extension-${rootArtifactId}-repository-webapp-${symbol_dollar}{project.version}.war tomcat/webapps/
+COPY --chown=worker:worker artifacts/edu_sharing-extension-${rootArtifactId}-repository-webapp-${symbol_dollar}{project.version}.war tomcat/webapps/
 
 RUN set -eux \
     && mkdir -p tomcat/webapps/edu-sharing \
 	&& unzip tomcat/webapps/edu_sharing-extension-${rootArtifactId}-repository-webapp-${symbol_dollar}{project.version}.war -d tomcat/webapps/edu-sharing \
 	&& rm -f tomcat/webapps/edu_sharing-extension-${rootArtifactId}-repository-webapp-${symbol_dollar}{project.version}.war \
-	&& mv tomcat/webapps/edu-sharing/META-INF/context.xml tomcat/conf/Catalina/localhost/edu-sharing.xml
+	&& cp tomcat/webapps/edu-sharing/META-INF/context.xml tomcat/conf/Catalina/localhost/edu-sharing.xml \
+	&& cp tomcat/conf/Catalina/localhost/edu-sharing.xml /tmp/install/edu-sharing.xml \
+    && xmlstarlet ed -L \
+        -i '/Context' -t attr -n 'docBase' -v 'edu-sharing' \
+        /tmp/install/edu-sharing.xml \
+    && xmlstarlet ed -L \
+        -s '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t elem -n 'Context' -v '' \
+        --var ctx '$prev' \
+        -i '$ctx' -t attr -n 'docBase' -v 'edu-sharing' \
+        tomcat/conf/server.xml \
+    && sed -i -r "s|<Context docBase=\"edu-sharing\"/>|$(xmlstarlet sel -t -m '/' -c './Context' -n /tmp/install/edu-sharing.xml | tr -d '\n')|" tomcat/conf/server.xml \
+    && rm -f /tmp/install/edu-sharing.xml
 
-COPY assets/edu-sharing/log4j2.xml tomcat/webapps/edu-sharing/WEB-INF/log4j2.xml
+COPY --chown=worker:worker assets/edu-sharing/log4j2.xml tomcat/webapps/edu-sharing/WEB-INF/log4j2.xml
 
-########################################################################################################################
+### edu-sharing modules ################################################################################################
+
+COPY --chown=worker:worker amps amps/
 
 RUN set -eux \
+    && if [ -d amps/1 ] && [ -n $(ls -A amps/1 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/1 tomcat/webapps/alfresco -directory -nobackup -force; fi \
+    && if [ -d amps/2 ] && [ -n $(ls -A amps/2 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/2 tomcat/webapps/alfresco -directory -nobackup -force; fi \
+    && if [ -d amps/3 ] && [ -n $(ls -A amps/3 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/3 tomcat/webapps/edu-sharing -directory -nobackup -force; fi \
+    && if [ -d amps/4 ] && [ -n $(ls -A amps/4 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/4 tomcat/webapps/alfresco -directory -nobackup -force; fi
+
+### edu-sharing config #################################################################################################
+
+COPY --chown=worker:worker artifacts/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar tomcat/shared/lib/
+
+RUN set -eux \
+	&& unzip tomcat/shared/lib/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar \
+	    -d tomcat/shared/classes -x META-INF/* \
+	&& rm -f tomcat/shared/lib/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar \
 	&& touch tomcat/shared/classes/config/edu-sharing.deployment.conf \
 	&& touch tomcat/shared/classes/config/edu-sharing.conf \
     && tar cvf tomcat/shared.tar tomcat/shared

@@ -57,6 +57,8 @@
 
   <dependencies>
 
+    <!-- compile -->
+
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>edu_sharing-extension-${rootArtifactId}-repository-backend-webapp</artifactId>

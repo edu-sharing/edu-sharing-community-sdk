@@ -1,0 +1,262 @@
+########################################################################################################################
+# GLOBAL
+########################################################################################################################
+
+global:
+
+  cluster:
+
+    cert:
+      annotations: {}
+#        cert-manager.io/cluster-issuer:
+#        cert-manager.io/issuer:
+
+    domain: cluster.local
+
+    istio:
+      enabled: false
+      gateway:
+        selector:
+          app: istio-ingressgateway
+
+    storage:
+      share:
+        spec: {}
+#          storageClassName:
+
+  image:
+    registry: ${docker.registry}
+    repository: ${docker.image}
+    tag: ${docker.tag}
+    pullPolicy: Always
+    pullSecrets: []
+
+########################################################################################################################
+# LOCAL
+########################################################################################################################
+
+nameOverride: edusharing-repository-service
+
+########################################################################################################################
+
+replicaCount: 1
+
+########################################################################################################################
+
+service:
+
+  port:
+    api:
+      internal: 8080
+      external: 8081
+    gossip: 5701
+
+########################################################################################################################
+
+ingress:
+
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/affinity: cookie
+    nginx.ingress.kubernetes.io/session-cookie-name: edusharing-repository
+    nginx.ingress.kubernetes.io/session-cookie-path: "*"
+    nginx.ingress.kubernetes.io/proxy-body-size: 5g
+#    nginx.ingress.kubernetes.io/configuration-snippet: |
+#      location /alfresco/service/api/solr/ {return 403;}
+#      location /alfresco/s/api/solr/ {return 403;}
+#      location /alfresco/wcservice/api/solr/ {return 403;}
+#      location /alfresco/wcs/api/solr/ {return 403;}
+#      location /share/proxy/alfresco/api/solr/ {return 403 ;}
+#      location /share/-default-/proxy/alfresco/api/ {return 403;}
+
+  hosts:
+  - repository.127.0.0.1.xip.io
+
+  tls: []
+#  - secretName: edusharing-repository-tls
+#    hosts:
+#    - repository.127.0.0.1.xip.io
+
+  paths:
+  - /edu-sharing
+  - /alfresco
+  - /share
+
+########################################################################################################################
+
+config:
+
+  admin:
+    password: admin
+
+  cache:
+    host: edusharing-repository-rediscluster
+    port: 6379
+    type: rediscluster
+    # https://github.com/redisson/redisson/wiki/2.-Configuration#242-cluster-yaml-config-format
+    options: |
+      readMode: "MASTER"
+      subscriptionMode: "MASTER"
+    # https://github.com/redisson/redisson/wiki/2.-Configuration#23-common-settings
+    commons: |
+      threads: 16
+      nettyThreads: 32
+      codec: !<org.redisson.codec.FstCodec> {}
+      transportMode: "NIO"
+
+  cluster:
+    enabled: false
+    backupCount: 1
+    readBackupData: true
+
+  database:
+    driver: org.postgresql.Driver
+    host: edusharing-repository-postgresql
+    port: 5432
+    database: repository
+    username: repository
+    password: repository
+    protocol: postgresql
+    options: ""
+
+    pool:
+      max: 80
+      sql: "SELECT 1"
+
+  guest:
+    username: ""
+    password: ""
+
+  home:
+    appid: local
+
+  jvm:
+    ram:
+      minPercentage: "75.0"
+      maxPercentage: "75.0"
+
+  saml:
+    enabled: false
+#    config: ""
+#    files: {}
+
+  smtp:
+    addReplyTo: false
+    from: noreply@repository.127.0.0.1.xip.io
+    host: localhost
+    port: 25
+    auth: ""
+    username: ""
+    password: ""
+
+  search:
+
+    elastic:
+      host: edusharing-repository-search-elastic
+      port: 9200
+
+    solr4:
+      host: edusharing-repository-search-solr4
+      port: 8080
+
+########################################################################################################################
+
+persistence:
+
+  share:
+    create: true
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      resources:
+        requests:
+          storage: 5Gi
+
+########################################################################################################################
+
+nodeAffinity: {}
+podAntiAffinity: "" # "soft" or "hard"
+
+tolerations: []
+
+########################################################################################################################
+
+podSecurityContext:
+
+  runAsUser: 1000
+  fsGroup: 1000
+
+securityContext:
+
+  server:
+
+    capabilities:
+      drop:
+      - ALL
+
+  transform:
+
+    capabilities:
+      drop:
+      - ALL
+
+########################################################################################################################
+
+terminationGracePeriod: 120
+
+livenessProbe:
+
+  server:
+
+    failureThreshold: 3
+    initialDelaySeconds: 300
+    periodSeconds: 10
+    timeoutSeconds: 5
+
+  transform:
+
+    failureThreshold: 3
+    initialDelaySeconds: 300
+    periodSeconds: 10
+    timeoutSeconds: 5
+
+readinessProbe:
+
+  server:
+
+    failureThreshold: 1
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+
+  transform:
+
+    failureThreshold: 1
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+
+########################################################################################################################
+
+resources:
+
+  server:
+
+    limits:
+      cpu: 1000m
+      memory: 4Gi
+    requests:
+      cpu: 1000m
+      memory: 4Gi
+
+  transform:
+
+    limits:
+      cpu: 100m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 1Gi
+
+########################################################################################################################

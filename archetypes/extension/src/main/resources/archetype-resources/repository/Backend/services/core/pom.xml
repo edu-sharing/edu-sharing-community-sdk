@@ -42,6 +42,13 @@
 
   <dependencies>
 
+    <!-- compile -->
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-core</artifactId>
+    </dependency>
+
     <!-- provided -->
 
     <dependency>
@@ -90,13 +97,6 @@
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-servlet-api</artifactId>
       <scope>provided</scope>
-    </dependency>
-
-    <!-- compile -->
-
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>edu_sharing-community-repository-backend-services-core</artifactId>
     </dependency>
 
   </dependencies>

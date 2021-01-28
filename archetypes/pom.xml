@@ -19,6 +19,7 @@
   <name>edu_sharing-community-sdk-archetypes</name>
 
   <modules>
+    <module>community</module>
     <module>extension</module>
     <module>plugin</module>
   </modules>

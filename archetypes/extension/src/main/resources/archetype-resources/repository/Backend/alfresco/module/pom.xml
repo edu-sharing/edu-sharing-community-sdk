@@ -45,7 +45,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <outputDirectory>src/main/assembly/config/alfresco/module/${project.artifactId}</outputDirectory>
+              <outputDirectory>src/main/amp/config/alfresco/module/${project.artifactId}</outputDirectory>
               <thirdPartyFilename>THIRD-PARTY.txt</thirdPartyFilename>
             </configuration>
           </execution>

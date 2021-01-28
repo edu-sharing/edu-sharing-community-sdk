@@ -45,7 +45,7 @@
             </goals>
             <phase>generate-resources</phase>
             <configuration>
-              <outputDirectory>src/main/assembly/config/alfresco/module/${project.artifactId}</outputDirectory>
+              <outputDirectory>src/main/amp/config/alfresco/module/${project.artifactId}</outputDirectory>
               <thirdPartyFilename>THIRD-PARTY.txt</thirdPartyFilename>
             </configuration>
           </execution>
@@ -124,12 +124,6 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-fixes</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-config</artifactId>
       <scope>provided</scope>
     </dependency>
 

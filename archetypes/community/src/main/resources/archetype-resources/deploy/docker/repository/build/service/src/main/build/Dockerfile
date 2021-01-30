@@ -222,9 +222,9 @@ COPY --chown=worker:worker assets/edu-sharing/log4j2.xml tomcat/webapps/edu-shar
 COPY --chown=worker:worker amps amps/
 
 RUN set -eux \
-    && if [ -d amps/1 ] && [ -n $(ls -A amps/1 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/1 tomcat/webapps/alfresco -directory -nobackup -force; fi \
-    && if [ -d amps/2 ] && [ -n $(ls -A amps/2 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/2 tomcat/webapps/alfresco -directory -nobackup -force; fi \
-    && if [ -d amps/3 ] && [ -n $(ls -A amps/3 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/3 tomcat/webapps/edu-sharing -directory -nobackup -force; fi
+    && if [ -d amps/alfresco/1 ] && [ -n $(ls -A amps/alfresco/1 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/alfresco/1 tomcat/webapps/alfresco -directory -nobackup -force; fi \
+    && if [ -d amps/alfresco/2 ] && [ -n $(ls -A amps/alfresco/2 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/alfresco/2 tomcat/webapps/alfresco -directory -nobackup -force; fi \
+    && if [ -d amps/edu-sharing/1 ] && [ -n $(ls -A amps/edu-sharing/1 | wc -l) ]; then java -jar bin/alfresco-mmt.jar install amps/edu-sharing/1 tomcat/webapps/edu-sharing -directory -nobackup -force; fi
 
 ### edu-sharing config #################################################################################################
 

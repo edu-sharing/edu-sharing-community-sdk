@@ -264,48 +264,6 @@
 
     <profile>
 
-      <id>plugin-logineo-idm</id>
-
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>env.PLUGIN_LOGINEO_IDM_ENABLED</name>
-          <value>true</value>
-        </property>
-      </activation>
-
-      <properties>
-
-        <plugin.logineo-idm.repository.version>${project.version}</plugin.logineo-idm.repository.version>
-
-      </properties>
-
-      <dependencyManagement>
-
-        <dependencies>
-
-          <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>edu_sharing-plugin-logineo-idm-repository-backend-alfresco-module</artifactId>
-            <type>amp</type>
-            <version>${plugin.logineo-idm.repository.version}</version>
-          </dependency>
-
-          <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>edu_sharing-plugin-logineo-idm-repository-backend-services-module</artifactId>
-            <type>amp</type>
-            <version>${plugin.logineo-idm.repository.version}</version>
-          </dependency>
-
-        </dependencies>
-
-      </dependencyManagement>
-
-    </profile>
-
-    <profile>
-
       <id>plugin-remote</id>
 
       <activation>
@@ -399,25 +357,6 @@
     <repository>
       <id>edu-sharing.plugin.cluster.snapshots</id>
       <url>https://artifacts.edu-sharing.com/repository/plugin-cluster-snapshots/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
-
-    <repository>
-      <id>edu-sharing.plugin.logineo-idm.releases</id>
-      <url>https://artifacts.edu-sharing.com/repository/plugin-logineo-idm-releases/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-
-    <repository>
-      <id>edu-sharing.plugin.logineo-idm.snapshots</id>
-      <url>https://artifacts.edu-sharing.com/repository/plugin-logineo-idm-snapshots/</url>
       <releases>
         <enabled>false</enabled>
       </releases>

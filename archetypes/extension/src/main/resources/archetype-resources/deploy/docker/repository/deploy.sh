@@ -208,7 +208,6 @@ it() {
 plugins() {
 	echo "Checking plugins ..."
 	echo "- cluster            [ ${PLUGIN_CLUSTER_ENABLED:-false} ]"
-	echo "- logineo-idm        [ ${PLUGIN_LOGINEO_IDM_ENABLED:-false} ]"
 	echo "- remote             [ ${PLUGIN_REMOTE_ENABLED:-false} ]"
 }
 
@@ -430,7 +429,12 @@ reload-alfresco() {
 	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		exec repository-service \
-		java -jar bin/alfresco-mmt.jar install amps tomcat/webapps/alfresco -directory -nobackup -force || exit
+		java -jar bin/alfresco-mmt.jar install amps/alfresco/1 tomcat/webapps/alfresco -directory -nobackup -force || exit
+
+	$COMPOSE_EXEC \
+		-f "repository.yml" \
+		exec repository-service \
+		java -jar bin/alfresco-mmt.jar install amps/alfresco/3 tomcat/webapps/alfresco -directory -nobackup -force || exit
 
 	$COMPOSE_EXEC \
 		-f "repository.yml" \

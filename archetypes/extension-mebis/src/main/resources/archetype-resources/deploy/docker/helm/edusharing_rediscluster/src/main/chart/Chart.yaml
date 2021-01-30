@@ -1,0 +1,10 @@
+apiVersion: v2
+
+name: edusharing_rediscluster
+description: edusharing_rediscluster
+
+icon: ${chart.icon}
+
+version: ${chart.version}
+appVersion: ${docker.tag}
+kubeVersion: ">= 1.16.0"

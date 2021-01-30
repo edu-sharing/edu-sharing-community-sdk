@@ -100,7 +100,6 @@ build() {
 plugins() {
 	echo "Checking plugins ..."
 	echo "- cluster            [ ${PLUGIN_CLUSTER_ENABLED:-false} ]"
-	echo "- logineo-idm        [ ${PLUGIN_LOGINEO_IDM_ENABLED:-false} ]"
 	echo "- remote             [ ${PLUGIN_REMOTE_ENABLED:-false} ]"
 }
 

@@ -21,6 +21,8 @@
   <modules>
     <module>community</module>
     <module>extension</module>
+    <module>extension-logineo</module>
+    <module>extension-mebis</module>
     <module>plugin</module>
   </modules>
 

@@ -366,7 +366,7 @@ reload-alfresco() {
 	$COMPOSE_EXEC \
 		-f "repository.yml" \
 		exec repository-service \
-		java -jar bin/alfresco-mmt.jar install amps tomcat/webapps/alfresco -directory -nobackup -force || exit
+		java -jar bin/alfresco-mmt.jar install amps/alfresco/1 tomcat/webapps/alfresco -directory -nobackup -force || exit
 
 	$COMPOSE_EXEC \
 		-f "repository.yml" \

@@ -90,17 +90,6 @@ Build
       </server>  
    
       <server>  
-        <id>edu-sharing.plugin.logineo-idm.releases</id>
-        <username> ... </username>
-        <password> ... </password>
-      </server>
-      <server>
-        <id>edu-sharing.plugin.logineo-idm.snapshots</id>
-        <username> ... </username>
-        <password> ... </password>
-      </server>  
-   
-      <server>  
         <id>edu-sharing.plugin.remote.releases</id>
         <username> ... </username>
         <password> ... </password>
@@ -116,7 +105,6 @@ Build
                           
    ```
    export PLUGIN_CLUSTER_ENABLED="true"
-   export PLUGIN_LOGIN_IDM_ENABLED="true"
    export PLUGIN_REMOTE_ENABLED="true"
    ```
    

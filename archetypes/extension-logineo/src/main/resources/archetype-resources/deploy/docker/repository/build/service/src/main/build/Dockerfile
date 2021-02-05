@@ -67,17 +67,7 @@ RUN set -eux \
         's|^[#]*\s*shared\.loader=.*|shared.loader=${catalina.base}/shared/classes,${catalina.base}/shared/lib/*.jar|' \
         tomcat/conf/catalina.properties \
     && xmlstarlet ed -L \
-        -d '/Context/Manager[@className="org.redisson.tomcat.RedissonSessionManager"]' \
-        -s '/Context' -t elem -n "Manager" -v "" \
-        --var redis '$prev' \
-        -i '$redis' -t attr -n "className" -v "org.redisson.tomcat.RedissonSessionManager" \
-        -i '$redis' -t attr -n "configPath" -v "tomcat/conf/redisson.yaml" \
-        -i '$redis' -t attr -n "readMode" -v "REDIS" \
-        -i '$redis' -t attr -n "updateMode" -v "DEFAULT" \
-        -i '$redis' -t attr -n "broadcastSessionEvents" -v "false" \
-        tomcat/conf/context.xml \
-    && xmlstarlet ed -L \
-        -i '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t attr -n 'className' -v 'org.edu_sharing.catalina.core.OrderedHost' \
+        -i '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t attr -n 'hostConfigClass' -v 'org.edu_sharing.catalina.startup.OrderedHostConfig' \
         tomcat/conf/server.xml
 
 ### Alfresco Platform ##################################################################################################
@@ -96,15 +86,6 @@ RUN set -eux \
     && cp -rf /tmp/install/alfresco-platform/bin/* bin \
     && rm -f /tmp/install/alfresco-platform/web-server/lib/postgresql* \
     && cp -rf /tmp/install/alfresco-platform/web-server/* tomcat/ \
-    && xmlstarlet ed -L \
-        -i '/Context' -t attr -n 'docBase' -v 'alfresco' \
-        /tmp/install/alfresco-platform/web-server/conf/Catalina/localhost/alfresco.xml \
-    && xmlstarlet ed -L \
-        -s '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t elem -n 'Context' -v '' \
-        --var ctx '$prev' \
-        -i '$ctx' -t attr -n 'docBase' -v 'alfresco' \
-        tomcat/conf/server.xml \
-    && sed -i -r "s|<Context docBase=\"alfresco\"/>|$(xmlstarlet sel -t -m '/' -c './Context' -n /tmp/install/alfresco-platform/web-server/conf/Catalina/localhost/alfresco.xml | tr -d '\n')|" tomcat/conf/server.xml \
     && rm -rf /tmp/install/alfresco-platform \
     && mkdir -p tomcat/webapps/alfresco \
     && unzip tomcat/webapps/alfresco.war -d tomcat/webapps/alfresco -x "WEB-INF/lib/hazelcast*" \
@@ -158,15 +139,6 @@ RUN set -eux \
         tomcat/webapps/alfresco -nobackup -force \
     && mv /tmp/install/alfresco-share/web-extension* tomcat/shared/classes/alfresco/web-extension \
     && cp -rf /tmp/install/alfresco-share/web-server/* tomcat/ \
-    && xmlstarlet ed -L \
-        -i '/Context' -t attr -n 'docBase' -v 'share' \
-        /tmp/install/alfresco-share/web-server/conf/Catalina/localhost/share.xml \
-    && xmlstarlet ed -L \
-        -s '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t elem -n 'Context' -v '' \
-        --var ctx '$prev' \
-        -i '$ctx' -t attr -n 'docBase' -v 'share' \
-        tomcat/conf/server.xml \
-    && sed -i -r "s|<Context docBase=\"share\"/>|$(xmlstarlet sel -t -m '/' -c './Context' -n /tmp/install/alfresco-platform/web-server/conf/Catalina/localhost/share.xml | tr -d '\n')|" tomcat/conf/server.xml \
     && rm -rf /tmp/install/alfresco-share \
     && mkdir -p tomcat/webapps/share \
     && unzip tomcat/webapps/share.war -d tomcat/webapps/share \
@@ -202,20 +174,21 @@ RUN set -eux \
     && mkdir -p tomcat/webapps/edu-sharing \
 	&& unzip tomcat/webapps/edu_sharing-extension-${rootArtifactId}-repository-webapp-${symbol_dollar}{project.version}.war -d tomcat/webapps/edu-sharing \
 	&& rm -f tomcat/webapps/edu_sharing-extension-${rootArtifactId}-repository-webapp-${symbol_dollar}{project.version}.war \
-	&& cp tomcat/webapps/edu-sharing/META-INF/context.xml tomcat/conf/Catalina/localhost/edu-sharing.xml \
-	&& cp tomcat/conf/Catalina/localhost/edu-sharing.xml /tmp/install/edu-sharing.xml \
-    && xmlstarlet ed -L \
-        -i '/Context' -t attr -n 'docBase' -v 'edu-sharing' \
-        /tmp/install/edu-sharing.xml \
-    && xmlstarlet ed -L \
-        -s '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t elem -n 'Context' -v '' \
-        --var ctx '$prev' \
-        -i '$ctx' -t attr -n 'docBase' -v 'edu-sharing' \
-        tomcat/conf/server.xml \
-    && sed -i -r "s|<Context docBase=\"edu-sharing\"/>|$(xmlstarlet sel -t -m '/' -c './Context' -n /tmp/install/edu-sharing.xml | tr -d '\n')|" tomcat/conf/server.xml \
-    && rm -f /tmp/install/edu-sharing.xml
+	&& cp tomcat/webapps/edu-sharing/META-INF/context.xml tomcat/conf/Catalina/localhost/edu-sharing.xml
 
 COPY --chown=worker:worker assets/edu-sharing/log4j2.xml tomcat/webapps/edu-sharing/WEB-INF/log4j2.xml
+
+RUN set -eux \
+    && xmlstarlet ed -L \
+        -d '/Context/Manager[@className="org.redisson.tomcat.RedissonSessionManager"]' \
+        -s '/Context' -t elem -n "Manager" -v "" \
+        --var redis '$prev' \
+        -i '$redis' -t attr -n "className" -v "org.redisson.tomcat.RedissonSessionManager" \
+        -i '$redis' -t attr -n "configPath" -v "tomcat/conf/redisson.yaml" \
+        -i '$redis' -t attr -n "readMode" -v "REDIS" \
+        -i '$redis' -t attr -n "updateMode" -v "DEFAULT" \
+        -i '$redis' -t attr -n "broadcastSessionEvents" -v "false" \
+        tomcat/conf/Catalina/localhost/edu-sharing.xml
 
 ### edu-sharing modules ################################################################################################
 
@@ -235,8 +208,9 @@ RUN set -eux \
 	&& unzip tomcat/shared/lib/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar \
 	    -d tomcat/shared/classes -x META-INF/* \
 	&& rm -f tomcat/shared/lib/edu_sharing-extension-${rootArtifactId}-repository-config-${symbol_dollar}{project.version}.jar \
-	&& touch tomcat/shared/classes/config/edu-sharing.deployment.conf \
 	&& touch tomcat/shared/classes/config/edu-sharing.conf \
+	&& touch tomcat/shared/classes/config/edu-sharing.deployment.conf \
+	&& touch tomcat/shared/classes/config/edu-sharing.server.conf \
     && tar cvf tomcat/shared.tar tomcat/shared
 
 ########################################################################################################################

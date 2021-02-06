@@ -65,6 +65,12 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-community-repository-backend-search-elastic-tracker</artifactId>
+        <version>${community.repository.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
         <artifactId>edu_sharing-community-repository-backend-services-core</artifactId>
         <version>${community.repository.version}</version>
       </dependency>
@@ -135,6 +141,12 @@
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_search_elastic_tracker</artifactId>
         <version>${project.version}</version>
       </dependency>
 

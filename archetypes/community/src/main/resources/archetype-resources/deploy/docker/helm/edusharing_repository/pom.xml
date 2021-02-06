@@ -100,6 +100,12 @@
 
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-deploy-docker-helm-edusharing_repository_search_elastic_tracker
+      </artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>edu_sharing-community-deploy-docker-helm-edusharing_repository_search_solr4
       </artifactId>
     </dependency>

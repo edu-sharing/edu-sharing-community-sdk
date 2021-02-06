@@ -257,6 +257,19 @@
                   </fileSets>
                 </module>
                 <module
+                    id="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_search_elastic_tracker"
+                    dir="edusharing_repository_search_elastic_tracker"
+                    name="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_search_elastic_tracker">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module
                     id="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_search_solr4"
                     dir="edusharing_repository_search_solr4"
                     name="edu_sharing-extension-${rootArtifactId}-deploy-docker-helm-edusharing_repository_search_solr4">
@@ -356,6 +369,24 @@
                             dir="search"
                             name="edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-build-search">
                       <modules>
+                        <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-build-search-elastic"
+                                dir="elastic"
+                                name="edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-build-search-elastic">
+                          <modules>
+                            <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-build-search-elastic-tracker"
+                                    dir="tracker"
+                                    name="edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-build-search-elastic-tracker">
+                              <fileSets>
+                                <fileSet encoding="UTF-8">
+                                  <directory>src</directory>
+                                  <includes>
+                                    <include>**/*</include>
+                                  </includes>
+                                </fileSet>
+                              </fileSets>
+                            </module>
+                          </modules>
+                        </module>
                         <module id="edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-build-search-solr4"
                                 dir="solr4"
                                 name="edu_sharing-extension-${rootArtifactId}-deploy-docker-repository-build-search-solr4">

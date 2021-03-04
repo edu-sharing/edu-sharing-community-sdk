@@ -30,6 +30,9 @@
     <community.rendering.version>feature-maven-${project.version}</community.rendering.version>
     <community.repository.version>feature-maven-${project.version}</community.repository.version>
 
+    <maven.deploy.releases>https://artifacts.edu-sharing.com/repository/extension-${rootArtifactId}-releases/</maven.deploy.releases>
+    <maven.deploy.snapshots>https://artifacts.edu-sharing.com/repository/extension-${rootArtifactId}-snapshots/</maven.deploy.snapshots>
+
   </properties>
 
   <dependencyManagement>
@@ -321,7 +324,7 @@
   <repositories>
 
     <repository>
-      <id>edu-sharing.public.releases</id>
+      <id>public.releases</id>
       <url>https://artifacts.edu-sharing.com/repository/public-releases/</url>
       <snapshots>
         <enabled>false</enabled>
@@ -329,7 +332,7 @@
     </repository>
 
     <repository>
-      <id>edu-sharing.public.snapshots</id>
+      <id>public.snapshots</id>
       <url>https://artifacts.edu-sharing.com/repository/public-snapshots/</url>
       <releases>
         <enabled>false</enabled>
@@ -340,7 +343,7 @@
     </repository>
 
     <repository>
-      <id>edu-sharing.extension.${rootArtifactId}.releases</id>
+      <id>extension.releases</id>
       <url>https://artifacts.edu-sharing.com/repository/extension-${rootArtifactId}-releases/</url>
       <snapshots>
         <enabled>false</enabled>
@@ -348,7 +351,7 @@
     </repository>
 
     <repository>
-      <id>edu-sharing.extension.${rootArtifactId}.snapshots</id>
+      <id>extension.snapshots</id>
       <url>https://artifacts.edu-sharing.com/repository/extension-${rootArtifactId}-snapshots/</url>
       <releases>
         <enabled>false</enabled>
@@ -359,7 +362,7 @@
     </repository>
 
     <repository>
-      <id>edu-sharing.plugin.cluster.releases</id>
+      <id>plugin.cluster.releases</id>
       <url>https://artifacts.edu-sharing.com/repository/plugin-cluster-releases/</url>
       <snapshots>
         <enabled>false</enabled>
@@ -367,7 +370,7 @@
     </repository>
 
     <repository>
-      <id>edu-sharing.plugin.cluster.snapshots</id>
+      <id>plugin.cluster.snapshots</id>
       <url>https://artifacts.edu-sharing.com/repository/plugin-cluster-snapshots/</url>
       <releases>
         <enabled>false</enabled>
@@ -378,7 +381,7 @@
     </repository>
 
     <repository>
-      <id>edu-sharing.plugin.remote.releases</id>
+      <id>plugin.remote.releases</id>
       <url>https://artifacts.edu-sharing.com/repository/plugin-remote-releases/</url>
       <snapshots>
         <enabled>false</enabled>
@@ -386,7 +389,7 @@
     </repository>
 
     <repository>
-      <id>edu-sharing.plugin.remote.snapshots</id>
+      <id>plugin.remote.snapshots</id>
       <url>https://artifacts.edu-sharing.com/repository/plugin-remote-snapshots/</url>
       <releases>
         <enabled>false</enabled>
@@ -401,13 +404,13 @@
   <distributionManagement>
 
     <repository>
-      <id>edu-sharing.extension.${rootArtifactId}.releases</id>
-      <url>https://artifacts.edu-sharing.com/repository/extension-${rootArtifactId}-releases/</url>
+      <id>deploy.releases</id>
+      <url>${maven.deploy.releases}</url>
     </repository>
 
     <snapshotRepository>
-      <id>edu-sharing.extension.${rootArtifactId}.snapshots</id>
-      <url>https://artifacts.edu-sharing.com/repository/extension-${rootArtifactId}-snapshots/</url>
+      <id>deploy.snapshots</id>
+      <url>${maven.deploy.snapshots}</url>
     </snapshotRepository>
 
   </distributionManagement>

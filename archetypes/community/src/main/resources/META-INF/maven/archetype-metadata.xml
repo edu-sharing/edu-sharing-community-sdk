@@ -23,20 +23,11 @@
     </requiredProperty>
   </requiredProperties>
   <fileSets>
-    <fileSet filtered="true" encoding="UTF-8">
-      <directory>.mvn</directory>
-      <includes>
-        <include>settings.xml</include>
-      </includes>
-    </fileSet>
     <fileSet encoding="UTF-8">
       <directory>.mvn</directory>
       <includes>
         <include>*.xml</include>
       </includes>
-      <excludes>
-        <exclude>settings.xml</exclude>
-      </excludes>
     </fileSet>
     <fileSet filtered="true" encoding="UTF-8">
       <directory></directory>
@@ -78,6 +69,18 @@
             <module id="edu_sharing-community-deploy-docker-build" dir="build"
                     name="edu_sharing-community-deploy-docker-build">
               <modules>
+                <module id="edu_sharing-community-deploy-docker-build-apache_exporter"
+                        dir="apache_exporter"
+                        name="edu_sharing-community-deploy-docker-build-apache_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module id="edu_sharing-community-deploy-docker-build-elasticsearch"
                         dir="elasticsearch"
                         name="edu_sharing-community-deploy-docker-build-elasticsearch">
@@ -90,8 +93,31 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module id="edu_sharing-community-deploy-docker-build-elasticsearch_exporter"
+                        dir="elasticsearch_exporter"
+                        name="edu_sharing-community-deploy-docker-build-elasticsearch_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module id="edu_sharing-community-deploy-docker-build-mariadb" dir="mariadb"
                         name="edu_sharing-community-deploy-docker-build-mariadb">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module id="edu_sharing-community-deploy-docker-build-mariadb_exporter" dir="mariadb_exporter"
+                        name="edu_sharing-community-deploy-docker-build-mariadb_exporter">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>
@@ -123,8 +149,30 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module id="edu_sharing-community-deploy-docker-build-postgresql_exporter" dir="postgresql_exporter"
+                        name="edu_sharing-community-deploy-docker-build-postgresql_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module id="edu_sharing-community-deploy-docker-build-redis" dir="redis"
                         name="edu_sharing-community-deploy-docker-build-redis">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module id="edu_sharing-community-deploy-docker-build-redis_exporter" dir="redis_exporter"
+                        name="edu_sharing-community-deploy-docker-build-redis_exporter">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>

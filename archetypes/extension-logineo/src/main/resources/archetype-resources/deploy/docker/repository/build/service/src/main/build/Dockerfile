@@ -2,7 +2,7 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 
-FROM docker.io/tomcat:${symbol_dollar}{repository.tomcat.version}-jdk8
+FROM ${docker.from.tomcat}
 
 ########################################################################################################################
 
@@ -54,6 +54,9 @@ RUN set -eux \
     && mkdir -p tomcat/shared/lib \
     && mkdir -p tomcat/logs \
     && touch tomcat/logs/catalina.out
+
+COPY --chown=worker:worker artifacts/jmx_prometheus_javaagent-${repository.prometheus.jmx.version}.jar tomcat/agent/jmx_prometheus_javaagent.jar
+COPY --chown=worker:worker assets/agent/jmx-exporter-config.yaml tomcat/agent/
 
 COPY --chown=worker:worker artifacts/postgresql-${symbol_dollar}{repository.postgresql.client.version}.jar tomcat/lib/
 COPY --chown=worker:worker artifacts/redisson-all-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/

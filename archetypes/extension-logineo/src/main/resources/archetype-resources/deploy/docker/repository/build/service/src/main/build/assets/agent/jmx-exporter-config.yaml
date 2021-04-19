@@ -1,8 +1,30 @@
 ---
 lowercaseOutputLabelNames: true
 lowercaseOutputName: true
-whitelistObjectNames: ["Catalina:*"]
+blacklistObjectNames: ["org.apache.logging.log4j2:*"]
 rules:
+  - pattern: 'Alfresco<type=CacheStatistics, name=(.+)><>(.*)Count:'
+    name: alfresco_cache_$2_total
+    help: alfresco_cache_$2_total
+    type: COUNTER
+    labels:
+      cache: "$1"
+  - pattern: 'Alfresco<type=CacheStatistics, name=(.+)><>(.*)Time:'
+    name: alfresco_cache_$2_sum
+    help: alfresco_cache_$2_sum
+    type: COUNTER
+    labels:
+      cache: "$1"
+  - pattern: 'Alfresco<type=CacheStatistics, name=(.+)><>(.*)Ratio:'
+    name: alfresco_cache_$2_ratio
+    help: alfresco_cache_$2_ratio
+    type: GAUGE
+    labels:
+      cache: "$1"
+  - pattern: 'Alfresco<type=DataSource><>(.*)Connections:'
+    name: alfresco_datasource_$2_connection
+    help: alfresco_datasource_$2_connection
+    type: GAUGE
   - pattern: 'Catalina<type=StringCache><>accessCount:'
     name: tomcat_cache_access_total
     help: tomcat_cache_access_total
@@ -158,3 +180,38 @@ rules:
     labels:
       protocol: "$1"
       port: "$4"
+  - pattern: 'com.hazelcast<instance=(.*), name=(.+), type=HazelcastInstance><>(.*)Count:'
+    name: hazelcast_$3_total
+    help: hazelcast_$3_total
+    type: COUNTER
+    labels:
+      instance: "$1"
+      name: "$2"
+  - pattern: 'com.hazelcast<instance=(.*), name=(.+), type=HazelcastInstance><>running:'
+    name: hazelcast_up
+    help: hazelcast_up
+    type: GAUGE
+    labels:
+      instance: "$1"
+      name: "$2"
+  - pattern: 'com.hazelcast<name=(.*), instance=(.+), type=I(.*)><>local(.*)Count:'
+    name: hazelcast_$3_$4_total
+    help: hazelcast_$3_$4_total
+    type: COUNTER
+    labels:
+      name: "$1"
+      instance: "$2"
+  - pattern: 'com.hazelcast<name=(.*), instance=(.+), type=I(.*)><>localHits:'
+    name: hazelcast_$3_hits_total
+    help: hazelcast_$3_hits_total
+    type: COUNTER
+    labels:
+      name: "$1"
+      instance: "$2"
+  - pattern: 'com.hazelcast<name=(.*), instance=(.+), type=I(.*)><>size:'
+    name: hazelcast_$3_entries
+    help: hazelcast_$3_entries
+    type: GAUGE
+    labels:
+      name: "$1"
+      instance: "$2"

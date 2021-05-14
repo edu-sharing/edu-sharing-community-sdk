@@ -57,7 +57,7 @@
 
   Following environment variables should be customized:
   
-  - `REPOSITORY_SERVICE_SMTP_FROM`: sender address, which will add in the 'From' header, default: `noreply@127.0.0.1.xip.io`  
+  - `REPOSITORY_SERVICE_SMTP_FROM`: sender address, which will add in the 'From' header, default: `noreply@127.0.0.1.nip.io`  
   - `REPOSITORY_SERVICE_SMTP_REPL`: if `true` email address of invitor will add in the 'Reply-To' header, default: `false`  
 
   You can send out the invitation emails: 
@@ -77,7 +77,7 @@
   
     If so, you can customize this relay option over: 
   
-    - `REPOSITORY_MAILRELAY_MAILNAME`: your mail domain, default: `127.0.0.1.xip.io`    
+    - `REPOSITORY_MAILRELAY_MAILNAME`: your mail domain, default: `127.0.0.1.nip.io`    
     - `REPOSITORY_MAILRELAY_RELAYHOST`: if specified then all emails will be forwarded to this mail server,
        otherwise all emails will send out directly, default: ``  
 å

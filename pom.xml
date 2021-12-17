@@ -8,7 +8,7 @@
 
   <parent>
     <groupId>org.edu_sharing</groupId>
-    <artifactId>edu_sharing-community-parent</artifactId>
+    <artifactId>edu_sharing-super-pom</artifactId>
     <version>develop-SNAPSHOT</version>
     <relativePath/>
   </parent>
@@ -33,43 +33,10 @@
 
   <properties>
 
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-
     <maven.deploy.releases>https://artifacts.edu-sharing.com/repository/community-releases/</maven.deploy.releases>
     <maven.deploy.snapshots>https://artifacts.edu-sharing.com/repository/community-snapshots/</maven.deploy.snapshots>
 
   </properties>
-
-  <build>
-
-    <plugins>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <inherited>false</inherited>
-        <executions>
-          <execution>
-            <id>enforce</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <phase>validate</phase>
-            <configuration>
-              <rules>
-                <requireJavaVersion>
-                  <version>${repository.java.version.range}</version>
-                </requireJavaVersion>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-    </plugins>
-
-  </build>
 
   <dependencyManagement>
 

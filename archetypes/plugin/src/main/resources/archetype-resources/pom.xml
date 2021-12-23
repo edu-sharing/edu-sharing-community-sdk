@@ -13,11 +13,11 @@
     <relativePath/>
   </parent>
 
-  <artifactId>edu_sharing-plugin-${rootArtifactId}</artifactId>
+  <artifactId>edu_sharing-community-repository-plugin-${rootArtifactId}</artifactId>
   <packaging>pom</packaging>
   <version>${version}</version>
 
-  <name>edu_sharing-plugin-${rootArtifactId}</name>
+  <name>edu_sharing-community-repository-plugin-${rootArtifactId}</name>
 
   <scm>
     <connection>scm:git:https://scm.edu-sharing.com/edu-sharing-plugins/edu-sharing-plugin-${rootArtifactId}.git</connection>
@@ -55,13 +55,13 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-fixes</artifactId>
+        <artifactId>edu_sharing-community-repository-plugin-${rootArtifactId}-backend-alfresco-fixes</artifactId>
         <version>${project.version}</version>
       </dependency>
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-plugin-${rootArtifactId}-repository-backend-alfresco-module</artifactId>
+        <artifactId>edu_sharing-community-repository-plugin-${rootArtifactId}-backend-alfresco-module</artifactId>
         <version>${project.version}</version>
       </dependency>
 

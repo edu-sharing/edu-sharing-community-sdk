@@ -9,10 +9,11 @@ pushd "${EDU_ROOT:-$HOME/.edusharing}" >/dev/null || exit 1
 	exit 1
 }
 
-repos=(edu-sharing-community-bom)
-repos+=(edu-sharing-community-parent)
+repos=(edu-sharing-community-parent)
+repos+=(edu-sharing-community-bom)
 repos+=(edu-sharing-community-repository)
 repos+=(edu-sharing-community-plugin-elastic)
+#repos+=(edu-sharing-community-plugin-mongo)
 repos+=(edu-sharing-enterprise-repository-plugin-cluster)
 repos+=(edu-sharing-enterprise-repository-plugin-remote)
 repos+=(edu-sharing-enterprise-repository-plugin-transform)

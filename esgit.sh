@@ -12,6 +12,7 @@ pushd "${EDU_ROOT:-$HOME/.edusharing}" >/dev/null || exit 1
 	git clone https://scm.edu-sharing.com/edu-sharing/community/edu-sharing-community-parent.git -bare
 	git clone https://scm.edu-sharing.com/edu-sharing/community/repository/edu-sharing-community-repository.git --recurse-submodules -bare
 	git clone https://scm.edu-sharing.com/edu-sharing/community/repository/edu-sharing-community-repository-plugin-elastic.git -bare
+#	git clone https://scm.edu-sharing.com/edu-sharing/community/repository/edu-sharing-community-repository-plugin-mongo.git -bare
 	git clone https://scm.edu-sharing.com/edu-sharing/community/services/edu-sharing-community-services-rendering.git -bare
 	git clone https://scm.edu-sharing.com/edu-sharing/enterprise/repository/edu-sharing-enterprise-repository-plugin-cluster.git -bare
 	git clone https://scm.edu-sharing.com/edu-sharing/enterprise/repository/edu-sharing-enterprise-repository-plugin-remote.git -bare

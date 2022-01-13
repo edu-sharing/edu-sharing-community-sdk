@@ -8,8 +8,8 @@
 
   <parent>
     <groupId>org.edu_sharing</groupId>
-    <artifactId>edu_sharing-super-pom</artifactId>
-    <version>develop-SNAPSHOT</version>
+    <artifactId>edu_sharing-community-parent</artifactId>
+    <version>git</version>
     <relativePath/>
   </parent>
 
@@ -33,8 +33,7 @@
 
   <properties>
 
-    <maven.deploy.releases>https://artifacts.edu-sharing.com/repository/community-releases/</maven.deploy.releases>
-    <maven.deploy.snapshots>https://artifacts.edu-sharing.com/repository/community-snapshots/</maven.deploy.snapshots>
+    <community.platform>${project.version}</community.platform>
 
   </properties>
 
@@ -44,147 +43,37 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-alfresco-fixes</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-alfresco-module</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-base</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-core</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-rest-client</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-rest-server</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-rest-webapp</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-soap-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-soap-server</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-soap-webapp</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-services-xoai</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-tomcat</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-backend-webapp</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-config</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-sdk-frontend-webapp</artifactId>
-        <version>${project.version}</version>
-        <type>war</type>
+        <artifactId>edu_sharing-community-bom</artifactId>
+        <version>${community.platform}</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
 
     </dependencies>
 
   </dependencyManagement>
 
-  <pluginRepositories>
+  <repositories>
 
-    <pluginRepository>
-      <id>edu-sharing.public.releases</id>
-      <url>https://artifacts.edu-sharing.com/repository/public-releases/</url>
+    <repository>
+      <id>edusharing-remote</id>
+      <url>https://artifacts.edu-sharing.com/repository/maven-remote/</url>
       <releases>
         <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-
-    <pluginRepository>
-      <id>edu-sharing.public.snapshots</id>
-      <url>https://artifacts.edu-sharing.com/repository/public-snapshots/</url>
-      <releases>
-        <enabled>false</enabled>
+        <updatePolicy>always</updatePolicy>
       </releases>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>always</updatePolicy>
       </snapshots>
-    </pluginRepository>
-
-  </pluginRepositories>
-
-  <repositories>
-
-    <repository>
-      <id>edu-sharing.public.releases</id>
-      <url>https://artifacts.edu-sharing.com/repository/public-releases/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
     </repository>
 
     <repository>
-      <id>edu-sharing.public.snapshots</id>
-      <url>https://artifacts.edu-sharing.com/repository/public-snapshots/</url>
+      <id>edusharing-mirror</id>
+      <url>https://artifacts.edu-sharing.com/repository/maven-mirror/</url>
       <releases>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
       </releases>
       <snapshots>
         <enabled>true</enabled>
@@ -193,19 +82,5 @@
     </repository>
 
   </repositories>
-
-  <distributionManagement>
-
-    <repository>
-      <id>maven.deploy.releases</id>
-      <url>${maven.deploy.releases}</url>
-    </repository>
-
-    <snapshotRepository>
-      <id>maven.deploy.snapshots</id>
-      <url>${maven.deploy.snapshots}</url>
-    </snapshotRepository>
-
-  </distributionManagement>
 
 </project>

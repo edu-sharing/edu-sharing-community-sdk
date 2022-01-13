@@ -19,6 +19,7 @@ repos+=(edu-sharing-enterprise-repository-plugin-remote)
 repos+=(edu-sharing-enterprise-repository-plugin-transform)
 repos+=(edu-sharing-community-services-rendering)
 repos+=(edu-sharing-community-deploy)
+repos+=(edu-sharing-community-sdk)
 
 export OPTS="${MAVEN_CLI_OPTS:-"-q -ff"}"
 

@@ -2,7 +2,14 @@
 set -e
 set -o pipefail
 
-pushd "${EDU_ROOT:-$HOME/.edusharing}" >/dev/null || exit 1
+root=${EDU_ROOT:-$HOME/.edusharing}
+mkdir -p "${root}"
+
+echo "################################################################################"
+echo "root: ${root}"
+echo "################################################################################"
+
+pushd "${root}" >/dev/null || exit 1
 
 [[ ! -d ./main ]] && {
 	mkdir -p main
@@ -71,6 +78,7 @@ worktree() {
 		;;
 	*)
 		{
+			echo "options:"
 			echo "  add <worktree>"
 			echo "  remove <worktree>"
 		} >&2
@@ -85,6 +93,7 @@ worktree)
 	;;
 *)
 	{
+		echo "options:"
 		echo "  worktree"
 	} >&2
 	exit 1

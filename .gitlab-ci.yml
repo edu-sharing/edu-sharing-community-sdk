@@ -1,14 +1,14 @@
-image: maven:3.6.3-jdk-8
-
 variables:
-  MAVEN_CLI_OPTS: "-Dmaven.deploy.releases=$MAVEN_RELEASES -Dmaven.deploy.snapshots=$MAVEN_SNAPSHOTS -s .mvn/settings.xml --batch-mode --errors --show-version"
+  MAVEN_CLI: "-Ddocker.registry=$DOCKER_REGISTRY -Dhelm.deploy.url=$HELM_REGISTRY -Dhelm.deploy.type=$HELM_TYPE -Dmaven.deploy.releases=$MAVEN_DEPLOY_RELEASES -Dmaven.deploy.snapshots=$MAVEN_DEPLOY_SNAPSHOTS --batch-mode --errors --fail-fast --show-version"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
-cache:
-  paths:
-    - .m2/repository/
+default:
+  image: maven:3.8.4-jdk-8
+
+stages:
+  - deploy
 
 deploy:
   stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS deploy
+    - mvn $MAVEN_CLI -s .mvn/settings.xml deploy

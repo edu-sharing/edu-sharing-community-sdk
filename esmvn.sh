@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 set -o pipefail
 
 pushd "${EDU_ROOT:-$HOME/.edusharing}" #>/dev/null || exit 1
@@ -25,7 +25,8 @@ export OPTS="${MAVEN_CLI_OPTS:-"-ff -DskipTests"}"
 
 install() {
 	shift || exit 1
-	path="link/$1"
+	#path="link/$1"
+	path="main/$1"
 	[[ -d "${path}" ]] && {
 		for repo in "${repos[@]}"
     do

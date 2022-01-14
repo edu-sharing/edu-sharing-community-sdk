@@ -2,7 +2,7 @@
 set -e
 set -o pipefail
 
-pushd "${EDU_ROOT:-$HOME/.edusharing}" >/dev/null || exit 1
+pushd "${EDU_ROOT:-$HOME/.edusharing}" #>/dev/null || exit 1
 
 [[ ! -d ./main ]] && {
 	echo "please run: esgit.sh worktree add"
@@ -21,7 +21,7 @@ repos+=(edu-sharing-community-services-rendering)
 repos+=(edu-sharing-community-deploy)
 repos+=(edu-sharing-community-sdk)
 
-export OPTS="${MAVEN_CLI_OPTS:-"-q -ff"}"
+export OPTS="${MAVEN_CLI_OPTS:-"-ff -DskipTests"}"
 
 install() {
 	shift || exit 1
@@ -29,11 +29,12 @@ install() {
 	[[ -d "${path}" ]] && {
 		for repo in "${repos[@]}"
     do
-			pushd "${path}/${repo}" >/dev/null || exit 1
+			pushd "${path}/${repo}.git" >/dev/null || exit 1
 			echo "################################################################################"
 			echo "$repo"
 			echo "################################################################################"
-    	mvn "$OPTS" install
+    	mvn $OPTS install
+    	#mvn install
     	popd >/dev/null
     done
 	}

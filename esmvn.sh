@@ -9,17 +9,17 @@ pushd "${EDU_ROOT:-$HOME/.edusharing}" #>/dev/null || exit 1
 	exit 1
 }
 
-repos=(edu-sharing-community-parent)
-repos+=(edu-sharing-community-bom)
-repos+=(edu-sharing-community-repository)
-repos+=(edu-sharing-community-plugin-elastic)
-#repos+=(edu-sharing-community-plugin-mongo)
-repos+=(edu-sharing-enterprise-repository-plugin-cluster)
-repos+=(edu-sharing-enterprise-repository-plugin-remote)
-repos+=(edu-sharing-enterprise-repository-plugin-transform)
-repos+=(edu-sharing-community-services-rendering)
-repos+=(edu-sharing-community-deploy)
-repos+=(edu-sharing-community-sdk)
+repos=(parent)
+repos+=(bom)
+repos+=(repository)
+repos+=(repository-plugin-elastic)
+#repos+=(repository-plugin-mongo)
+repos+=(repository-plugin-cluster)
+repos+=(repository-plugin-remote)
+repos+=(repository-plugin-transform)
+repos+=(services-rendering)
+repos+=(deploy/docker)
+repos+=(sdk)
 
 export OPTS="${MAVEN_CLI_OPTS:-"-ff -DskipTests"}"
 
@@ -29,7 +29,7 @@ install() {
 	[[ -d "${path}" ]] && {
 		for repo in "${repos[@]}"
     do
-			pushd "${path}/${repo}.git" >/dev/null || exit 1
+			pushd "${path}/${repo}" >/dev/null || exit 1
 			echo "################################################################################"
 			echo "$repo"
 			echo "################################################################################"

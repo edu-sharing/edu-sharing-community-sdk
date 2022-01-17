@@ -132,6 +132,57 @@ build() {
 	local="$1"
 	path="link/$local"
 	[[ ! -d "${path}" ]] && exit 1
+
+	read -p "repository.cluster      [y/N] " answer
+	case ${answer:0:1} in
+	y | Y)
+	  export REPOSITORY_CLUSTER_ENABLED=true
+		;;
+	*)
+	  export REPOSITORY_CLUSTER_ENABLED=false
+		;;
+	esac
+
+	read -p "repository.elastic      [y/N] " answer
+	case ${answer:0:1} in
+	y | Y)
+	  export REPOSITORY_ELASTIC_ENABLED=true
+		;;
+	*)
+	  export REPOSITORY_ELASTIC_ENABLED=false
+		;;
+	esac
+
+	read -p "repository.mongo        [y/N] " answer
+	case ${answer:0:1} in
+	y | Y)
+	  export REPOSITORY_MONGO_ENABLED=true
+		;;
+	*)
+	  export REPOSITORY_MONGO_ENABLED=false
+		;;
+	esac
+
+	read -p "repository.remote       [y/N] " answer
+	case ${answer:0:1} in
+	y | Y)
+	  export REPOSITORY_REMOTE_ENABLED=true
+		;;
+	*)
+	  export REPOSITORY_REMOTE_ENABLED=false
+		;;
+	esac
+
+	read -p "repository.transform    [y/N] " answer
+	case ${answer:0:1} in
+	y | Y)
+	  export REPOSITORY_TRANSFORM_ENABLED=true
+		;;
+	*)
+	  export REPOSITORY_TRANSFORM_ENABLED=false
+		;;
+	esac
+
 	for repo in "${repos[@]}"
 	do
 		pushd "${path}/${repo}" >/dev/null || exit 1

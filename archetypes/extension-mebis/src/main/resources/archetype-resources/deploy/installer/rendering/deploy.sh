@@ -46,7 +46,7 @@ build() {
 
 	echo "Checking artifactId ..."
 
-	EXPECTED_ARTIFACTID="edu_sharing-community-rendering"
+	EXPECTED_ARTIFACTID="edu_sharing-community-services-rendering"
 
 	pushd "${COMMUNITY_PATH}" >/dev/null || exit
 	PROJECT_ARTIFACTID=$($MVN_EXEC -q -ff -nsu -N help:evaluate -Dexpression=project.artifactId -DforceStdout)

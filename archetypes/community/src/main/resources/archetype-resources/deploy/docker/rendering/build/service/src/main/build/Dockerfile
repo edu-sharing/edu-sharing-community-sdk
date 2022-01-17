@@ -57,12 +57,12 @@ WORKDIR $RS_ROOT
 
 ########################################################################################################################
 
-COPY artifacts/edu_sharing-community-rendering-${community.rendering.version}-bin.tar.gz /tmp/edu_sharing-community-rendering.tar.gz
+COPY artifacts/edu_sharing-community-services-rendering-${community.rendering.version}-bin.tar.gz /tmp/edu_sharing-community-services-rendering.tar.gz
 
 RUN set -eux \
 	&& mkdir -p $RS_ROOT $RS_CACHE \
-	&& tar -xzvf /tmp/edu_sharing-community-rendering.tar.gz --exclude './vendor/lib/converter' \
-	&& rm -rf /tmp/edu_sharing-community-rendering.tar.gz
+	&& tar -xzvf /tmp/edu_sharing-community-services-rendering.tar.gz --exclude './vendor/lib/converter' \
+	&& rm -rf /tmp/edu_sharing-community-services-rendering.tar.gz
 
 COPY assets/apache2/ports.conf /etc/apache2/ports.conf
 COPY assets/apache2/sites/* /etc/apache2/sites-available/

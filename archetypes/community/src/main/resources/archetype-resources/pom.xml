@@ -113,7 +113,7 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-rendering</artifactId>
+        <artifactId>edu_sharing-community-services-rendering</artifactId>
         <version>${community.rendering.version}</version>
         <type>tar.gz</type>
         <classifier>bin</classifier>

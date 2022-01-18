@@ -102,7 +102,7 @@
       <plugins>
 
         <plugin>
-          <groupId>com.kiwigrid</groupId>
+          <groupId>io.kokuwa.maven</groupId>
           <artifactId>helm-maven-plugin</artifactId>
           <configuration>
             <chartDirectory>${project.build.directory}/chart</chartDirectory>

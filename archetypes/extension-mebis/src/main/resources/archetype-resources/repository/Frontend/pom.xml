@@ -153,7 +153,7 @@
             <goals>
               <goal>single</goal>
             </goals>
-            <phase>verify</phase>
+            <phase>package</phase>
             <configuration>
               <descriptors>
                 <descriptor>src/main/assembly/sources.xml</descriptor>

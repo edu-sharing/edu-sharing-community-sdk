@@ -27,10 +27,10 @@ spec:
         - "/bin/bash"
         - "-ec"
         - |
-          chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /usr/local/alfresco/alf_data
+          chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/alfresco/alf_data
         volumeMounts:
         - name: data
-          mountPath: /usr/local/alfresco/alf_data
+          mountPath: /opt/alfresco/alf_data
           subPath: data/
         securityContext:
           runAsUser: 0
@@ -59,7 +59,7 @@ spec:
         {{- end }}
         volumeMounts:
         - name: data
-          mountPath: /usr/local/alfresco/alf_data
+          mountPath: /opt/alfresco/alf_data
           subPath: data/
         {{- with .Values.livenessProbe }}
         livenessProbe:

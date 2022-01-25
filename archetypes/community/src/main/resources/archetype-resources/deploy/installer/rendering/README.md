@@ -17,8 +17,8 @@ Download
 
 1. Download the installer artifact:
 
-   * [releases](https://artifacts.edu-sharing.com/#browse/browse:community-releases:org%2Fedu_sharing%2Fedu_sharing-community-deploy-installer-rendering)
-   * [snapshots](https://artifacts.edu-sharing.com/#browse/browse:community-snapshots:org%2Fedu_sharing%2Fedu_sharing-community-deploy-installer-rendering)
+   * [releases](https://artifacts.edu-sharing.com/#browse/browse:community-releases:org%2Fedu_sharing%2Fedu_sharing-community-deploy-installer-services-rendering)
+   * [snapshots](https://artifacts.edu-sharing.com/#browse/browse:community-snapshots:org%2Fedu_sharing%2Fedu_sharing-community-deploy-installer-services-rendering)
 
 Build
 -----

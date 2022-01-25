@@ -33,7 +33,7 @@
             <phase>package</phase>
             <configuration>
               <includeArtifactIds>
-                edu_sharing-community-deploy-docker-rendering-compose,
+                edu_sharing-community-deploy-docker-services-rendering-compose,
                 edu_sharing-community-deploy-docker-repository-compose
               </includeArtifactIds>
               <excludes>META-INF/**</excludes>
@@ -69,7 +69,7 @@
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>edu_sharing-community-deploy-docker-rendering-compose</artifactId>
+      <artifactId>edu_sharing-community-deploy-docker-services-rendering-compose</artifactId>
     </dependency>
 
     <dependency>

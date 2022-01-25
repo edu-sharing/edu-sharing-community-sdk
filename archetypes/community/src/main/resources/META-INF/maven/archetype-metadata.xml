@@ -344,8 +344,8 @@
                 </module>
               </modules>
             </module>
-            <module id="edu_sharing-community-deploy-docker-rendering" dir="rendering"
-                    name="edu_sharing-community-deploy-docker-rendering">
+            <module id="edu_sharing-community-deploy-docker-services-rendering" dir="rendering"
+                    name="edu_sharing-community-deploy-docker-services-rendering">
               <fileSets>
                 <fileSet filtered="true" encoding="UTF-8">
                   <directory></directory>
@@ -362,12 +362,12 @@
                 </fileSet>
               </fileSets>
               <modules>
-                <module id="edu_sharing-community-deploy-docker-rendering-build" dir="build"
-                        name="edu_sharing-community-deploy-docker-rendering-build">
+                <module id="edu_sharing-community-deploy-docker-services-rendering-build" dir="build"
+                        name="edu_sharing-community-deploy-docker-services-rendering-build">
                   <modules>
-                    <module id="edu_sharing-community-deploy-docker-rendering-build-service"
+                    <module id="edu_sharing-community-deploy-docker-services-rendering-build-service"
                             dir="service"
-                            name="edu_sharing-community-deploy-docker-rendering-build-service">
+                            name="edu_sharing-community-deploy-docker-services-rendering-build-service">
                       <fileSets>
                         <fileSet encoding="UTF-8">
                           <directory>src</directory>
@@ -379,8 +379,8 @@
                     </module>
                   </modules>
                 </module>
-                <module id="edu_sharing-community-deploy-docker-rendering-compose" dir="compose"
-                        name="edu_sharing-community-deploy-docker-rendering-compose">
+                <module id="edu_sharing-community-deploy-docker-services-rendering-compose" dir="compose"
+                        name="edu_sharing-community-deploy-docker-services-rendering-compose">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>
@@ -511,8 +511,8 @@
         <module id="edu_sharing-community-deploy-installer" dir="installer"
                 name="edu_sharing-community-deploy-installer">
           <modules>
-            <module id="edu_sharing-community-deploy-installer-rendering" dir="rendering"
-                    name="edu_sharing-community-deploy-installer-rendering">
+            <module id="edu_sharing-community-deploy-installer-services-rendering" dir="rendering"
+                    name="edu_sharing-community-deploy-installer-services-rendering">
               <fileSets>
                 <fileSet filtered="true" encoding="UTF-8">
                   <directory></directory>

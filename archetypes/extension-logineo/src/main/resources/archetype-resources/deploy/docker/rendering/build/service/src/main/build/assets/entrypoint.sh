@@ -3,30 +3,30 @@ set -eux
 
 ########################################################################################################################
 
-my_bind="${RENDERING_SERVICE_BIND:-"0.0.0.0"}"
+my_bind="${SERVICES_RENDERING_SERVICE_BIND:-"0.0.0.0"}"
 
-my_prot_external="${RENDERING_SERVICE_PROT_EXTERNAL:-http}"
-my_host_external="${RENDERING_SERVICE_HOST_EXTERNAL:-rendering.127.0.0.1.nip.io}"
-my_port_external="${RENDERING_SERVICE_PORT_EXTERNAL:-9100}"
-my_path_external="${RENDERING_SERVICE_PATH_EXTERNAL:-/esrender}"
+my_prot_external="${SERVICES_RENDERING_SERVICE_PROT_EXTERNAL:-http}"
+my_host_external="${SERVICES_RENDERING_SERVICE_HOST_EXTERNAL:-rendering.services.127.0.0.1.nip.io}"
+my_port_external="${SERVICES_RENDERING_SERVICE_PORT_EXTERNAL:-9100}"
+my_path_external="${SERVICES_RENDERING_SERVICE_PATH_EXTERNAL:-/esrender}"
 my_base_external="${my_prot_external}://${my_host_external}:${my_port_external}${my_path_external}"
 
-my_host_internal="${RENDERING_SERVICE_HOST_INTERNAL:-rendering-service}"
-my_port_internal="${RENDERING_SERVICE_PORT_INTERNAL:-8080}"
+my_host_internal="${SERVICES_RENDERING_SERVICE_HOST_INTERNAL:-rendering-service}"
+my_port_internal="${SERVICES_RENDERING_SERVICE_PORT_INTERNAL:-8080}"
 my_base_internal="http://${my_host_internal}:${my_port_internal}/esrender"
 
-rendering_cache_host="${RENDERING_CACHE_HOST:-rendering-cache}"
-rendering_cache_port="${RENDERING_CACHE_PORT:-6379}"
-rendering_cache_prot="${RENDERING_CACHE_PROT:-tcp://}"
-rendering_cache_opts="${RENDERING_CACHE_OPTS:-}"
-rendering_cache_type="${RENDERING_CACHE_TYPE:-redis}"
+rendering_cache_host="${SERVICES_RENDERING_CACHE_HOST:-rendering-cache}"
+rendering_cache_port="${SERVICES_RENDERING_CACHE_PORT:-6379}"
+rendering_cache_prot="${SERVICES_RENDERING_CACHE_PROT:-tcp://}"
+rendering_cache_opts="${SERVICES_RENDERING_CACHE_OPTS:-}"
+rendering_cache_type="${SERVICES_RENDERING_CACHE_TYPE:-redis}"
 
-rendering_database_driv="${RENDERING_DATABASE_DRIV:-"mysql"}"
-rendering_database_host="${RENDERING_DATABASE_HOST:-rendering-database}"
-rendering_database_name="${RENDERING_DATABASE_NAME:-rendering}"
-rendering_database_pass="${RENDERING_DATABASE_PASS:-rendering}"
-rendering_database_port="${RENDERING_DATABASE_PORT:-3306}"
-rendering_database_user="${RENDERING_DATABASE_USER:-rendering}"
+rendering_database_driv="${SERVICES_RENDERING_DATABASE_DRIV:-"mysql"}"
+rendering_database_host="${SERVICES_RENDERING_DATABASE_HOST:-rendering-database}"
+rendering_database_name="${SERVICES_RENDERING_DATABASE_NAME:-rendering}"
+rendering_database_pass="${SERVICES_RENDERING_DATABASE_PASS:-rendering}"
+rendering_database_port="${SERVICES_RENDERING_DATABASE_PORT:-3306}"
+rendering_database_user="${SERVICES_RENDERING_DATABASE_USER:-rendering}"
 
 repository_service_host="${REPOSITORY_SERVICE_HOST:-repository-service}"
 repository_service_port="${REPOSITORY_SERVICE_PORT:-8080}"

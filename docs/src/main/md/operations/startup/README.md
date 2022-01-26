@@ -14,12 +14,12 @@
     > ```
     > COMPOSE_PROJECT_NAME="instance-0" \
     > REPOSITORY_SERVICE_PORT_HTTP="8100" \
-    > RENDERING_SERVICE_PORT_HTTP="9100" \
+    > SERVICES_RENDERING_SERVICE_PORT_HTTP="9100" \
     > ./deploy.sh start 
     > 
     > COMPOSE_PROJECT_NAME="instance-1" \
     > REPOSITORY_SERVICE_PORT_HTTP="8101" \
-    > RENDERING_SERVICE_PORT_HTTP="9101" \
+    > SERVICES_RENDERING_SERVICE_PORT_HTTP="9101" \
     > ./deploy.sh start 
     > ```  
     > Please check your docker engine has enough total memory, because each instance needs a minimum of memory, 

@@ -8,8 +8,8 @@
 
   <parent>
     <groupId>org.edu_sharing</groupId>
-    <artifactId>edu_sharing-community-parent</artifactId>
-    <version>git</version>
+    <artifactId>edu_sharing-super-pom</artifactId>
+    <version>develop-SNAPSHOT</version>
     <relativePath/>
   </parent>
 

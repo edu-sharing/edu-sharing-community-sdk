@@ -55,7 +55,7 @@ RUN set -eux \
 COPY --chown=worker:worker artifacts/jmx_prometheus_javaagent-${repository.prometheus.jmx.version}.jar tomcat/agent/jmx_prometheus_javaagent.jar
 COPY --chown=worker:worker assets/agent/jmx-exporter-config.yaml tomcat/agent/
 
-COPY --chown=worker:worker artifacts/postgresql-${symbol_dollar}{repository.postgresql.client.version}.jar tomcat/lib/
+COPY --chown=worker:worker artifacts/postgresql-${symbol_dollar}{postgresql.jdbc.version}.jar tomcat/lib/
 COPY --chown=worker:worker artifacts/redisson-all-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
 COPY --chown=worker:worker artifacts/redisson-tomcat-7-${symbol_dollar}{repository.redis.client.version}.jar tomcat/lib/
 
@@ -72,7 +72,7 @@ RUN set -eux \
 
 ### Alfresco Platform ##################################################################################################
 
-COPY --chown=worker:worker artifacts/alfresco-platform-community-distributionzip-${symbol_dollar}{repository.alfresco.platform.version}.zip \
+COPY --chown=worker:worker artifacts/alfresco-platform-community-distributionzip-${symbol_dollar}{alfresco.platform.version}.zip \
     /tmp/alfresco-platform-community-distributionzip.zip
 
 RUN set -eux \
@@ -127,7 +127,7 @@ COPY --chown=worker:worker assets/alfresco/web-scripts-config-custom.xml tomcat/
 
 ### Alfresco Share #####################################################################################################
 
-COPY --chown=worker:worker artifacts/alfresco-content-services-share-distribution-${symbol_dollar}{repository.alfresco.share.version}.zip \
+COPY --chown=worker:worker artifacts/alfresco-content-services-share-distribution-${symbol_dollar}{alfresco.share.version}.zip \
     /tmp/alfresco-content-services-share-distribution.zip
 
 RUN set -eux \
@@ -149,7 +149,7 @@ COPY --chown=worker:worker assets/share/share-config-custom.xml tomcat/shared/cl
 
 ### Alfresco PDF Renderer ##############################################################################################
 
-COPY --chown=worker:worker artifacts/alfresco-pdf-renderer-${symbol_dollar}{repository.alfresco.pdf-renderer.version}-linux.tgz /tmp/alfresco-pdf-renderer.tgz
+COPY --chown=worker:worker artifacts/alfresco-pdf-renderer-${symbol_dollar}{alfresco.pdf-renderer.version}-linux.tgz /tmp/alfresco-pdf-renderer.tgz
 
 RUN set -eux \
 	&& mkdir -p /tmp/install/alfresco-pdf-renderer \

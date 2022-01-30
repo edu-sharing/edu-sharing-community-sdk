@@ -41,8 +41,9 @@
     <dependencySet>
       <outputDirectory>lib</outputDirectory>
       <excludes>
-        <exclude>log4j:log4j</exclude>
-        <exclude>org.slf4j:slf4j-api</exclude>
+        <exclude>log4j:*</exclude>
+        <exclude>org.apache.logging.log4j:*</exclude>
+        <exclude>org.slf4j:*</exclude>
       </excludes>
     </dependencySet>
   </dependencySets>

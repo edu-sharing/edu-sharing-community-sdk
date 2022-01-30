@@ -40,7 +40,7 @@ COPY --chown=worker:worker assets/tomcat/logging.properties tomcat/conf/logging.
 
 ### Alfresco Solr4 #####################################################################################################
 
-COPY --chown=worker:worker artifacts/alfresco-solr4-distribution-${repository.alfresco.platform.version}.zip /tmp/alfresco-solr4-distribution.zip
+COPY --chown=worker:worker artifacts/alfresco-solr4-distribution-${alfresco.platform.version}.zip /tmp/alfresco-solr4-distribution.zip
 
 RUN set -eux \
 	&& mkdir -p /tmp/install/alfresco-solr4 \

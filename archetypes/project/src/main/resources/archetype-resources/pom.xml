@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>${groupId}</groupId>
+    <artifactId>edu_sharing-super-pom</artifactId>
+    <version>develop-SNAPSHOT</version>
+    <relativePath/>
+  </parent>
+
+  <artifactId>${artifactId}</artifactId>
+  <packaging>pom</packaging>
+  <version>${version}</version>
+
+  <name>${artifactId}</name>
+
+  <scm>
+    <connection>scm:git:https://scm.edu-sharing.com/edu-sharing/projects/${project}/edu-sharing-projects-${project}.git</connection>
+    <developerConnection>scm:git:https://scm.edu-sharing.com/edu-sharing/projects/${project}/edu-sharing-projects-${project}.git</developerConnection>
+    <url>https://scm.edu-sharing.com/edu-sharing/projects/${project}/edu-sharing-projects-${project}.git</url>
+  </scm>
+
+  <properties>
+
+    <!-- release-4 -->
+    <bom.bom.version>${project.version}</bom.bom.version>
+
+  </properties>
+
+  <profiles>
+
+    <profile>
+
+      <id>dev</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.DEV</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <properties>
+        <bom.bom.version>${project.version}</bom.bom.version>
+      </properties>
+
+    </profile>
+
+  </profiles>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>com.github.tommyk-gears</groupId>
+        <artifactId>bom-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>community-bom</id>
+            <goals>
+              <goal>import-properties</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <artifacts>
+                <dependency>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>edu_sharing-community-bom</artifactId>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <version>${bom.bom.version}</version>
+                  <type>pom</type>
+                </dependency>
+              </artifacts>
+            </configuration>
+          </execution>
+          <execution>
+            <id>community-repository</id>
+            <goals>
+              <goal>import-properties</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <artifacts>
+                <dependency>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>edu_sharing-community-repository</artifactId>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <version>${bom.repository.version}</version>
+                  <type>pom</type>
+                </dependency>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+  <dependencyManagement>
+
+    <dependencies>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>edu_sharing-community-bom</artifactId>
+        <version>${bom.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-helm-postgresql</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-helm-rediscluster</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-repository-compose</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-bundle</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-service</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-solr4</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-services-rendering-compose</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-services-rendering-helm-bundle</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-services-rendering-helm-service</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-installer-repository-compose-debian-bullseye</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-installer-repository-distribution</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-installer-services-rendering-compose-debian-bullseye</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-installer-services-rendering-distribution</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-backend-alfresco-module</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-backend-alfresco-module</artifactId>
+        <version>${project.version}</version>
+        <type>amp</type>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-backend-services-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-backend-services-webapp</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-config-cluster</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-config-defaults</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-config-node</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-frontend</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-webapp</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+      </dependency>
+
+    </dependencies>
+
+  </dependencyManagement>
+
+  <repositories>
+
+    <repository>
+      <id>edusharing-remote</id>
+      <url>https://artifacts.edu-sharing.com/repository/maven-remote/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+
+    <repository>
+      <id>edusharing-mirror</id>
+      <url>https://artifacts.edu-sharing.com/repository/maven-mirror/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+
+  </repositories>
+
+</project>

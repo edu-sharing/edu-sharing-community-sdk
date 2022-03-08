@@ -1,5 +1,0 @@
-services:
-
-  rendering-service:
-    volumes:
-      - "${COMMUNITY_PATH}/target/php:/var/www/html/esrender"

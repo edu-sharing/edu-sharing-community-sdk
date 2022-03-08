@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+    name="edu_sharing-project"
+    xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0
+                        http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd">
+  <requiredProperties>
+    <requiredProperty key="groupId">
+      <defaultValue>org.edu_sharing</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="artifactId">
+      <defaultValue>edu_sharing-projects-community</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="version">
+      <defaultValue>git</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="project">
+      <defaultValue>community</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="repositoryClusterEnabled">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="repositoryElasticEnabled">
+      <defaultValue>true</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="repositoryMongoEnabled">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="repositoryRemoteEnabled">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="repositoryTransformEnabled">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="gitignore">
+      <defaultValue>.gitignore</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="gitattributes">
+      <defaultValue>.gitattributes</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  <fileSets>
+    <fileSet encoding="UTF-8">
+      <directory>.mvn</directory>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>__gitattributes__</include>
+        <include>__gitignore__</include>
+        <include>LICENSE</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8" filtered="true">
+      <directory></directory>
+      <includes>
+        <include>.gitlab-ci.yml</include>
+        <include>README.md</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+  <modules>
+    <module dir="deploy"
+            id="${rootArtifactId}-deploy"
+            name="${rootArtifactId}-deploy">
+      <fileSets>
+        <fileSet encoding="UTF-8" filtered="true">
+          <directory></directory>
+          <includes>
+            <include>.info</include>
+          </includes>
+        </fileSet>
+      </fileSets>
+      <modules>
+        <module dir="docker"
+                id="${rootArtifactId}-deploy-docker"
+                name="${rootArtifactId}-deploy-docker">
+          <fileSets>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.env.sample</include>
+                <include>deploy.sh</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8" filtered="true">
+              <directory></directory>
+              <includes>
+                <include>README.md</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+          <modules>
+            <module dir="build"
+                    id="${rootArtifactId}-deploy-docker-build"
+                    name="${rootArtifactId}-deploy-docker-build">
+              <modules>
+                <module dir="apache_exporter"
+                        id="${rootArtifactId}-deploy-docker-build-apache_exporter"
+                        name="${rootArtifactId}-deploy-docker-build-apache_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="minideb"
+                        id="${rootArtifactId}-deploy-docker-build-minideb"
+                        name="${rootArtifactId}-deploy-docker-build-minideb">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="postgresql"
+                        id="${rootArtifactId}-deploy-docker-build-postgresql"
+                        name="${rootArtifactId}-deploy-docker-build-postgresql">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="postgresql_exporter"
+                        id="${rootArtifactId}-deploy-docker-build-postgresql_exporter"
+                        name="${rootArtifactId}-deploy-docker-build-postgresql_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="redis"
+                        id="${rootArtifactId}-deploy-docker-build-redis"
+                        name="${rootArtifactId}-deploy-docker-build-redis">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="redis_exporter"
+                        id="${rootArtifactId}-deploy-docker-build-redis_exporter"
+                        name="${rootArtifactId}-deploy-docker-build-redis_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="rediscluster"
+                        id="${rootArtifactId}-deploy-docker-build-rediscluster"
+                        name="${rootArtifactId}-deploy-docker-build-rediscluster">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+            <module dir="compose"
+                    id="${rootArtifactId}-deploy-docker-compose"
+                    name="${rootArtifactId}-deploy-docker-compose">
+              <fileSets>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                  <excludes>
+                    <exclude>main/scripts/README.md</exclude>
+                  </excludes>
+                </fileSet>
+                <fileSet encoding="UTF-8" filtered="true">
+                  <directory>src</directory>
+                  <includes>
+                    <include>main/scripts/README.md</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+            <module dir="helm"
+                    id="${rootArtifactId}-deploy-docker-helm"
+                    name="${rootArtifactId}-deploy-docker-helm">
+              <fileSets>
+                <fileSet encoding="UTF-8">
+                  <directory></directory>
+                  <includes>
+                    <include>deploy.sh</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+              <modules>
+                <module dir="bundle"
+                        id="${rootArtifactId}-deploy-docker-helm-bundle"
+                        name="${rootArtifactId}-deploy-docker-helm-bundle">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="postgresql"
+                        id="${rootArtifactId}-deploy-docker-helm-postgresql"
+                        name="${rootArtifactId}-deploy-docker-helm-postgresql">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="rediscluster"
+                        id="${rootArtifactId}-deploy-docker-helm-rediscluster"
+                        name="${rootArtifactId}-deploy-docker-helm-rediscluster">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+            <module dir="repository"
+                    id="${rootArtifactId}-deploy-docker-repository"
+                    name="${rootArtifactId}-deploy-docker-repository">
+              <modules>
+                <module dir="build"
+                        id="${rootArtifactId}-deploy-docker-repository-build"
+                        name="${rootArtifactId}-deploy-docker-repository-build">
+                  <modules>
+                    <module dir="search"
+                            id="${rootArtifactId}-deploy-docker-repository-build-search"
+                            name="${rootArtifactId}-deploy-docker-repository-build-search">
+                      <modules>
+                        <module dir="solr4"
+                                id="${rootArtifactId}-deploy-docker-repository-build-search-solr4"
+                                name="${rootArtifactId}-deploy-docker-repository-build-search-solr4">
+                          <fileSets>
+                            <fileSet encoding="UTF-8">
+                              <directory>src</directory>
+                              <includes>
+                                <include>**/*</include>
+                              </includes>
+                            </fileSet>
+                          </fileSets>
+                        </module>
+                      </modules>
+                    </module>
+                    <module dir="service"
+                            id="${rootArtifactId}-deploy-docker-repository-build-service"
+                            name="${rootArtifactId}-deploy-docker-repository-build-service">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module dir="transform"
+                            id="${rootArtifactId}-deploy-docker-repository-build-transform"
+                            name="${rootArtifactId}-deploy-docker-repository-build-transform">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                  </modules>
+                </module>
+                <module dir="compose"
+                        id="${rootArtifactId}-deploy-docker-repository-compose"
+                        name="${rootArtifactId}-deploy-docker-repository-compose">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                      <excludes>
+                        <exclude>main/compose/repository-dev.yml</exclude>
+                      </excludes>
+                    </fileSet>
+                    <fileSet encoding="UTF-8" filtered="true">
+                      <directory>src</directory>
+                      <includes>
+                        <include>main/compose/repository-dev.yml</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="helm"
+                        id="${rootArtifactId}-deploy-docker-repository-helm"
+                        name="${rootArtifactId}-deploy-docker-repository-helm">
+                  <modules>
+                    <module dir="bundle"
+                            id="${rootArtifactId}-deploy-docker-repository-helm-bundle"
+                            name="${rootArtifactId}-deploy-docker-repository-helm-bundle">
+
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module dir="service"
+                            id="${rootArtifactId}-deploy-docker-repository-helm-service"
+                            name="${rootArtifactId}-deploy-docker-repository-helm-service">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module dir="solr4"
+                            id="${rootArtifactId}-deploy-docker-repository-helm-solr4"
+                            name="${rootArtifactId}-deploy-docker-repository-helm-solr4">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                  </modules>
+                </module>
+              </modules>
+            </module>
+            <module dir="services"
+                    id="${rootArtifactId}-deploy-docker-services"
+                    name="${rootArtifactId}-deploy-docker-services">
+              <modules>
+                <module dir="rendering"
+                        id="${rootArtifactId}-deploy-docker-services-rendering"
+                        name="${rootArtifactId}-deploy-docker-services-rendering">
+                  <modules>
+                    <module dir="build"
+                            id="${rootArtifactId}-deploy-docker-services-rendering-build"
+                            name="${rootArtifactId}-deploy-docker-services-rendering-build">
+                      <modules>
+                        <module dir="service"
+                                id="${rootArtifactId}-deploy-docker-services-rendering-build-service"
+                                name="${rootArtifactId}-deploy-docker-services-rendering-build-service">
+                          <fileSets>
+                            <fileSet encoding="UTF-8">
+                              <directory>src</directory>
+                              <includes>
+                                <include>**/*</include>
+                              </includes>
+                            </fileSet>
+                          </fileSets>
+                        </module>
+                      </modules>
+                    </module>
+                    <module dir="compose"
+                            id="${rootArtifactId}-deploy-docker-services-rendering-compose"
+                            name="${rootArtifactId}-deploy-docker-services-rendering-compose">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module dir="helm"
+                            id="${rootArtifactId}-deploy-docker-services-rendering-helm"
+                            name="${rootArtifactId}-deploy-docker-services-rendering-helm">
+                      <modules>
+                        <module dir="bundle"
+                                id="${rootArtifactId}-deploy-docker-services-rendering-helm-bundle"
+                                name="${rootArtifactId}-deploy-docker-services-rendering-helm-bundle">
+                          <fileSets>
+                            <fileSet encoding="UTF-8">
+                              <directory>src</directory>
+                              <includes>
+                                <include>**/*</include>
+                              </includes>
+                            </fileSet>
+                          </fileSets>
+                        </module>
+                        <module dir="service"
+                                id="${rootArtifactId}-deploy-docker-services-rendering-helm-service"
+                                name="${rootArtifactId}-deploy-docker-services-rendering-helm-service">
+                          <fileSets>
+                            <fileSet encoding="UTF-8">
+                              <directory>src</directory>
+                              <includes>
+                                <include>**/*</include>
+                              </includes>
+                            </fileSet>
+                          </fileSets>
+                        </module>
+                      </modules>
+                    </module>
+                  </modules>
+                </module>
+              </modules>
+            </module>
+          </modules>
+        </module>
+        <module dir="installer"
+                id="${rootArtifactId}-deploy-installer"
+                name="${rootArtifactId}-deploy-installer">
+          <fileSets>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>.env.sample</include>
+                <include>deploy.sh</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+          <modules>
+            <module dir="compose"
+                    id="${rootArtifactId}-deploy-installer-compose"
+                    name="${rootArtifactId}-deploy-installer-compose">
+              <modules>
+                <module dir="debian"
+                        id="${rootArtifactId}-deploy-installer-compose-debian"
+                        name="${rootArtifactId}-deploy-installer-compose-debian">
+                  <modules>
+                    <module dir="bullseye"
+                            id="${rootArtifactId}-deploy-installer-compose-debian-bullseye"
+                            name="${rootArtifactId}-deploy-installer-compose-debian-bullseye">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                  </modules>
+                </module>
+              </modules>
+            </module>
+            <module dir="repository"
+                    id="${rootArtifactId}-deploy-installer-repository"
+                    name="${rootArtifactId}-deploy-installer-repository">
+              <modules>
+                <module dir="compose"
+                        id="${rootArtifactId}-deploy-installer-repository-compose"
+                        name="${rootArtifactId}-deploy-installer-repository-compose">
+                  <modules>
+                    <module dir="debian"
+                            id="${rootArtifactId}-deploy-installer-repository-compose-debian"
+                            name="${rootArtifactId}-deploy-installer-repository-compose-debian">
+                      <modules>
+                        <module dir="bullseye"
+                                id="${rootArtifactId}-deploy-installer-repository-compose-debian-bullseye"
+                                name="${rootArtifactId}-deploy-installer-repository-compose-debian-bullseye">
+                          <fileSets>
+                            <fileSet encoding="UTF-8">
+                              <directory>src</directory>
+                              <includes>
+                                <include>**/*</include>
+                              </includes>
+                            </fileSet>
+                          </fileSets>
+                        </module>
+                      </modules>
+                    </module>
+                  </modules>
+                </module>
+                <module dir="distribution"
+                        id="${rootArtifactId}-deploy-installer-repository-distribution"
+                        name="${rootArtifactId}-deploy-installer-repository-distribution">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="scripts"
+                        id="${rootArtifactId}-deploy-installer-repository-scripts"
+                        name="${rootArtifactId}-deploy-installer-repository-scripts">
+                  <modules>
+                    <module dir="debian"
+                            id="${rootArtifactId}-deploy-installer-repository-scripts-debian"
+                            name="${rootArtifactId}-deploy-installer-repository-scripts-debian">
+                      <modules>
+                        <module dir="bullseye"
+                                id="${rootArtifactId}-deploy-installer-repository-scripts-debian-bullseye"
+                                name="${rootArtifactId}-deploy-installer-repository-scripts-debian-bullseye">
+                          <fileSets>
+                            <fileSet encoding="UTF-8">
+                              <directory>src</directory>
+                              <includes>
+                                <include>**/*</include>
+                              </includes>
+                              <excludes>
+                                <exclude>main/scripts/artifact.sh</exclude>
+                              </excludes>
+                            </fileSet>
+                            <fileSet encoding="UTF-8" filtered="true">
+                              <directory>src</directory>
+                              <includes>
+                                <include>main/scripts/artifact.sh</include>
+                              </includes>
+                            </fileSet>
+                          </fileSets>
+                        </module>
+                      </modules>
+                    </module>
+                  </modules>
+                </module>
+              </modules>
+            </module>
+            <module dir="services"
+                    id="${rootArtifactId}-deploy-installer-services"
+                    name="${rootArtifactId}-deploy-installer-services">
+              <modules>
+                <module dir="rendering"
+                        id="${rootArtifactId}-deploy-installer-services-rendering"
+                        name="${rootArtifactId}-deploy-installer-services-rendering">
+                  <modules>
+                    <module dir="compose"
+                            id="${rootArtifactId}-deploy-installer-services-rendering-compose"
+                            name="${rootArtifactId}-deploy-installer-services-rendering-compose">
+                      <modules>
+                        <module dir="debian"
+                                id="${rootArtifactId}-deploy-installer-services-rendering-compose-debian"
+                                name="${rootArtifactId}-deploy-installer-services-rendering-compose-debian">
+                          <modules>
+                            <module dir="bullseye"
+                                    id="${rootArtifactId}-deploy-installer-services-rendering-compose-debian-bullseye"
+                                    name="${rootArtifactId}-deploy-installer-services-rendering-compose-debian-bullseye">
+                              <fileSets>
+                                <fileSet encoding="UTF-8">
+                                  <directory>src</directory>
+                                  <includes>
+                                    <include>**/*</include>
+                                  </includes>
+                                </fileSet>
+                              </fileSets>
+                            </module>
+                          </modules>
+                        </module>
+                      </modules>
+                    </module>
+                    <module dir="distribution"
+                            id="${rootArtifactId}-deploy-installer-services-rendering-distribution"
+                            name="${rootArtifactId}-deploy-installer-services-rendering-distribution">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module dir="scripts"
+                            id="${rootArtifactId}-deploy-installer-services-rendering-scripts"
+                            name="${rootArtifactId}-deploy-installer-services-rendering-scripts">
+                      <modules>
+                        <module dir="debian"
+                                id="${rootArtifactId}-deploy-installer-services-rendering-scripts-debian"
+                                name="${rootArtifactId}-deploy-installer-services-rendering-scripts-debian">
+                          <modules>
+                            <module dir="bullseye"
+                                    id="${rootArtifactId}-deploy-installer-services-rendering-scripts-debian-bullseye"
+                                    name="${rootArtifactId}-deploy-installer-services-rendering-scripts-debian-bullseye">
+                              <fileSets>
+                                <fileSet encoding="UTF-8">
+                                  <directory>src</directory>
+                                  <includes>
+                                    <include>**/*</include>
+                                  </includes>
+                                  <excludes>
+                                    <exclude>main/scripts/artifact.sh</exclude>
+                                  </excludes>
+                                </fileSet>
+                                <fileSet encoding="UTF-8" filtered="true">
+                                  <directory>src</directory>
+                                  <includes>
+                                    <include>main/scripts/artifact.sh</include>
+                                  </includes>
+                                </fileSet>
+                              </fileSets>
+                            </module>
+                          </modules>
+                        </module>
+                      </modules>
+                    </module>
+                  </modules>
+                </module>
+              </modules>
+            </module>
+          </modules>
+        </module>
+      </modules>
+    </module>
+    <module dir="repository"
+            id="${rootArtifactId}-repository"
+            name="${rootArtifactId}-repository">
+      <modules>
+        <module dir="Backend"
+                id="${rootArtifactId}-repository-backend"
+                name="${rootArtifactId}-repository-backend">
+          <modules>
+            <module dir="alfresco"
+                    id="${rootArtifactId}-repository-backend-alfresco"
+                    name="${rootArtifactId}-repository-backend-alfresco">
+              <modules>
+                <module dir="module"
+                        id="${rootArtifactId}-repository-backend-alfresco-module"
+                        name="${rootArtifactId}-repository-backend-alfresco-module">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+            <module dir="services"
+                    id="${rootArtifactId}-repository-backend-services"
+                    name="${rootArtifactId}-repository-backend-services">
+              <modules>
+                <module dir="core"
+                        id="${rootArtifactId}-repository-backend-services-core"
+                        name="${rootArtifactId}-repository-backend-services-core">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="webapp"
+                        id="${rootArtifactId}-repository-backend-services-webapp"
+                        name="${rootArtifactId}-repository-backend-services-webapp">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
+            </module>
+          </modules>
+        </module>
+        <module dir="config"
+                id="${rootArtifactId}-repository-config"
+                name="${rootArtifactId}-repository-config">
+          <modules>
+            <module dir="cluster"
+                    id="${rootArtifactId}-repository-config-cluster"
+                    name="${rootArtifactId}-repository-config-cluster">
+              <fileSets>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+            <module dir="defaults"
+                    id="${rootArtifactId}-repository-config-defaults"
+                    name="${rootArtifactId}-repository-config-defaults">
+              <fileSets>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+            <module dir="node"
+                    id="${rootArtifactId}-repository-config-node"
+                    name="${rootArtifactId}-repository-config-node">
+              <fileSets>
+                <fileSet encoding="UTF-8">
+                  <directory>src</directory>
+                  <includes>
+                    <include>**/*</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+            </module>
+          </modules>
+        </module>
+        <module dir="Frontend"
+                id="${rootArtifactId}-repository-frontend"
+                name="${rootArtifactId}-repository-frontend">
+          <fileSets>
+            <fileSet encoding="UTF-8">
+              <directory></directory>
+              <includes>
+                <include>__gitignore__</include>
+              </includes>
+            </fileSet>
+            <fileSet encoding="UTF-8">
+              <directory>src</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+        </module>
+        <module dir="webapp"
+                id="${rootArtifactId}-repository-webapp"
+                name="${rootArtifactId}-repository-webapp">
+          <fileSets>
+            <fileSet encoding="UTF-8">
+              <directory>src</directory>
+              <includes>
+                <include>**/*</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+        </module>
+      </modules>
+    </module>
+  </modules>
+</archetype-descriptor>

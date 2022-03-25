@@ -299,7 +299,7 @@
             <artifactId>gmavenplus-plugin</artifactId>
             <executions>
               <execution>
-                <id>community-repository-backend-services-rest-client</id>
+                <id>elastic-rest-client</id>
                 <goals>
                   <goal>execute</goal>
                 </goals>
@@ -419,7 +419,7 @@
             <artifactId>gmavenplus-plugin</artifactId>
             <executions>
               <execution>
-                <id>community-repository-backend-services-rest-client</id>
+                <id>transform-rest-client</id>
                 <goals>
                   <goal>execute</goal>
                 </goals>

@@ -6,4 +6,4 @@ set -e
 set -o pipefail
 
 export ARTIFACT_ID="${rootArtifactId}-deploy-installer-repository-distribution"
-export ARTIFACT_VERSON="${symbol_dollar}{org.edu_sharing:${rootArtifactId}-deploy-installer-services-rendering-distribution:tar.gz:bin.version}"
+export ARTIFACT_VERSION="${symbol_dollar}{org.edu_sharing:${rootArtifactId}-deploy-installer-repository-distribution:tar.gz:bin.version}"

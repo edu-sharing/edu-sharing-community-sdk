@@ -28,30 +28,7 @@
 
   <modules>
     <module>archetypes</module>
-    <module>docs</module>
   </modules>
-
-  <properties>
-
-    <community.platform>${project.version}</community.platform>
-
-  </properties>
-
-  <dependencyManagement>
-
-    <dependencies>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>edu_sharing-community-bom</artifactId>
-        <version>${community.platform}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-    </dependencies>
-
-  </dependencyManagement>
 
   <repositories>
 

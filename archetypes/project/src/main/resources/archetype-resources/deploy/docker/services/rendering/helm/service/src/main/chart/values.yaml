@@ -209,9 +209,17 @@ init:
 
   permission:
 
-    resources: {}
+    resources:
+
+      limits:
+        cpu: 100m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 1Gi
 
     securityContext:
+
       runAsUser: 0
 
 ########################################################################################################################
@@ -222,9 +230,17 @@ job:
 
     podAnnotations: {}
 
-    resources: {}
+    resources:
+
+      limits:
+        cpu: 100m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 1Gi
 
     securityContext:
+
       allowPrivilegeEscalation: false
       capabilities:
         drop:
@@ -234,11 +250,19 @@ job:
 
     podAnnotations: {}
 
-    resources: {}
+    resources:
+
+      limits:
+        cpu: 100m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 1Gi
 
     schedule: "0 * * * *"
 
     securityContext:
+
       allowPrivilegeEscalation: false
       capabilities:
         drop:

@@ -159,6 +159,8 @@ tolerations: []
 
 ########################################################################################################################
 
+podAnnotations: {}
+
 podSecurityContext:
 
   runAsUser: 1000
@@ -218,6 +220,8 @@ job:
 
   init:
 
+    podAnnotations: {}
+
     resources: {}
 
     securityContext:
@@ -227,6 +231,8 @@ job:
           - ALL
 
   cachecleaner:
+
+    podAnnotations: {}
 
     resources: {}
 

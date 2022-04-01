@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "edusharing_repository_service.name" . }}
-  labels: {{ include "edusharing_repository_servicelabels.app" . | nindent 4 }}
+  labels: {{ include "edusharing_repository_service.labels.app" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       name: {{ include "edusharing_repository_service.name" . }}
-      labels: {{ include "edusharing_repository_servicelabels.app" . | nindent 8 }}
+      labels: {{ include "edusharing_repository_service.labels.app" . | nindent 8 }}
       annotations:
         checksum/configmap-env: {{ include (print .Template.BasePath "/configmap-env.yaml") . | sha256sum | trunc 63 }}
         {{- if .Values.config.custom.enabled }}
@@ -246,5 +246,5 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: data
-      labels: {{ include "edusharing_repository_servicelabels.app" . | nindent 8 }}
+      labels: {{ include "edusharing_repository_service.labels.app" . | nindent 8 }}
     spec: {{ merge .Values.persistence.data.config.spec .Values.global.cluster.storage.data.spec | toYaml | nindent 6 }}

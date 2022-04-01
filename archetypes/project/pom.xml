@@ -18,4 +18,15 @@
 
   <name>edu_sharing-community-sdk-archetypes-project</name>
 
+  <build>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.archetype</groupId>
+        <artifactId>archetype-packaging</artifactId>
+      </extension>
+    </extensions>
+
+  </build>
+
 </project>

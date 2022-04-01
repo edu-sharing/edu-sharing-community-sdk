@@ -6,7 +6,7 @@ metadata:
   labels: {{ include "edusharing_postgresql.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
-  selector: {{ include "edusharing_postgresql.labels.instance" . | nindent 4 }}
+  selector: {{ include "edusharing_postgresql.labels.app" . | nindent 4 }}
   ports:
   - name: tcp-api
     port: {{ .Values.service.port.api }}
@@ -20,7 +20,7 @@ metadata:
 spec:
   type: ClusterIP
   clusterIP: None
-  selector: {{ include "edusharing_postgresql.labels.instance" . | nindent 4 }}
+  selector: {{ include "edusharing_postgresql.labels.app" . | nindent 4 }}
   ports:
   - name: tcp-api
     port: {{ .Values.service.port.api }}

@@ -6,7 +6,7 @@ metadata:
   labels: {{ include "edusharing_rediscluster.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
-  selector: {{ include "edusharing_rediscluster.labels.instance" . | nindent 4 }}
+  selector: {{ include "edusharing_rediscluster.labels.app" . | nindent 4 }}
   ports:
   - name: tcp-api
     port: {{ .Values.service.port.api }}
@@ -21,7 +21,7 @@ spec:
   type: ClusterIP
   clusterIP: None
   publishNotReadyAddresses: true
-  selector: {{ include "edusharing_rediscluster.labels.instance" . | nindent 4 }}
+  selector: {{ include "edusharing_rediscluster.labels.app" . | nindent 4 }}
   ports:
   - name: tcp-api
     port: {{ .Values.service.port.api }}

@@ -7,5 +7,5 @@ metadata:
 spec:
   maxUnavailable: {{ .Values.config.cluster.replicas }}
   selector:
-    matchLabels: {{ include "edusharing_rediscluster.labels.instance" . | nindent 6 }}
+    matchLabels: {{ include "edusharing_rediscluster.labels.app" . | nindent 6 }}
 {{- end }}

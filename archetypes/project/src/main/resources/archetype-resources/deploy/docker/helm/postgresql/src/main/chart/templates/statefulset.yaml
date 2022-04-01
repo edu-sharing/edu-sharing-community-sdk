@@ -7,7 +7,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchLabels: {{ include "edusharing_postgresql.labels.instance" . | nindent 6 }}
+    matchLabels: {{ include "edusharing_postgresql.labels.app" . | nindent 6 }}
   serviceName: {{ include "edusharing_postgresql.name" . }}-headless
   template:
     metadata:

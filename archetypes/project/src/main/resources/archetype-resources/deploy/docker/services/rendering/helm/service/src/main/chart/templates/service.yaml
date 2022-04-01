@@ -5,7 +5,7 @@ metadata:
   labels: {{ include "edusharing_rendering_service.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
-  selector: {{ include "edusharing_rendering_service.labels.instance" . | nindent 4 }}
+  selector: {{ include "edusharing_rendering_service.labels.app" . | nindent 4 }}
   ports:
   - name: http-api-external
     port: {{ .Values.service.port.api.external }}
@@ -22,7 +22,7 @@ metadata:
 spec:
   type: ClusterIP
   clusterIP: None
-  selector: {{ include "edusharing_rendering_service.labels.instance" . | nindent 4 }}
+  selector: {{ include "edusharing_rendering_service.labels.app" . | nindent 4 }}
   ports:
   - name: http-api-external
     port: {{ .Values.service.port.api.external }}

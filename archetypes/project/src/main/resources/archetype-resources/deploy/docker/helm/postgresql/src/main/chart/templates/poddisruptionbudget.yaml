@@ -8,6 +8,6 @@ metadata:
 spec:
   maxUnavailable: 0
   selector:
-    matchLabels: {{ include "edusharing_postgresql.labels.instance" . | nindent 6 }}
+    matchLabels: {{ include "edusharing_postgresql.labels.app" . | nindent 6 }}
 {{- end }}
 {{- end }}

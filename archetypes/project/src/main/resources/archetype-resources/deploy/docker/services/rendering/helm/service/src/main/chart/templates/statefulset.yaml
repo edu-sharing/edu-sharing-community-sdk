@@ -6,7 +6,7 @@ metadata:
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
-    matchLabels: {{ include "edusharing_rendering_service.labels.instance" . | nindent 6 }}
+    matchLabels: {{ include "edusharing_rendering_service.labels.app" . | nindent 6 }}
   serviceName: {{ include "edusharing_rendering_service.name" . }}-headless
   template:
     metadata:
@@ -136,14 +136,14 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - topologyKey: kubernetes.io/hostname
             labelSelector:
-              matchLabels: {{ include "edusharing_rendering_service.labels.instance" . | nindent 16 }}
+              matchLabels: {{ include "edusharing_rendering_service.labels.app" . | nindent 16 }}
           {{- else if eq .Values.podAntiAffinity "soft" }}
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 1
             podAffinityTerm:
               topologyKey: kubernetes.io/hostname
               labelSelector:
-                matchLabels: {{ include "edusharing_rendering_service.labels.instance" . | nindent 18 }}
+                matchLabels: {{ include "edusharing_rendering_service.labels.app" . | nindent 18 }}
           {{- end }}
         {{- end }}
       {{- end }}

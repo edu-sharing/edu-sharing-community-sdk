@@ -3,7 +3,7 @@ apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
   name: {{ include "edusharing_repository_search_solr4.name" . }}
-  labels: {{ include "edusharing_repository_search_solr4.labels" . | nindent 4 }}
+  labels: {{ include "edusharing_repository_search_solr4labels.app" . | nindent 4 }}
 spec:
   maxUnavailable: {{ if .Values.autoscaling.enabled }}1{{ else }}0{{ end }}
   selector:

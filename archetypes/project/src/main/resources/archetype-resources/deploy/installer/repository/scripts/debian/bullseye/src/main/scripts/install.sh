@@ -384,6 +384,7 @@ config_edu_sharing() {
 		-i '$ajp' -t attr -n "port" -v "8009" \
 		-i '$ajp' -t attr -n "secretRequired" -v "false" \
 		-d '/Server/Service[@name="Catalina"]/Connector[@port="8443"]' \
+		-i '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t attr -n 'hostConfigClass' -v 'org.edu_sharing.catalina.startup.OrderedHostConfig' \
 		${catServe}
 
 	if [[ ! -f ${setEnvSh} ]] ; then

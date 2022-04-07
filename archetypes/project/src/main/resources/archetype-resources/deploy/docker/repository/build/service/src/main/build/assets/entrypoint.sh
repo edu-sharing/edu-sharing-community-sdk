@@ -37,7 +37,13 @@ my_http_client_proxy_proxypass="${REPOSITORY_SERVICE_HTTP_CLIENT_PROXY_PROXYPASS
 my_http_client_proxy_proxyport="${REPOSITORY_SERVICE_HTTP_CLIENT_PROXY_PROXYPORT:-}"
 my_http_client_proxy_proxyuser="${REPOSITORY_SERVICE_HTTP_CLIENT_PROXY_PROXYUSER:-}"
 
-my_http_session_timeout="${REPOSITORY_SERVICE_HTTP_SESSION_TIMEOUT:-60}"
+my_http_server_csp_connect="${REPOSITORY_SERVICE_HTTP_SERVER_CSP_CONNECT:-}"
+my_http_server_csp_default="${REPOSITORY_SERVICE_HTTP_SERVER_CSP_DEFAULT:-}"
+my_http_server_csp_font="${REPOSITORY_SERVICE_HTTP_SERVER_CSP_FONT:-}"
+my_http_server_csp_img="${REPOSITORY_SERVICE_HTTP_SERVER_CSP_IMG:-}"
+my_http_server_csp_script="${REPOSITORY_SERVICE_HTTP_SERVER_CSP_SCRIPT:-}"
+
+my_http_server_session_timeout="${REPOSITORY_SERVICE_HTTP_SERVER_SESSION_TIMEOUT:-60}"
 
 my_http_accesslog_enabled="${REPOSITORY_SERVICE_HTTP_ACCESSLOG_ENABLED:-}"
 
@@ -203,11 +209,6 @@ xmlstarlet ed -L \
 			} >> tomcat/conf/redisson.yaml
 		fi
 }
-
-xmlstarlet ed -L \
-  -N x="http://java.sun.com/xml/ns/javaee" \
-	-u '/x:web-app/x:session-config/x:session-timeout' -v "${my_http_session_timeout}" \
-	${catWConf}
 
 ### Alfresco platform ##################################################################################################
 
@@ -424,6 +425,36 @@ xmlstarlet ed -L \
 	hocon -f ${eduSConf} \
 		set "repository.httpclient.proxy.proxyuser" '"'"${my_http_client_proxy_proxyuser}"'"'
 }
+
+[[ -n "${my_http_server_csp_default}" ]] && {
+	hocon -f ${eduSConf} \
+		set "angular.headers.Content-Security-Policy.default-src" '"'"${my_http_server_csp_default}"'"'
+}
+
+[[ -n "${my_http_server_csp_connect}" ]] && {
+	hocon -f ${eduSConf} \
+		set "angular.headers.Content-Security-Policy.connect-src" '"'"${my_http_server_csp_connect}"'"'
+}
+
+[[ -n "${my_http_server_csp_img}" ]] && {
+	hocon -f ${eduSConf} \
+		set "angular.headers.Content-Security-Policy.img-src" '"'"${my_http_server_csp_img}"'"'
+}
+
+[[ -n "${my_http_server_csp_script}" ]] && {
+	hocon -f ${eduSConf} \
+		set "angular.headers.Content-Security-Policy.script-src" '"'"${my_http_server_csp_script}"'"'
+}
+
+[[ -n "${my_http_server_csp_font}" ]] && {
+	hocon -f ${eduSConf} \
+		set "angular.headers.Content-Security-Policy.font-src" '"'"${my_http_server_csp_font}"'"'
+}
+
+xmlstarlet ed -L \
+  -N x="http://java.sun.com/xml/ns/javaee" \
+	-u '/x:web-app/x:session-config/x:session-timeout' -v "${my_http_server_session_timeout}" \
+	${catWConf}
 
 ########################################################################################################################
 

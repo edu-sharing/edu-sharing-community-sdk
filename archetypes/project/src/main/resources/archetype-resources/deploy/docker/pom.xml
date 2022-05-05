@@ -51,7 +51,7 @@
       ${docker.registry}/mirror/docker.io/tomcat:${tomcat.version}-jdk8-openjdk-bullseye
     </docker.from.tomcat>
 
-    <phpredis.version>5.3.6</phpredis.version>
+    <phpredis.version>5.3.7</phpredis.version>
     <prometheus.jmx.version>0.14.0</prometheus.jmx.version>
     <redisson.version>3.16.8</redisson.version>
 

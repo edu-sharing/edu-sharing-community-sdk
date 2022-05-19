@@ -151,8 +151,12 @@ COPY assets/libreoffice libreoffice/
 ########################################################################################################################
 
 RUN set -eux \
-    && wget -q -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-    && echo "deb https://artifacts.edu-sharing.com/repository/postgresql `lsb_release -cs`-pgdg main" | tee  /etc/apt/sources.list.d/postgresql.list \
+    && wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc \
+    && gpg --no-default-keyring --keyring ./postgresql-keyring.gpg --import ACCC4CF8.asc \
+    && gpg --no-default-keyring --keyring ./postgresql-keyring.gpg --export --output postgresql-archive-keyring.gpg \
+    && mv postgresql-archive-keyring.gpg /usr/share/keyrings \
+    && rm postgresql-keyring.gpg ACCC4CF8.asc \
+    && echo "deb [signed-by=/usr/share/keyrings/postgresql-archive-keyring.gpg] https://artifacts.edu-sharing.com/repository/postgresql `lsb_release -cs`-pgdg main" | tee  /etc/apt/sources.list.d/postgresql.list \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
         postgresql-${postgresql.version.major}=${postgresql.version.major}.${postgresql.version.minor}* \

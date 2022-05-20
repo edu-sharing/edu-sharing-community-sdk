@@ -144,6 +144,18 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module dir="profiler"
+                        id="${rootArtifactId}-deploy-docker-build-profiler"
+                        name="${rootArtifactId}-deploy-docker-build-profiler">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module dir="redis"
                         id="${rootArtifactId}-deploy-docker-build-redis"
                         name="${rootArtifactId}-deploy-docker-build-redis">

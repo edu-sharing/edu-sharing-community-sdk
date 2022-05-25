@@ -49,7 +49,7 @@
               <includeArtifactIds>
                 alfresco-content-services-share-distribution,
                 alfresco-pdf-renderer,
-                alfresco-platform-community-distributionzip,
+                alfresco-content-services-community-distribution,
                 alfresco-solr4-distribution
               </includeArtifactIds>
               <outputDirectory>${project.build.directory}/build/artifacts</outputDirectory>

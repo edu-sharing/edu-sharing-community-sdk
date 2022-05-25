@@ -34,7 +34,7 @@
               <includeArtifactIds>
                 alfresco-content-services-share-distribution,
                 alfresco-pdf-renderer,
-                alfresco-platform-community-distributionzip,
+                alfresco-content-services-community-distribution,
                 edu_sharing-community-repository-backend-tomcat,
                 jmx_prometheus_javaagent,
                 postgresql,
@@ -268,7 +268,7 @@
 
     <dependency>
       <groupId>org.alfresco</groupId>
-      <artifactId>alfresco-platform-community-distributionzip</artifactId>
+      <artifactId>alfresco-content-services-community-distribution</artifactId>
       <type>zip</type>
     </dependency>
 

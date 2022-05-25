@@ -74,14 +74,14 @@ RUN set -eux \
         -i '$resources' -t attr -n "cacheMaxSize" -v "20480" \
         tomcat/conf/context.xml
 
-COPY --chown=worker:worker artifacts/alfresco-platform-community-distributionzip-${org.alfresco:alfresco-platform-community-distributionzip:zip.version}.zip \
-    /tmp/alfresco-platform-community-distributionzip.zip
+COPY --chown=worker:worker artifacts/alfresco-content-services-community-distribution-${org.alfresco:alfresco-content-services-community-distribution:zip.version}.zip \
+    /tmp/alfresco-content-services-community-distribution.zip
 
 RUN set -eux \
     && mkdir -p /tmp/install \
-	&& unzip /tmp/alfresco-platform-community-distributionzip.zip -d /tmp/install \
-	&& rm -f /tmp/alfresco-platform-community-distributionzip.zip \
-	&& mv /tmp/install/alfresco-platform-community-distributionzip* /tmp/install/alfresco-platform \
+	&& unzip /tmp/alfresco-content-services-community-distribution.zip -d /tmp/install \
+	&& rm -f /tmp/alfresco-content-services-community-distribution.zip \
+	&& mv /tmp/install/alfresco-content-services-community-distribution* /tmp/install/alfresco-platform \
     && mv /tmp/install/alfresco-platform/alf_data . \
     && mv /tmp/install/alfresco-platform/licenses . \
     && mv /tmp/install/alfresco-platform/README.txt . \

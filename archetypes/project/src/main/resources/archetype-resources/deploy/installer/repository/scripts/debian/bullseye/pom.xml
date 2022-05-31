@@ -50,7 +50,7 @@
                 alfresco-content-services-share-distribution,
                 alfresco-pdf-renderer,
                 alfresco-content-services-community-distribution,
-                alfresco-solr4-distribution
+                alfresco-search-services
               </includeArtifactIds>
               <outputDirectory>${project.build.directory}/build/artifacts</outputDirectory>
             </configuration>

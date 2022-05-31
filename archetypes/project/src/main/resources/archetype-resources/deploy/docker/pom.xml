@@ -48,7 +48,7 @@
     </docker.from.rediscluster.server>
     <!--suppress UnresolvedMavenProperty -->
     <docker.from.tomcat>
-      ${docker.registry}/mirror/docker.io/tomcat:${tomcat.version}-jdk8-openjdk-bullseye
+      ${docker.registry}/mirror/docker.io/tomcat:${tomcat.version}-jre11-openjdk-bullseye
     </docker.from.tomcat>
 
     <helm.kube.version>&gt;= 1.18.0</helm.kube.version>

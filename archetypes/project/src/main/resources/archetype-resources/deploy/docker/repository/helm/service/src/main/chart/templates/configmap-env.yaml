@@ -9,7 +9,7 @@ data:
   CACHE_HOST: {{ .Values.config.cache.host | quote }}
   CACHE_PORT: {{ .Values.config.cache.port | quote }}
   CATALINA_OPTS: >-
-    -XX:MinRAMPercentage={{ .Values.config.jvm.ram.minPercentage }}
+    -XX:InitialRAMPercentage={{ .Values.config.jvm.ram.minPercentage }}
     -XX:MaxRAMPercentage={{ .Values.config.jvm.ram.maxPercentage }}
     -Dcom.sun.management.jmxremote
     -Dcom.sun.management.jmxremote.authenticate=false

@@ -66,8 +66,8 @@ config:
   jvm:
     debug: false
     ram:
-      minPercentage: "90.0"
-      maxPercentage: "90.0"
+      minPercentage: "75.0"
+      maxPercentage: "75.0"
 
   metrics: true
 
@@ -142,11 +142,11 @@ readinessProbe:
 resources:
 
   limits:
-    cpu: 500m
-    memory: 2Gi
+    cpu: 1000m
+    memory: 4Gi
   requests:
-    cpu: 500m
-    memory: 2Gi
+    cpu: 1000m
+    memory: 4Gi
 
 ########################################################################################################################
 
@@ -157,11 +157,11 @@ init:
     resources:
 
       limits:
-        cpu: 100m
-        memory: 1Gi
+        cpu: 125m
+        memory: 512Mi
       requests:
-        cpu: 100m
-        memory: 1Gi
+        cpu: 125m
+        memory: 512Mi
 
     securityContext:
 

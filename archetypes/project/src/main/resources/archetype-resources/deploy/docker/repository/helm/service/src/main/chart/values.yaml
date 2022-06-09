@@ -318,11 +318,11 @@ init:
     resources:
 
       limits:
-        cpu: 100m
-        memory: 1Gi
+        cpu: 125m
+        memory: 512Mi
       requests:
-        cpu: 100m
-        memory: 1Gi
+        cpu: 125m
+        memory: 512Mi
 
     securityContext:
 
@@ -360,11 +360,11 @@ sidecar:
     resources:
 
       limits:
-        cpu: 100m
-        memory: 1Gi
+        cpu: 500m
+        memory: 2Gi
       requests:
-        cpu: 100m
-        memory: 1Gi
+        cpu: 500m
+        memory: 2Gi
 
     securityContext:
 

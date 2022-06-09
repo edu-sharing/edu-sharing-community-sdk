@@ -66,8 +66,8 @@ config:
   jvm:
     debug: false
     ram:
-      minPercentage: "90.0"
-      maxPercentage: "90.0"
+      minPercentage: "75.0"
+      maxPercentage: "75.0"
 
   metrics: true
 

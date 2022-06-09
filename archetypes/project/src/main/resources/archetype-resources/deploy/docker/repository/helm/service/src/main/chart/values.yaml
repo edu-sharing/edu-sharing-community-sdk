@@ -214,7 +214,7 @@ config:
   transform:
 
     server:
-      enabled: false
+      enabled: ${helm.config.transform.enabled}
       host: edusharing-repository-transform
       port: 8080
 

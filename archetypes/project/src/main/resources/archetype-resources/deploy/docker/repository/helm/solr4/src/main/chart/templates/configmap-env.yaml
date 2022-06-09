@@ -5,7 +5,7 @@ metadata:
   labels: {{ include "edusharing_repository_search_solr4.labels.app" . | nindent 4 }}
 data:
   CATALINA_OPTS: >-
-    -XX:MinRAMPercentage={{ .Values.config.jvm.ram.minPercentage }}
+    -XX:InitialRAMPercentage={{ .Values.config.jvm.ram.minPercentage }}
     -XX:MaxRAMPercentage={{ .Values.config.jvm.ram.maxPercentage }}
     -Dcom.sun.management.jmxremote
     -Dcom.sun.management.jmxremote.authenticate=false

@@ -128,7 +128,7 @@ config:
   cluster:
     enabled: ${helm.config.cluster.enabled}
     backup:
-      count: 0
+      count: 1
       read: false
 
   connector:

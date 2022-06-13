@@ -18,19 +18,19 @@
     <requiredProperty key="project">
       <defaultValue>community</defaultValue>
     </requiredProperty>
-    <requiredProperty key="repositoryClusterEnabled">
+    <requiredProperty key="REPOSITORY_CLUSTER_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
-    <requiredProperty key="repositoryElasticEnabled">
+    <requiredProperty key="REPOSITORY_ELASTIC_ENABLED">
       <defaultValue>true</defaultValue>
     </requiredProperty>
-    <requiredProperty key="repositoryMongoEnabled">
+    <requiredProperty key="REPOSITORY_MONGO_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
-    <requiredProperty key="repositoryRemoteEnabled">
+    <requiredProperty key="REPOSITORY_REMOTE_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
-    <requiredProperty key="repositoryTransformEnabled">
+    <requiredProperty key="REPOSITORY_TRANSFORM_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
     <requiredProperty key="gitignore">

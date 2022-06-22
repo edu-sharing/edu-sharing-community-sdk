@@ -191,6 +191,27 @@
 
     <profile>
 
+      <id>repository.mongo</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_MONGO_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-community-repository-plugin-mongo-deploy-installer-repository-scripts-debian-bullseye</artifactId>
+        </dependency>
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
       <id>repository.transform</id>
 
       <activation>

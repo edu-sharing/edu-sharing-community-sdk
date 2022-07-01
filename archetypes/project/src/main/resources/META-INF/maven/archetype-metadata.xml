@@ -301,9 +301,9 @@
                             id="${rootArtifactId}-deploy-docker-repository-build-search"
                             name="${rootArtifactId}-deploy-docker-repository-build-search">
                       <modules>
-                        <module dir="solr4"
-                                id="${rootArtifactId}-deploy-docker-repository-build-search-solr4"
-                                name="${rootArtifactId}-deploy-docker-repository-build-search-solr4">
+                        <module dir="solr6"
+                                id="${rootArtifactId}-deploy-docker-repository-build-search-solr6"
+                                name="${rootArtifactId}-deploy-docker-repository-build-search-solr6">
                           <fileSets>
                             <fileSet encoding="UTF-8">
                               <directory>src</directory>
@@ -403,9 +403,9 @@
                         </fileSet>
                       </fileSets>
                     </module>
-                    <module dir="solr4"
-                            id="${rootArtifactId}-deploy-docker-repository-helm-solr4"
-                            name="${rootArtifactId}-deploy-docker-repository-helm-solr4">
+                    <module dir="solr6"
+                            id="${rootArtifactId}-deploy-docker-repository-helm-solr6"
+                            name="${rootArtifactId}-deploy-docker-repository-helm-solr6">
                       <fileSets>
                         <fileSet encoding="UTF-8">
                           <directory>src</directory>

@@ -1,7 +1,7 @@
 apiVersion: v2
 
-name: ${helm.prefix}-repository-search-solr4
-description: ${helm.prefix}-repository-search-solr4
+name: ${helm.prefix}-repository-search-solr6
+description: ${helm.prefix}-repository-search-solr6
 
 icon: ${helm.chart.icon}
 

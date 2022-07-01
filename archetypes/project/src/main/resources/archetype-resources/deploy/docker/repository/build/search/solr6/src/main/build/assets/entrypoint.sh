@@ -3,10 +3,10 @@ set -eu
 
 ########################################################################################################################
 
-my_bind="${REPOSITORY_SEARCH_SOLR4_BIND:-"0.0.0.0"}"
+my_bind="${REPOSITORY_SEARCH_SOLR6_BIND:-"0.0.0.0"}"
 
-my_host="${REPOSITORY_SEARCH_SOLR4_HOST:-repository-search-solr4}"
-my_port="${REPOSITORY_SEARCH_SOLR4_PORT:-8080}"
+my_host="${REPOSITORY_SEARCH_SOLR6_HOST:-repository-search-solr6}"
+my_port="${REPOSITORY_SEARCH_SOLR6_PORT:-8080}"
 
 repository_service_host="${REPOSITORY_SERVICE_HOST:-repository-service}"
 repository_service_port="${REPOSITORY_SERVICE_PORT:-8080}"

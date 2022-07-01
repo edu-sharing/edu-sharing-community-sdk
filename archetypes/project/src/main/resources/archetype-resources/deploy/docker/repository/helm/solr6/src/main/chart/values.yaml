@@ -33,7 +33,7 @@ global:
 # LOCAL
 ########################################################################################################################
 
-nameOverride: edusharing-repository-search-solr4
+nameOverride: edusharing-repository-search-solr6
 
 image:
   registry: ${docker.registry}

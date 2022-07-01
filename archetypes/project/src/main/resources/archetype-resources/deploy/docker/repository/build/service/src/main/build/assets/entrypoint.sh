@@ -64,8 +64,8 @@ repository_database_prot="${REPOSITORY_DATABASE_PROT:-"postgresql"}"
 repository_database_user="${REPOSITORY_DATABASE_USER:-repository}"
 repository_database_jdbc="jdbc:${repository_database_prot}://${repository_database_host}:${repository_database_port}/${repository_database_name}${repository_database_opts}"
 
-repository_search_solr4_host="${REPOSITORY_SEARCH_SOLR4_HOST:-repository-search-solr4}"
-repository_search_solr4_port="${REPOSITORY_SEARCH_SOLR4_PORT:-8080}"
+repository_search_solr6_host="${REPOSITORY_SEARCH_SOLR6_HOST:-repository-search-solr6}"
+repository_search_solr6_port="${REPOSITORY_SEARCH_SOLR6_PORT:-8080}"
 
 repository_transform_host="${REPOSITORY_TRANSFORM_HOST:-}"
 repository_transform_port="${REPOSITORY_TRANSFORM_PORT:-}"
@@ -306,11 +306,11 @@ grep -q '^[#]*\s*share\.host=' "${alfProps}" || echo "share.host=${my_host_exter
 sed -i -r 's|^[#]*\s*share\.port=.*|share.port='"${my_port_external}"'|' "${alfProps}"
 grep -q '^[#]*\s*share\.port=' "${alfProps}" || echo "share.port=${my_port_external}" >>"${alfProps}"
 
-sed -i -r 's|^[#]*\s*solr\.host=.*|solr.host='"${repository_search_solr4_host}"'|' "${alfProps}"
-grep -q '^[#]*\s*solr\.host=' "${alfProps}" || echo "solr.host=${repository_search_solr4_host}" >>"${alfProps}"
+sed -i -r 's|^[#]*\s*solr\.host=.*|solr.host='"${repository_search_solr6_host}"'|' "${alfProps}"
+grep -q '^[#]*\s*solr\.host=' "${alfProps}" || echo "solr.host=${repository_search_solr6_host}" >>"${alfProps}"
 
-sed -i -r 's|^[#]*\s*solr\.port=.*|solr.port='"${repository_search_solr4_port}"'|' "${alfProps}"
-grep -q '^[#]*\s*solr\.port=' "${alfProps}" || echo "solr.port=${repository_search_solr4_port}" >>"${alfProps}"
+sed -i -r 's|^[#]*\s*solr\.port=.*|solr.port='"${repository_search_solr6_port}"'|' "${alfProps}"
+grep -q '^[#]*\s*solr\.port=' "${alfProps}" || echo "solr.port=${repository_search_solr6_port}" >>"${alfProps}"
 
 sed -i -r 's|^[#]*\s*solr\.secureComms=.*|solr.secureComms=none|' "${alfProps}"
 grep -q '^[#]*\s*solr\.secureComms=' "${alfProps}" || echo "solr.secureComms=none" >>"${alfProps}"

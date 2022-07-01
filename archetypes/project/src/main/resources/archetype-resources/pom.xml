@@ -154,7 +154,7 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-solr4</artifactId>
+        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-solr6</artifactId>
         <version>${project.version}</version>
         <type>tar.gz</type>
         <classifier>bin</classifier>

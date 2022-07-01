@@ -12,7 +12,6 @@ SOURCE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 pushd "${SOURCE_PATH}" >/dev/null || exit
 
 COMPOSE_PROJECT=$(basename $(cd ../../.. && pwd))
-COMPOSE_WORKTREE=""
 COMPOSE_DIR="compose/target/compose"
 
 pushd ".." >/dev/null || exit
@@ -32,7 +31,7 @@ popd >/dev/null || exit
 	cp -f ".env" "${COMPOSE_DIR}"
 }
 
-export COMPOSE_NAME="${COMPOSE_PROJECT_NAME:-$(echo "${COMPOSE_PROJECT}-${COMPOSE_WORKTREE}-docker-$(git rev-parse --abbrev-ref HEAD)" | sed 's|[\/\.]|-|g')}"
+export COMPOSE_NAME="${COMPOSE_PROJECT_NAME:-$(echo "${COMPOSE_PROJECT}-docker-$(git rev-parse --abbrev-ref HEAD)" | sed 's|[\/\.]|-|g' | tr '[:upper:]' '[:lower:]')}"
 
 case "$(uname)" in
 MINGW*)
@@ -60,16 +59,7 @@ export MAVEN_CMD="mvn"
 }
 
 [[ ! -d "${COMPOSE_DIR}" ]] && {
-	echo "Initializing ..."
-	pushd "repository/compose" >/dev/null || exit
-	$MAVEN_CMD $MAVEN_CMD_OPTS -Dmaven.test.skip=true install || exit
-	popd >/dev/null || exit
-	pushd "services/rendering/compose" >/dev/null || exit
-	$MAVEN_CMD $MAVEN_CMD_OPTS -Dmaven.test.skip=true install || exit
-	popd >/dev/null || exit
-	pushd "compose" >/dev/null || exit
-	$MAVEN_CMD $MAVEN_CMD_OPTS -Dmaven.test.skip=true package || exit
-	popd >/dev/null || exit
+  mkdir -p "${COMPOSE_DIR}"
 }
 
 pushd "${COMPOSE_DIR}" >/dev/null || exit
@@ -333,7 +323,33 @@ ps() {
 		ps || exit
 }
 
+getComposeFilesFromRemote() {
+  pushd ../../ >/dev/null
+  # we are in the compose project folder!
+
+  artifactId=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout);
+  version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout);
+
+  echo "$artifactId:$version"
+  rm -rf ./target/compose
+  mvn -q dependency:get \
+  	-Dartifact="org.edu_sharing:${artifactId}:${version}:tar.gz:bin" \
+  	-DremoteRepositories=edusharing-remote::::https://artifacts.edu-sharing.com/repository/maven-remote/ \
+  	-Dtransitive=false
+
+  mvn -q -llr dependency:copy \
+     	-Dartifact="org.edu_sharing:${artifactId}:${version}:tar.gz:bin" \
+    	-DoutputDirectory=./target/compose
+
+  popd >/dev/null
+
+  tar xzf "${artifactId}-${version}-bin.tar.gz"
+  rm "${artifactId}-${version}-bin.tar.gz"
+}
+
 rstart() {
+  getComposeFilesFromRemote
+
 	COMPOSE_LIST="$COMPOSE_LIST $(compose edusharing.yml -common -remote)"
 	COMPOSE_LIST="$COMPOSE_LIST $(compose repository/repository.yml -common -remote) $(compose_plugins repository -common -remote)"
 	COMPOSE_LIST="$COMPOSE_LIST $(compose services/rendering/rendering.yml -common -remote)"
@@ -351,6 +367,8 @@ rstart() {
 }
 
 rdebug() {
+  getComposeFilesFromRemote
+
 	COMPOSE_LIST="$COMPOSE_LIST $(compose edusharing.yml -common -remote -debug)"
 	COMPOSE_LIST="$COMPOSE_LIST $(compose repository/repository.yml -common -remote -debug) $(compose_plugins repository -common -remote -debug)"
 	COMPOSE_LIST="$COMPOSE_LIST $(compose services/rendering/rendering.yml -common -remote -debug)"
@@ -368,6 +386,8 @@ rdebug() {
 }
 
 rdev() {
+  getComposeFilesFromRemote
+
 	pushd "${SOURCE_PATH}/../../.." >/dev/null || exit
 	GIT_ROOT=$(pwd)
 	export GIT_ROOT

@@ -53,6 +53,12 @@
     <docker.from.tomcat>
       dockerio.mirror.docker.edu-sharing.com/tomcat:${tomcat.version}-jre11-openjdk-bullseye
     </docker.from.tomcat>
+    <docker.from.activemq>
+      dockerio.mirror.docker.edu-sharing.com/alfresco/alfresco-activemq:5.16.5-jre11-centos7
+    </docker.from.activemq>
+    <docker.from.alfresco.transform.core.aio>
+      dockerio.mirror.docker.edu-sharing.com/alfresco/alfresco-transform-core-aio:2.6.0
+    </docker.from.alfresco.transform.core.aio>
 
     <helm.kube.version>&gt;= 1.18.0</helm.kube.version>
     <helm.version>3.8.2</helm.version>

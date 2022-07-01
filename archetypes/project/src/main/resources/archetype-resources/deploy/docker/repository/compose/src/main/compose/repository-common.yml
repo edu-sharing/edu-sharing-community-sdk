@@ -95,6 +95,30 @@ services:
     expose:
       - "8100"
 
+  repository-activemq:
+    image: "${docker.repository}/${docker.prefix}-deploy-docker-build-activemq:${docker.tag}"
+    expose:
+      - "8161"
+      - "61616"
+      - "5672"
+      - "61613"
+    ports:
+      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_ACTIVEMQ_PORT_HTTP:-8161}:8161"
+
+  repository-alfresco-transform-core-aio:
+    image: "${docker.repository}/${docker.prefix}-deploy-docker-build-alfresco-transform-core-aio:${docker.tag}"
+    expose:
+      - "8090"
+    ports:
+      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_ALFRESCOTRANSFORM_PORT_HTTP:-8090}:8090"
+
+  repository-transform-edu-sharing:
+    image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-transform-edu-sharing:${docker.tag}"
+    expose:
+      - "8091"
+    ports:
+      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_EDU_SHARINGTRANSFORM_PORT_HTTP:-8091}:8091"
+
 volumes:
   repository-database-volume-data:
   repository-search-solr4-volume-data:

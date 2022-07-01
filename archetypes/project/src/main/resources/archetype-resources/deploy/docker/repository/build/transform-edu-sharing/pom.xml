@@ -5,7 +5,7 @@
 
   <parent>
     <groupId>${groupId}</groupId>
-    <artifactId>${rootArtifactId}-deploy-docker-repository-build-search</artifactId>
+    <artifactId>${rootArtifactId}-deploy-docker-repository-build</artifactId>
     <version>${version}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -16,20 +16,6 @@
   <name>${artifactId}</name>
 
   <build>
-
-    <!-- prevent that assets/alf_data/keystore/keystore is filtered which causes mvn process to fail -->
-    <resources>
-      <resource>
-        <directory>src/main/build</directory>
-        <filtering>true</filtering>
-        <excludes><exclude>assets/keystores/**/*</exclude></excludes>
-      </resource>
-      <resource>
-        <directory>src/main/build/assets/keystores</directory>
-        <filtering>false</filtering>
-        <targetPath>${project.build.directory}/build/assets/keystores</targetPath>
-      </resource>
-    </resources>
 
     <plugins>
 
@@ -43,10 +29,7 @@
             </goals>
             <phase>package</phase>
             <configuration>
-              <includeArtifactIds>
-                alfresco-search-services,
-                jmx_prometheus_javaagent
-              </includeArtifactIds>
+              <includeArtifactIds>edu_sharing-community-repository-backend-transform</includeArtifactIds>
               <outputDirectory>${project.build.directory}/build/artifacts</outputDirectory>
             </configuration>
           </execution>
@@ -75,7 +58,7 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.repository}/${docker.prefix}-deploy-docker-repository-build-search-solr4:${docker.tag}</name>
+              <name>${docker.repository}/${docker.prefix}-deploy-docker-repository-build-transform-edu-sharing:${docker.tag}</name>
             </image>
           </images>
         </configuration>
@@ -101,14 +84,8 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.alfresco</groupId>
-      <artifactId>alfresco-search-services</artifactId>
-      <type>zip</type>
-    </dependency>
-
-    <dependency>
-      <groupId>io.prometheus.jmx</groupId>
-      <artifactId>jmx_prometheus_javaagent</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-transform</artifactId>
     </dependency>
 
   </dependencies>

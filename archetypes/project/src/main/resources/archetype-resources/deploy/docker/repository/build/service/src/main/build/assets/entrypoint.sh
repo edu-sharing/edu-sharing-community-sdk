@@ -72,13 +72,16 @@ repository_transform_port="${REPOSITORY_TRANSFORM_PORT:-}"
 
 catSConf="tomcat/conf/server.xml"
 catCConf="tomcat/conf/Catalina/localhost/edu-sharing.xml"
-catWConf="tomcat/webapps/edu-sharing/WEB-INF/web.xml"
+catEduWConf="tomcat/webapps/edu-sharing/WEB-INF/web.xml"
+catAlfWConf="tomcat/webapps/alfresco/WEB-INF/web.xml"
 
 eduCConf="tomcat/shared/classes/config/defaults/client.config.xml"
 
 alfProps="tomcat/shared/classes/config/cluster/alfresco-global.properties"
 eduSConf="tomcat/shared/classes/config/cluster/edu-sharing.deployment.conf"
 homeProp="tomcat/shared/classes/config/cluster/applications/homeApplication.properties.xml"
+
+alfExt="tomcat/shared/classes/alfresco/extension"
 
 ### Wait ###############################################################################################################
 
@@ -219,8 +222,8 @@ xmlstarlet ed -L \
 sed -i -r 's|^[#]*\s*dir\.root=.*|dir.root='"$ALF_HOME/alf_data"'|' "${alfProps}"
 grep -q '^[#]*\s*dir\.root=' "${alfProps}" || echo "dir.root=$ALF_HOME/alf_data" >>"${alfProps}"
 
-sed -i -r 's|^[#]*\s*dir\.keystore=.*|dir.keystore='"$ALF_HOME/keystore"'|' "${alfProps}"
-grep -q '^[#]*\s*dir\.keystore=' "${alfProps}" || echo "dir.keystore=$ALF_HOME/keystore" >>"${alfProps}"
+sed -i -r 's|^[#]*\s*dir\.keystore=.*|dir.keystore='"$ALF_HOME/${alfExt}/keystore"'|' "${alfProps}"
+grep -q '^[#]*\s*dir\.keystore=' "${alfProps}" || echo "dir.keystore=$ALF_HOME/${alfExt}/keystore" >>"${alfProps}"
 
 sed -i -r 's|^[#]*\s*img\.root=.*|img.root=/usr|' "${alfProps}"
 grep -q '^[#]*\s*img\.root=' "${alfProps}" || echo 'img.root=/usr' >>"${alfProps}"
@@ -311,6 +314,22 @@ grep -q '^[#]*\s*solr\.port=' "${alfProps}" || echo "solr.port=${repository_sear
 
 sed -i -r 's|^[#]*\s*solr\.secureComms=.*|solr.secureComms=none|' "${alfProps}"
 grep -q '^[#]*\s*solr\.secureComms=' "${alfProps}" || echo "solr.secureComms=none" >>"${alfProps}"
+
+sed -i -r 's|^[#]*\s*messaging\.broker\.url=.*|messaging.broker.url=failover:(nio://repository-activemq:61616)?timeout=3000\&jms.useCompression=true|' "${alfProps}"
+grep -q '^[#]*\s*messaging\.broker\.url=' "${alfProps}" || echo "messaging.broker.url=failover:(nio://repository-activemq:61616)?timeout=3000\&jms.useCompression=true" >>"${alfProps}"
+
+sed -i -r 's|^[#]*\s*localTransform\.edu-sharing\.url=.*|localTransform.edu-sharing.url=http://repository-transform-edu-sharing:8091/|' "${alfProps}"
+grep -q '^[#]*\s*localTransform\.edu-sharing\.url=' "${alfProps}" || echo "localTransform.edu-sharing.url=http://repository-transform-edu-sharing:8091/" >>"${alfProps}"
+
+sed -i -r 's|^[#]*\s*localTransform\.core-aio\.url=.*|localTransform.core-aio.url=http://repository-alfresco-transform-core-aio:8090/|' "${alfProps}"
+grep -q '^[#]*\s*localTransform\.core-aio\.url=' "${alfProps}" || echo "localTransform.core-aio.url=http://repository-alfresco-transform-core-aio:8090/" >>"${alfProps}"
+
+xmlstarlet ed -L \
+	-s '_:web-app/_:filter[_:filter-name="X509AuthFilter"]' -t elem -n "init-param" -v '' \
+	--var param '$prev' \
+	-s '$param' -t elem -n "param-name" -v "allow-unauthenticated-solr-endpoint" \
+	-s '$param' -t elem -n "param-value" -v "true" \
+	${catAlfWConf}
 
 ### edu-sharing ########################################################################################################
 
@@ -458,7 +477,7 @@ xmlstarlet ed -L \
 xmlstarlet ed -L \
   -N x="http://java.sun.com/xml/ns/javaee" \
 	-u '/x:web-app/x:session-config/x:session-timeout' -v "${my_http_server_session_timeout}" \
-	${catWConf}
+	${catEduWConf}
 
 ########################################################################################################################
 

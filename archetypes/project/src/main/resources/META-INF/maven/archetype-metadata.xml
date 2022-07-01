@@ -192,6 +192,30 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module dir="activemq"
+                        id="${rootArtifactId}-deploy-docker-build-activemq"
+                        name="${rootArtifactId}-deploy-docker-build-activemq">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="alfresco-transform-core-aio"
+                        id="${rootArtifactId}-deploy-docker-build-alfresco-transform-core-aio"
+                        name="${rootArtifactId}-deploy-docker-build-alfresco-transform-core-aio">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
               </modules>
             </module>
             <module dir="compose"
@@ -306,6 +330,18 @@
                     <module dir="transform"
                             id="${rootArtifactId}-deploy-docker-repository-build-transform"
                             name="${rootArtifactId}-deploy-docker-repository-build-transform">
+                      <fileSets>
+                        <fileSet encoding="UTF-8">
+                          <directory>src</directory>
+                          <includes>
+                            <include>**/*</include>
+                          </includes>
+                        </fileSet>
+                      </fileSets>
+                    </module>
+                    <module dir="transform-edu-sharing"
+                            id="${rootArtifactId}-deploy-docker-repository-build-transform-edu-sharing"
+                            name="${rootArtifactId}-deploy-docker-repository-build-transform-edu-sharing">
                       <fileSets>
                         <fileSet encoding="UTF-8">
                           <directory>src</directory>

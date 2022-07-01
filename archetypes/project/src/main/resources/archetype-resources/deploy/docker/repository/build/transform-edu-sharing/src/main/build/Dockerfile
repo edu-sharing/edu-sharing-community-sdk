@@ -5,18 +5,16 @@ FROM ${docker.from.openjdk.11}
 RUN set -eux \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
-        jq \
-        wait-for-it \
+		jq \
+		wait-for-it \
         xmlstarlet \
-        procps \
-        lsof \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*
 
 ########################################################################################################################
 
 ENV ALF_HOME /opt/alfresco
-ENV PATH $ALF_HOME/bin:$ALF_HOME/solr6/bin:$PATH
+ENV PATH $ALF_HOME/bin:$PATH
 
 WORKDIR $ALF_HOME
 
@@ -27,36 +25,27 @@ RUN set -eux \
 
 RUN set -eux \
     && adduser --uid=1000 --home=$ALF_HOME --disabled-password --gecos "" --shell=/bin/bash worker \
-    && chown -RL worker:worker /tmp \
-    && mkdir -p alf_data \
-    && chown -RL worker:worker .
+    && chown -RL worker:worker . \
+    && chown -RL worker:worker /tmp
+
+RUN set -eux \
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+        ffmpeg \
+	&& apt-get clean \
+    && rm -r /var/lib/apt/lists/*
 
 USER worker
 
-### Alfresco Solr6 #####################################################################################################
+### Tracker ############################################################################################################
 
-COPY --chown=worker:worker artifacts/alfresco-search-services-${org.alfresco:alfresco-search-services:zip.version}.zip /tmp/alfresco-search-services.zip
-
-RUN set -eux \
-	&& mkdir -p /tmp/install/alfresco-search-services \
-	&& unzip /tmp/alfresco-search-services.zip -d /tmp/install/alfresco-search-services \
-	&& rm -f /tmp/alfresco-search-services.zip \
-	&& mkdir -p alf_data \
-	&& mkdir -p solr6 \
-    && mv /tmp/install/alfresco-search-services/alfresco-search-services/* solr6
-
-COPY --chown=worker:worker assets/keystores/solr/ solr6/solrhome/keystore/
-
-COPY --chown=worker:worker assets/security.json solr6/solrhome/security.json
+COPY --chown=worker:worker artifacts/edu_sharing-community-repository-backend-transform-${org.edu_sharing:edu_sharing-community-repository-backend-transform:jar.version}.jar ./
 
 ########################################################################################################################
 
-EXPOSE 8080
+EXPOSE 8080 8081
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["solr6/solr/bin/solr", "start", "-f","-p","8080", "-Dcreate.alfresco.defaults=alfresco,archive"]
-
-VOLUME [ "/opt/alfresco/alf_data" ]
 
 ########################################################################################################################
 

@@ -13,10 +13,13 @@ repository_service_port="${REPOSITORY_SERVICE_PORT:-8080}"
 
 repository_service_base="http://${repository_service_host}:${repository_service_port}/edu-sharing"
 
-catSConf="tomcat/conf/server.xml"
-
-solr4Wor="solr4/workspace-SpacesStore/conf/solrcore.properties"
-solr4Arc="solr4/archive-SpacesStore/conf/solrcore.properties"
+solrBase="/opt/alfresco"
+solrData="${solrBase}/alf_data"
+solrHome="${solrBase}/solr6/solrhome"
+solrEnvs="${solrBase}/solr6/solr.in.sh"
+solrCoreTpl="${solrHome}/templates/rerank/conf/solrcore.properties"
+solrSchemaTpl="${solrHome}/templates/rerank/conf/schema.xml"
+solrConfShared="${solrHome}/conf/shared.properties"
 
 ### Wait ###############################################################################################################
 
@@ -36,39 +39,39 @@ export CATALINA_OPTS="-Dfile.encoding=UTF-8 $CATALINA_OPTS"
 export CATALINA_OPTS="-Duser.country=DE $CATALINA_OPTS"
 export CATALINA_OPTS="-Duser.language=de $CATALINA_OPTS"
 
-xmlstarlet ed -L \
-  -d '/Server/Service[@name="Catalina"]/Connector' \
-  -s '/Server/Service[@name="Catalina"]' -t elem -n 'Connector' -v '' \
-  --var internal '$prev' \
-  -i '$internal' -t attr -n "address"            -v "${my_bind}" \
-  -i '$internal' -t attr -n "port"               -v "8080" \
-  -i '$internal' -t attr -n "scheme"             -v "http" \
-  -i '$internal' -t attr -n "proxyName"          -v "${my_host}" \
-  -i '$internal' -t attr -n "proxyPort"          -v "${my_port}" \
-  -i '$internal' -t attr -n "protocol"           -v "HTTP/1.1" \
-  -i '$internal' -t attr -n "connectionTimeout"  -v "20000" \
-  ${catSConf}
+### Alfresco solr6 #####################################################################################################
 
-### Alfresco solr4 #####################################################################################################
+sed -i -r 's|^[#]*\s*alfresco\.host=.*|alfresco.host='"${repository_service_host}"'|' "${solrCoreTpl}"
+grep -q '^[#]*\s*alfresco\.host=' "${solrCoreTpl}" || echo "alfresco.host=${repository_service_host}" >>"${solrCoreTpl}"
 
-sed -i -r 's|^[#]*\s*alfresco\.host=.*|alfresco.host='"${repository_service_host}"'|' "${solr4Wor}"
-grep -q   '^[#]*\s*alfresco\.host=' "${solr4Wor}" || echo "alfresco.host=${repository_service_host}" >> "${solr4Wor}"
+sed -i -r 's|^[#]*\s*alfresco\.port=.*|alfresco.port='"${repository_service_port}"'|' "${solrCoreTpl}"
+grep -q '^[#]*\s*alfresco\.port=' "${solrCoreTpl}" || echo "alfresco.port=${repository_service_port}" >>"${solrCoreTpl}"
 
-sed -i -r 's|^[#]*\s*alfresco\.port=.*|alfresco.port='"${repository_service_port}"'|' "${solr4Wor}"
-grep -q   '^[#]*\s*alfresco\.port=' "${solr4Wor}" || echo "alfresco.port=${repository_service_port}" >> "${solr4Wor}"
+sed -i -r 's|^[#]*\s*alfresco\.secureComms=.*|alfresco.secureComms=none|' "${solrCoreTpl}"
+grep -q '^[#]*\s*alfresco\.secureComms=' "${solrCoreTpl}" || echo "alfresco.secureComms=none" >>"${solrCoreTpl}"
 
-sed -i -r 's|^[#]*\s*alfresco\.secureComms=.*|alfresco.secureComms=none|' "${solr4Wor}"
-grep -q   '^[#]*\s*alfresco\.secureComms=' "${solr4Wor}" || echo "alfresco.secureComms=none" >> "${solr4Wor}"
+sed -i -r 's|^[#]*\s*alfresco\.encryption\.ssl\.keystore\.location=.*|alfresco.encryption.ssl.keystore.location='"${solrHome}"'/keystore/ssl.repo.client.keystore|' "${solrCoreTpl}"
+grep -q   '^[#]*\s*alfresco\.encryption\.ssl\.keystore\.location=' "${solrCoreTpl}" || echo "alfresco.encryption.ssl.keystore.location=${solrHome}/keystore/ssl.repo.client.keystore" >> "${solrCoreTpl}"
 
-sed -i -r 's|^[#]*\s*alfresco\.host=.*|alfresco.host='"${repository_service_host}"'|' "${solr4Arc}"
-grep -q   '^[#]*\s*alfresco\.host=' "${solr4Arc}" || echo "alfresco.host=${repository_service_host}" >> "${solr4Arc}"
+sed -i -r 's|^[#]*\s*alfresco\.encryption\.ssl\.truststore\.location=.*|alfresco.encryption.ssl.truststore.location='"${solrHome}"'/keystore/ssl.repo.client.truststore|' "${solrCoreTpl}"
+grep -q   '^[#]*\s*alfresco\.encryption\.ssl\.truststore\.location=' "${solrCoreTpl}" || echo "alfresco.encryption.ssl.truststore.location=${solrHome}/keystore/ssl.repo.client.truststore" >> "${solrCoreTpl}"
 
-sed -i -r 's|^[#]*\s*alfresco\.port=.*|alfresco.port='"${repository_service_port}"'|' "${solr4Arc}"
-grep -q   '^[#]*\s*alfresco\.port=' "${solr4Arc}" || echo "alfresco.port=${repository_service_port}" >> "${solr4Arc}"
+sed -i -r 's|^[#]*\s*data\.dir\.root=.*|data.dir.root='"${solrData}"'|' "${solrCoreTpl}"
+grep -q '^[#]*\s*data\.dir\.root=' "${solrCoreTpl}" || echo "data.dir.root=${solrData}" >>"${solrCoreTpl}"
 
-sed -i -r 's|^[#]*\s*alfresco\.secureComms=.*|alfresco.secureComms=none|' "${solr4Arc}"
-grep -q   '^[#]*\s*alfresco\.secureComms=' "${solr4Arc}" || echo "alfresco.secureComms=none" >> "${solr4Arc}"
+#enable multi language search support
+sed -i -r 's|^[#]*\s*alfresco\.cross\.locale\.datatype\.0=.*|alfresco.cross.locale.datatype.0={http://www.alfresco.org/model/dictionary/1.0}text|' "${solrConfShared}"
+grep -q '^[#]*\s*alfresco\.cross\.locale\.datatype\.0=' "${solrConfShared}" || echo "alfresco.cross.locale.datatype.0={http://www.alfresco.org/model/dictionary/1.0}text" >>"${solrConfShared}"
+
+sed -i -r 's|^[#]*\s*alfresco\.cross\.locale\.datatype\.1=.*|alfresco.cross.locale.datatype.1={http://www.alfresco.org/model/dictionary/1.0}content|' "${solrConfShared}"
+grep -q '^[#]*\s*alfresco\.cross\.locale\.datatype\.1=' "${solrConfShared}" || echo "alfresco.cross.locale.datatype.1={http://www.alfresco.org/model/dictionary/1.0}content" >>"${solrConfShared}"
+
+sed -i -r 's|^[#]*\s*alfresco\.cross\.locale\.datatype\.2=.*|alfresco.cross.locale.datatype.2={http://www.alfresco.org/model/dictionary/1.0}mltext|' "${solrConfShared}"
+grep -q '^[#]*\s*alfresco\.cross\.locale\.datatype\.2=' "${solrConfShared}" || echo "alfresco.cross.locale.datatype.2={http://www.alfresco.org/model/dictionary/1.0}mltext" >>"${solrConfShared}"
 
 ########################################################################################################################
+
+#change type stripLocaleStrField to prevent cclom:general_keyword not indexed: Caused by: java.lang.ClassCastException: Cannot cast java.util.ArrayList to java.lang.String
+xmlstarlet ed -L -u "/schema/fields/dynamicField[@name='mltext@m____@*']/@type" -v 'alfrescoFieldType' ${solrSchemaTpl}
 
 exec "$@"

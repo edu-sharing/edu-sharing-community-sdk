@@ -1,5 +1,6 @@
 FROM ${docker.from.tomcat}
 
+########################################################################################################################
 
 RUN set -eux \
     && apt-get update -y \
@@ -15,9 +16,11 @@ RUN set -eux \
         ruby-hocon \
         wait-for-it \
         xmlstarlet \
+        vim \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*
 
+########################################################################################################################
 
 ENV ALF_HOME /opt/alfresco
 ENV PATH $ALF_HOME/bin:$PATH
@@ -60,7 +63,7 @@ COPY --chown=worker:worker assets/agent/jmx-exporter-config.yaml tomcat/agent/
 
 COPY --chown=worker:worker artifacts/postgresql-${org.postgresql:postgresql:jar.version}.jar tomcat/lib/
 COPY --chown=worker:worker artifacts/redisson-all-${org.redisson:redisson-all:jar.version}.jar tomcat/lib/
-COPY --chown=worker:worker artifacts/redisson-tomcat-8-${org.redisson:redisson-tomcat-8:jar.version}.jar tomcat/lib/
+COPY --chown=worker:worker artifacts/redisson-tomcat-9-${org.redisson:redisson-tomcat-9:jar.version}.jar tomcat/lib/
 
 COPY --chown=worker:worker assets/tomcat/logging.properties tomcat/conf/logging.properties
 
@@ -78,27 +81,34 @@ COPY --chown=worker:worker artifacts/alfresco-content-services-community-distrib
     /tmp/alfresco-content-services-community-distribution.zip
 
 RUN set -eux \
-    && mkdir -p /tmp/install \
-	&& unzip /tmp/alfresco-content-services-community-distribution.zip -d /tmp/install \
+    && mkdir -p /tmp/install/alfresco-platform \
+	&& unzip /tmp/alfresco-content-services-community-distribution.zip -d /tmp/install/alfresco-platform \
 	&& rm -f /tmp/alfresco-content-services-community-distribution.zip \
-	&& mv /tmp/install/alfresco-content-services-community-distribution* /tmp/install/alfresco-platform \
-    && mv /tmp/install/alfresco-platform/alf_data . \
     && mv /tmp/install/alfresco-platform/licenses . \
     && mv /tmp/install/alfresco-platform/README.txt . \
     && cp -rf /tmp/install/alfresco-platform/bin/* bin \
     && rm -f /tmp/install/alfresco-platform/web-server/lib/postgresql* \
     && cp -rf /tmp/install/alfresco-platform/web-server/* tomcat/ \
-    && xmlstarlet ed -L -d '/Context/Loader' tomcat/conf/Catalina/localhost/alfresco.xml \
+    && xmlstarlet ed -L -d '/Context/Resources' tomcat/conf/Catalina/localhost/alfresco.xml \
+    && mkdir -p tomcat/shared/classes/alfresco/extension/keystore \
+    && cp -R /tmp/install/alfresco-platform/keystore/metadata-keystore tomcat/shared/classes/alfresco/extension/keystore \
     && rm -rf /tmp/install/alfresco-platform \
     && mkdir -p tomcat/webapps/alfresco \
     && unzip tomcat/webapps/alfresco.war -d tomcat/webapps/alfresco \
       -x "WEB-INF/lib/commons-lang3-*" \
       -x "WEB-INF/lib/hazelcast-*" \
       -x "WEB-INF/lib/jackson-*" \
-      -x "WEB-INF/lib/log4j-*" \
-      -x "WEB-INF/lib/slf4j-*" \
+      -x "WEB-INF/lib/jsr305-*" \
+      -x "WEB-INF/lib/woodstox-core-*" \
+      -x "WEB-INF/lib/owasp-java-html-sanitizer-*" \
+    #   -x "WEB-INF/lib/log4j-*" \
+   #   -x "WEB-INF/lib/slf4j-*" \
     && rm -f tomcat/webapps/alfresco.war \
-    && mv alf_data/keystore .
+    && mkdir -p modules/platform \
+    && mkdir -p modules/share
+    #&& cp -r assets/alf_data/keystore .
+
+COPY --chown=worker:worker assets/tomcat/bin/setenv.sh tomcat/bin/setenv.sh
 
 COPY --chown=worker:worker artifacts/alfresco-content-services-share-distribution-${org.alfresco:alfresco-content-services-share-distribution:zip.version}.zip \
     /tmp/alfresco-content-services-share-distribution.zip
@@ -112,7 +122,7 @@ RUN set -eux \
         tomcat/webapps/alfresco -nobackup -force \
     && mv /tmp/install/alfresco-share/web-extension* tomcat/shared/classes/alfresco/web-extension \
     && cp -rf /tmp/install/alfresco-share/web-server/* tomcat/ \
-    && xmlstarlet ed -L -d '/Context/Loader' tomcat/conf/Catalina/localhost/share.xml \
+    && xmlstarlet ed -L -d '/Context/Resources' tomcat/conf/Catalina/localhost/share.xml \
     && rm -rf /tmp/install/alfresco-share \
     && mkdir -p tomcat/webapps/share \
     && unzip tomcat/webapps/share.war -d tomcat/webapps/share \
@@ -153,6 +163,7 @@ STOPSIGNAL SIGWINCH
 
 EXPOSE 8080 8081
 
+#ENTRYPOINT ["libcheck.sh"]
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["catalina.sh", "run"]
 

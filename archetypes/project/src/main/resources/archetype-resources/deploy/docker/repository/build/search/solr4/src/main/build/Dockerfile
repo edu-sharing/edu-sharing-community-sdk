@@ -1,4 +1,4 @@
-FROM ${docker.from.tomcat}
+FROM ${docker.from.openjdk.11}
 
 ########################################################################################################################
 
@@ -8,18 +8,17 @@ RUN set -eux \
         jq \
         wait-for-it \
         xmlstarlet \
+        procps \
+        lsof \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*
 
 ########################################################################################################################
 
 ENV ALF_HOME /opt/alfresco
-ENV PATH $ALF_HOME/bin:$PATH
+ENV PATH $ALF_HOME/bin:$ALF_HOME/solr6/bin:$PATH
 
 WORKDIR $ALF_HOME
-
-RUN set -eux \
-    && ln -sf /usr/local/tomcat tomcat
 
 COPY assets/entrypoint.sh bin/
 
@@ -34,58 +33,28 @@ RUN set -eux \
 
 USER worker
 
-### Tomcat #############################################################################################################
-
-COPY --chown=worker:worker artifacts/jmx_prometheus_javaagent-${io.prometheus.jmx:jmx_prometheus_javaagent:jar.version}.jar tomcat/agent/jmx_prometheus_javaagent.jar
-COPY --chown=worker:worker assets/agent/jmx-exporter-config.yaml tomcat/agent/
-
-COPY --chown=worker:worker assets/tomcat/logging.properties tomcat/conf/logging.properties
-
-### Alfresco Solr4 #####################################################################################################
+### Alfresco Solr6 #####################################################################################################
 
 COPY --chown=worker:worker artifacts/alfresco-search-services-${org.alfresco:alfresco-search-services:zip.version}.zip /tmp/alfresco-search-services.zip
 
 RUN set -eux \
-	&& mkdir -p /tmp/install/alfresco-solr4 \
-	&& unzip /tmp/alfresco-search-services.zip -d /tmp/install/alfresco-solr4 \
+	&& mkdir -p /tmp/install/alfresco-search-services \
+	&& unzip /tmp/alfresco-search-services.zip -d /tmp/install/alfresco-search-services \
 	&& rm -f /tmp/alfresco-search-services.zip \
 	&& mkdir -p alf_data \
-	&& mkdir -p solr4 \
-    && mv /tmp/install/alfresco-solr4/alfrescoModels solr4 \
-    && mv /tmp/install/alfresco-solr4/archive-SpacesStore solr4 \
-    && mv /tmp/install/alfresco-solr4/conf solr4 \
-    && mv /tmp/install/alfresco-solr4/templates solr4 \
-    && mv /tmp/install/alfresco-solr4/workspace-SpacesStore solr4 \
-    && mv /tmp/install/alfresco-solr4/solr.xml solr4 \
-    && mkdir -p tomcat/conf/Catalina/localhost \
-    && mv /tmp/install/alfresco-solr4/context.xml tomcat/conf/Catalina/localhost/solr4.xml \
-    && mkdir -p tomcat/webapps/solr4 \
-	&& unzip /tmp/install/alfresco-solr4/solr4.war -d tomcat/webapps/solr4 \
-    && rm -rf /tmp/install/alfresco-solr4 \
-    && sed -i \
-        's|@@ALFRESCO_SOLR4_DIR@@|'"$ALF_HOME"'/solr4|' \
-        tomcat/conf/Catalina/localhost/solr4.xml \
-    && sed -i \
-        's|@@ALFRESCO_SOLR4_MODEL_DIR@@|'"$ALF_HOME"'/alf_data/solr4/model|' \
-        tomcat/conf/Catalina/localhost/solr4.xml \
-    && sed -i \
-        's|@@ALFRESCO_SOLR4_CONTENT_DIR@@|'"$ALF_HOME"'/alf_data/solr4/content|' \
-        tomcat/conf/Catalina/localhost/solr4.xml \
-    && sed -i \
-        's|@@ALFRESCO_SOLR4_DATA_DIR@@|'"$ALF_HOME"'/alf_data/solr4/index|' \
-        solr4/archive-SpacesStore/conf/solrcore.properties \
-    && sed -i \
-        's|@@ALFRESCO_SOLR4_DATA_DIR@@|'"$ALF_HOME"'/alf_data/solr4/index|' \
-        solr4/workspace-SpacesStore/conf/solrcore.properties
+	&& mkdir -p solr6 \
+    && mv /tmp/install/alfresco-search-services/alfresco-search-services/* solr6
 
-COPY --chown=worker:worker assets/solr4 solr4/log4j-solr.properties
+COPY --chown=worker:worker assets/keystores/solr/ solr6/solrhome/keystore/
+
+COPY --chown=worker:worker assets/security.json solr6/solrhome/security.json
 
 ########################################################################################################################
 
 EXPOSE 8080
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["catalina.sh", "run"]
+CMD ["solr6/solr/bin/solr", "start", "-f","-p","8080", "-Dcreate.alfresco.defaults=alfresco,archive"]
 
 VOLUME [ "/opt/alfresco/alf_data" ]
 

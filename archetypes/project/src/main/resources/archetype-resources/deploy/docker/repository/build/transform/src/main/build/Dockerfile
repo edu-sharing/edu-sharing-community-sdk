@@ -1,26 +1,15 @@
-FROM ${docker.from.openjdk}
+FROM ${docker.from.openjdk.11}
 
 ########################################################################################################################
 
 RUN set -eux \
-	&& apt-get update -y \
-	&& apt-get install -y --no-install-recommends \
-		fonts-dejavu \
-		fonts-liberation \
-		hyphen-* \
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends \
 		jq \
-		libreoffice-core \
-		libreoffice-writer \
-		libreoffice-calc \
-		libreoffice-draw \
-		libreoffice-impress \
-		libreoffice-base \
-		unoconv \
-		ure \
 		wait-for-it \
         xmlstarlet \
-	&& apt-get clean \
-	&& rm -r /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -r /var/lib/apt/lists/*
 
 ########################################################################################################################
 
@@ -29,31 +18,32 @@ ENV PATH $ALF_HOME/bin:$PATH
 
 WORKDIR $ALF_HOME
 
-### Libreoffice Headless ###############################################################################################
-
-RUN set -eux \
-    && sed -i -r 's|^[#]*\s*CrashDumpEnable=.*|CrashDumpEnable=false|' /etc/libreoffice/sofficerc \
-    && sed -i -r 's|^[#]*\s*HideEula=.*|HideEula=1|' /etc/libreoffice/sofficerc \
-    && sed -i -r 's|^[#]*\s*Logo=.*|Logo=0|' /etc/libreoffice/sofficerc
-
-########################################################################################################################
-
-COPY assets/entrypoint*.sh bin/
+COPY assets/entrypoint.sh bin/
 
 RUN set -eux \
 	&& find bin -type f -name '*.sh' -exec chmod +x {} \;
 
-########################################################################################################################
+RUN set -eux \
+    && adduser --uid=1000 --home=$ALF_HOME --disabled-password --gecos "" --shell=/bin/bash worker \
+    && chown -RL worker:worker . \
+    && chown -RL worker:worker /tmp
 
 RUN set -eux \
-	&& adduser --uid=1000 --home=$ALF_HOME --disabled-password --gecos "" --shell=/bin/bash worker \
-    && chown -RL worker:worker .
+    && apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+        ffmpeg \
+	&& apt-get clean \
+    && rm -r /var/lib/apt/lists/*
 
 USER worker
 
+### Tracker ############################################################################################################
+
+COPY --chown=worker:worker artifacts/edu_sharing-community-repository-backend-transform-${org.edu_sharing:edu_sharing-community-repository-backend-transform:jar.version}.jar ./
+
 ########################################################################################################################
 
-EXPOSE 8100
+EXPOSE 8080 8081
 
 ENTRYPOINT ["entrypoint.sh"]
 

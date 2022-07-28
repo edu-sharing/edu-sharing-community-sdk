@@ -108,6 +108,18 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module dir="mailcatcher"
+                        id="${rootArtifactId}-deploy-docker-build-mailcatcher"
+                        name="${rootArtifactId}-deploy-docker-build-mailcatcher">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module dir="minideb"
                         id="${rootArtifactId}-deploy-docker-build-minideb"
                         name="${rootArtifactId}-deploy-docker-build-minideb">

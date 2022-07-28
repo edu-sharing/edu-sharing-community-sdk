@@ -89,6 +89,12 @@ info() {
 	echo ""
 	echo "#########################################################################"
 	echo ""
+	echo "repository-mailcatcher:"
+	echo ""
+	echo "  Port:             http://127.0.0.1:${REPOSITORY_MAILCATCHER_PORT_HTTP:-8025}"
+	echo ""
+	echo "#########################################################################"
+	echo ""
 	echo "repository-mongo:"
 	echo ""
 	echo "  Credentials:"
@@ -339,6 +345,7 @@ getComposeFilesFromRemote() {
 
   mvn -q -llr dependency:copy \
      	-Dartifact="org.edu_sharing:${artifactId}:${version}:tar.gz:bin" \
+    	-Dmdep.useBaseVersion=true \
     	-DoutputDirectory=./target/compose
 
   popd >/dev/null

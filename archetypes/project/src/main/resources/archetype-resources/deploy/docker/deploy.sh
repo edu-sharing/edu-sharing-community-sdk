@@ -345,6 +345,7 @@ getComposeFilesFromRemote() {
 
   mvn -q -llr dependency:copy \
      	-Dartifact="org.edu_sharing:${artifactId}:${version}:tar.gz:bin" \
+    	-Dmdep.useBaseVersion=true \
     	-DoutputDirectory=./target/compose
 
   popd >/dev/null

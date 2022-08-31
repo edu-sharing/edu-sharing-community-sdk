@@ -339,13 +339,13 @@
                         <include>**/*</include>
                       </includes>
                       <excludes>
-                        <exclude>main/compose/repository-dev.yml</exclude>
+                        <exclude>main/compose/1_repository-dev.yml</exclude>
                       </excludes>
                     </fileSet>
                     <fileSet encoding="UTF-8" filtered="true">
                       <directory>src</directory>
                       <includes>
-                        <include>main/compose/repository-dev.yml</include>
+                        <include>main/compose/1_repository-dev.yml</include>
                       </includes>
                     </fileSet>
                   </fileSets>

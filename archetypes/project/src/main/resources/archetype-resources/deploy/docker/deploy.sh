@@ -31,14 +31,14 @@ popd >/dev/null || exit
 	cp -f ".env" "${COMPOSE_DIR}"
 }
 
-export COMPOSE_NAME="${COMPOSE_PROJECT_NAME:-$(echo "${COMPOSE_PROJECT}-docker-$(git rev-parse --abbrev-ref HEAD)" | sed 's|[\/\.]|-|g' | tr '[:upper:]' '[:lower:]')}"
+export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-$(echo "${COMPOSE_PROJECT}-docker-$(git rev-parse --abbrev-ref HEAD)" | sed 's|[\/\.]|-|g' | tr '[:upper:]' '[:lower:]')}"
 
 case "$(uname)" in
 MINGW*)
-	COMPOSE_EXEC="winpty docker-compose -p $COMPOSE_NAME"
+	COMPOSE_EXEC="winpty docker-compose"
 	;;
 *)
-	COMPOSE_EXEC="docker-compose -p $COMPOSE_NAME"
+	COMPOSE_EXEC="docker-compose"
 	;;
 esac
 

@@ -137,7 +137,7 @@ ps() {
 	echo "Use compose set: $COMPOSE_LIST"
 
 	$COMPOSE_EXEC \
-		-f $COMPOSE_LIST \
+		$COMPOSE_LIST \
 		ps || exit
 }
 

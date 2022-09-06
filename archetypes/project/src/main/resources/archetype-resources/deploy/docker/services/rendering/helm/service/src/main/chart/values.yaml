@@ -137,6 +137,10 @@ config:
         proxyuser: ""
         proxypass: ""
 
+  override:
+    logging:
+      application: ""
+
   plugins: []
 #   - class: "ESRender_Plugin_...."
 #     args: ['"arg1"','"arg2"']

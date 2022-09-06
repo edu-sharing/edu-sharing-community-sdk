@@ -71,6 +71,11 @@ config:
 
   metrics: true
 
+  override:
+    logging:
+      application: ""
+      server: ""
+
   repository:
     host: edusharing-repository-service
     port: 8080

@@ -37,7 +37,7 @@ spec:
       initContainers:
       {{- if (default .Values.global.cluster.storage.share.permission .Values.persistence.share.permission) }}
       - name: {{ include "edusharing_repository_service.name" . }}-init-permission
-        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
+        image: {{ include "edusharing_repository_service.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         command:
         - "/bin/bash"
@@ -62,7 +62,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ include "edusharing_repository_service.name" . }}-server
-        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-repository-build-service:{{ .Values.image.tag }}
+        image: {{ include "edusharing_repository_service.image" . }}{{ .Values.image.prefix }}-deploy-docker-repository-build-service:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         {{- if .Values.config.jvm.debug }}
         args: [ "catalina.sh", "jpda", "run" ]
@@ -133,7 +133,7 @@ spec:
         {{- with .Values.startupProbe }}
         startupProbe:
           httpGet:
-            path: /edu-sharing/rest/_about/status/SERVICE?timeoutSeconds={{ add1 .timeoutSeconds }}
+            path: /edu-sharing/rest/_about/status/SERVICE?timeoutSeconds={{ .timeoutSeconds }}
             httpHeaders:
               - name: Accept
                 value: application/json
@@ -156,7 +156,7 @@ spec:
         {{- with .Values.readinessProbe }}
         readinessProbe:
           httpGet:
-            path: /edu-sharing/rest/_about/status/SERVICE?timeoutSeconds={{ add1 .timeoutSeconds }}
+            path: /edu-sharing/rest/_about/status/SERVICE?timeoutSeconds={{ .timeoutSeconds }}
             httpHeaders:
             - name: Accept
               value: application/json
@@ -175,7 +175,7 @@ spec:
         {{- end }}
       {{ if not .Values.config.transform.server.enabled }}
       - name: {{ include "edusharing_repository_service.name" . }}-transform
-        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-repository-build-transform:{{ .Values.image.tag }}
+        image: {{ include "edusharing_repository_service.image" . }}{{ .Values.image.prefix }}-deploy-docker-repository-build-transform:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         envFrom:
         - configMapRef:

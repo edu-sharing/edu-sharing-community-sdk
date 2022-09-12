@@ -33,6 +33,8 @@ global:
   image:
     pullPolicy: Always
     pullSecrets: []
+    registry: ${docker.registry}
+    repository: ${docker.repository}
 
   metrics:
     scrape:
@@ -54,8 +56,6 @@ global:
 nameOverride: edusharing-repository-service
 
 image:
-  registry: ${docker.registry}
-  repository: ${docker.repository}
   prefix: ${docker.prefix}
   tag: ${docker.tag}
 
@@ -297,7 +297,7 @@ startupProbe:
 
   failureThreshold: 30
   initialDelaySeconds: 0
-  periodSeconds: 20
+  periodSeconds: 30
   successThreshold: 1
   timeoutSeconds: 10
 

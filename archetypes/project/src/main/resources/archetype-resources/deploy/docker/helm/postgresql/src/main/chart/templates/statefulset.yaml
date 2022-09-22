@@ -81,8 +81,12 @@ spec:
         {{- end }}
         {{- with .Values.livenessProbe }}
         livenessProbe:
-          tcpSocket:
-            port: api
+          exec:
+            command:
+              - "/bin/bash"
+              - "-ec"
+              - |
+                exec pg_isready -U "${POSTGRESQL_USERNAME}" -d "${POSTGRESQL_DATABASE}"
           failureThreshold: {{ .failureThreshold }}
           initialDelaySeconds: {{ .initialDelaySeconds }}
           periodSeconds: {{ .periodSeconds }}

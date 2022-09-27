@@ -117,6 +117,12 @@ config:
   admin:
     password: admin
 
+  antivirus:
+    enabled: ${helm.config.antivirus.enabled}
+    host: edusharing-repository-antivirus
+    port: 1344
+    service: virus_scan
+
   cache:
     cluster: true
     database: 0

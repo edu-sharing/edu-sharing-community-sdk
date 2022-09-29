@@ -259,12 +259,12 @@ compose() {
         flag="$1"
         shift || break
 
-        COMPOSE_FILE_TYPY=""
+        COMPOSE_FILE_TYPE=""
         case "$flag" in
-        -common) COMPOSE_FILE_TYPY="common" ;;
-        -debug) COMPOSE_FILE_TYPY="debug" ;;
-        -dev) COMPOSE_FILE_TYPY="dev" ;;
-        -remote) COMPOSE_FILE_TYPY="remote" ;;
+        -common) COMPOSE_FILE_TYPE="common" ;;
+        -debug) COMPOSE_FILE_TYPE="debug" ;;
+        -dev) COMPOSE_FILE_TYPE="dev" ;;
+        -remote) COMPOSE_FILE_TYPE="remote" ;;
         *)
           {
             echo "error: unknown flag: $flag"
@@ -476,7 +476,7 @@ reload() {
 }
 
 ci() {
-	COMPOSE_LIST="$(compose . 2 -common -remote)"
+	COMPOSE_LIST="$(compose . 2 -remote)"
 
   [[ -n $COMPOSE_LIST ]] && {
 		echo "Use compose set: $COMPOSE_LIST1"

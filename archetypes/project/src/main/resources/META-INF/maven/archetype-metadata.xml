@@ -18,6 +18,9 @@
     <requiredProperty key="project">
       <defaultValue>community</defaultValue>
     </requiredProperty>
+    <requiredProperty key="REPOSITORY_ANTIVIRUS_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
     <requiredProperty key="REPOSITORY_CLUSTER_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>

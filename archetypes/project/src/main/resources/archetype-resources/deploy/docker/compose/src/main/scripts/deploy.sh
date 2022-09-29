@@ -3,14 +3,14 @@ set -e
 set -o pipefail
 
 GIT_BRANCH="$(echo '${project.version}' | sed 's|[\/\.]|-|g' | tr '[:upper:]' '[:lower:]')"
-export COMPOSE_NAME="${COMPOSE_PROJECT_NAME:-edusharing-docker-$GIT_BRANCH}"
+export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-edusharing-docker-$GIT_BRANCH}"
 
 case "$(uname)" in
 MINGW*)
-	COMPOSE_EXEC="winpty docker-compose -p $COMPOSE_NAME"
+	COMPOSE_EXEC="winpty docker-compose"
 	;;
 *)
-	COMPOSE_EXEC="docker-compose -p $COMPOSE_NAME"
+	COMPOSE_EXEC="docker-compose"
 	;;
 esac
 
@@ -137,7 +137,7 @@ ps() {
 	echo "Use compose set: $COMPOSE_LIST"
 
 	$COMPOSE_EXEC \
-		-f $COMPOSE_LIST \
+		$COMPOSE_LIST \
 		ps || exit
 }
 

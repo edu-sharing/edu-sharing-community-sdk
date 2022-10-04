@@ -108,7 +108,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-rediscluster.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-rediscluster.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -1186,7 +1186,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-postgresql.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-postgresql.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -2357,7 +2357,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-elastic-index.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-elastic-index.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -6090,7 +6090,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-elastic-tracker.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-elastic-tracker.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -6940,7 +6940,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -9775,7 +9775,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -20838,7 +20838,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-transform.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-transform.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -21688,7 +21688,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-postgresql.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-postgresql.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -22859,7 +22859,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_rate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"

@@ -18,6 +18,9 @@
     <requiredProperty key="project">
       <defaultValue>community</defaultValue>
     </requiredProperty>
+    <requiredProperty key="REPOSITORY_ANTIVIRUS_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
     <requiredProperty key="REPOSITORY_CLUSTER_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
@@ -99,6 +102,18 @@
                 <module dir="apache_exporter"
                         id="${rootArtifactId}-deploy-docker-build-apache_exporter"
                         name="${rootArtifactId}-deploy-docker-build-apache_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="mailcatcher"
+                        id="${rootArtifactId}-deploy-docker-build-mailcatcher"
+                        name="${rootArtifactId}-deploy-docker-build-mailcatcher">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>
@@ -327,13 +342,13 @@
                         <include>**/*</include>
                       </includes>
                       <excludes>
-                        <exclude>main/compose/repository-dev.yml</exclude>
+                        <exclude>main/compose/1_repository-dev.yml</exclude>
                       </excludes>
                     </fileSet>
                     <fileSet encoding="UTF-8" filtered="true">
                       <directory>src</directory>
                       <includes>
-                        <include>main/compose/repository-dev.yml</include>
+                        <include>main/compose/1_repository-dev.yml</include>
                       </includes>
                     </fileSet>
                   </fileSets>

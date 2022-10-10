@@ -7,10 +7,10 @@ export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-edusharing-docker-$GIT_BRAN
 
 case "$(uname)" in
 MINGW*)
-	COMPOSE_EXEC="winpty docker-compose"
+	COMPOSE_EXEC="winpty docker compose"
 	;;
 *)
-	COMPOSE_EXEC="docker-compose"
+	COMPOSE_EXEC="docker compose"
 	;;
 esac
 

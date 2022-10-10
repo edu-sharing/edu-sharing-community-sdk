@@ -210,6 +210,9 @@ case "${CLI_OPT1}" in
 start)
 	rstart && info
 	;;
+restart)
+  stop && rstart
+  ;;
 info)
 	info
 	;;
@@ -235,6 +238,7 @@ purge)
 	echo "Option:"
 	echo ""
 	echo "  - start             startup containers"
+  echo "  - restart           stops and starts containers"
 	echo ""
 	echo "  - info              show information"
 	echo "  - logs              show logs"

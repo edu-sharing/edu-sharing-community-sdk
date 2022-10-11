@@ -244,6 +244,7 @@ restart)
 	;;
 terminal)
   terminal $@
+  ;;
 *)
 	echo ""
 	echo "Usage: ${CLI_CMD} [option]"

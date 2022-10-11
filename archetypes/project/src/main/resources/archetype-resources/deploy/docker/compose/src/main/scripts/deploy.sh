@@ -29,8 +29,8 @@ pushd "$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)" >/dev/null || e
 
 COMPOSE_DIR="."
 
-[[ -f ".env" ]] && {
-	cp -f ".env" "${COMPOSE_DIR}"
+[[ -f ".env" ]] && [[ ! "${COMPOSE_DIR}/.env" -ef "./.env" ]] && {
+  cp -f ".env" "${COMPOSE_DIR}"
 }
 
 pushd "${COMPOSE_DIR}" >/dev/null || exit

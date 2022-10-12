@@ -220,7 +220,7 @@ if [[ -n $my_proxy_host ]] ; then
 	{
 		echo "<?php"
 		echo "\$PROXY_CONFIG = ["
-    echo "  \"http.nonproxyhosts\" => [${my_proxy_nonh}],"
+    echo "  \"http.nonproxyhosts\" => [\"${my_proxy_nonh/,/\",\"}\"],"
     echo "  \"http.proxy\"         => \"http://${my_proxy_auth}${my_proxy_host}:${my_proxy_port}\","
     echo "  \"https.proxy\"        => \"http://${my_proxy_auth}${my_proxy_host}:${my_proxy_port}\""
 		echo "];"

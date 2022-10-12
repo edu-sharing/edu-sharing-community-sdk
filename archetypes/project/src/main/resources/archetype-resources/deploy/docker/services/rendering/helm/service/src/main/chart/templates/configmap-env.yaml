@@ -16,7 +16,7 @@ data:
   SERVICES_RENDERING_DATABASE_PORT: {{ .Values.config.database.port | quote }}
   SERVICES_RENDERING_SERVICE_GDPR_ENABLED: {{ .Values.config.gdpr.enabled | quote }}
   {{- with .Values.config.gdpr.modules }}
-  SERVICES_RENDERING_SERVICE_GDPR_MODULES: '"{{- join "\",\"" . }}"'
+  SERVICES_RENDERING_SERVICE_GDPR_MODULES: {{- join "," . | quote }}
   {{- end }}
   SERVICES_RENDERING_SERVICE_GDPR_URLS: |-
   {{- range $ununsed, $url := .Values.config.gdpr.urls }}

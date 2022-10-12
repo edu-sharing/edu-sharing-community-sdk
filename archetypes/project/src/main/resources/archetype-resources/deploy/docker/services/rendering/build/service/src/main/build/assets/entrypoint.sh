@@ -207,8 +207,8 @@ sed -i -r "s|\$MC_URL.*|\$MC_URL = '${my_base_external}';|" "${systemConf}"
 sed -i -r "s|\$MC_DOCROOT.*|\$MC_DOCROOT = '${RS_ROOT}';|" "${systemConf}"
 sed -i -r "s|\$CC_RENDER_PATH.*|\$CC_RENDER_PATH = '${RS_CACHE}';|" "${systemConf}"
 
-sed -i -r 's|\$DATAPROTECTIONREGULATION_CONFIG.*|\$DATAPROTECTIONREGULATION_CONFIG = ["enabled" => '"${my_gdpr_enabled}"', "modules" => ['"${my_gdpr_modules}"'], "urls" => ['"${my_gdpr_urls}"']];|' "${systemConf}"
-grep -q '\$DATAPROTECTIONREGULATION_CONFIG' "${systemConf}" || echo "\$DATAPROTECTIONREGULATION_CONFIG = [\"enabled\" => ${my_gdpr_enabled}, \"modules\" => [${my_gdpr_modules}], \"urls\" => [${my_gdpr_urls}]];" >> "${systemConf}"
+sed -i -r 's|\$DATAPROTECTIONREGULATION_CONFIG.*|\$DATAPROTECTIONREGULATION_CONFIG = ["enabled" => '"${my_gdpr_enabled}"', "modules" => ['"${my_gdpr_modules/,/\",\"}"'], "urls" => ['"${my_gdpr_urls}"']];|' "${systemConf}"
+grep -q '\$DATAPROTECTIONREGULATION_CONFIG' "${systemConf}" || echo "\$DATAPROTECTIONREGULATION_CONFIG = [\"enabled\" => ${my_gdpr_enabled}, \"modules\" => [\"${my_gdpr_modules/,/\",\"}\"], \"urls\" => [${my_gdpr_urls}]];" >> "${systemConf}"
 
 proxyConf="${RS_ROOT}/conf/proxy.conf.php"
 rm -f "${proxyConf}"

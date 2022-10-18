@@ -48,6 +48,9 @@
       <directory>.mvn</directory>
     </fileSet>
     <fileSet encoding="UTF-8">
+      <directory>scripts</directory>
+    </fileSet>
+    <fileSet encoding="UTF-8">
       <directory></directory>
       <includes>
         <include>__gitattributes__</include>

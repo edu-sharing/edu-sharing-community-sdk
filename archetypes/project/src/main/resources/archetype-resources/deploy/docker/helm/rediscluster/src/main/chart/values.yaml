@@ -18,6 +18,9 @@ global:
         permission: false
         spec: {}
 
+    sysctl:
+      enabled: false
+
   image:
     pullPolicy: Always
     pullSecrets: []
@@ -141,6 +144,21 @@ resources:
 init:
 
   permission:
+
+    resources:
+
+      limits:
+        cpu: 125m
+        memory: 512Mi
+      requests:
+        cpu: 125m
+        memory: 512Mi
+
+    securityContext:
+
+      runAsUser: 0
+
+  sysctl:
 
     resources:
 

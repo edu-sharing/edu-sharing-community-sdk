@@ -5,16 +5,19 @@ FROM ${docker.from.tomcat}
 RUN set -eux \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
+        curl \
         exiftool \
 	    ffmpeg \
 	    ghostscript \
 	    gsfonts \
 	    imagemagick \
 	    jq \
+	    nano \
         postgresql-client \
 	    redis-tools \
         ruby-hocon \
         wait-for-it \
+        wget \
         xmlstarlet \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*

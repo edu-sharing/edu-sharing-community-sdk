@@ -5,8 +5,11 @@ FROM ${docker.from.tomcat}
 RUN set -eux \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
+        curl \
         jq \
+        nano \
         wait-for-it \
+        wget \
         xmlstarlet \
     && apt-get clean \
     && rm -r /var/lib/apt/lists/*

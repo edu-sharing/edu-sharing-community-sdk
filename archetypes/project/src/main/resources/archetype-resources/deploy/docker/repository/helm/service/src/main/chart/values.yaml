@@ -30,6 +30,8 @@ global:
         permission: false
         spec: {}
 
+  debug: false
+
   image:
     pullPolicy: Always
     pullSecrets: []

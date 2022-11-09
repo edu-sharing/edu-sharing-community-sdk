@@ -95,6 +95,14 @@ COPY --chown=worker:worker assets/solr4 solr4/
 
 ########################################################################################################################
 
+RUN set -eux \
+    && mkdir profiler \
+    && wget -qO- https://github.com/Granulate/async-profiler/releases/download/v2.0g1/async-profiler-2.0-linux-x64.tar.gz | tar xvz -C profiler
+
+COPY --chown=worker:worker assets/profiler profiler/
+
+########################################################################################################################
+
 EXPOSE 8080
 
 ENTRYPOINT ["entrypoint.sh"]

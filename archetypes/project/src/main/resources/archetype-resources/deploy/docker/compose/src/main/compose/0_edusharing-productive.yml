@@ -4,6 +4,3 @@ services:
 
   cache:
     restart: unless-stopped
-
-  profiler:
-    restart: unless-stopped

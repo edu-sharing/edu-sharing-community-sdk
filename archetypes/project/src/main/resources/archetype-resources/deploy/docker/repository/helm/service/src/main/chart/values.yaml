@@ -186,6 +186,8 @@ config:
         proxyuser: ""
         proxypass: ""
     server:
+      # additional, allowed origins to allow CORS-Access from
+      allowOrigin: []
       csp:
         connect: ""
         default: ""

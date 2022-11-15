@@ -463,7 +463,7 @@
             </module>
           </modules>
         </module>
-        <module dir="installer"
+        <!--<module dir="installer"
                 id="${rootArtifactId}-deploy-installer"
                 name="${rootArtifactId}-deploy-installer">
           <fileSets>
@@ -657,7 +657,7 @@
               </modules>
             </module>
           </modules>
-        </module>
+        </module>-->
       </modules>
     </module>
     <module dir="repository"

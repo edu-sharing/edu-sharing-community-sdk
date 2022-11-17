@@ -140,7 +140,8 @@ e2e:
     - tags
     - web
   except:
-    - $E2E_TEST == "false"
+    variables:
+      - $E2E_TEST == "false"
 
 deploy:
   stage: deploy

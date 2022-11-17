@@ -139,6 +139,8 @@ e2e:
     - schedules
     - tags
     - web
+  except:
+    - $E2E_TEST == "false"
 
 deploy:
   stage: deploy

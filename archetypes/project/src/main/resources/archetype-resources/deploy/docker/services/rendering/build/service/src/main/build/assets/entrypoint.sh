@@ -238,7 +238,7 @@ if [[ -n $my_proxy_host ]] ; then
 	fi
 
 	# attach repository to the non proxy host
-  if [[ -z $my_proxy_nonh ]]; then
+  if [[ -n $my_proxy_nonh ]]; then
     my_proxy_nonh="${my_proxy_nonh},"
   fi
   my_proxy_nonh="${my_proxy_nonh}${REPOSITORY_SERVICE_HOST}"

@@ -231,10 +231,18 @@ grep -q 'ENABLE_VIEWER_JS' "${systemConf}" || echo "DEFINE(\"ENABLE_VIEWER_JS\",
 proxyConf="${RS_ROOT}/conf/proxy.conf.php"
 rm -f "${proxyConf}"
 if [[ -n $my_proxy_host ]] ; then
+
 	my_proxy_auth=""
 	if [[ -n $my_proxy_user ]] ; then
 		my_proxy_auth="${my_proxy_user}:${my_proxy_pass}@"
 	fi
+
+	# attach repository to the non proxy host
+  if [[ -z $my_proxy_nonh ]]; then
+    my_proxy_nonh="${my_proxy_nonh},"
+  fi
+  my_proxy_nonh="${my_proxy_nonh}${REPOSITORY_SERVICE_HOST}"
+
 	{
 		echo "<?php"
 		echo "\$PROXY_CONFIG = ["

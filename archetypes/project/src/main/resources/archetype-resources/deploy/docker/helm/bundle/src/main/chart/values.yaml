@@ -78,9 +78,6 @@ edusharing_repository:
 
     config:
 
-      admin:
-        password: &repositoryConfigAdminPassword admin
-
       cache:
         host: *redisclusterNameOverride
         port: *redisclusterServicePortApi
@@ -117,6 +114,5 @@ edusharing_services_rendering:
       repository:
         host: *repositoryNameOverride
         port: *repositoryServicePostApiInternal
-        password: *repositoryConfigAdminPassword
 
 ########################################################################################################################

@@ -11,6 +11,9 @@ global:
 
     domain: cluster.local
 
+    ingress:
+      ingressClassName: ""
+
     istio:
       enabled: false
       gateway:

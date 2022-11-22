@@ -9,6 +9,9 @@ global:
     cert:
       annotations: {}
 
+    ingress:
+      ingressClassName: ""
+
     istio:
       enabled: false
       gateway:

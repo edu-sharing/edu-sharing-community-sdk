@@ -136,12 +136,8 @@ e2e:
     - . deploy.sh stop
     - popd
   only:
-    - schedules
-    - tags
-    - web
-  except:
     variables:
-      - $E2E_TEST == "false"
+      $E2E_TEST == "true"
 
 deploy:
   stage: deploy

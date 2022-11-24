@@ -55,7 +55,7 @@
       <includes>
         <include>__gitattributes__</include>
         <include>__gitignore__</include>
-        <include>LICENSE</include>
+        <include>LICENSE.txt</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8" filtered="true">
@@ -153,18 +153,6 @@
                 <module dir="postgresql_exporter"
                         id="${rootArtifactId}-deploy-docker-build-postgresql_exporter"
                         name="${rootArtifactId}-deploy-docker-build-postgresql_exporter">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-                <module dir="profiler"
-                        id="${rootArtifactId}-deploy-docker-build-profiler"
-                        name="${rootArtifactId}-deploy-docker-build-profiler">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>
@@ -475,7 +463,7 @@
             </module>
           </modules>
         </module>
-        <module dir="installer"
+        <!--<module dir="installer"
                 id="${rootArtifactId}-deploy-installer"
                 name="${rootArtifactId}-deploy-installer">
           <fileSets>
@@ -669,7 +657,7 @@
               </modules>
             </module>
           </modules>
-        </module>
+        </module>-->
       </modules>
     </module>
     <module dir="repository"

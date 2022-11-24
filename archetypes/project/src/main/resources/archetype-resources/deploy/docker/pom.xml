@@ -54,7 +54,7 @@
     </docker.from.rediscluster.server>
     <!--suppress UnresolvedMavenProperty -->
     <docker.from.tomcat>
-      dockerio.mirror.docker.edu-sharing.com/tomcat:${tomcat.version}-jdk8-openjdk
+      dockerio.mirror.docker.edu-sharing.com/bitnami/tomcat:${tomcat.version}
     </docker.from.tomcat>
 
     <helm.kube.version>&gt;= 1.20.0</helm.kube.version>

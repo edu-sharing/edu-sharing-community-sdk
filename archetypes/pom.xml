@@ -16,6 +16,7 @@
   <name>edu_sharing-community-sdk-archetypes</name>
 
   <modules>
+    <module>helm</module>
     <module>project</module>
   </modules>
 

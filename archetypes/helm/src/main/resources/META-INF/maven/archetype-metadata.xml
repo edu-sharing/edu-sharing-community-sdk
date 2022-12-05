@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor
+    name="edu_sharing-helm"
+    xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0
+                        http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd">
+  <requiredProperties>
+    <requiredProperty key="groupId">
+      <defaultValue>org.edu_sharing</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="artifactId">
+      <defaultValue>edu_sharing-projects-community-helm</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="version">
+      <defaultValue>git</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="project">
+      <defaultValue>community</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="gitignore">
+      <defaultValue>.gitignore</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="gitattributes">
+      <defaultValue>.gitattributes</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  <fileSets>
+    <fileSet encoding="UTF-8">
+      <directory>.hooks</directory>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>.mvn</directory>
+    </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory></directory>
+      <includes>
+        <include>__gitattributes__</include>
+        <include>__gitignore__</include>
+        <include>deploy.sh</include>
+        <include>LICENSE.txt</include>
+      </includes>
+    </fileSet>
+    <fileSet encoding="UTF-8" filtered="true">
+      <directory></directory>
+      <includes>
+        <include>.gitlab-ci.yml</include>
+        <include>README.md</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>

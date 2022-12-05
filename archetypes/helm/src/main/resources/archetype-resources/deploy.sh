@@ -2,120 +2,94 @@
 set -e
 set -o pipefail
 
-RELEASE=${1}
-CHART=${2}
+RELEASE=${1?"release required"}
+CHART=${2?"chart required"}
 VERSION=${3:-""}
-USERNAME=${4:-""}
-PASSWORD=${5:-""}
 
 CONTEXT="$(kubectl config current-context)"
 NAMESPACE="$(kubectl config view --minify --output 'jsonpath={..namespace}')"
 
 SOURCE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 
-OPTIONS=()
+ARGS=()
+
+if [[ ! -f ${CHART} ]] ; then
+
+  ARGS+=("--version")
+  ARGS+=("${VERSION:->=0.0.0-0}")
+
+fi
 
 pushd "${SOURCE_PATH}" >/dev/null || exit
 
 if [[ -f "${RELEASE%-*}.yaml" ]]; then
-  OPTIONS+=("--values")
-  OPTIONS+=("${RELEASE%-*}.yaml")
+  ARGS+=("--values")
+  ARGS+=("${RELEASE%-*}.yaml")
 fi
 if [[ -f "${RELEASE%-*}-secrets.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("secrets://${RELEASE%-*}-secrets.yaml")
+  ARGS+=("--values")
+  ARGS+=("secrets://${RELEASE%-*}-secrets.yaml")
 fi
 
 if [[ -f "${RELEASE}.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("${RELEASE}.yaml")
+  ARGS+=("--values")
+  ARGS+=("${RELEASE}.yaml")
 fi
 if [[ -f "${RELEASE}-secrets.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("secrets://${RELEASE}-secrets.yaml")
+  ARGS+=("--values")
+  ARGS+=("secrets://${RELEASE}-secrets.yaml")
 fi
 
 if [[ -f "${CONTEXT}/${RELEASE%-*}.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("${CONTEXT}/${RELEASE%-*}.yaml")
+  ARGS+=("--values")
+  ARGS+=("${CONTEXT}/${RELEASE%-*}.yaml")
 fi
 if [[ -f "${CONTEXT}/${RELEASE%-*}-secrets.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("secrets://${CONTEXT}/${RELEASE%-*}-secrets.yaml")
+  ARGS+=("--values")
+  ARGS+=("secrets://${CONTEXT}/${RELEASE%-*}-secrets.yaml")
 fi
 
 if [[ -f "${CONTEXT}/${RELEASE}.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("${CONTEXT}/${RELEASE}.yaml")
+  ARGS+=("--values")
+  ARGS+=("${CONTEXT}/${RELEASE}.yaml")
 fi
 if [[ -f "${CONTEXT}/${RELEASE}-secrets.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("secrets://${CONTEXT}/${RELEASE}-secrets.yaml")
+  ARGS+=("--values")
+  ARGS+=("secrets://${CONTEXT}/${RELEASE}-secrets.yaml")
 fi
 
 if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE%-*}.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("${CONTEXT}/${NAMESPACE}/${RELEASE%-*}.yaml")
+  ARGS+=("--values")
+  ARGS+=("${CONTEXT}/${NAMESPACE}/${RELEASE%-*}.yaml")
 fi
 if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE%-*}-secrets.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("secrets://${CONTEXT}/${NAMESPACE}/${RELEASE%-*}-secrets.yaml")
+  ARGS+=("--values")
+  ARGS+=("secrets://${CONTEXT}/${NAMESPACE}/${RELEASE%-*}-secrets.yaml")
 fi
 
 if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE}.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("${CONTEXT}/${NAMESPACE}/${RELEASE}.yaml")
+  ARGS+=("--values")
+  ARGS+=("${CONTEXT}/${NAMESPACE}/${RELEASE}.yaml")
 fi
 if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE}-secrets.yaml" ]] ; then
-  OPTIONS+=("--values")
-  OPTIONS+=("secrets://${CONTEXT}/${NAMESPACE}/${RELEASE}-secrets.yaml")
+  ARGS+=("--values")
+  ARGS+=("secrets://${CONTEXT}/${NAMESPACE}/${RELEASE}-secrets.yaml")
 fi
 
-[[ -n $USERNAME && -n $PASSWORD ]] && {
-	OPTIONS+=("--set")
-	OPTIONS+=("global.image.pullSecrets[0].name=registry")
-	OPTIONS+=("--set")
-	OPTIONS+=("image.pullSecrets[0].name=registry")
-	OPTIONS+=("--set")
-	OPTIONS+=("image.pullSecrets[0].server=${HELM_REGISTRY:-docker.edu-sharing.com}")
-	OPTIONS+=("--set")
-	OPTIONS+=("image.pullSecrets[0].username=${USERNAME}")
-	OPTIONS+=("--set")
-	OPTIONS+=("image.pullSecrets[0].password=${PASSWORD}")
-}
+if [[ -n "${HELM_TIMEOUT}" ]] ; then
+  ARGS+=("--timeout")
+  ARGS+=("${HELM_TIMEOUT}")
+fi
 
-file="../deploy/docker/helm/bundle/target/helm/repo/${CHART}-${VERSION}.tgz"
-
-if [[ -f $file ]]; then
-
-	set -x
-	helm $HELM_PLUGIN upgrade --install "${RELEASE}" \
-	  "${file}" \
-    "${OPTIONS[@]}" \
-    $HELM_OPTS
-	set +x
-
-else
-
-	CREDENTIALS=()
-	[[ -n $HELM_USER || -n $USERNAME ]] && {
-		CREDENTIALS+=("--username")
-		CREDENTIALS+=("${HELM_USER:-$USERNAME}")
-	}
-	[[ -n $HELM_PASS || -n $PASSWORD ]] && {
-		CREDENTIALS+=("--password")
-		CREDENTIALS+=("${HELM_PASS:-$PASSWORD}")
-	}
-
-	set -x
-	helm $HELM_PLUGIN upgrade --install "${RELEASE}" \
-		"${CHART}" --version "${VERSION}" \
-		--repo "${HELM_REPO:-https://artifacts.edu-sharing.com/repository/helm/}" \
-		"${CREDENTIALS[@]}" \
-		"${OPTIONS[@]}" \
-		$HELM_OPTS
-	set +x
-
+if [[ -n "${HELM_DEBUG}" ]] ; then
+  ARGS+=("--dry-run")
+  ARGS+=("--debug")
 fi
 
 popd >/dev/null || exit
+
+set -x
+helm ${HELM_PLUGIN} upgrade --install "${RELEASE}" \
+  "${CHART}" \
+  "${ARGS[@]}"
+set +x

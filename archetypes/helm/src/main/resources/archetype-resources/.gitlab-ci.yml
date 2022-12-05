@@ -1,0 +1,17 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+variables:
+  MAVEN_CLI: "-Ddocker.registry=$DOCKER_REGISTRY -Dhelm.deploy.url=$HELM_REGISTRY -Dhelm.deploy.type=$HELM_TYPE -Dmaven.deploy.releases=$MAVEN_DEPLOY_RELEASES -Dmaven.deploy.snapshots=$MAVEN_DEPLOY_SNAPSHOTS --batch-mode --errors --fail-fast --show-version -T 1C"
+  MAVEN_OPTS: "-Dmaven.repo.local=/builds/$CI_PROJECT_PATH/mnt/.m2/repository"
+
+default:
+  image: maven:3.8.4-jdk-8
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - mvn $MAVEN_CLI -s .mvn/settings.xml deploy

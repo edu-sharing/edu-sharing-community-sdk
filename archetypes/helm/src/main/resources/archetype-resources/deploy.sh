@@ -31,13 +31,15 @@ if [[ -f "${RELEASE%-*}-secrets.yaml" ]] ; then
   ARGS+=("secrets://${RELEASE%-*}-secrets.yaml")
 fi
 
-if [[ -f "${RELEASE}.yaml" ]] ; then
-  ARGS+=("--values")
-  ARGS+=("${RELEASE}.yaml")
-fi
-if [[ -f "${RELEASE}-secrets.yaml" ]] ; then
-  ARGS+=("--values")
-  ARGS+=("secrets://${RELEASE}-secrets.yaml")
+if [[ "${RELEASE%-*}" != "${RELEASE%}" ]] ; then
+  if [[ -f "${RELEASE}.yaml" ]] ; then
+    ARGS+=("--values")
+    ARGS+=("${RELEASE}.yaml")
+  fi
+  if [[ -f "${RELEASE}-secrets.yaml" ]] ; then
+    ARGS+=("--values")
+    ARGS+=("secrets://${RELEASE}-secrets.yaml")
+  fi
 fi
 
 if [[ -f "${CONTEXT}/${RELEASE%-*}.yaml" ]] ; then
@@ -49,13 +51,15 @@ if [[ -f "${CONTEXT}/${RELEASE%-*}-secrets.yaml" ]] ; then
   ARGS+=("secrets://${CONTEXT}/${RELEASE%-*}-secrets.yaml")
 fi
 
-if [[ -f "${CONTEXT}/${RELEASE}.yaml" ]] ; then
-  ARGS+=("--values")
-  ARGS+=("${CONTEXT}/${RELEASE}.yaml")
-fi
-if [[ -f "${CONTEXT}/${RELEASE}-secrets.yaml" ]] ; then
-  ARGS+=("--values")
-  ARGS+=("secrets://${CONTEXT}/${RELEASE}-secrets.yaml")
+if [[ "${CONTEXT}/${RELEASE%-*}" != "${CONTEXT}/${RELEASE}" ]] ; then
+  if [[ -f "${CONTEXT}/${RELEASE}.yaml" ]] ; then
+    ARGS+=("--values")
+    ARGS+=("${CONTEXT}/${RELEASE}.yaml")
+  fi
+  if [[ -f "${CONTEXT}/${RELEASE}-secrets.yaml" ]] ; then
+    ARGS+=("--values")
+    ARGS+=("secrets://${CONTEXT}/${RELEASE}-secrets.yaml")
+  fi
 fi
 
 if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE%-*}.yaml" ]] ; then
@@ -67,13 +71,15 @@ if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE%-*}-secrets.yaml" ]] ; then
   ARGS+=("secrets://${CONTEXT}/${NAMESPACE}/${RELEASE%-*}-secrets.yaml")
 fi
 
-if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE}.yaml" ]] ; then
-  ARGS+=("--values")
-  ARGS+=("${CONTEXT}/${NAMESPACE}/${RELEASE}.yaml")
-fi
-if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE}-secrets.yaml" ]] ; then
-  ARGS+=("--values")
-  ARGS+=("secrets://${CONTEXT}/${NAMESPACE}/${RELEASE}-secrets.yaml")
+if [[ "${CONTEXT}/${NAMESPACE}/${RELEASE%-*}" != "${CONTEXT}/${NAMESPACE}/${RELEASE}" ]] ; then
+  if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE}.yaml" ]] ; then
+    ARGS+=("--values")
+    ARGS+=("${CONTEXT}/${NAMESPACE}/${RELEASE}.yaml")
+  fi
+  if [[ -f "${CONTEXT}/${NAMESPACE}/${RELEASE}-secrets.yaml" ]] ; then
+    ARGS+=("--values")
+    ARGS+=("secrets://${CONTEXT}/${NAMESPACE}/${RELEASE}-secrets.yaml")
+  fi
 fi
 
 if [[ -n "${HELM_TIMEOUT}" ]] ; then

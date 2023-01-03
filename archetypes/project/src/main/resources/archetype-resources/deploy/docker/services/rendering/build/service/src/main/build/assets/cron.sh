@@ -17,4 +17,4 @@ cat "$cron_file"
 crontab -u appuser "$cron_file"
 
 echo "Starting cron..."
-cron -f
+exec cron -f

@@ -8,9 +8,15 @@ metadata:
 spec:
   hosts:
   - {{ include "edusharing_postgresql.name" . }}
+  http:
+  - route:
+    - destination:
+        host: {{ include "edusharing_postgresql.name" . }}
+      weight: 100
   tcp:
   - route:
     - destination:
         host: {{ include "edusharing_postgresql.name" . }}
+      weight: 100
 {{- end }}
 {{- end }}

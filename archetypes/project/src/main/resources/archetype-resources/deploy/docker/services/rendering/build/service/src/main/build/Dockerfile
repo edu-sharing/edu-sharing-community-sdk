@@ -5,6 +5,7 @@ FROM ${docker.from.apache.server}
 RUN set -eux \
 	&& apt-get update -y \
 	&& apt-get install -y --no-install-recommends \
+        cron \
         ca-certificates \
         curl \
         exiftool \
@@ -17,9 +18,11 @@ RUN set -eux \
         libxml2-dev \
         libzip-dev \
         mariadb-client \
+        nano \
         postgresql-client \
         redis-tools \
         wait-for-it \
+        wget \
         xmlstarlet \
         zip \
     && docker-php-ext-install -j$(nproc) soap \
@@ -58,7 +61,7 @@ WORKDIR $RS_ROOT
 COPY artifacts/edu_sharing-community-services-rendering-${org.edu_sharing:edu_sharing-community-services-rendering:tar.gz:bin.version}-bin.tar.gz /tmp/edu_sharing-community-services-rendering.tar.gz
 
 RUN set -eux \
-	&& tar -xzvf /tmp/edu_sharing-community-services-rendering.tar.gz --exclude './vendor/lib/converter' \
+	&& tar -xzf /tmp/edu_sharing-community-services-rendering.tar.gz --exclude './vendor/lib/converter' \
 	&& rm -rf /tmp/edu_sharing-community-services-rendering.tar.gz
 
 COPY assets/apache2/ports.conf /etc/apache2/ports.conf
@@ -70,13 +73,11 @@ RUN set -eux \
 	&& a2ensite internal \
     && a2ensite metrics
 
-COPY assets/rendering/de.metaventis.esrender.log4php.properties conf/
-COPY assets/rendering/de.metaventis.esrender.log4php.cachecleaner.properties conf/
-
 ########################################################################################################################
 
 COPY assets/entrypoint.sh /usr/local/bin/
 COPY assets/init.sh /usr/local/bin/
+COPY assets/cron.sh /usr/local/bin/
 
 RUN set -eux \
 	&& find /usr/local/bin -type f -name '*.sh' -exec chmod +x {} \;
@@ -92,6 +93,9 @@ RUN set -eux \
     && mkdir -p $RS_CACHE/config \
     && mkdir -p $RS_CACHE/data \
 	&& chown -R appuser:appuser /etc/apache2 $RS_ROOT $RS_CACHE $PHP_INI_DIR
+
+RUN set -eux \
+    && chmod u+s /usr/sbin/cron
 
 USER appuser
 

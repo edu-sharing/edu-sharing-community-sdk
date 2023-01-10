@@ -2,19 +2,25 @@ FROM ${docker.from.tomcat}
 
 ########################################################################################################################
 
+USER root
+
 RUN set -eux \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
+        curl \
         exiftool \
 	    ffmpeg \
 	    ghostscript \
 	    gsfonts \
 	    imagemagick \
 	    jq \
+	    nano \
         postgresql-client \
 	    redis-tools \
         ruby-hocon \
+        unzip \
         wait-for-it \
+        wget \
         xmlstarlet \
         vim \
     && apt-get clean \
@@ -28,7 +34,7 @@ ENV PATH $ALF_HOME/bin:$PATH
 WORKDIR $ALF_HOME
 
 RUN set -eux \
-    && ln -sf /usr/local/tomcat tomcat
+    && ln -sf /opt/bitnami/tomcat tomcat
 
 COPY assets/entrypoint.sh assets/reinstall.sh assets/libcheck.sh bin/
 
@@ -157,17 +163,31 @@ COPY --chown=worker:worker config tomcat/shared/lib/
 
 COPY --chown=worker:worker assets/plugins bin/plugins/
 
+RUN set -eux \
+	&& find bin -type f -name '*.sh' -exec chmod +x {} \;
+
 ########################################################################################################################
+
+RUN set -eux \
+    && mkdir profiler \
+    && wget -qO- https://github.com/Granulate/async-profiler/releases/download/v2.0g1/async-profiler-2.0-linux-x64.tar.gz | tar xvz -C profiler \
+    && chown -RL worker:worker profiler
+
+COPY --chown=worker:worker assets/profiler profiler/
+
+########################################################################################################################
+
+USER worker
 
 STOPSIGNAL SIGWINCH
 
-EXPOSE 8080 8081
+EXPOSE 8009 8080 8081
 
 #ENTRYPOINT ["libcheck.sh"]
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["catalina.sh", "run"]
 
-VOLUME [ "/opt/alfresco/alf_data", "/usr/local/tomcat/shared/classes/config/cluster", "/usr/local/tomcat/shared/classes/config/node" ]
+VOLUME [ "/opt/alfresco/alf_data", "/opt/bitnami/tomcat/shared/classes/config/cluster", "/opt/bitnami/tomcat/shared/classes/config/node" ]
 
 ########################################################################################################################
 

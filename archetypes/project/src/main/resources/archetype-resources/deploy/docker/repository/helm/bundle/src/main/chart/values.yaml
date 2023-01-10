@@ -13,13 +13,21 @@ global:
 
 nameOverride: edusharing-repository
 
-image:
-  registry: ${docker.registry}
-  repository: ${docker.repository}
-  tag: ${docker.tag}
-
 ########################################################################################################################
 # DEPENDENCY
+########################################################################################################################
+
+edusharing_repository_antivirus:
+
+  enabled: ${helm.edusharing_repository_antivirus.enabled}
+
+  nameOverride: &antivirusNameOverride edusharing-repository-antivirus
+
+  service:
+
+    port:
+      api: &antivirusServicePortApi 1344
+
 ########################################################################################################################
 
 edusharing_repository_postgresql:
@@ -37,7 +45,6 @@ edusharing_repository_postgresql:
 
     database: &postgresqlConfigDatabase repository
     username: &postgresqlConfigUsername repository
-    password: &postgresqlConfigPassword repository
 
 ########################################################################################################################
 
@@ -45,12 +52,30 @@ edusharing_repository_rediscluster:
 
   enabled: true
 
-  nameOverride: &redisclusterNameOverride edusharing-rediscluster
+  nameOverride: &redisclusterNameOverride edusharing-repository-rediscluster
 
   service:
 
     port:
       api: &redisclusterServicePortApi 6379
+
+########################################################################################################################
+
+edusharing_repository_mongo:
+
+  enabled: ${helm.edusharing_repository_mongo.enabled}
+
+  nameOverride: &mongoNameOverride edusharing-repository-mongo
+
+  service:
+
+    port:
+      api: &mongoServicePortApi 27017
+
+  config:
+
+    database: &mongoConfigDatabase repository
+    username: &mongoConfigUsername repository
 
 ########################################################################################################################
 
@@ -111,6 +136,11 @@ edusharing_repository_service:
 
   config:
 
+    antivirus:
+      enabled: ${helm.edusharing_repository_antivirus.enabled}
+      host: *antivirusNameOverride
+      port: *antivirusServicePortApi
+
     cache:
       host: *redisclusterNameOverride
       port: *redisclusterServicePortApi
@@ -120,7 +150,13 @@ edusharing_repository_service:
       port: *postgresqlServicePortApi
       database: *postgresqlConfigDatabase
       username: *postgresqlConfigUsername
-      password: *postgresqlConfigPassword
+
+    mongo:
+      enabled: ${helm.edusharing_repository_mongo.enabled}
+      host: *mongoNameOverride
+      port: *mongoServicePortApi
+      database: *mongoConfigDatabase
+      username: *mongoConfigUsername
 
     search:
 

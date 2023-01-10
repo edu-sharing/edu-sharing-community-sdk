@@ -18,6 +18,9 @@
     <requiredProperty key="project">
       <defaultValue>community</defaultValue>
     </requiredProperty>
+    <requiredProperty key="REPOSITORY_ANTIVIRUS_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
     <requiredProperty key="REPOSITORY_CLUSTER_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
@@ -45,11 +48,14 @@
       <directory>.mvn</directory>
     </fileSet>
     <fileSet encoding="UTF-8">
+      <directory>scripts</directory>
+    </fileSet>
+    <fileSet encoding="UTF-8">
       <directory></directory>
       <includes>
         <include>__gitattributes__</include>
         <include>__gitignore__</include>
-        <include>LICENSE</include>
+        <include>LICENSE.txt</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8" filtered="true">
@@ -108,6 +114,18 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module dir="mailcatcher"
+                        id="${rootArtifactId}-deploy-docker-build-mailcatcher"
+                        name="${rootArtifactId}-deploy-docker-build-mailcatcher">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module dir="minideb"
                         id="${rootArtifactId}-deploy-docker-build-minideb"
                         name="${rootArtifactId}-deploy-docker-build-minideb">
@@ -135,18 +153,6 @@
                 <module dir="postgresql_exporter"
                         id="${rootArtifactId}-deploy-docker-build-postgresql_exporter"
                         name="${rootArtifactId}-deploy-docker-build-postgresql_exporter">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-                <module dir="profiler"
-                        id="${rootArtifactId}-deploy-docker-build-profiler"
-                        name="${rootArtifactId}-deploy-docker-build-profiler">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>
@@ -363,13 +369,13 @@
                         <include>**/*</include>
                       </includes>
                       <excludes>
-                        <exclude>main/compose/repository-dev.yml</exclude>
+                        <exclude>main/compose/1_repository-dev.yml</exclude>
                       </excludes>
                     </fileSet>
                     <fileSet encoding="UTF-8" filtered="true">
                       <directory>src</directory>
                       <includes>
-                        <include>main/compose/repository-dev.yml</include>
+                        <include>main/compose/1_repository-dev.yml</include>
                       </includes>
                     </fileSet>
                   </fileSets>
@@ -493,7 +499,7 @@
             </module>
           </modules>
         </module>
-        <module dir="installer"
+        <!--<module dir="installer"
                 id="${rootArtifactId}-deploy-installer"
                 name="${rootArtifactId}-deploy-installer">
           <fileSets>
@@ -687,7 +693,7 @@
               </modules>
             </module>
           </modules>
-        </module>
+        </module>-->
       </modules>
     </module>
     <module dir="repository"

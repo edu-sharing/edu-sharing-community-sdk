@@ -1,4 +1,5 @@
 #!/bin/bash
+[[ -n $DEBUG ]] && set -x
 set -eu
 
 ########################################################################################################################
@@ -6,22 +7,10 @@ whitelist=(
   # swagger gen vs swagger usage conflict -> new api
   "swagger-annotations-1.6.6.jar:alf-lib"  # diff groupId
   "swagger-annotations-2.1.11.jar:alf-lib" # diff groupId
-
-  # swagger gen vs swagger usage conflict -> new api
-  "swagger-core-1.6.6.jar:alf-lib"  # diff groupId
-  "swagger-core-2.1.11.jar:alf-lib" # diff groupId
-
-  # swagger gen vs swagger usage conflict -> new api
-  "swagger-models-1.6.6.jar:alf-lib"  # diff groupId
-  "swagger-models-2.1.11.jar:alf-lib" # diff groupId
-
-  # 2.1.0 refers 1.0.56
-  # swagger gen vs swagger usage conflict -> new api
-  "swagger-parser-1.0.56.jar:alf-lib" # diff groupId
-  "swagger-parser-2.1.0.jar:alf-lib"  # diff groupId
-
-  "dom4j-2.1.3.jar:alf-lib" # diff groupId
-  "dom4j-1.6.1.jar:alf-lib" # diff groupId
+  "wss4j-1.6.19.jar:alf-lib" # axis-1.4
+  "wss4j-1.5.12.jar:edu-lib" # axis-1.4
+  "xmlsec-1.5.8.jar:alf-lib" # axis-1.4
+  "xmlsec-1.4.5.jar:edu-lib" # axis-1.4
 )
 
 files=()

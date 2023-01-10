@@ -12,5 +12,6 @@ spec:
   - route:
     - destination:
         host: {{ include "edusharing_repository_search_solr6.name" . }}
+      weight: 100
 {{- end }}
 {{- end }}

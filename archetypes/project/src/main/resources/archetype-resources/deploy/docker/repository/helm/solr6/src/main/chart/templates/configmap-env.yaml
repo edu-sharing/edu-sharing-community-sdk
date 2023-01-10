@@ -4,6 +4,7 @@ metadata:
   name: {{ include "edusharing_repository_search_solr6.name" . }}-env
   labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
 data:
+  ALLOW_EMPTY_PASSWORD: "yes"
   CATALINA_OPTS: >-
     {{- with .Values.config.jvm.ram.minPercentage }}
     -XX:InitialRAMPercentage={{ . }}
@@ -24,3 +25,4 @@ data:
   REPOSITORY_SEARCH_SOLR6_PORT: {{ .Values.service.port.api | quote }}
   REPOSITORY_SERVICE_HOST: {{ .Values.config.repository.host | quote }}
   REPOSITORY_SERVICE_PORT: {{ .Values.config.repository.port | quote }}
+  TOMCAT_INSTALL_DEFAULT_WEBAPPS: "no"

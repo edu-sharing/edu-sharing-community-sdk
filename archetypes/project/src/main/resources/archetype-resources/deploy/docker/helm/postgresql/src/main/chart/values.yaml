@@ -21,6 +21,8 @@ global:
   image:
     pullPolicy: Always
     pullSecrets: []
+    registry: ${docker.registry}
+    repository: ${docker.repository}
 
   metrics:
     scrape:
@@ -39,6 +41,8 @@ global:
       strict: true
     team: edusharing
 
+  password: ""
+
 ########################################################################################################################
 # LOCAL
 ########################################################################################################################
@@ -46,8 +50,6 @@ global:
 nameOverride: *nameOverride
 
 image:
-  registry: ${docker.registry}
-  repository: ${docker.repository}
   prefix: ${docker.prefix}
   tag: ${docker.tag}
 
@@ -65,7 +67,7 @@ config:
 
   database: postgresql
   username: postgresql
-  password: postgresql
+  password: ""
 
   extra:
     max_connections: "300"
@@ -95,6 +97,7 @@ podSecurityContext:
 
   runAsUser: 1001
   fsGroup: 1001
+  fsGroupChangePolicy: OnRootMismatch
 
 securityContext:
 

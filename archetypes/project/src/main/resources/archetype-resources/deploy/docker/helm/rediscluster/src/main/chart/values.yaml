@@ -18,9 +18,14 @@ global:
         permission: false
         spec: {}
 
+    sysctl:
+      enabled: false
+
   image:
     pullPolicy: Always
     pullSecrets: []
+    registry: ${docker.registry}
+    repository: ${docker.repository}
 
   metrics:
     scrape:
@@ -36,8 +41,6 @@ global:
 nameOverride: edusharing-rediscluster
 
 image:
-  registry: ${docker.registry}
-  repository: ${docker.repository}
   prefix: ${docker.prefix}
   tag: ${docker.tag}
 
@@ -54,12 +57,16 @@ service:
 
 config:
 
+  aof:
+    enabled: true
+
   cluster:
     master: 3
     replicas: 1
     wait: 30
 
   extra: {}
+#   save: ""
 
 ########################################################################################################################
 
@@ -87,9 +94,7 @@ podSecurityContext:
 
   runAsUser: 1001
   fsGroup: 1001
-#  sysctls:
-#  - name: net.core.somaxconn
-#    value: "10000"
+  fsGroupChangePolicy: OnRootMismatch
 
 securityContext:
 
@@ -153,6 +158,22 @@ init:
 
     securityContext:
 
+      runAsUser: 0
+
+  sysctl:
+
+    resources:
+
+      limits:
+        cpu: 125m
+        memory: 512Mi
+      requests:
+        cpu: 125m
+        memory: 512Mi
+
+    securityContext:
+
+      privileged: true
       runAsUser: 0
 
 ########################################################################################################################

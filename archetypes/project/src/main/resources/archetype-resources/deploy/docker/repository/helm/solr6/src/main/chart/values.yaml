@@ -18,9 +18,13 @@ global:
         permission: false
         spec: {}
 
+  debug: false
+
   image:
     pullPolicy: Always
     pullSecrets: []
+    registry: ${docker.registry}
+    repository: ${docker.repository}
 
   metrics:
     scrape:
@@ -36,8 +40,6 @@ global:
 nameOverride: edusharing-repository-search-solr6
 
 image:
-  registry: ${docker.registry}
-  repository: ${docker.repository}
   prefix: ${docker.prefix}
   tag: ${docker.tag}
 
@@ -64,16 +66,24 @@ service:
 config:
 
   jvm:
-    debug: false
     ram:
       minPercentage: "75.0"
       maxPercentage: "75.0"
 
   metrics: true
 
+  override:
+    logging:
+      application: ""
+      server: ""
+
   repository:
     host: edusharing-repository-service
     port: 8080
+
+########################################################################################################################
+
+debug: false
 
 ########################################################################################################################
 
@@ -102,6 +112,7 @@ podSecurityContext:
 
   runAsUser: 1000
   fsGroup: 1000
+  fsGroupChangePolicy: OnRootMismatch
 
 securityContext:
 

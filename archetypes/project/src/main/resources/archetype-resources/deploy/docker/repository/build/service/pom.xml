@@ -102,22 +102,21 @@
           </execution>
 
           <execution>
-            <id>alfresco</id>
+            <id>alfresco-1</id>
             <goals>
               <goal>copy-dependencies</goal>
             </goals>
             <phase>package</phase>
             <configuration>
               <includeArtifactIds>
-                edu_sharing-community-repository-backend-alfresco-module,
-                ${rootArtifactId}-repository-backend-alfresco-module
+                edu_sharing-community-repository-backend-alfresco-module
               </includeArtifactIds>
-              <outputDirectory>${project.build.directory}/build/amps/alfresco/0</outputDirectory>
+              <outputDirectory>${project.build.directory}/build/amps/alfresco/1</outputDirectory>
             </configuration>
           </execution>
 
           <execution>
-            <id>plugin-alfresco</id>
+            <id>alfresco-2</id>
             <goals>
               <goal>copy-dependencies</goal>
             </goals>
@@ -126,16 +125,31 @@
               <includeArtifactIds>
                 edu_sharing-community-repository-plugin-elastic-backend-alfresco-module,
                 edu_sharing-community-repository-plugin-mongo-backend-alfresco-module,
+                edu_sharing-enterprise-repository-plugin-antivirus-backend-alfresco-module,
                 edu_sharing-enterprise-repository-plugin-cluster-backend-alfresco-module,
                 edu_sharing-enterprise-repository-plugin-remote-backend-alfresco-module,
                 edu_sharing-enterprise-repository-plugin-transform-backend-alfresco-module
               </includeArtifactIds>
-              <outputDirectory>${project.build.directory}/build/amps/alfresco/1</outputDirectory>
+              <outputDirectory>${project.build.directory}/build/amps/alfresco/2</outputDirectory>
             </configuration>
           </execution>
 
           <execution>
-            <id>plugin-edusharing</id>
+            <id>alfresco-3</id>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <includeArtifactIds>
+                ${rootArtifactId}-repository-backend-alfresco-module
+              </includeArtifactIds>
+              <outputDirectory>${project.build.directory}/build/amps/alfresco/3</outputDirectory>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>edusharing-1</id>
             <goals>
               <goal>copy-dependencies</goal>
             </goals>
@@ -144,6 +158,7 @@
               <includeArtifactIds>
                 edu_sharing-community-repository-plugin-elastic-backend-services-module,
                 edu_sharing-community-repository-plugin-mongo-backend-services-module,
+                edu_sharing-enterprise-repository-plugin-antivirus-backend-services-module,
                 edu_sharing-enterprise-repository-plugin-cluster-backend-services-module,
                 edu_sharing-enterprise-repository-plugin-remote-backend-services-module,
                 edu_sharing-enterprise-repository-plugin-transform-backend-services-module
@@ -162,6 +177,7 @@
               <includeArtifactIds>
                 edu_sharing-community-repository-plugin-elastic-config-defaults,
                 edu_sharing-community-repository-plugin-mongo-config-defaults,
+                edu_sharing-enterprise-repository-plugin-antivirus-config-defaults,
                 edu_sharing-enterprise-repository-plugin-cluster-config-defaults,
                 edu_sharing-enterprise-repository-plugin-remote-config-defaults,
                 edu_sharing-enterprise-repository-plugin-transform-config-defaults
@@ -180,6 +196,7 @@
               <includeArtifactIds>
                 edu_sharing-community-repository-plugin-elastic-deploy-docker-build-service,
                 edu_sharing-community-repository-plugin-mongo-deploy-docker-build-service,
+                edu_sharing-enterprise-repository-plugin-antivirus-deploy-docker-build-service,
                 edu_sharing-enterprise-repository-plugin-cluster-deploy-docker-build-service,
                 edu_sharing-enterprise-repository-plugin-transform-deploy-docker-build-service
               </includeArtifactIds>
@@ -338,6 +355,47 @@
   </dependencies>
 
   <profiles>
+
+    <profile>
+
+      <id>repository.antivirus</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_ANTIVIRUS_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-antivirus-backend-alfresco-module</artifactId>
+          <type>amp</type>
+        </dependency>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-antivirus-backend-services-module</artifactId>
+          <type>amp</type>
+        </dependency>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-antivirus-config-defaults</artifactId>
+        </dependency>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-antivirus-deploy-docker-build-service</artifactId>
+          <classifier>sources</classifier>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
 
     <profile>
 

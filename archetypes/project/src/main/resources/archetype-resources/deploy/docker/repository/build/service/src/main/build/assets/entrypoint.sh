@@ -1,4 +1,5 @@
 #!/bin/bash
+[[ -n $DEBUG ]] && set -x
 set -eu
 
 ########################################################################################################################
@@ -13,7 +14,13 @@ my_bind="${REPOSITORY_SERVICE_BIND:-"0.0.0.0"}"
 
 my_home_appid="${REPOSITORY_SERVICE_HOME_APPID:-local}"
 my_home_auth="${REPOSITORY_SERVICE_HOME_AUTH:-}"
+my_home_auth_external="${REPOSITORY_SERVICE_HOME_AUTH_EXTERNAL:-false}"
+my_home_auth_external_logout="${REPOSITORY_SERVICE_HOME_AUTH_EXTERNAL_LOGOUT:-/logout}"
 my_home_provider="${REPOSITORY_SERVICE_HOME_PROVIDER:-}"
+my_allow_origin="${REPOSITORY_SERVICE_ALLOW_ORIGIN:-}"
+if [[ ! -z "$my_allow_origin" ]]; then
+  my_allow_origin=",${my_allow_origin}"
+fi
 
 my_prot_external="${REPOSITORY_SERVICE_PROT_EXTERNAL:-http}"
 my_host_external="${REPOSITORY_SERVICE_HOST_EXTERNAL:-repository.127.0.0.1.nip.io}"
@@ -23,11 +30,22 @@ my_base_external="${my_prot_external}://${my_host_external}:${my_port_external}$
 my_auth_external="${my_base_external}/services/authentication"
 my_pool_external="${REPOSITORY_SERVICE_POOL_EXTERNAL:-200}"
 my_wait_external="${REPOSITORY_SERVICE_WAIT_EXTERNAL:--1}"
+my_proxy_buffer_size="${REPOSITORY_SERVICE_PROXY_BUFFER_SIZE:-65536}"
 
 my_host_internal="${REPOSITORY_SERVICE_HOST_INTERNAL:-repository-service}"
 my_port_internal="${REPOSITORY_SERVICE_PORT_INTERNAL:-8080}"
 my_pool_internal="${REPOSITORY_SERVICE_POOL_INTERNAL:-200}"
 my_wait_internal="${REPOSITORY_SERVICE_WAIT_INTERNAL:--1}"
+
+my_mail_from="${REPOSITORY_SERVICE_MAIL_FROM:-}"
+my_mail_addreplyto="${REPOSITORY_SERVICE_MAIL_ADDREPLYTO:-}"
+my_mail_register_receiver="${REPOSITORY_SERVICE_MAIL_REGISTER_RECEIVER:-}"
+my_mail_report_receiver="${REPOSITORY_SERVICE_MAIL_REPORT_RECEIVER:-}"
+my_mail_server_smtp_host="${REPOSITORY_SERVICE_MAIL_SERVER_SMTP_HOST:-}"
+my_mail_server_smtp_port="${REPOSITORY_SERVICE_MAIL_SERVER_SMTP_PORT:-}"
+my_mail_server_smtp_username="${REPOSITORY_SERVICE_MAIL_SERVER_SMTP_USERNAME:-}"
+my_mail_server_smtp_password="${REPOSITORY_SERVICE_MAIL_SERVER_SMTP_PASSWORD:-}"
+my_mail_server_smtp_authtype="${REPOSITORY_SERVICE_MAIL_SERVER_SMTP_AUTHTYPE:-}"
 
 my_http_client_disablesni4hosts="${REPOSITORY_SERVICE_HTTP_CLIENT_DISABLE_SNI4HOSTS:-}"
 my_http_client_proxy_host="${REPOSITORY_SERVICE_HTTP_CLIENT_PROXY_HOST:-}"
@@ -46,6 +64,7 @@ my_http_server_csp_script="${REPOSITORY_SERVICE_HTTP_SERVER_CSP_SCRIPT:-}"
 my_http_server_session_timeout="${REPOSITORY_SERVICE_HTTP_SERVER_SESSION_TIMEOUT:-60}"
 
 my_http_accesslog_enabled="${REPOSITORY_SERVICE_HTTP_ACCESSLOG_ENABLED:-}"
+my_http_jvmroute="${REPOSITORY_SERVICE_HTTP_JVMROUTE:-}"
 
 cache_cluster="${CACHE_CLUSTER:-false}"
 cache_database="${CACHE_DATABASE:-0}"
@@ -117,21 +136,20 @@ configs=(defaults plugins cluster node)
 for config in "${configs[@]}"; do
 	if [[ ! -f tomcat/shared/classes/config/$config/version.json ]]; then
 		mkdir -p tomcat/shared/classes/config/$config
-		for jar in tomcat/shared/lib/$config/*.jar; do
+		for jar in tomcat/shared/assets/$config/*.jar; do
 		  if [[ -f $jar ]] ; then
         unzip -o $jar -d tomcat/shared/classes/config/$config -x 'META-INF/*'
 			fi
 		done
-		cp -f tomcat/webapps/edu-sharing/version.json tomcat/shared/classes/config/$config
+    cp tomcat/webapps/edu-sharing/WEB-INF/classes/version.json tomcat/shared/classes/config/$config/version.json
+    cp tomcat/shared/classes/config/$config/version.json tomcat/shared/classes/config/$config/version.json.$(date +%d-%m-%Y_%H-%M-%S )
 	else
-		cmp -s tomcat/webapps/edu-sharing/version.json tomcat/shared/classes/config/$config/version.json || {
-			mv tomcat/shared/classes/config/$config/version.json tomcat/shared/classes/config/$config/version.json.$(date +%d-%m-%Y_%H-%M-%S )
-			cp tomcat/webapps/edu-sharing/version.json tomcat/shared/classes/config/$config/version.json
+		cmp -s tomcat/webapps/edu-sharing/WEB-INF/classes/version.json tomcat/shared/classes/config/$config/version.json || {
+			cp tomcat/webapps/edu-sharing/WEB-INF/classes/version.json tomcat/shared/classes/config/$config/version.json
+			cp tomcat/shared/classes/config/$config/version.json tomcat/shared/classes/config/$config/version.json.$(date +%d-%m-%Y_%H-%M-%S )
 		}
 	fi
 done
-
-rm -rf tomcat/shared/lib/*
 
 reinstall.sh
 
@@ -156,6 +174,12 @@ xmlstarlet ed -L \
 	-d '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]/Valve[@className="org.apache.catalina.valves.AccessLogValve"]' \
 	${catSConf}
 
+[[ -n $my_http_jvmroute ]] && {
+	xmlstarlet ed -L \
+		-i '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]]' -t attr -n 'jvmRoute' -v "${my_http_jvmroute}" \
+		${catSConf}
+}
+
 [[ -n $my_http_accesslog_enabled ]] && {
 	xmlstarlet ed -L \
 		-s '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]' -t elem -n 'Valve' -v '' \
@@ -178,15 +202,30 @@ xmlstarlet ed -L \
 	-i '$internal' -t attr -n "connectionTimeout" -v "${my_wait_internal}" \
 	-i '$internal' -t attr -n "maxThreads" -v "${my_pool_internal}" \
 	-s '/Server/Service[@name="Catalina"]' -t elem -n 'Connector' -v '' \
-	--var external '$prev' \
-	-i '$external' -t attr -n "address" -v "${my_bind}" \
-	-i '$external' -t attr -n "port" -v "8081" \
-	-i '$external' -t attr -n "scheme" -v "${my_prot_external}" \
-	-i '$external' -t attr -n "proxyName" -v "${my_host_external}" \
-	-i '$external' -t attr -n "proxyPort" -v "${my_port_external}" \
-	-i '$external' -t attr -n "protocol" -v "org.apache.coyote.http11.Http11NioProtocol" \
-	-i '$external' -t attr -n "connectionTimeout" -v "${my_wait_external}" \
-	-i '$external' -t attr -n "maxThreads" -v "${my_pool_external}" \
+	--var external1 '$prev' \
+	-i '$external1' -t attr -n "address" -v "${my_bind}" \
+	-i '$external1' -t attr -n "port" -v "8081" \
+	-i '$external1' -t attr -n "scheme" -v "${my_prot_external}" \
+	-i '$external1' -t attr -n "proxyName" -v "${my_host_external}" \
+	-i '$external1' -t attr -n "proxyPort" -v "${my_port_external}" \
+	-i '$external1' -t attr -n "protocol" -v "org.apache.coyote.http11.Http11NioProtocol" \
+	-i '$external1' -t attr -n "connectionTimeout" -v "${my_wait_external}" \
+	-i '$external1' -t attr -n "maxThreads" -v "${my_pool_external}" \
+	-s '/Server/Service[@name="Catalina"]' -t elem -n 'Connector' -v '' \
+	--var external2 '$prev' \
+	-i '$external2' -t attr -n "address" -v "${my_bind}" \
+	-i '$external2' -t attr -n "port" -v "8009" \
+	-i '$external2' -t attr -n "scheme" -v "${my_prot_external}" \
+	-i '$external2' -t attr -n "proxyName" -v "${my_host_external}" \
+	-i '$external2' -t attr -n "proxyPort" -v "${my_port_external}" \
+	-i '$external2' -t attr -n "protocol" -v "org.apache.coyote.ajp.AjpNioProtocol" \
+	-i '$external2' -t attr -n "URIEncoding" -v "UTF-8" \
+	-i '$external2' -t attr -n "connectionTimeout" -v "${my_wait_external}" \
+	-i '$external2' -t attr -n "maxThreads" -v "${my_pool_external}" \
+	-i '$external2' -t attr -n "secretRequired" -v "false" \
+	-i '$external2' -t attr -n "tomcatAuthentication" -v "false" \
+	-i '$external2' -t attr -n "allowedRequestAttributesPattern" -v ".*" \
+	-i '$external2' -t attr -n "packetSize" -v "${my_proxy_buffer_size}" \
 	${catSConf}
 
 [[ -n "${cache_host}" && -n "${cache_port}" ]] && {
@@ -196,10 +235,10 @@ xmlstarlet ed -L \
 		--var redis '$prev' \
 		-i '$redis' -t attr -n "className" -v "org.redisson.tomcat.RedissonSessionManager" \
 		-i '$redis' -t attr -n "configPath" -v "tomcat/conf/redisson.yaml" \
-		-i '$redis' -t attr -n "readMode" -v "MEMORY" \
-		-i '$redis' -t attr -n "updateMode" -v "AFTER_REQUEST" \
-		-i '$redis' -t attr -n "broadcastSessionEvents" -v "true" \
-		-i '$redis' -t attr -n "broadcastSessionUpdates" -v "true" \
+		-i '$redis' -t attr -n "readMode" -v "REDIS" \
+		-i '$redis' -t attr -n "updateMode" -v "DEFAULT" \
+		-i '$redis' -t attr -n "broadcastSessionEvents" -v "false" \
+		-i '$redis' -t attr -n "broadcastSessionUpdates" -v "false" \
 		${catCConf}
 
 		if [[ "${cache_cluster}" == "true" ]] ; then
@@ -347,36 +386,59 @@ xmlstarlet ed -L \
 	-u '/properties/entry[@key="host"]' -v "${my_host_internal}" \
 	-u '/properties/entry[@key="password"]' -v "${my_admin_pass}" \
 	-u '/properties/entry[@key="port"]' -v "${my_port_internal}" \
-	-u '/properties/entry[@key="allow_origin"]' -v "${my_origin},http://localhost:54361" \
+	-u '/properties/entry[@key="allow_origin"]' -v "${my_origin},http://localhost:54361${my_allow_origin}" \
 	${homeProp}
+
+xmlstarlet ed -L \
+  -d '/properties/entry[@key="guest_username"]' \
+  ${homeProp}
 
 [[ -n "${my_guest_user}" ]] && {
 	xmlstarlet ed -L \
-		-d '/properties/entry[@key="guest_username"]' \
 		-s '/properties' -t elem -n "entry" -v "${my_guest_user}" \
 		--var entry '$prev' \
 		-i '$entry' -t attr -n "key" -v "guest_username" \
 		${homeProp}
 }
 
+xmlstarlet ed -L \
+  -d '/properties/entry[@key="guest_password"]' \
+  ${homeProp}
+
 [[ -n "${my_guest_pass}" ]] && {
 	xmlstarlet ed -L \
-		-d '/properties/entry[@key="guest_password"]' \
 		-s '/properties' -t elem -n "entry" -v "${my_guest_pass}" \
 		--var entry '$prev' \
 		-i '$entry' -t attr -n "key" -v "guest_password" \
 		${homeProp}
 }
 
+xmlstarlet ed -L \
+  -d '/properties/entry[@key="allowed_authentication_types"]' \
+  ${homeProp}
+
 [[ -n "${my_home_auth}" ]] && {
 	xmlstarlet ed -L \
-		-d '/properties/entry[@key="allowed_authentication_types"]' \
 		-s '/properties' -t elem -n "entry" -v "${my_home_auth}" \
 		--var entry '$prev' \
 		-i '$entry' -t attr -n "key" -v "allowed_authentication_types" \
 		${homeProp}
 
-	[[ "${my_home_auth}" == "shibboleth" ]] && {
+	if [[ "${my_home_auth_external}" == "true" ]] ; then
+    xmlstarlet ed -L \
+      -s '/config/values' -t elem -n 'loginUrl' -v '' \
+      -d '/config/values/loginUrl[position() != 1]' \
+			-u '/config/values/loginUrl' -v "${my_path_external}/shibboleth" \
+      -s '/config/values' -t elem -n 'logout' -v '' \
+      -d '/config/values/logout[position() != 1]' \
+      -s '/config/values/logout' -t elem -n 'url' -v '' \
+      -d '/config/values/logout/url[position() != 1]' \
+      -u '/config/values/logout/url' -v "${my_home_auth_external_logout}" \
+      -s '/config/values/logout' -t elem -n 'destroySession' -v '' \
+      -d '/config/values/logout/destroySession[position() != 1]' \
+      -u '/config/values/logout/destroySession' -v 'false' \
+      ${eduCConf}
+  else
 		sed -i -r 's|<!--\s*SAML||g' tomcat/webapps/edu-sharing/WEB-INF/web.xml
 		sed -i -r 's|SAML\s*-->||g'  tomcat/webapps/edu-sharing/WEB-INF/web.xml
 		xmlstarlet ed -L \
@@ -392,86 +454,191 @@ xmlstarlet ed -L \
 			-d '/config/values/logout/destroySession[position() != 1]' \
 			-u '/config/values/logout/destroySession' -v 'false' \
 			${eduCConf}
-	}
+	fi
 }
+
+xmlstarlet ed -L \
+  -d '/properties/entry[@key="remote_provider"]' \
+  ${homeProp}
 
 [[ -n "${my_home_provider}" ]] && {
 	xmlstarlet ed -L \
-		-d '/properties/entry[@key="remote_provider"]' \
 		-s '/properties' -t elem -n "entry" -v "${my_home_provider}" \
 		--var entry '$prev' \
 		-i '$entry' -t attr -n "key" -v "remote_provider" \
 		${homeProp}
 }
 
-[[ -n "${my_http_client_disablesni4hosts}" ]] && {
-	hocon -f ${eduSConf} \
-		set "repository.httpclient.disableSNI4Hosts" '"'"${my_http_client_disablesni4hosts}"'"'
+[[ $(hocon -f ${eduSConf} get "repository.mail.from" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.from"
+}
+[[ -n "${my_mail_from}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.from" '"'"${my_mail_from}"'"'
 }
 
+[[ $(hocon -f ${eduSConf} get "repository.mail.addReplyTo" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.addReplyTo"
+}
+[[ -n "${my_mail_addreplyto}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.addReplyTo" '"'"${my_mail_addreplyto}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.mail.register.receiver" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.register.receiver"
+}
+[[ -n "${my_mail_register_receiver}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.register.receiver" '"'"${my_mail_register_receiver}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.mail.report.receiver" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.report.receiver"
+}
+[[ -n "${my_mail_report_receiver}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.report.receiver" '"'"${my_mail_report_receiver}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.mail.server.smtp.host" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.server.smtp.host"
+}
+[[ -n "${my_mail_server_smtp_host}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.server.smtp.host" '"'"${my_mail_server_smtp_host}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.mail.server.smtp.port" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.server.smtp.port"
+}
+[[ -n "${my_mail_server_smtp_port}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.server.smtp.port" '"'"${my_mail_server_smtp_port}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.mail.server.smtp.username" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.server.smtp.username"
+}
+[[ -n "${my_mail_server_smtp_username}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.server.smtp.username" '"'"${my_mail_server_smtp_username}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.mail.server.smtp.password" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.server.smtp.password"
+}
+[[ -n "${my_mail_server_smtp_password}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.server.smtp.password" '"'"${my_mail_server_smtp_password}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.mail.server.smtp.authtype" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.server.smtp.authtype"
+}
+[[ -n "${my_mail_server_smtp_authtype}" ]] && {
+	hocon -f ${eduSConf} set "repository.mail.server.smtp.authtype" '"'"${my_mail_server_smtp_authtype}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.httpclient.disableSNI4Hosts" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.httpclient.disableSNI4Hosts"
+}
+[[ -n "${my_http_client_disablesni4hosts}" ]] && {
+	hocon -f ${eduSConf} set "repository.httpclient.disableSNI4Hosts" '"'"${my_http_client_disablesni4hosts}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.httpclient.proxy.host" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.httpclient.proxy.host"
+}
 [[ -n "${my_http_client_proxy_host}" ]] && {
-	hocon -f ${eduSConf} \
-		set "repository.httpclient.proxy.host" '"'"${my_http_client_proxy_host}"'"'
+	hocon -f ${eduSConf} set "repository.httpclient.proxy.host" '"'"${my_http_client_proxy_host}"'"'
 }
 
 [[ -n "${my_http_client_proxy_nonproxyhosts}" ]] && {
-	export CATALINA_OPTS="-Dhttp.nonProxyHosts=${my_http_client_proxy_nonproxyhosts} $CATALINA_OPTS"
-	export CATALINA_OPTS="-Dhttps.nonProxyHosts=${my_http_client_proxy_nonproxyhosts} $CATALINA_OPTS"
-	hocon -f ${eduSConf} \
-		set "repository.httpclient.proxy.nonproxyhosts" '"'"${my_http_client_proxy_nonproxyhosts}"'"'
+	export CATALINA_OPTS="-Dhttp.nonProxyHosts=\"${my_http_client_proxy_nonproxyhosts//,/|}\" $CATALINA_OPTS"
+	export CATALINA_OPTS="-Dhttps.nonProxyHosts=\"${my_http_client_proxy_nonproxyhosts//,/|}\" $CATALINA_OPTS"
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.httpclient.proxy.nonproxyhosts" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.httpclient.proxy.nonproxyhosts"
+}
+[[ -n "${my_http_client_proxy_nonproxyhosts}" ]] && {
+	hocon -f ${eduSConf} set "repository.httpclient.proxy.nonproxyhosts" '"'"${my_http_client_proxy_nonproxyhosts}"'"'
 }
 
 [[ -n "${my_http_client_proxy_proxyhost}" ]] && {
 	export CATALINA_OPTS="-Dhttp.proxyHost=${my_http_client_proxy_proxyhost} $CATALINA_OPTS"
 	export CATALINA_OPTS="-Dhttps.proxyHost=${my_http_client_proxy_proxyhost} $CATALINA_OPTS"
-	hocon -f ${eduSConf} \
-		set "repository.httpclient.proxy.proxyhost" '"'"${my_http_client_proxy_proxyhost}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.httpclient.proxy.proxyhost" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.httpclient.proxy.proxyhost"
+}
+[[ -n "${my_http_client_proxy_proxyhost}" ]] && {
+	hocon -f ${eduSConf} set "repository.httpclient.proxy.proxyhost" '"'"${my_http_client_proxy_proxyhost}"'"'
 }
 
 [[ -n "${my_http_client_proxy_proxypass}" ]] && {
 	export CATALINA_OPTS="-Dhttp.proxyPass=${my_http_client_proxy_proxypass} $CATALINA_OPTS"
 	export CATALINA_OPTS="-Dhttps.proxyPass=${my_http_client_proxy_proxypass} $CATALINA_OPTS"
-	hocon -f ${eduSConf} \
-		set "repository.httpclient.proxy.proxypass" '"'"${my_http_client_proxy_proxypass}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.httpclient.proxy.proxypass" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.httpclient.proxy.proxypass"
+}
+[[ -n "${my_http_client_proxy_proxypass}" ]] && {
+	hocon -f ${eduSConf} set "repository.httpclient.proxy.proxypass" '"'"${my_http_client_proxy_proxypass}"'"'
 }
 
 [[ -n "${my_http_client_proxy_proxyport}" ]] && {
 	export CATALINA_OPTS="-Dhttp.proxyPort=${my_http_client_proxy_proxyport} $CATALINA_OPTS"
 	export CATALINA_OPTS="-Dhttps.proxyPort=${my_http_client_proxy_proxyport} $CATALINA_OPTS"
-	hocon -f ${eduSConf} \
-		set "repository.httpclient.proxy.proxyport" '"'"${my_http_client_proxy_proxyport}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "repository.httpclient.proxy.proxyport" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.httpclient.proxy.proxyport"
+}
+[[ -n "${my_http_client_proxy_proxyport}" ]] && {
+	hocon -f ${eduSConf} set "repository.httpclient.proxy.proxyport" '"'"${my_http_client_proxy_proxyport}"'"'
 }
 
 [[ -n "${my_http_client_proxy_proxyuser}" ]] && {
 	export CATALINA_OPTS="-Dhttp.proxyUser=${my_http_client_proxy_proxyuser} $CATALINA_OPTS"
 	export CATALINA_OPTS="-Dhttps.proxyUser=${my_http_client_proxy_proxyuser} $CATALINA_OPTS"
-	hocon -f ${eduSConf} \
-		set "repository.httpclient.proxy.proxyuser" '"'"${my_http_client_proxy_proxyuser}"'"'
 }
 
+[[ $(hocon -f ${eduSConf} get "repository.httpclient.proxy.proxyuser" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.httpclient.proxy.proxyuser"
+}
+[[ -n "${my_http_client_proxy_proxyuser}" ]] && {
+	hocon -f ${eduSConf} set "repository.httpclient.proxy.proxyuser" '"'"${my_http_client_proxy_proxyuser}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "angular.headers.Content-Security-Policy.default-src" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "angular.headers.Content-Security-Policy.default-src"
+}
 [[ -n "${my_http_server_csp_default}" ]] && {
-	hocon -f ${eduSConf} \
-		set "angular.headers.Content-Security-Policy.default-src" '"'"${my_http_server_csp_default}"'"'
+	hocon -f ${eduSConf} set "angular.headers.Content-Security-Policy.default-src" '"'"${my_http_server_csp_default}"'"'
 }
 
+[[ $(hocon -f ${eduSConf} get "angular.headers.Content-Security-Policy.connect-src" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "angular.headers.Content-Security-Policy.connect-src"
+}
 [[ -n "${my_http_server_csp_connect}" ]] && {
-	hocon -f ${eduSConf} \
-		set "angular.headers.Content-Security-Policy.connect-src" '"'"${my_http_server_csp_connect}"'"'
+	hocon -f ${eduSConf} set "angular.headers.Content-Security-Policy.connect-src" '"'"${my_http_server_csp_connect}"'"'
 }
 
+[[ $(hocon -f ${eduSConf} get "angular.headers.Content-Security-Policy.img-src" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "angular.headers.Content-Security-Policy.img-src"
+}
 [[ -n "${my_http_server_csp_img}" ]] && {
-	hocon -f ${eduSConf} \
-		set "angular.headers.Content-Security-Policy.img-src" '"'"${my_http_server_csp_img}"'"'
+	hocon -f ${eduSConf} set "angular.headers.Content-Security-Policy.img-src" '"'"${my_http_server_csp_img}"'"'
 }
 
+[[ $(hocon -f ${eduSConf} get "angular.headers.Content-Security-Policy.script-src" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "angular.headers.Content-Security-Policy.script-src"
+}
 [[ -n "${my_http_server_csp_script}" ]] && {
-	hocon -f ${eduSConf} \
-		set "angular.headers.Content-Security-Policy.script-src" '"'"${my_http_server_csp_script}"'"'
+	hocon -f ${eduSConf} set "angular.headers.Content-Security-Policy.script-src" '"'"${my_http_server_csp_script}"'"'
 }
 
+[[ $(hocon -f ${eduSConf} get "angular.headers.Content-Security-Policy.font-src" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "angular.headers.Content-Security-Policy.font-src"
+}
 [[ -n "${my_http_server_csp_font}" ]] && {
-	hocon -f ${eduSConf} \
-		set "angular.headers.Content-Security-Policy.font-src" '"'"${my_http_server_csp_font}"'"'
+	hocon -f ${eduSConf} set "angular.headers.Content-Security-Policy.font-src" '"'"${my_http_server_csp_font}"'"'
 }
 
 xmlstarlet ed -L \
@@ -489,5 +656,12 @@ for entrypoint in bin/plugins/plugin-*/entrypoint.sh; do
 done
 
 ########################################################################################################################
+
+# Load libraries
+. /opt/bitnami/scripts/libtomcat.sh
+. /opt/bitnami/scripts/liblog.sh
+
+# Load Tomcat environment variables
+. /opt/bitnami/scripts/tomcat-env.sh
 
 exec "$@"

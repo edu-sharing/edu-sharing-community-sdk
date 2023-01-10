@@ -1,5 +1,6 @@
 #!/bin/bash
-set -eux
+[[ -n $DEBUG ]] && set -x
+set -eu
 
 ########################################################################################################################
 
@@ -27,6 +28,18 @@ do
 	sleep 3
 done
 
+until wait-for-it "${repository_service_host}:${repository_service_port}" -t 3; do sleep 1; done
+
+until [[ $(curl -sSf -w "%{http_code}\n" -o /dev/null -H 'Accept: application/json' "${repository_service_base}/rest/_about/status/SERVICE?timeoutSeconds=3") -eq 200 ]]; do
+	echo >&2 "Waiting for ${repository_service_host} service ..."
+	sleep 3
+done
+
+until [[ $(curl -sSf -w "%{http_code}\n" -o /dev/null -H 'Accept: application/json' "${repository_service_base}/rest/_about/status/SEARCH?timeoutSeconds=3") -eq 200 ]]; do
+	echo >&2 "Waiting for ${repository_service_host} search ..."
+	sleep 3
+done
+
 ########################################################################################################################
 
 my_appid=$( \
@@ -40,12 +53,18 @@ has_my_appid=$( \
 		"${repository_service_base}/rest/admin/v1/applications" | jq -r '.[] | select(.id == "'"${my_appid}"'") | .id' \
 )
 
-if [ -z "${has_my_appid}" ]
+if [ -n "${has_my_appid}" ]
 then
 	curl -sS \
 		-H "Accept: application/json" \
 		--user "${repository_service_admin_user}:${repository_service_admin_pass}" \
-		-XPUT \
-		"${repository_service_base}/rest/admin/v1/applications?url=$( jq -nr --arg v "${my_meta_internal}" '$v|@uri' )"
+		-XDELETE \
+		"${repository_service_base}/rest/admin/v1/applications/${my_appid}"
 fi
+
+curl -sS \
+  -H "Accept: application/json" \
+  --user "${repository_service_admin_user}:${repository_service_admin_pass}" \
+  -XPUT \
+  "${repository_service_base}/rest/admin/v1/applications?url=$( jq -nr --arg v "${my_meta_internal}" '$v|@uri' )"
 

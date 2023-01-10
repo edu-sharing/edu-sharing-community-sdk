@@ -14,6 +14,7 @@ spec:
       labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 8 }}
       annotations:
         checksum/configmap-env: {{ include (print .Template.BasePath "/configmap-env.yaml") . | sha256sum | trunc 63 }}
+        checksum/configmap-file: {{ include (print .Template.BasePath "/configmap-file.yaml") . | sha256sum | trunc 63 }}
         {{- if not .Values.global.metrics.servicemonitor.enabled }}
         prometheus.io/path: "/metrics"
         prometheus.io/port: "9090"
@@ -33,7 +34,9 @@ spec:
         - "/bin/bash"
         - "-ec"
         - |
-          chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/alfresco/alf_data
+          if [[ ! "$(ls -A /opt/alfresco/alf_data)" ]]; then
+            chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/alfresco/alf_data
+          fi
         volumeMounts:
         - name: data
           mountPath: /opt/alfresco/alf_data
@@ -48,7 +51,7 @@ spec:
       - name: {{ include "edusharing_repository_search_solr6.name" . }}
         image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-repository-build-search-solr6:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
-        {{- if .Values.config.jvm.debug }}
+        {{- if default .Values.global.debug .Values.debug }}
         args: [ "catalina.sh", "jpda", "run" ]
         {{- end }}
         envFrom:
@@ -61,9 +64,23 @@ spec:
         - name: metrics
           containerPort: 9090
         {{- end }}
+        {{- if default .Values.global.debug .Values.debug }}
+        - name: jpda
+          containerPort: 5005
+        {{- end }}
         volumeMounts:
         - name: data
           mountPath: /opt/alfresco/alf_data
+        {{- with .Values.config.override.logging.application }}
+        - name: file
+          mountPath: /opt/alfresco/solr4/log4j.properties
+          subPath: logging-application
+        {{- end }}
+        {{- with .Values.config.override.logging.server }}
+        - name: file
+          mountPath: /opt/bitnami/tomcat/conf/logging.properties
+          subPath: logging-server
+        {{- end }}
         {{- with .Values.startupProbe }}
         startupProbe:
           httpGet:
@@ -135,6 +152,10 @@ spec:
           {{- end }}
         {{- end }}
       {{- end }}
+      volumes:
+        - name: file
+          configMap:
+            name: {{ include "edusharing_repository_search_solr6.name" . }}-file
   volumeClaimTemplates:
   - metadata:
       name: data

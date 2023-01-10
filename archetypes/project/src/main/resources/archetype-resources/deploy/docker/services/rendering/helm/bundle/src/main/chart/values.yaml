@@ -13,11 +13,6 @@ global:
 
 nameOverride: edusharing-services-rendering
 
-image:
-  registry: ${docker.registry}
-  repository: ${docker.repository}
-  tag: ${docker.tag}
-
 ########################################################################################################################
 # DEPENDENCY
 ########################################################################################################################
@@ -36,7 +31,6 @@ edusharing_services_rendering_postgresql:
 
     database: &postgresqlConfigDatabase rendering
     username: &postgresqlConfigUsername rendering
-    password: &postgresqlConfigPassword rendering
 
 ########################################################################################################################
 
@@ -67,6 +61,5 @@ edusharing_services_rendering_service:
       port: *postgresqlServicePortApi
       database: *postgresqlConfigDatabase
       username: *postgresqlConfigUsername
-      password: *postgresqlConfigPassword
 
 ########################################################################################################################

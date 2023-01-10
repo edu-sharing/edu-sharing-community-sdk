@@ -30,13 +30,15 @@ spec:
       initContainers:
       {{- if (default .Values.global.cluster.storage.data.permission .Values.persistence.data.permission) }}
       - name: {{ include "edusharing_postgresql.name" . }}-init-permission
-        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
+        image: {{ include "edusharing_postgresql.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         command:
         - "/bin/bash"
         - "-ec"
         - |
-          chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /bitnami/postgresql
+          if [[ ! "$(ls -A /bitnami/postgresql)" ]]; then
+            chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /bitnami/postgresql
+          fi
         volumeMounts:
         - name: data
           mountPath: /bitnami/postgresql
@@ -49,7 +51,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ include "edusharing_postgresql.name" . }}
-        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-build-postgresql:{{ .Values.image.tag }}
+        image: {{ include "edusharing_postgresql.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-postgresql:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         envFrom:
         - configMapRef:
@@ -81,8 +83,12 @@ spec:
         {{- end }}
         {{- with .Values.livenessProbe }}
         livenessProbe:
-          tcpSocket:
-            port: api
+          exec:
+            command:
+              - "/bin/bash"
+              - "-ec"
+              - |
+                exec pg_isready -U "${POSTGRESQL_USERNAME}" -d "${POSTGRESQL_DATABASE}"
           failureThreshold: {{ .failureThreshold }}
           initialDelaySeconds: {{ .initialDelaySeconds }}
           periodSeconds: {{ .periodSeconds }}
@@ -110,11 +116,11 @@ spec:
         {{- end }}
       {{- if .Values.sidecar.metrics.enabled }}
       - name: {{ include "edusharing_postgresql.name" . }}-metrics
-        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-build-postgresql_exporter:{{ .Values.image.tag }}
+        image: {{ include "edusharing_postgresql.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-postgresql_exporter:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         args:
         - --disable-settings-metrics
-        - --web.listen-address={{ if .Values.global.cluster.istio.enabled }}127.0.0.1{{ end }}:9114
+        - --web.listen-address=:9114
         - --web.telemetry-path=/metrics
         env:
         - name: DATA_SOURCE_NAME

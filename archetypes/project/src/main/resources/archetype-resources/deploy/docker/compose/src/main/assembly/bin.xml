@@ -20,7 +20,7 @@
       <outputDirectory>.</outputDirectory>
       <includes>
         <include>.env.sample</include>
-        <include>deploy.sh</include>
+        <include>utils.sh</include>
         <include>README.md</include>
         <include>**/*.yml</include>
       </includes>

@@ -445,7 +445,6 @@ remove() {
 		$COMPOSE_EXEC \
 			$COMPOSE_LIST \
 			kill || exit
-		;;
 
 		$COMPOSE_EXEC \
 			$COMPOSE_LIST \

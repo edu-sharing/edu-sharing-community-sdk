@@ -205,6 +205,7 @@ fi
 
 # rendermoodle config
 rm -f "${RS_ROOT}/modules/moodle/config.php"
+rm -f "${RS_ROOT}/modules/scorm/config.php"
 if [[ -n "${rendering_rendermoodle_url}" ]]; then
   cp "${RS_ROOT}/modules/moodle/config.php.dist" "${RS_ROOT}/modules/moodle/config.php"
   sed -i "s|define('MOODLE_BASE_DIR', '');.*|define('MOODLE_BASE_DIR', '${rendering_rendermoodle_url}');|" "${RS_ROOT}/modules/moodle/config.php"

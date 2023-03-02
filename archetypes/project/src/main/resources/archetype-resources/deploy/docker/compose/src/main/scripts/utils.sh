@@ -2,7 +2,6 @@
 set -e
 set -o pipefail
 
-#$ADDITIONAL_COMPOSE_FILES are defined in .env
 export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-$(basename $(pwd))}"
 
 case "$(uname)" in
@@ -79,112 +78,31 @@ info() {
 	echo ""
 }
 
-compose() {
-
-	COMPOSE_DIRECTORY="$1"
-	COMPOSE_LIST=
-
-	shift && {
-
-    COMPOSE_FILE_GROUP="$1"
-
-    shift && {
-
-      while true; do
-        flag="$1"
-        shift || break
-
-        COMPOSE_FILE_TYPE=""
-        case "$flag" in
-        -common) COMPOSE_FILE_TYPE="common" ;;
-        -debug) COMPOSE_FILE_TYPE="debug" ;;
-        -dev) COMPOSE_FILE_TYPE="dev" ;;
-        -remote) COMPOSE_FILE_TYPE="remote" ;;
-        -productive)
-          COMPOSE_FILE_TYPE="productive"
-          if [[ ! $PRODUCTIVE_ENABLED -eq "true" ]] ; then continue ; fi
-          ;;
-        *)
-          {
-            echo "error: unknown flag: $flag"
-            echo ""
-            echo "valid flags are:"
-            echo "  -common"
-            echo "  -debug"
-            echo "  -dev"
-            echo "  -remote"
-            echo "  -productive"
-          } >&2
-          exit 1
-          ;;
-        esac
-
-        while IFS='' read -r COMPOSE_FILE; do
-          COMPOSE_LIST="$COMPOSE_LIST -f ${COMPOSE_FILE}"
-        done < <(find "${COMPOSE_DIRECTORY}" -type f -name "${COMPOSE_FILE_GROUP}_*-${COMPOSE_FILE_TYPE}.yml" | sort -g)
-      done
-
-
-      for COMPOSE_FILE in $ADDITIONAL_COMPOSE_FILES; do
-        COMPOSE_LIST="$COMPOSE_LIST -f ${COMPOSE_FILE}"
-      done
-    }
-	}
-
-	echo $COMPOSE_LIST
-}
-
 logs() {
-	COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -productive)"
-
-	echo "Use compose set: $COMPOSE_LIST"
-
 	$COMPOSE_EXEC \
-		$COMPOSE_LIST \
 		logs -f $@ || exit
 }
 
 terminal() {
-	COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -productive)"
-
-	echo "Use compose set: $COMPOSE_LIST"
-
 	$COMPOSE_EXEC \
-		$COMPOSE_LIST \
 		exec -u root -it  $1 /bin/bash || exit
 }
 
 ps() {
-	COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -productive)"
-
-	echo "Use compose set: $COMPOSE_LIST"
-
 	$COMPOSE_EXEC \
-		$COMPOSE_LIST \
 		ps || exit
 }
 
-rstart() {
-	COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -remote -productive)"
-
-	echo "Use compose set: $COMPOSE_LIST"
-
+start() {
 	$COMPOSE_EXEC \
-		$COMPOSE_LIST \
 		pull || exit
 
 	$COMPOSE_EXEC \
-		$COMPOSE_LIST \
 		up -d $@ || exit
 }
 
 stop() {
-	COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -productive)"
-
-	echo "Use compose set: $COMPOSE_LIST"
-
 	$COMPOSE_EXEC \
-		$COMPOSE_LIST \
 		stop $@ || exit
 }
 
@@ -192,12 +110,7 @@ remove() {
 	read -p "Are you sure you want to continue? [y/N] " answer
 	case ${answer:0:1} in
 	y | Y)
-		COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -productive)"
-
-		echo "Use compose set: $COMPOSE_LIST"
-
 		$COMPOSE_EXEC \
-			$COMPOSE_LIST \
 			down || exit
 		;;
 	*)
@@ -210,12 +123,7 @@ purge() {
 	read -p "Are you sure you want to continue? [y/N] " answer
 	case ${answer:0:1} in
 	y | Y)
-		COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -productive)"
-
-		echo "Use compose set: $COMPOSE_LIST"
-
 		$COMPOSE_EXEC \
-			$COMPOSE_LIST \
 			down -v || exit
 		;;
 	*)
@@ -226,7 +134,7 @@ purge() {
 
 case "${CLI_OPT1}" in
 start)
-	rstart $@ && info
+	start $@ && info
 	;;
 info)
 	info
@@ -247,7 +155,7 @@ purge)
 	purge
 	;;
 restart)
-	stop $@ && rstart $@ && info
+	stop $@ && start $@ && info
 	;;
 terminal)
   terminal $@

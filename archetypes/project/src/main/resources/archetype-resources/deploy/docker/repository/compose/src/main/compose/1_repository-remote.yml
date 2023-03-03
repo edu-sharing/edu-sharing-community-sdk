@@ -16,3 +16,12 @@ services:
 
   repository-transform:
     image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-repository-build-transform:${docker.tag}"
+
+  repository-alfresco-transform-core-aio:
+    image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-repository-build-alfresco-transform-core-aio:${docker.tag}"
+
+  repository-transform-edu-sharing:
+    image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-repository-build-transform-edu-sharing:${docker.tag}"
+
+  repository-activemq:
+    image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-build-activemq:${docker.tag}"

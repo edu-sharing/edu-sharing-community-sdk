@@ -54,7 +54,7 @@
     </docker.from.rediscluster.server>
     <!--suppress UnresolvedMavenProperty -->
     <docker.from.tomcat>
-      dockerio.mirror.docker.edu-sharing.com/tomcat:${tomcat.version}-jre11-openjdk-bullseye
+      dockerio.mirror.docker.edu-sharing.com/bitnami/tomcat:${tomcat.version}
     </docker.from.tomcat>
     <docker.from.activemq>
       dockerio.mirror.docker.edu-sharing.com/alfresco/alfresco-activemq:5.16.5-jre11-centos7

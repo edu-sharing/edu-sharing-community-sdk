@@ -46,6 +46,7 @@ services:
       - "9090"
     volumes:
       - "repository-search-solr6-volume-data:/opt/alfresco/alf_data"
+      - "repository-search-solr6-volume-solrhome:/opt/alfresco/solr6/solrhome"
     depends_on:
       - repository-service
 
@@ -131,12 +132,6 @@ services:
       - repository-database
       - repository-transform
 
-  repository-transform:
-    image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-transform:${docker.tag}"
-    container_name: "repository-transform_${COMPOSE_PROJECT_NAME}"
-    expose:
-      - "8100"
-
   repository-activemq:
     image: "${docker.repository}/${docker.prefix}-deploy-docker-build-activemq:${docker.tag}"
     expose:
@@ -147,8 +142,14 @@ services:
     ports:
       - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_ACTIVEMQ_PORT_HTTP:-8161}:8161"
 
+  repository-transform:
+    image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-transform:${docker.tag}"
+    container_name: "repository-transform_${COMPOSE_PROJECT_NAME}"
+    expose:
+      - "8100"
+
   repository-alfresco-transform-core-aio:
-    image: "${docker.repository}/${docker.prefix}-deploy-docker-build-alfresco-transform-core-aio:${docker.tag}"
+    image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-alfresco-transform-core-aio:${docker.tag}"
     expose:
       - "8090"
     ports:
@@ -164,6 +165,7 @@ services:
 volumes:
   repository-database-volume-data:
   repository-search-solr6-volume-data:
+  repository-search-solr6-volume-solrhome:
   repository-service-volume-config-cluster:
   repository-service-volume-config-node:
   repository-service-volume-data:

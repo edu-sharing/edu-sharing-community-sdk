@@ -24,3 +24,9 @@ services:
       JPDA_ADDRESS: "0.0.0.0:5005"
     ports:
       - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_SERVICE_PORT_JPDA:-8101}:5005"
+
+  repository-transform-edu-sharing:
+    environment:
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000"
+    ports:
+      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_EDU_SHARING_TRANSFORM_PORT_JPDA:-8601}:8000"

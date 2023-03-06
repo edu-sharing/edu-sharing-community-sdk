@@ -150,6 +150,7 @@ services:
 
   repository-alfresco-transform-core-aio:
     image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-alfresco-transform-core-aio:${docker.tag}"
+    container_name: "repository-alfresco-transform-core-aio_${COMPOSE_PROJECT_NAME}"
     expose:
       - "8090"
     ports:
@@ -157,6 +158,7 @@ services:
 
   repository-transform-edu-sharing:
     image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-transform-edu-sharing:${docker.tag}"
+    container_name: "repository-transform-edu-sharing_${COMPOSE_PROJECT_NAME}"
     expose:
       - "8091"
     ports:

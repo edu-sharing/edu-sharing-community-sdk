@@ -19,7 +19,7 @@ variables:
   REPOSITORY_TRANSFORM_ENABLED: "${REPOSITORY_TRANSFORM_ENABLED}"
 
 default:
-  image: maven:3.8.4-openjdk-17
+  image: maven:3.8.4-jdk-17
   services:
     - name: "$DIND_IMAGE"
       alias: docker

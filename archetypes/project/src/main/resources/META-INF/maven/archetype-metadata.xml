@@ -36,6 +36,9 @@
     <requiredProperty key="REPOSITORY_TRANSFORM_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
+    <requiredProperty key="SERVICE_CONNECTOR_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
     <requiredProperty key="gitignore">
       <defaultValue>.gitignore</defaultValue>
     </requiredProperty>

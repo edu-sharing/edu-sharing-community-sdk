@@ -193,6 +193,11 @@ backup() {
     echo "backup postgres"
     $COMPOSE_EXEC exec -t repository-database sh -c "export PGPASSWORD=${REPOSITORY_DATABASE_PASS:-repository}; pg_dumpall --clean -U postgres | gzip" >"$backupDir/repository-db.gz"
 
+    if [[ "$($COMPOSE_EXEC ps repository-mongo -a)" != "no such service: repository-mongo" ]]; then
+      echo "backup mongo"
+      $COMPOSE_EXEC exec -t repository-mongo sh -c "mongodump --archive --gzip -u ${REPOSITORY_MONGO_ROOT_PASS:-root} -p ${REPOSITORY_MONGO_ROOT_USER:-root}" >"$backupDir/repository-mongo.gz"
+    fi
+
     echo "backup binaries"
     docker run \
       --rm \
@@ -277,7 +282,7 @@ restore() {
   repo=
   solr=
   elastic=
-  if [[ -f "$backupDir/binaries.tar" ]] || [[ -f "$backupDir/repository-db.gz" ]] ; then
+  if [[ -f "$backupDir/binaries.tar" ]] || [[ -f "$backupDir/repository-db.gz" ]] || [[ -f "$backupDir/repository-mongo.gz" ]] ; then
     if [[ ! -f "$backupDir/binaries.tar" ]]; then
       echo "Backup directory doesn't contains a binaries.tar!"
       exit 1
@@ -325,6 +330,11 @@ restore() {
 
     echo "### restore postgres"
     gunzip <"$backupDir/repository-db.gz" | $COMPOSE_EXEC exec -T repository-database sh -c "export PGPASSWORD=${REPOSITORY_DATABASE_PASS:-repository}; psql -U postgres"
+
+    if [[ "$($COMPOSE_EXEC ps repository-mongo -a)" != "no such service: repository-mongo" ]]; then
+      echo "restore mongo"
+      $COMPOSE_EXEC exec -T repository-mongo sh -c "mongorestore --archive --gzip -u ${REPOSITORY_MONGO_ROOT_PASS:-root} -p ${REPOSITORY_MONGO_ROOT_USER:-root}" <"$backupDir/repository-mongo.gz"
+    fi
   fi
 
   if [[ -n $solr ]] ; then

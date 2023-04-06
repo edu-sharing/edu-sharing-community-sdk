@@ -199,7 +199,11 @@ backup() {
 
     if [[ "$($COMPOSE_EXEC ps repository-mongo -a)" != "no such service: repository-mongo" ]]; then
       echo "backup mongo"
-      $COMPOSE_EXEC exec -t repository-mongo sh -c "mongodump --archive --gzip -u ${REPOSITORY_MONGO_ROOT_PASS:-root} -p ${REPOSITORY_MONGO_ROOT_USER:-root}" >"$backupDir/repository-mongo.gz"
+      $COMPOSE_EXEC exec -t repository-mongo sh -c "mongodump --archive --gzip -u ${REPOSITORY_MONGO_ROOT_PASS:-root} -p ${REPOSITORY_MONGO_ROOT_USER:-root}" >"$backupDir/repository-mongo.gz" || {
+        rm -rf "$backupDir"
+        echo "ERROR on creating mongodb dump"
+        exit 1
+      }
     fi
 
     echo "backup binaries"

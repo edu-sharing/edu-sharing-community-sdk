@@ -110,6 +110,30 @@ RUN set -eux \
       -x "WEB-INF/lib/slf4j-*" \
       -x "WEB-INF/lib/jsr305-*" \
       -x "WEB-INF/lib/antlr-2.*" \
+      -x "WEB-INF/lib/alfresco-xmlfactory-*" \
+      -x "WEB-INF/lib/xstream-*" \
+      -x "WEB-INF/lib/jodconverter-*" \
+      -x "WEB-INF/lib/commons-io-*" \
+      -x "WEB-INF/lib/activemq-*" \
+      -x "WEB-INF/lib/xmlrpc-*" \
+      -x "WEB-INF/lib/xmlbeans-*" \
+      -x "WEB-INF/lib/quartz-*" \
+      -x "WEB-INF/lib/alfresco-messaging-repo-*" \
+      -x "WEB-INF/lib/camel-*" \
+      -x "WEB-INF/lib/spring-web-*" \
+      -x "WEB-INF/lib/spring-webmvc-*" \
+      -x "WEB-INF/lib/spring-core-*" \
+      -x "WEB-INF/lib/batik-*" \
+      -x "WEB-INF/lib/bcel-*" \
+      -x "WEB-INF/lib/commons-fileupload-*" \
+      -x "WEB-INF/lib/cxf-*" \
+      -x "WEB-INF/lib/groovy-all-*" \
+      -x "WEB-INF/lib/juh-*" \
+      -x "WEB-INF/lib/jurt-*" \
+      -x "WEB-INF/lib/ridl-*" \
+      -x "WEB-INF/lib/unoil-*" \
+      -x "WEB-INF/lib/guava-*" \
+      -x "WEB-INF/lib/dom4j-*" \
     && rm -f tomcat/webapps/alfresco.war \
     && mv alf_data/keystore .
 
@@ -149,6 +173,11 @@ RUN set -eux \
     && mv /tmp/install/alfresco-pdf-renderer common/alfresco-pdf-renderer
 
 COPY --chown=worker:worker artifacts/edu_sharing-community-repository-backend-tomcat-${org.edu_sharing:edu_sharing-community-repository-backend-tomcat:jar.version}.jar tomcat/lib/
+
+COPY --chown=worker:worker artifacts/edu_sharing-community-repository-backend-xml-security-${org.edu_sharing:edu_sharing-community-repository-backend-xml-security:jar.version}.jar tomcat/webapps/alfresco/WEB-INF/lib/
+
+COPY --chown=worker:worker artifacts/edu_sharing-community-repository-backend-xml-security-${org.edu_sharing:edu_sharing-community-repository-backend-xml-security:jar.version}.jar tomcat/webapps/share/WEB-INF/lib/
+COPY --chown=worker:worker artifacts/xalan*.jar tomcat/webapps/share/WEB-INF/lib/
 
 COPY --chown=worker:worker webapp/*.war tomcat/webapps/edu-sharing.war
 

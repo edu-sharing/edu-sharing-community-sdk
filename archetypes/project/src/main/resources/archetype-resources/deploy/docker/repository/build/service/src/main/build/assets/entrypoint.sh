@@ -155,9 +155,18 @@ export CATALINA_OPTS="-Dfile.encoding=UTF-8 $CATALINA_OPTS"
 export CATALINA_OPTS="-Duser.country=DE $CATALINA_OPTS"
 export CATALINA_OPTS="-Duser.language=de $CATALINA_OPTS"
 
-export CATALINA_OPTS="-Dorg.xml.sax.parser=com.sun.org.apache.xerces.internal.parsers.SAXParser $CATALINA_OPTS"
-export CATALINA_OPTS="-Djavax.xml.parsers.DocumentBuilderFactory=com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl $CATALINA_OPTS"
+# the following configs are defined in other jars with serviceloader files:
+# xalan-2.7.2-alfresco.jar, xalan.jar, edu_sharing-xoai-1.0.1.jar, xercesImpl-2.10.0-alfresco-patched.jar
+# so they MUST be defined as System Property
+export CATALINA_OPTS="-Djavax.xml.xpath.XPathFactory:http://java.sun.com/jaxp/xpath/dom=org.edu_sharing.xml.security.xpath.XPathFactory $CATALINA_OPTS"
+export CATALINA_OPTS="-Djavax.xml.transform.TransformerFactory=org.edu_sharing.xml.security.transform.TransformerFactory $CATALINA_OPTS"
 export CATALINA_OPTS="-Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl $CATALINA_OPTS"
+export CATALINA_OPTS="-Djavax.xml.validation.SchemaFactory:http://www.w3.org/2001/XMLSchema=org.edu_sharing.xml.security.validation.SchemaFactory $CATALINA_OPTS"
+export CATALINA_OPTS="-Dorg.xml.sax.driver=org.edu_sharing.xml.security.sax.XMLReader $CATALINA_OPTS"
+
+# the following configs can be defined as systemproperties
+#export CATALINA_OPTS="-Dorg.xml.sax.parser=com.sun.org.apache.xerces.internal.parsers.SAXParser $CATALINA_OPTS"
+#export CATALINA_OPTS="-Djavax.xml.parsers.DocumentBuilderFactory=org.edu_sharing.xml.security.jaxp.DocumentBuilderFactory $CATALINA_OPTS"
 
 xmlstarlet ed -L \
 	-d '/Server/Service[@name="Catalina"]/Engine[@name="Catalina"]/Host[@name="localhost"]/@hostConfigClass' \

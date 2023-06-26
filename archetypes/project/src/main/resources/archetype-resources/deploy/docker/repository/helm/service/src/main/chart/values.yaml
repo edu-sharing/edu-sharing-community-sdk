@@ -171,6 +171,7 @@ config:
 
   home:
     appid: local
+    cookieAttributes: ""
 
   jvm:
     ram:

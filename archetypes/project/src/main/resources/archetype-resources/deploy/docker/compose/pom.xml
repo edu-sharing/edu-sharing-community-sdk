@@ -77,13 +77,19 @@
           </execution>
           <execution>
             <id>scripts</id>
-            <phase>validate</phase>
+            <phase>package</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}/edu-sharing</outputDirectory>
               <resources>
+                <resource>
+                  <directory>${project.build.directory}/compose</directory>
+                  <excludes>
+                    <exclude>*.yml</exclude>
+                  </excludes>
+                </resource>
                 <resource>
                   <directory>src/main/scripts</directory>
                   <filtering>true</filtering>

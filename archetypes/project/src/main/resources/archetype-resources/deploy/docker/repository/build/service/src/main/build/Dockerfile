@@ -26,7 +26,7 @@ RUN set -eux \
     && rm -r /var/lib/apt/lists/*
 
 RUN set -eux \
-    && echo "deb https://snapshot.debian.org/archive/debian/20230630T210935Z/ sid main" >> /etc/apt/sources.list \
+    && echo "deb http://deb.debian.org/debian sid main" >> /etc/apt/sources.list \
     && apt-get update -y \
     && apt-get install -y --no-install-recommends \
         openjdk-8-dbg \

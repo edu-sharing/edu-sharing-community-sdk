@@ -4,6 +4,8 @@
 
 global:
 
+  annotations: {}
+
   cluster:
 
     cert:
@@ -55,6 +57,8 @@ global:
     team: edusharing
 
   password: ""
+
+  security: {}
 
 ########################################################################################################################
 # LOCAL
@@ -167,6 +171,7 @@ config:
 
   home:
     appid: local
+    cookieAttributes: ""
 
   jvm:
     ram:

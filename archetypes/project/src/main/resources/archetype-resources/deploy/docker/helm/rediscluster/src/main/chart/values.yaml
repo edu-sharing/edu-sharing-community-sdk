@@ -4,6 +4,8 @@
 
 global:
 
+  annotations: {}
+
   cluster:
 
     istio:
@@ -33,6 +35,8 @@ global:
       timeout: 10s
     servicemonitor:
       enabled: false
+
+  security: {}
 
 ########################################################################################################################
 # LOCAL

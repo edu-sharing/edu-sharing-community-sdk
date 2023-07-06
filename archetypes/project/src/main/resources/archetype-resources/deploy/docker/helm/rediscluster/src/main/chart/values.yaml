@@ -62,15 +62,15 @@ service:
 config:
 
   aof:
-    enabled: true
+    enabled: false
 
   cluster:
     master: 3
     replicas: 1
     wait: 30
 
-  extra: {}
-#   save: ""
+  extra:
+    save: '""'
 
 ########################################################################################################################
 

@@ -201,6 +201,30 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module dir="varnish"
+                        id="${rootArtifactId}-deploy-docker-build-varnish"
+                        name="${rootArtifactId}-deploy-docker-build-varnish">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="varnish_exporter"
+                        id="${rootArtifactId}-deploy-docker-build-varnish_exporter"
+                        name="${rootArtifactId}-deploy-docker-build-varnish_exporter">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
               </modules>
             </module>
             <module dir="compose"

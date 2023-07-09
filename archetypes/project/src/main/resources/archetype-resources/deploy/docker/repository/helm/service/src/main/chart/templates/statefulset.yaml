@@ -27,7 +27,7 @@ spec:
         {{- if not .Values.global.metrics.servicemonitor.enabled }}
         prometheus.io/path: "/metrics"
         prometheus.io/port: "9090"
-        prometheus.io/scrape: {{ .Values.config.metrics | quote }}
+        prometheus.io/scrape: {{ .Values.config.metrics.enabled | quote }}
         {{- end }}
         sidecar.istio.io/inject: {{ .Values.global.cluster.istio.enabled | quote }}
         {{- with merge .Values.podAnnotations .Values.global.annotations }}
@@ -94,7 +94,7 @@ spec:
           containerPort: 8081
         - name: gossip
           containerPort: 5701
-        {{- if .Values.config.metrics }}
+        {{- if .Values.config.metrics.enabled }}
         - name: metrics-api
           containerPort: 9090
         {{- end }}

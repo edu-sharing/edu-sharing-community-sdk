@@ -1,6 +1,6 @@
 {{- if .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" }}
 {{- if .Values.global.metrics.servicemonitor.enabled }}
-{{- if .Values.config.metrics }}
+{{- if .Values.config.metrics.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -13,6 +13,9 @@ spec:
     port: http-metrics-api
     interval: {{ .Values.global.metrics.scrape.interval }}
     scrapeTimeout: {{ .Values.global.metrics.scrape.timeout }}
+    {{- with .Values.config.metrics.relabelings }}
+    metricRelabelings: {{ toYaml . | nindent 6 }}
+    {{- end }}
   selector:
     matchLabels: {{ include "edusharing_repository_service.labels.app" . | nindent 6 }}
       app.kubernetes.io/component: "metrics-api"
@@ -30,10 +33,13 @@ metadata:
     app.kubernetes.io/component: "metrics-proxy"
 spec:
   endpoints:
-    - path: "/metrics"
-      port: http-metrics-proxy
-      interval: {{ .Values.global.metrics.scrape.interval }}
-      scrapeTimeout: {{ .Values.global.metrics.scrape.timeout }}
+  - path: "/metrics"
+    port: http-metrics-proxy
+    interval: {{ .Values.global.metrics.scrape.interval }}
+    scrapeTimeout: {{ .Values.global.metrics.scrape.timeout }}
+    {{- with .Values.sidecar.proxyMetrics.relabelings }}
+    metricRelabelings: {{ toYaml . | nindent 6 }}
+    {{- end }}
   selector:
     matchLabels: {{ include "edusharing_repository_service.labels.app" . | nindent 6 }}
       app.kubernetes.io/component: "metrics-proxy"

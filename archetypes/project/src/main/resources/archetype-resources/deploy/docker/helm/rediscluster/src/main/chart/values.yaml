@@ -188,6 +188,8 @@ sidecar:
 
     enabled: true
 
+    relabelings: []
+
     resources:
 
       limits:

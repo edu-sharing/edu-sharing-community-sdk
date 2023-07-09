@@ -197,7 +197,9 @@ config:
       minPercentage: "75.0"
       maxPercentage: "75.0"
 
-  metrics: true
+  metrics:
+    enabled: true
+    relabelings: []
 
   http:
     client:
@@ -430,6 +432,8 @@ sidecar:
   proxyMetrics:
 
     enabled: true
+
+    relabelings: []
 
     resources:
 

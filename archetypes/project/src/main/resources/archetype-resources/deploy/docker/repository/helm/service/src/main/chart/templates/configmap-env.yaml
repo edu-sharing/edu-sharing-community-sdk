@@ -28,7 +28,7 @@ data:
     -Dhazelcast.shutdownhook.policy=GRACEFUL
     -Dhazelcast.graceful.shutdown.max.wait={{ .Values.terminationGracePeriod }}
     {{- end }}
-    {{- if .Values.config.metrics }}
+    {{- if .Values.config.metrics.enabled }}
     -javaagent:/opt/alfresco/tomcat/agent/jmx_prometheus_javaagent.jar=9090:/opt/alfresco/tomcat/agent/jmx-exporter-config.yaml
     {{- end }}
   JPDA_ADDRESS: "0.0.0.0:5005"

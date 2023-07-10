@@ -82,20 +82,48 @@ if [[ "${CONTEXT}/${NAMESPACE}/${RELEASE%-*}" != "${CONTEXT}/${NAMESPACE}/${RELE
   fi
 fi
 
-if [[ -n "${HELM_TIMEOUT}" ]] ; then
-  ARGS+=("--timeout")
-  ARGS+=("${HELM_TIMEOUT}")
-fi
-
-if [[ -n "${HELM_DEBUG}" ]] ; then
-  ARGS+=("--dry-run")
-  ARGS+=("--debug")
-fi
-
 popd >/dev/null || exit
 
-set -x
-helm ${HELM_PLUGIN} upgrade --install "${RELEASE}" \
-  "${CHART}" \
-  "${ARGS[@]}"
-set +x
+info() {
+  echo ""
+  echo "--------------------------------------------------------------------------------"
+  echo ""
+  echo "release:       ${RELEASE}"
+  echo "chart:         ${CHART}"
+  echo ""
+  echo "arguments:     ${ARGS[@]}"
+  echo ""
+  echo "cluster:       ${CONTEXT}"
+  echo "namespace:     ${NAMESPACE}"
+  echo ""
+}
+
+info
+read -p "show diff  [y/N] " answer
+case ${answer:0:1} in
+  y | Y)
+    helm diff upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}"
+    ;;
+  *)
+    ;;
+esac
+
+info
+read -p "test  [y/N] " answer
+case ${answer:0:1} in
+  y | Y)
+    helm upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}" --dry-run
+    ;;
+  *)
+    ;;
+esac
+
+info
+read -p "install  [y/N] " answer
+case ${answer:0:1} in
+  y | Y)
+    helm upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}" --timeout=30m
+    ;;
+  *)
+    ;;
+esac

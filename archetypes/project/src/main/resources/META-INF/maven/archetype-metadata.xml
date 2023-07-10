@@ -27,6 +27,9 @@
     <requiredProperty key="REPOSITORY_ELASTIC_ENABLED">
       <defaultValue>true</defaultValue>
     </requiredProperty>
+    <requiredProperty key="REPOSITORY_KAFKA_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
     <requiredProperty key="REPOSITORY_MONGO_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>

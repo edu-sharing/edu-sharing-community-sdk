@@ -62,15 +62,15 @@ service:
 config:
 
   aof:
-    enabled: true
+    enabled: false
 
   cluster:
     master: 3
     replicas: 1
     wait: 30
 
-  extra: {}
-#   save: ""
+  extra:
+    save: '""'
 
 ########################################################################################################################
 
@@ -96,7 +96,6 @@ podAnnotations: {}
 
 podSecurityContext:
 
-  runAsUser: 1001
   fsGroup: 1001
   fsGroupChangePolicy: OnRootMismatch
 
@@ -106,6 +105,7 @@ securityContext:
   capabilities:
     drop:
     - ALL
+  runAsUser: 1001
 
 ########################################################################################################################
 
@@ -188,6 +188,8 @@ sidecar:
 
     enabled: true
 
+    relabelings: []
+
     resources:
 
       limits:
@@ -203,5 +205,6 @@ sidecar:
       capabilities:
         drop:
           - ALL
+      runAsUser: 1001
 
 ########################################################################################################################

@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1689066915273,
+  "iteration": 1689066915276,
   "links": [],
   "panels": [
     {
@@ -1454,7 +1454,7 @@
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 3
+            "y": 4
           },
           "hiddenSeries": false,
           "id": 351,
@@ -1549,7 +1549,7 @@
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 3
+            "y": 4
           },
           "hiddenSeries": false,
           "id": 357,
@@ -1644,7 +1644,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 9
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 360,
@@ -1739,7 +1739,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 9
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 361,
@@ -1834,7 +1834,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 9
+            "y": 10
           },
           "hiddenSeries": false,
           "id": 362,
@@ -1929,7 +1929,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 16
+            "y": 17
           },
           "hiddenSeries": false,
           "id": 354,
@@ -2024,7 +2024,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 16
+            "y": 17
           },
           "hiddenSeries": false,
           "id": 355,
@@ -2119,7 +2119,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 16
+            "y": 17
           },
           "hiddenSeries": false,
           "id": 356,
@@ -2214,7 +2214,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 24
+            "y": 25
           },
           "hiddenSeries": false,
           "id": 358,
@@ -2309,7 +2309,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 24
+            "y": 25
           },
           "hiddenSeries": false,
           "id": 359,
@@ -12702,7 +12702,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 18
+            "y": 21
           },
           "hiddenSeries": false,
           "id": 335,
@@ -12733,14 +12733,14 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]))",
+              "expr": "sum(rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval])))",
               "interval": "",
               "legendFormat": "hit",
               "refId": "A"
             },
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]))",
+              "expr": "sum(rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval])))",
               "hide": false,
               "interval": "",
               "legendFormat": "miss",
@@ -12806,7 +12806,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 18
+            "y": 21
           },
           "hiddenSeries": false,
           "id": 339,
@@ -12903,7 +12903,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 26
+            "y": 29
           },
           "hiddenSeries": false,
           "id": 336,
@@ -12922,14 +12922,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -12999,7 +12999,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 26
+            "y": 29
           },
           "hiddenSeries": false,
           "id": 341,
@@ -13018,14 +13018,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -13095,7 +13095,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 34
+            "y": 37
           },
           "hiddenSeries": false,
           "id": 340,
@@ -13114,14 +13114,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -13191,7 +13191,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 34
+            "y": 37
           },
           "hiddenSeries": false,
           "id": 338,
@@ -13210,14 +13210,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -29941,7 +29941,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 53
+            "y": 57
           },
           "hiddenSeries": false,
           "id": 344,
@@ -29972,14 +29972,14 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]))",
+              "expr": "sum(rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval])))",
               "interval": "",
               "legendFormat": "hit",
               "refId": "A"
             },
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]))",
+              "expr": "sum(rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval])))",
               "hide": false,
               "interval": "",
               "legendFormat": "miss",
@@ -30045,7 +30045,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 53
+            "y": 57
           },
           "hiddenSeries": false,
           "id": 345,
@@ -30141,7 +30141,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 61
+            "y": 65
           },
           "hiddenSeries": false,
           "id": 346,
@@ -30160,14 +30160,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -30237,7 +30237,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 61
+            "y": 65
           },
           "hiddenSeries": false,
           "id": 347,
@@ -30256,14 +30256,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -30333,7 +30333,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 69
+            "y": 73
           },
           "hiddenSeries": false,
           "id": 348,
@@ -30352,14 +30352,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -30429,7 +30429,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 69
+            "y": 73
           },
           "hiddenSeries": false,
           "id": 349,
@@ -30448,14 +30448,14 @@
           "options": {
             "alertThreshold": true
           },
-          "percentage": true,
+          "percentage": false,
           "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
-          "stack": false,
+          "stack": true,
           "steppedLine": false,
           "targets": [
             {
@@ -31186,7 +31186,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},

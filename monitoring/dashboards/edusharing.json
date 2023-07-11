@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1688988753499,
+  "iteration": 1689066915270,
   "links": [],
   "panels": [
     {
@@ -3233,7 +3233,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(mongodb_ss_wt_txn_transactions_committed{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-mongo.*\"}[2m])",
+              "expr": "rate(mongodb_ss_wt_txn_transactions_committed{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-mongo.*\"}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -3330,7 +3330,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(mongodb_ss_wt_txn_transactions_rolled_back{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-mongo.*\"}[2m])",
+              "expr": "rate(mongodb_ss_wt_txn_transactions_rolled_back{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-mongo.*\"}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -3427,7 +3427,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(mongodb_ss_wt_txn_update_conflicts{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-mongo.*\"}[2m])",
+              "expr": "rate(mongodb_ss_wt_txn_update_conflicts{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-mongo.*\"}[$__rate_interval])",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -12430,14 +12430,14 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]))",
+              "expr": "rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]))",
               "interval": "",
               "legendFormat": "hit",
               "refId": "A"
             },
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]))",
+              "expr": "rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]))",
               "hide": false,
               "interval": "",
               "legendFormat": "miss",
@@ -12631,7 +12631,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_main_client_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_main_client_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -12727,7 +12727,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_main_backend_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_main_backend_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -12823,7 +12823,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_main_s_resp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]) + irate(varnish_main_s_resp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_main_s_resp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + irate(varnish_main_s_resp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -12919,7 +12919,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_backend_beresp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m]) + irate(varnish_backend_beresp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_backend_beresp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval]) + irate(varnish_backend_beresp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-repository-service.*\"}[$__rate_interval])) by (pod)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -29669,14 +29669,14 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]))",
+              "expr": "rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]))",
               "interval": "",
               "legendFormat": "hit",
               "refId": "A"
             },
             {
               "exemplar": true,
-              "expr": "rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]))",
+              "expr": "rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) / (rate(varnish_main_cache_hit{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + rate(varnish_main_cache_miss{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]))",
               "hide": false,
               "interval": "",
               "legendFormat": "miss",
@@ -29869,7 +29869,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_main_client_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_main_client_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -29965,7 +29965,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_main_backend_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_main_backend_req{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -30061,7 +30061,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_main_s_resp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]) + irate(varnish_main_s_resp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_main_s_resp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + irate(varnish_main_s_resp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -30157,7 +30157,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(irate(varnish_backend_beresp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m]) + irate(varnish_backend_beresp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[2m])) by (pod)",
+              "expr": "sum(irate(varnish_backend_beresp_hdrbytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval]) + irate(varnish_backend_beresp_bodybytes{namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval])) by (pod)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -30238,7 +30238,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28
+            "y": 34
           },
           "hiddenSeries": false,
           "id": 307,
@@ -30258,7 +30258,103 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.8",
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "apache_up{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}",
+              "interval": "",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Apache - Status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "decimals": 0,
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 34
+          },
+          "hiddenSeries": false,
+          "id": 421,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -30332,8 +30428,8 @@
           "gridPos": {
             "h": 8,
             "w": 12,
-            "x": 12,
-            "y": 28
+            "x": 0,
+            "y": 42
           },
           "hiddenSeries": false,
           "id": 308,
@@ -30353,7 +30449,103 @@
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.5.8",
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "rate(apache_sent_kilobytes_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}[$__rate_interval])",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Apache - Sent rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "KBs",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 42
+          },
+          "hiddenSeries": false,
+          "id": 422,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -30411,9 +30603,199 @@
             "align": false,
             "alignLevel": null
           }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 50
+          },
+          "hiddenSeries": false,
+          "id": 423,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(apache_scoreboard{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}) by (state)",
+              "interval": "",
+              "legendFormat": "{{state}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Apache - Scoreboard",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": null,
+          "description": "",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 50
+          },
+          "hiddenSeries": false,
+          "id": 424,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "7.5.11",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "exemplar": true,
+              "expr": "sum(apache_workers{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-services-rendering-service.*\"}) by (state)",
+              "interval": "",
+              "legendFormat": "{{state}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Apache - Worker",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
-      "title": "edusharing-services-rendering-service (php)",
+      "title": "edusharing-services-rendering-service (php-apache)",
       "type": "row"
     }
   ],
@@ -30425,7 +30807,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "Prometheus",
           "value": "Prometheus"
         },
@@ -30508,5 +30890,5 @@
   "timezone": "",
   "title": "edusharing",
   "uid": "gAT9YMl7k",
-  "version": 15
+  "version": 18
 }

@@ -37,7 +37,7 @@ spec:
         - "-ec"
         - |
           if [[ ! "$(ls -A /bitnami/postgresql)" ]]; then
-            chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /bitnami/postgresql
+            chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /bitnami/postgresql
           fi
         volumeMounts:
         - name: data

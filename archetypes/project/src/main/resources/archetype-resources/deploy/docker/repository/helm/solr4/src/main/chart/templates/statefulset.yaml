@@ -35,7 +35,7 @@ spec:
         - "-ec"
         - |
           if [[ ! "$(ls -A /opt/alfresco/alf_data)" ]]; then
-            chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/alfresco/alf_data
+            chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/alfresco/alf_data
           fi
         volumeMounts:
         - name: data

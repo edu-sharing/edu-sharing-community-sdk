@@ -44,13 +44,13 @@ spec:
         - "-ec"
         - |
           if [[ ! "$(ls -A /opt/bitnami/tomcat/shared/classes/config/cluster)" ]]; then
-            chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/bitnami/tomcat/shared/classes/config/cluster
+            chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/bitnami/tomcat/shared/classes/config/cluster
           fi
           if [[ ! "$(ls -A /opt/bitnami/tomcat/shared/classes/config/node)" ]]; then
-            chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/bitnami/tomcat/shared/classes/config/node
+            chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/bitnami/tomcat/shared/classes/config/node
           fi
           if [[ ! "$(ls -A /opt/alfresco/alf_data)" ]]; then
-            chown -R {{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/alfresco/alf_data
+            chown -R {{ .Values.securityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }} /opt/alfresco/alf_data
           fi
         volumeMounts:
         - name: data

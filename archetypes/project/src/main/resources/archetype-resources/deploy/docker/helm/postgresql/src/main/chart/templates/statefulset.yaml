@@ -126,9 +126,9 @@ spec:
         - --disable-settings-metrics
         - --web.listen-address=:9114
         - --web.telemetry-path=/metrics
-        env:
-        - name: DATA_SOURCE_NAME
-          value: postgresql://{{ .Values.config.username }}:{{ .Values.config.password }}@127.0.0.1:5432/{{ .Values.config.database }}?sslmode=disable
+        envFrom:
+        - secretRef:
+            name: {{ include "edusharing_postgresql.name" . }}-env
         ports:
         - name: metrics
           containerPort: 9114

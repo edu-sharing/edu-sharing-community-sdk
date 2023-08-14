@@ -494,11 +494,11 @@ xmlstarlet ed -L \
 	hocon -f ${eduSConf} set "repository.mail.register.receiver" '"'"${my_mail_register_receiver}"'"'
 }
 
-[[ $(hocon -f ${eduSConf} get "repository.mail.report.receiver" 2>/dev/null) ]] && {
-  hocon -f ${eduSConf} unset "repository.mail.report.receiver"
+[[ $(hocon -f ${eduSConf} get "repository.mail.report.receivers" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "repository.mail.report.receivers"
 }
 [[ -n "${my_mail_report_receiver}" ]] && {
-	hocon -f ${eduSConf} set "repository.mail.report.receiver" '"'"${my_mail_report_receiver}"'"'
+	hocon -f ${eduSConf} set "repository.mail.report.receivers" "[\"${my_mail_report_receiver//,/\",\"}\"]"
 }
 
 [[ $(hocon -f ${eduSConf} get "repository.mail.server.smtp.host" 2>/dev/null) ]] && {

@@ -87,5 +87,6 @@ data:
         {{- end }}
         return (deliver);
       }
+      unset beresp.http.Via;
     }
 {{- end }}

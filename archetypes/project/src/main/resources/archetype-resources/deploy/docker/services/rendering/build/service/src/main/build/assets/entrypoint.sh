@@ -309,9 +309,9 @@ xmlstarlet ed -L \
 
 # audio video config
 videoConfFile="${RS_ROOT}/conf/audio-video.conf.php"
-[[ -n $rendering_audio_formats ]] && rendering_audio_formats="'${rendering_audio_formats//,/','}'"
-[[ -n $rendering_video_formats ]] && rendering_video_formats="'${rendering_video_formats//,/','}'"
-[[ -n $rendering_video_resolutions ]] && rendering_video_resolutions="'${rendering_video_resolutions//,/','}'"
+[[ -n $rendering_audio_formats ]] && rendering_audio_formats="'${rendering_audio_formats//,/\',\'}'"
+[[ -n $rendering_video_formats ]] && rendering_video_formats="'${rendering_video_formats//,/\',\'}'"
+[[ -n $rendering_video_resolutions ]] && rendering_video_resolutions="'${rendering_video_resolutions//,/\',\'}'"
 
 sed -i 's|const AUDIO_FORMATS.*|const AUDIO_FORMATS = ['"${rendering_audio_formats}"'];|' "${videoConfFile}"
 sed -i 's|const VIDEO_FORMATS.*|const VIDEO_FORMATS = ['"${rendering_video_formats}"'];|' "${videoConfFile}"

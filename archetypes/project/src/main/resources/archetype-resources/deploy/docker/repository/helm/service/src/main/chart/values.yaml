@@ -216,8 +216,12 @@ config:
         connect: ""
         default: ""
         font: ""
+        frame: ""
         img: ""
+        media: ""
+        object: ""
         script: ""
+        style: ""
       session:
         timeout: 60
 

@@ -75,6 +75,9 @@ data:
         {{- end }}
         return (deliver);
       }
-      unset beresp.http.Via;
+    }
+
+    sub vcl_deliver {
+      unset resp.http.Via;
     }
 {{- end }}

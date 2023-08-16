@@ -6,19 +6,19 @@ metadata:
 data:
 {{- with .Values.config.override.config.application.client }}
   config-application-client: |
-    {{ . | nindent 4 }}
+    {{ . | indent 4 }}
 {{- end }}
 {{- with .Values.config.override.config.application.server }}
   config-application-server: |
-    {{ . | nindent 4 }}
+    {{ . | indent 4 }}
 {{- end }}
 {{- with .Values.config.override.logging.application }}
   logging-application: |
-    {{ . | nindent 4 }}
+    {{ . | indent 4 }}
 {{- end }}
 {{- with .Values.config.override.logging.server }}
   logging-server: |
-    {{ . | nindent 4 }}
+    {{ . | indent 4 }}
 {{- end }}
 {{- if .Values.proxy.enabled }}
   proxy-config: |
@@ -87,6 +87,9 @@ data:
         {{- end }}
         return (deliver);
       }
-      unset beresp.http.Via;
+    }
+
+    sub vcl_deliver {
+      unset resp.http.Via;
     }
 {{- end }}

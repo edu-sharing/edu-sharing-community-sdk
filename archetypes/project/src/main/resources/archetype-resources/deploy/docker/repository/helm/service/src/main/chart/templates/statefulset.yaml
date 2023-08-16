@@ -121,7 +121,7 @@ spec:
         {{- end }}
         {{- with .Values.config.override.logging.application }}
         - name: file
-          mountPath: /opt/bitnami/tomcat/webapps/alfresco/WEB-INF/classes/log4j2.xml
+          mountPath: /opt/bitnami/tomcat/webapps/alfresco/WEB-INF/log4j2-alfresco.xml
           subPath: logging-application
         {{- end }}
         {{- with .Values.config.override.logging.server }}

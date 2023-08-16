@@ -59,7 +59,7 @@ rendering_rendermoodle_category_id="${SERVICES_RENDERING_RENDERMOODLE_CATEGORY_I
 
 repository_service_base="http://${repository_service_host}:${repository_service_port}/edu-sharing"
 
-rendering_audio_formats="${SERVICES_RENDERING_ADUIO_FORMATS:-"mp3"}"
+rendering_audio_formats="${SERVICES_RENDERING_AUDIO_FORMATS:-"mp3"}"
 rendering_video_formats="${SERVICES_RENDERING_VIDEO_FORMATS:-"mp4,webm"}"
 rendering_video_resolutions="${SERVICES_RENDERING_VIDEO_RESOLUTIONS:-"240,720,1080"}"
 rendering_video_default_resolution="${SERVICES_RENDERING_VIDEO_DEFAULT_RESOLUTION:-"720"}"

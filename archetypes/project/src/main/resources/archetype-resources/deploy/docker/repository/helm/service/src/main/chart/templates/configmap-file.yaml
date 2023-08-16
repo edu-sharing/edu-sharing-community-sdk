@@ -5,20 +5,16 @@ metadata:
   labels: {{ include "edusharing_repository_service.labels.app" . | nindent 4 }}
 data:
 {{- with .Values.config.override.config.application.client }}
-  config-application-client: |
-    {{ . | indent 4 }}
+  config-application-client: | {{ . | nindent 4 }}
 {{- end }}
 {{- with .Values.config.override.config.application.server }}
-  config-application-server: |
-    {{ . | indent 4 }}
+  config-application-server: | {{ . | nindent 4 }}
 {{- end }}
 {{- with .Values.config.override.logging.application }}
-  logging-application: |
-    {{ . | indent 4 }}
+  logging-application: | {{ . | nindent 4 }}
 {{- end }}
 {{- with .Values.config.override.logging.server }}
-  logging-server: |
-    {{ . | indent 4 }}
+  logging-server: | {{ . | nindent 4 }}
 {{- end }}
 {{- if .Values.proxy.enabled }}
   proxy-config: |

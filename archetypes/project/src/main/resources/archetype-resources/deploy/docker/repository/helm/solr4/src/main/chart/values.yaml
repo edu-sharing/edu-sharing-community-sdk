@@ -79,6 +79,8 @@ config:
     relabelings: []
 
   override:
+    application:
+      common: ""
     logging:
       application: ""
       server: ""

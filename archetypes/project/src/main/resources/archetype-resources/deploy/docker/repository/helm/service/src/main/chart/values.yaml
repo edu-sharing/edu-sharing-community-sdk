@@ -254,7 +254,7 @@ config:
     config:
       application:
         client: ""
-        server: ""
+        mds: ""
     logging:
       application: ""
       server: ""

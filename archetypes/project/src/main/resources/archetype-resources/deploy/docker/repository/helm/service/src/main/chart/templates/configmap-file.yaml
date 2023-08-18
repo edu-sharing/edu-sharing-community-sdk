@@ -7,8 +7,8 @@ data:
 {{- with .Values.config.override.config.application.client }}
   config-application-client: | {{ . | nindent 4 }}
 {{- end }}
-{{- with .Values.config.override.config.application.server }}
-  config-application-server: | {{ . | nindent 4 }}
+{{- with .Values.config.override.config.application.mds }}
+  config-application-mds: | {{ . | nindent 4 }}
 {{- end }}
 {{- with .Values.config.override.logging.application }}
   logging-application: | {{ . | nindent 4 }}

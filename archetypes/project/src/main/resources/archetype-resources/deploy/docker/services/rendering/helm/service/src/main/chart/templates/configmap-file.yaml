@@ -5,8 +5,7 @@ metadata:
   labels: {{ include "edusharing_services_rendering.labels.app" . | nindent 4 }}
 data:
 {{- with .Values.config.override.logging.application }}
-  logging-application: |
-    {{ . | nindent 4 }}
+  logging-application: | {{ . | nindent 4 }}
 {{- end }}
 {{- if .Values.proxy.enabled }}
   proxy-config: |

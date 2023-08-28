@@ -445,8 +445,6 @@ sidecar:
 
   proxyMetrics:
 
-    enabled: true
-
     relabelings: []
 
     resources:

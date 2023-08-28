@@ -303,8 +303,7 @@ spec:
         {{- with .Values.sidecar.proxyCache.securityContext }}
         securityContext: {{ toYaml . | nindent 10 }}
         {{- end }}
-      {{- end }}
-      {{- if and .Values.proxy.enabled .Values.sidecar.proxyMetrics.enabled }}
+      {{- if .Values.config.metrics.enabled }}
       - name: {{ include "edusharing_repository_service.name" . }}-proxy-metrics
         image: {{ include "edusharing_repository_service.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-varnish_exporter:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
@@ -323,6 +322,7 @@ spec:
         {{- with .Values.sidecar.proxyMetrics.securityContext }}
         securityContext: {{ toYaml . | nindent 10 }}
         {{- end }}
+      {{- end }}
       {{- end }}
       {{- with .Values.global.image.pullSecrets }}
       imagePullSecrets: {{ toYaml . | nindent 8 }}

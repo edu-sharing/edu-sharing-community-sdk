@@ -130,7 +130,7 @@ done
 
 ### config #############################################################################################################
 
-configs=(defaults plugins cluster node)
+configs=(cluster node)
 
 for config in "${configs[@]}"; do
 	if [[ ! -f tomcat/shared/classes/config/$config/version.json ]]; then

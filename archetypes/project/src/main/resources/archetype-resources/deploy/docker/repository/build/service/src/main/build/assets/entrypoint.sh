@@ -133,7 +133,9 @@ done
 
 ### config #############################################################################################################
 
-[[ -f "${eduCConfX}"]] && cp "${eduCConfX}" "${eduCConf}"
+[[ -f "${eduCConfX}" ]] && {
+  cp "${eduCConfX}" "${eduCConf}"
+}
 
 configs=(cluster node)
 

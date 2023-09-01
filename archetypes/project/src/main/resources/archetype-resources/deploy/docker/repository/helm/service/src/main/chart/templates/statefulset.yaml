@@ -111,7 +111,7 @@ spec:
           mountPath: /opt/alfresco/alf_data
         {{- with .Values.config.override.config.application.client }}
         - name: file
-          mountPath: /opt/bitnami/tomcat/shared/classes/config/defaults/client.config.xml
+          mountPath: /opt/bitnami/tomcat/shared/classes/config/defaults/client.config.override.xml
           subPath: config-application-client
         {{- end }}
         {{- with .Values.config.override.config.application.mds }}

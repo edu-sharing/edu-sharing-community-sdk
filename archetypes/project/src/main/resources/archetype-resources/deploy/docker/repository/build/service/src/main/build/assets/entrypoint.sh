@@ -102,6 +102,7 @@ catCConf="tomcat/conf/Catalina/localhost/edu-sharing.xml"
 catWConf="tomcat/webapps/edu-sharing/WEB-INF/web.xml"
 
 eduCConf="tomcat/shared/classes/config/defaults/client.config.xml"
+eduCConfX="tomcat/shared/classes/config/defaults/client.config.override.xml"
 
 alfProps="tomcat/shared/classes/config/cluster/alfresco-global.properties"
 eduSConf="tomcat/shared/classes/config/cluster/edu-sharing.deployment.conf"
@@ -135,6 +136,8 @@ done
 }
 
 ### config #############################################################################################################
+
+[[ -f "${eduCConfX}"]] && cp "${eduCConfX}" "${eduCConf}"
 
 configs=(cluster node)
 
@@ -714,3 +717,5 @@ done
 . /opt/bitnami/scripts/tomcat-env.sh
 
 exec "$@"
+
+}

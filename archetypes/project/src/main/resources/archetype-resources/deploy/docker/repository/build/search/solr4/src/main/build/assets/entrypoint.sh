@@ -64,6 +64,9 @@ grep -q   '^[#]*\s*alfresco\.port=' "${solr4Wor}" || echo "alfresco.port=${repos
 sed -i -r 's|^[#]*\s*alfresco\.secureComms=.*|alfresco.secureComms=none|' "${solr4Wor}"
 grep -q   '^[#]*\s*alfresco\.secureComms=' "${solr4Wor}" || echo "alfresco.secureComms=none" >> "${solr4Wor}"
 
+sed -i -r 's|^[#]*\s*solr\.suggester\.enabled=.*|solr.suggester.enabled=false|' "${solr4Wor}"
+grep -q   '^[#]*\s*solr\.suggester\.enabled=' "${solr4Wor}" || echo "solr.suggester.enabled=false" >> "${solr4Wor}"
+
 if [[ -n $my_config ]] ; then
   echo "\n${my_config}" >> "${solr4Wor}"
 fi

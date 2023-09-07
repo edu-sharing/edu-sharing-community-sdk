@@ -39,6 +39,7 @@
             <configuration>
               <includeArtifactIds>
                 edu_sharing-community-repository-plugin-elastic-deploy-docker-compose,
+                edu_sharing-community-repository-plugin-kafka-deploy-docker-compose,
                 edu_sharing-community-repository-plugin-mongo-deploy-docker-compose,
                 edu_sharing-enterprise-repository-plugin-antivirus-deploy-docker-compose,
                 edu_sharing-enterprise-repository-plugin-cluster-deploy-docker-compose,
@@ -150,6 +151,29 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>edu_sharing-community-repository-plugin-elastic-deploy-docker-compose</artifactId>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>repository.kafka</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_KAFKA_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-community-repository-plugin-kafka-deploy-docker-compose</artifactId>
         </dependency>
 
       </dependencies>

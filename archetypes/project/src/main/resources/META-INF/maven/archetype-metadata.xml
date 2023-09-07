@@ -27,6 +27,9 @@
     <requiredProperty key="REPOSITORY_ELASTIC_ENABLED">
       <defaultValue>true</defaultValue>
     </requiredProperty>
+    <requiredProperty key="REPOSITORY_KAFKA_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
     <requiredProperty key="REPOSITORY_MONGO_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
@@ -34,6 +37,9 @@
       <defaultValue>false</defaultValue>
     </requiredProperty>
     <requiredProperty key="REPOSITORY_TRANSFORM_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="SERVICE_CONNECTOR_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
     <requiredProperty key="gitignore">
@@ -189,6 +195,30 @@
                 <module dir="rediscluster"
                         id="${rootArtifactId}-deploy-docker-build-rediscluster"
                         name="${rootArtifactId}-deploy-docker-build-rediscluster">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="varnish"
+                        id="${rootArtifactId}-deploy-docker-build-varnish"
+                        name="${rootArtifactId}-deploy-docker-build-varnish">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="varnish_exporter"
+                        id="${rootArtifactId}-deploy-docker-build-varnish_exporter"
+                        name="${rootArtifactId}-deploy-docker-build-varnish_exporter">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>

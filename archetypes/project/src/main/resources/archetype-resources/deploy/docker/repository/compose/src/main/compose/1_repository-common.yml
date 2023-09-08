@@ -23,21 +23,21 @@ services:
       - "1025"
       - "1080"
 
-  repository-search-solr6:
-    image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-search-solr6:${docker.tag}"
-    container_name: "repository-search-solr6_${COMPOSE_PROJECT_NAME}"
+  repository-search-solr:
+    image: "${docker.repository}/${docker.prefix}-deploy-docker-repository-build-search-solr:${docker.tag}"
+    container_name: "repository-search-solr_${COMPOSE_PROJECT_NAME}"
     environment:
       ALLOW_EMPTY_PASSWORD: "yes"
       CATALINA_OPTS: >-
-        -Xms${REPOSITORY_SEARCH_SOLR6_JAVA_XMS:-1g}
-        -Xmx${REPOSITORY_SEARCH_SOLR6_JAVA_XMX:-1g}
+        -Xms${REPOSITORY_SEARCH_SOLR_JAVA_XMS:-1g}
+        -Xmx${REPOSITORY_SEARCH_SOLR_JAVA_XMX:-1g}
         -Dcom.sun.management.jmxremote
         -Dcom.sun.management.jmxremote.authenticate=false
         -Dcom.sun.management.jmxremote.port=7199
         -Dcom.sun.management.jmxremote.ssl=false
         -javaagent:/opt/alfresco/tomcat/agent/jmx_prometheus_javaagent.jar=9090:/opt/alfresco/tomcat/agent/jmx-exporter-config.yaml
-      REPOSITORY_SEARCH_SOLR6_HOST: repository-search-solr6
-      REPOSITORY_SEARCH_SOLR6_PORT: "8080"
+      REPOSITORY_SEARCH_SOLR_HOST: repository-search-solr
+      REPOSITORY_SEARCH_SOLR_PORT: "8080"
       REPOSITORY_SERVICE_HOST: repository-service
       REPOSITORY_SERVICE_PORT: "8080"
       TOMCAT_INSTALL_DEFAULT_WEBAPPS: "no"
@@ -46,8 +46,8 @@ services:
       - "8080"
       - "9090"
     volumes:
-      - "repository-search-solr6-volume-data:/opt/alfresco/alf_data"
-      - "repository-search-solr6-volume-solrhome:/opt/alfresco/solr6/solrhome"
+      - "repository-search-solr-volume-data:/opt/alfresco/alf_data"
+      - "repository-search-solr-volume-solrhome:/opt/alfresco/solr/solrhome"
     depends_on:
       - repository-service
 
@@ -73,8 +73,8 @@ services:
       REPOSITORY_DATABASE_PASS: "${REPOSITORY_DATABASE_PASS:-repository}"
       REPOSITORY_DATABASE_PORT: "5432"
       REPOSITORY_DATABASE_USER: "${REPOSITORY_DATABASE_USER:-repository}"
-      REPOSITORY_SEARCH_SOLR6_HOST: repository-search-solr6
-      REPOSITORY_SEARCH_SOLR6_PORT: "8080"
+      REPOSITORY_SEARCH_SOLR_HOST: repository-search-solr
+      REPOSITORY_SEARCH_SOLR_PORT: "8080"
       REPOSITORY_SERVICE_ADMIN_PASS: "${REPOSITORY_SERVICE_ADMIN_PASS:-admin}"
       REPOSITORY_SERVICE_GUEST_PASS: "${REPOSITORY_SERVICE_GUEST_PASS:-}"
       REPOSITORY_SERVICE_GUEST_USER: "${REPOSITORY_SERVICE_GUEST_USER:-}"
@@ -174,8 +174,8 @@ services:
 
 volumes:
   repository-database-volume-data:
-  repository-search-solr6-volume-data:
-  repository-search-solr6-volume-solrhome:
+  repository-search-solr-volume-data:
+  repository-search-solr-volume-solrhome:
   repository-service-volume-config-cluster:
   repository-service-volume-config-node:
   repository-service-volume-data:

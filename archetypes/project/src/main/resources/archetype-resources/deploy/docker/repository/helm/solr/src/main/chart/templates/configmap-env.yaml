@@ -23,9 +23,9 @@ data:
   {{- with .Values.config.override.application.common }}
   REPOSITORY_SEARCH_SOLR4_CONFIG: | {{ . | nindent 4 }}
   {{- end }}
-  REPOSITORY_SEARCH_SOLR6_BIND: {{ if .Values.global.cluster.istio.enabled }}"127.0.0.1"{{ else }}"0.0.0.0"{{ end }}
-  REPOSITORY_SEARCH_SOLR6_HOST: {{ include "edusharing_repository_search_solr6.name" . | quote }}
-  REPOSITORY_SEARCH_SOLR6_PORT: {{ .Values.service.port.api | quote }}
+  REPOSITORY_SEARCH_SOLR_BIND: {{ if .Values.global.cluster.istio.enabled }}"127.0.0.1"{{ else }}"0.0.0.0"{{ end }}
+  REPOSITORY_SEARCH_SOLR_HOST: {{ include "edusharing_repository_search_solr.name" . | quote }}
+  REPOSITORY_SEARCH_SOLR_PORT: {{ .Values.service.port.api | quote }}
   REPOSITORY_SERVICE_HOST: {{ .Values.config.repository.host | quote }}
   REPOSITORY_SERVICE_PORT: {{ .Values.config.repository.port | quote }}
   TOMCAT_INSTALL_DEFAULT_WEBAPPS: "no"

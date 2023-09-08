@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "edusharing_repository_search_solr6.name" . }}
-  labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
+  name: {{ include "edusharing_repository_search_solr.name" . }}
+  labels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 4 }}
     {{- if .Values.multistage.enabled }}
     app.kubernetes.io/stage: ""
     {{- end }}
 spec:
   type: ClusterIP
-  selector: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
+  selector: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 4 }}
     {{- if .Values.multistage.enabled }}
     app.kubernetes.io/stage: {{ .Values.multistage.current | quote }}
     {{- end }}
@@ -20,8 +20,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "edusharing_repository_search_solr6.name" . }}-headless
-  labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
+  name: {{ include "edusharing_repository_search_solr.name" . }}-headless
+  labels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 4 }}
     {{- if .Values.multistage.enabled }}
     app.kubernetes.io/stage: ""
     {{- end }}
@@ -29,7 +29,7 @@ spec:
   type: ClusterIP
   clusterIP: None
   publishNotReadyAddresses: true
-  selector: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
+  selector: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 4 }}
     {{- if .Values.multistage.enabled }}
     app.kubernetes.io/stage: ""
     {{- end }}
@@ -41,15 +41,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "edusharing_repository_search_solr6.name" . }}-metrics
-  labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
+  name: {{ include "edusharing_repository_search_solr.name" . }}-metrics
+  labels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 4 }}
     app.kubernetes.io/component: "metrics"
     {{- if .Values.multistage.enabled }}
     app.kubernetes.io/stage: ""
     {{- end }}
 spec:
   type: ClusterIP
-  selector: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
+  selector: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 4 }}
     {{- if .Values.multistage.enabled }}
     app.kubernetes.io/stage: ""
     {{- end }}

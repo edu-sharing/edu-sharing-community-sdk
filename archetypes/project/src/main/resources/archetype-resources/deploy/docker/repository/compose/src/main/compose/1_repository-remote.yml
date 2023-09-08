@@ -8,8 +8,8 @@ services:
   repository-mailcatcher:
     image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-build-mailcatcher:${docker.tag}"
 
-  repository-search-solr6:
-    image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-repository-build-search-solr6:${docker.tag}"
+  repository-search-solr:
+    image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-repository-build-search-solr:${docker.tag}"
 
   repository-service:
     image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-repository-build-service:${docker.tag}"

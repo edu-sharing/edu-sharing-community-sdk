@@ -8,7 +8,7 @@ services:
   repository-mailcatcher:
     restart: unless-stopped
 
-  repository-search-solr6:
+  repository-search-solr:
     restart: unless-stopped
 
   repository-service:

@@ -11,13 +11,13 @@ services:
       - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_MAILCATCHER_PORT_SMTP:-8025}:1025"
       - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_MAILCATCHER_PORT_HTTP:-8026}:1080"
 
-  repository-search-solr6:
-    command: ["solr6/solr/bin/solr", "start", "-f","-p","8080", "-Dcreate.alfresco.defaults=alfresco,archive"]
+  repository-search-solr:
+    command: ["solr/solr/bin/solr", "start", "-f","-p","8080", "-Dcreate.alfresco.defaults=alfresco,archive"]
     environment:
       JPDA_ADDRESS: "0.0.0.0:5005"
     ports:
-      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_SEARCH_SOLR6_PORT_HTTP:-8200}:8080"
-      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_SEARCH_SOLR6_PORT_JPDA:-8201}:5005"
+      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_SEARCH_SOLR_PORT_HTTP:-8200}:8080"
+      - "${COMMON_BIND_HOST:-127.0.0.1}:${REPOSITORY_SEARCH_SOLR_PORT_JPDA:-8201}:5005"
 
   repository-service:
     command: ["catalina.sh", "jpda", "run"]

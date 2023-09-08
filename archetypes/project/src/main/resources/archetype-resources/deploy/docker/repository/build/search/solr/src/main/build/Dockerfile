@@ -16,7 +16,7 @@ RUN set -eux \
 ########################################################################################################################
 
 ENV ALF_HOME /opt/alfresco
-ENV PATH $ALF_HOME/bin:$ALF_HOME/solr6/bin:$PATH
+ENV PATH $ALF_HOME/bin:$ALF_HOME/solr/bin:$PATH
 
 WORKDIR $ALF_HOME
 
@@ -33,7 +33,7 @@ RUN set -eux \
 
 USER worker
 
-### Alfresco Solr6 #####################################################################################################
+### Alfresco solr #####################################################################################################
 
 COPY --chown=worker:worker artifacts/alfresco-search-services-${org.alfresco:alfresco-search-services:zip.version}.zip /tmp/alfresco-search-services.zip
 
@@ -42,19 +42,19 @@ RUN set -eux \
 	&& unzip /tmp/alfresco-search-services.zip -d /tmp/install/alfresco-search-services \
 	&& rm -f /tmp/alfresco-search-services.zip \
 	&& mkdir -p alf_data \
-	&& mkdir -p solr6 \
-    && mv /tmp/install/alfresco-search-services/alfresco-search-services/* solr6
+	&& mkdir -p solr \
+    && mv /tmp/install/alfresco-search-services/alfresco-search-services/* solr
 
-COPY --chown=worker:worker assets/keystores/solr/ solr6/solrhome/keystore/
+COPY --chown=worker:worker assets/keystores/solr/ solr/solrhome/keystore/
 
-COPY --chown=worker:worker assets/security.json solr6/solrhome/security.json
+COPY --chown=worker:worker assets/security.json solr/solrhome/security.json
 
 ########################################################################################################################
 
 EXPOSE 8080
 
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["solr6/solr/bin/solr", "start", "-f","-p","8080", "-Dcreate.alfresco.defaults=alfresco,archive"]
+CMD ["solr/solr/bin/solr", "start", "-f","-p","8080", "-Dcreate.alfresco.defaults=alfresco,archive"]
 
 VOLUME [ "/opt/alfresco/alf_data" ]
 

@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "edusharing_repository_search_solr6.name" . }}
-  labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 4 }}
+  name: {{ include "edusharing_repository_search_solr.name" . }}
+  labels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 4 }}
     {{- if .Values.multistage.enabled }}
     app.kubernetes.io/stage: ""
     {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
-    matchLabels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 6 }}
+    matchLabels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 6 }}
       {{- if .Values.multistage.enabled }}
       app.kubernetes.io/stage: ""
       {{- end }}
-  serviceName: {{ include "edusharing_repository_search_solr6.name" . }}-headless
+  serviceName: {{ include "edusharing_repository_search_solr.name" . }}-headless
   template:
     metadata:
-      name: {{ include "edusharing_repository_search_solr6.name" . }}
-      labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 8 }}
+      name: {{ include "edusharing_repository_search_solr.name" . }}
+      labels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 8 }}
          {{- if .Values.multistage.enabled }}
         app.kubernetes.io/stage: ""
          {{- end }}
@@ -36,7 +36,7 @@ spec:
     spec:
       initContainers:
       {{- if (default .Values.global.cluster.storage.data.permission .Values.persistence.data.permission) }}
-      - name: {{ include "edusharing_repository_search_solr6.name" . }}-init-permission
+      - name: {{ include "edusharing_repository_search_solr.name" . }}-init-permission
         image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           command:
@@ -57,15 +57,15 @@ spec:
         {{- end }}
       {{- end }}
       containers:
-      - name: {{ include "edusharing_repository_search_solr6.name" . }}
-        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-repository-build-search-solr6:{{ .Values.image.tag }}
+      - name: {{ include "edusharing_repository_search_solr.name" . }}
+        image: {{ .Values.image.registry }}/{{ .Values.image.repository }}/{{ .Values.image.prefix }}-deploy-docker-repository-build-search-solr:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         {{- if default .Values.global.debug .Values.debug }}
           args: [ "catalina.sh", "jpda", "run" ]
         {{- end }}
           envFrom:
             - configMapRef:
-            name: {{ include "edusharing_repository_search_solr6.name" . }}-env
+            name: {{ include "edusharing_repository_search_solr.name" . }}-env
           ports:
             - name: api
               containerPort: 8080
@@ -93,7 +93,7 @@ spec:
         {{- with .Values.startupProbe }}
           startupProbe:
             httpGet:
-            path: /solr6
+            path: /solr
               port: api
             failureThreshold: {{ .failureThreshold }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
@@ -113,7 +113,7 @@ spec:
         {{- with .Values.readinessProbe }}
           readinessProbe:
             httpGet:
-            path: /solr6
+            path: /solr
               port: api
             failureThreshold: {{ .failureThreshold }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
@@ -150,7 +150,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             - topologyKey: kubernetes.io/hostname
               labelSelector:
-              matchLabels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 16 }}
+              matchLabels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 16 }}
                 {{- if .Values.multistage.enabled }}
                 app.kubernetes.io/stage: ""
                 {{- end }}
@@ -160,7 +160,7 @@ spec:
               podAffinityTerm:
                 topologyKey: kubernetes.io/hostname
                 labelSelector:
-                matchLabels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 18 }}
+                matchLabels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 18 }}
                   {{- if .Values.multistage.enabled }}
                   app.kubernetes.io/stage: ""
                   {{- end }}
@@ -170,11 +170,11 @@ spec:
       volumes:
         - name: file
           configMap:
-            name: {{ include "edusharing_repository_search_solr6.name" . }}-file
+            name: {{ include "edusharing_repository_search_solr.name" . }}-file
   volumeClaimTemplates:
     - metadata:
         name: data
-      labels: {{ include "edusharing_repository_search_solr6.labels.app" . | nindent 8 }}
+      labels: {{ include "edusharing_repository_search_solr.labels.app" . | nindent 8 }}
       spec: {{ merge .Values.persistence.data.spec .Values.global.cluster.storage.data.spec | toYaml | nindent 6 }}
 {{- if .Values.multistage.enabled }}
 {{- range .Values.multistage.stages }}
@@ -182,19 +182,19 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ include "edusharing_repository_search_solr6.name" $ }}-{{ .name }}
-  labels: {{ include "edusharing_repository_search_solr6.labels.app" $ | nindent 4 }}
+  name: {{ include "edusharing_repository_search_solr.name" $ }}-{{ .name }}
+  labels: {{ include "edusharing_repository_search_solr.labels.app" $ | nindent 4 }}
     app.kubernetes.io/stage: {{ .name }}
 spec:
   replicas: {{ $.Values.replicaCount }}
   selector:
-    matchLabels: {{ include "edusharing_repository_search_solr6.labels.app" $ | nindent 6 }}
+    matchLabels: {{ include "edusharing_repository_search_solr.labels.app" $ | nindent 6 }}
       app.kubernetes.io/stage: {{ .name }}
-  serviceName: {{ include "edusharing_repository_search_solr6.name" $ }}-headless-{{ .name }}
+  serviceName: {{ include "edusharing_repository_search_solr.name" $ }}-headless-{{ .name }}
   template:
     metadata:
-      name: {{ include "edusharing_repository_search_solr6.name" $ }}
-      labels: {{ include "edusharing_repository_search_solr6.labels.app" $ | nindent 8 }}
+      name: {{ include "edusharing_repository_search_solr.name" $ }}
+      labels: {{ include "edusharing_repository_search_solr.labels.app" $ | nindent 8 }}
         app.kubernetes.io/stage: {{ .name }}
       annotations:
         checksum/configmap-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") $ | sha256sum | trunc 63 }}

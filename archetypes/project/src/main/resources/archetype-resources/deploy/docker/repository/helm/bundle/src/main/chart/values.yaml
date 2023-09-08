@@ -92,16 +92,16 @@ edusharing_repository_search_elastic_index:
 
 ########################################################################################################################
 
-edusharing_repository_search_solr6:
+edusharing_repository_search_solr:
 
   enabled: true
 
-  nameOverride: &searchSolr6NameOverride edusharing-repository-search-solr6
+  nameOverride: &searchSolrNameOverride edusharing-repository-search-solr
 
   service:
 
     port:
-      api: &searchSolr6ServicePortApi 9200
+      api: &searchSolrServicePortApi 9200
 
   config:
 
@@ -165,9 +165,9 @@ edusharing_repository_service:
         host: *searchElasticNameOverride
         port: *searchElasticServicePortApi
 
-      solr6:
-        host: *searchSolr6NameOverride
-        port: *searchSolr6ServicePortApi
+      solr:
+        host: *searchSolrNameOverride
+        port: *searchSolrServicePortApi
 
     transform:
 

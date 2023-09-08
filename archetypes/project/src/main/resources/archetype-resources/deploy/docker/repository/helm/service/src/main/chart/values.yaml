@@ -271,8 +271,8 @@ config:
       host: edusharing-repository-search-elastic-index
       port: 9200
 
-    solr6:
-      host: edusharing-repository-search-solr6
+    solr:
+      host: edusharing-repository-search-solr
       port: 8080
 
   transform:

@@ -21,10 +21,10 @@ dependencies:
     alias: edusharing_repository_rediscluster
     condition: edusharing_repository_rediscluster.enabled
 
-  - name: ${helm.prefix}-repository-search-solr6
+  - name: ${helm.prefix}-repository-search-solr
     version: ${helm.chart.version}
-    alias: edusharing_repository_search_solr6
-    condition: edusharing_repository_search_solr6.enabled
+    alias: edusharing_repository_search_solr
+    condition: edusharing_repository_search_solr.enabled
 
   - name: ${helm.prefix}-repository-service
     version: ${helm.chart.version}

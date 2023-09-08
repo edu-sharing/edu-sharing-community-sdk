@@ -41,7 +41,7 @@ global:
 # LOCAL
 ########################################################################################################################
 
-nameOverride: edusharing-repository-search-solr6
+nameOverride: edusharing-repository-search-solr
 
 image:
   prefix: ${docker.prefix}

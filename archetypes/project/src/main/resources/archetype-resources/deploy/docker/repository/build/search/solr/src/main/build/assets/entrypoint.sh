@@ -3,10 +3,10 @@ set -eu
 
 ########################################################################################################################
 
-my_bind="${REPOSITORY_SEARCH_SOLR6_BIND:-"0.0.0.0"}"
+my_bind="${REPOSITORY_SEARCH_SOLR_BIND:-"0.0.0.0"}"
 
-my_host="${REPOSITORY_SEARCH_SOLR6_HOST:-repository-search-solr6}"
-my_port="${REPOSITORY_SEARCH_SOLR6_PORT:-8080}"
+my_host="${REPOSITORY_SEARCH_SOLR_HOST:-repository-search-solr}"
+my_port="${REPOSITORY_SEARCH_SOLR_PORT:-8080}"
 
 repository_service_host="${REPOSITORY_SERVICE_HOST:-repository-service}"
 repository_service_port="${REPOSITORY_SERVICE_PORT:-8080}"
@@ -15,8 +15,8 @@ repository_service_base="http://${repository_service_host}:${repository_service_
 
 solrBase="/opt/alfresco"
 solrData="${solrBase}/alf_data"
-solrHome="${solrBase}/solr6/solrhome"
-solrEnvs="${solrBase}/solr6/solr.in.sh"
+solrHome="${solrBase}/solr/solrhome"
+solrEnvs="${solrBase}/solr/solr.in.sh"
 solrCoreTpl="${solrHome}/templates/rerank/conf/solrcore.properties"
 solrSchemaTpl="${solrHome}/templates/rerank/conf/schema.xml"
 solrConfShared="${solrHome}/conf/shared.properties"
@@ -39,7 +39,7 @@ export CATALINA_OPTS="-Dfile.encoding=UTF-8 $CATALINA_OPTS"
 export CATALINA_OPTS="-Duser.country=DE $CATALINA_OPTS"
 export CATALINA_OPTS="-Duser.language=de $CATALINA_OPTS"
 
-### Alfresco solr6 #####################################################################################################
+### Alfresco solr #####################################################################################################
 
 sed -i -r 's|^[#]*\s*alfresco\.host=.*|alfresco.host='"${repository_service_host}"'|' "${solrCoreTpl}"
 grep -q '^[#]*\s*alfresco\.host=' "${solrCoreTpl}" || echo "alfresco.host=${repository_service_host}" >>"${solrCoreTpl}"

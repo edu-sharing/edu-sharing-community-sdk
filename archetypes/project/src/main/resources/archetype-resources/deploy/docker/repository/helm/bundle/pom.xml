@@ -170,18 +170,18 @@
             </configuration>
           </execution>
           <execution>
-            <id>edusharing_repository_search_solr6</id>
+            <id>edusharing_repository_search_solr</id>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
             <phase>generate-sources</phase>
             <configuration>
               <includeArtifactIds>
-                ${rootArtifactId}-deploy-docker-repository-helm-solr6
+                ${rootArtifactId}-deploy-docker-repository-helm-solr
               </includeArtifactIds>
               <type>tar.gz</type>
               <classifier>bin</classifier>
-              <outputDirectory>${project.build.directory}/chart/charts/${helm.prefix}-repository-search-solr6
+              <outputDirectory>${project.build.directory}/chart/charts/${helm.prefix}-repository-search-solr
               </outputDirectory>
             </configuration>
           </execution>
@@ -311,7 +311,7 @@
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>${rootArtifactId}-deploy-docker-repository-helm-solr6
+      <artifactId>${rootArtifactId}-deploy-docker-repository-helm-solr
       </artifactId>
       <type>tar.gz</type>
       <classifier>bin</classifier>

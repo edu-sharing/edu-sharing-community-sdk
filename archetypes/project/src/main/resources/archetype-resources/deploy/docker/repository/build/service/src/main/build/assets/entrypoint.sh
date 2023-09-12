@@ -719,5 +719,3 @@ done
 . /opt/bitnami/scripts/tomcat-env.sh
 
 exec "$@"
-
-}

@@ -188,6 +188,26 @@ config:
     username: ""
     password: ""
 
+  hazelcast:
+    heartbeat:
+      failuredetector:
+        type: deadline
+      interval:
+        seconds: 5
+    max:
+      "no":
+        heartbeat:
+          seconds: 15
+    phiaccrual:
+      failuredetector:
+        min:
+          std:
+            dev:
+              millis: 100
+        threshold: 10
+        sample:
+          size: 200
+
   home:
     appid: local
     cookieAttributes: ""

@@ -29,7 +29,7 @@ spec:
       initContainers:
       {{- if (default .Values.global.cluster.storage.data.permission .Values.persistence.data.permission) }}
       - name: {{ include "edusharing_rediscluster.name" . }}-init-permission
-        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
+        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.images.minideb }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         command:
         - "/bin/bash"
@@ -50,7 +50,7 @@ spec:
       {{- end }}
       {{- if .Values.global.cluster.sysctl.enabled }}
       - name: {{ include "edusharing_rediscluster.name" . }}-init-sysctl
-        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
+        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.images.minideb }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         command:
           - "/bin/bash"
@@ -67,7 +67,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ include "edusharing_rediscluster.name" . }}
-        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-rediscluster:{{ .Values.image.tag }}
+        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.images.redis.cluster }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         command:
           - "/bin/bash"
@@ -146,7 +146,7 @@ spec:
         {{- end }}
       {{- if .Values.sidecar.metrics.enabled }}
       - name: {{ include "edusharing_rediscluster.name" . }}-metrics
-        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-redis_exporter:{{ .Values.image.tag }}
+        image: {{ include "edusharing_rediscluster.image" . }}{{ .Values.images.redis.exporter }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
         args:
         - --redis.addr=redis://127.0.0.1:6379

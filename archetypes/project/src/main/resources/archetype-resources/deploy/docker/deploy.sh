@@ -510,6 +510,19 @@ terminal() {
 		exec -u root -it  $1 /bin/bash || exit
 }
 
+pull() {
+	COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common)"
+
+	echo "Use compose set: $COMPOSE_LIST"
+
+	$COMPOSE_EXEC \
+		$COMPOSE_LIST \
+		pull \
+		--ignore-pull-failures \
+		$@ || exit
+
+}
+
 shift || true
 case "${CLI_OPT1}" in
 rstart)
@@ -548,6 +561,9 @@ stop)
 remove)
 	remove
 	;;
+pull)
+  pull
+  ;;
 ci)
 	ci
 	;;
@@ -581,6 +597,7 @@ terminal)
 	echo "  - remove              remove all containers and volumes"
 	echo ""
 	echo "  - terminal [service]  open container bash as root"
+	echo "  - pull [service]      pulls all images"
 	echo ""
 	;;
 esac

@@ -31,7 +31,7 @@
             <phase>package</phase>
             <configuration>
               <includeArtifactIds>
-                ${rootArtifactId}-deploy-docker-services-rendering-compose,
+                edu_sharing-community-services-rendering-deploy-docker-compose,
                 edu_sharing-community-services-connector-deploy-docker-compose
               </includeArtifactIds>
               <excludes>META-INF/**</excludes>
@@ -39,14 +39,19 @@
             </configuration>
           </execution>
           <execution>
-            <id>repository</id>
+            <id>repository-plugins</id>
             <goals>
               <goal>unpack-dependencies</goal>
             </goals>
             <phase>package</phase>
             <configuration>
               <includeArtifactIds>
-                ${rootArtifactId}-deploy-docker-repository-compose
+                edu_sharing-community-repository-plugin-elastic-deploy-docker-compose,
+                edu_sharing-community-repository-plugin-mongo-deploy-docker-compose,
+                edu_sharing-enterprise-repository-plugin-antivirus-deploy-docker-compose,
+                edu_sharing-enterprise-repository-plugin-cluster-deploy-docker-compose,
+                edu_sharing-enterprise-repository-plugin-remote-deploy-docker-compose,
+                edu_sharing-enterprise-repository-plugin-transform-deploy-docker-compose
               </includeArtifactIds>
               <excludes>META-INF/**</excludes>
               <outputDirectory>${project.build.directory}/compose</outputDirectory>
@@ -189,14 +194,15 @@
   </build>
 
   <profiles>
+
     <profile>
 
-      <id>service.connector</id>
+      <id>repository.antivirus</id>
 
       <activation>
         <activeByDefault>false</activeByDefault>
         <property>
-          <name>env.SERVICE_CONNECTOR_ENABLED</name>
+          <name>env.REPOSITORY_ANTIVIRUS_ENABLED</name>
           <value>true</value>
         </property>
       </activation>
@@ -205,24 +211,203 @@
 
         <dependency>
           <groupId>${project.groupId}</groupId>
-          <artifactId>edu_sharing-community-services-connector-deploy-docker-compose</artifactId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-antivirus-deploy-docker-compose</artifactId>
         </dependency>
 
       </dependencies>
 
     </profile>
+
+    <profile>
+
+      <id>repository.cluster</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_CLUSTER_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-cluster-deploy-docker-compose</artifactId>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>repository.elastic</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_ELASTIC_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-community-repository-plugin-elastic-deploy-docker-compose</artifactId>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>repository.mongo</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_MONGO_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-community-repository-plugin-mongo-deploy-docker-compose</artifactId>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>repository.remote</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_REMOTE_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-remote-deploy-docker-compose</artifactId>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>repository.transform</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_TRANSFORM_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <dependencies>
+
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-enterprise-repository-plugin-transform-deploy-docker-compose</artifactId>
+        </dependency>
+
+      </dependencies>
+
+    </profile>
+
   </profiles>
 
   <dependencies>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>${rootArtifactId}-deploy-docker-repository-compose</artifactId>
+      <artifactId>edu_sharing-community-services-rendering-deploy-docker-compose</artifactId>
     </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>${rootArtifactId}-deploy-docker-services-rendering-compose</artifactId>
+      <artifactId>edu_sharing-community-repository-backend-alfresco-module</artifactId>
+      <type>amp</type>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-common</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-rest-client-java</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-rest-server</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-graphql-server</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-soap-client-java</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-soap-server</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-backend-services-xoai</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-projects-enterprise-repository-backend-alfresco-module</artifactId>
+      <type>amp</type>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-projects-enterprise-repository-backend-services-core</artifactId>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>

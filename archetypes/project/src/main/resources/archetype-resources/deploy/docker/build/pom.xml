@@ -38,4 +38,30 @@
 
   </build>
 
+  <dependencyManagement>
+
+    <dependencies>
+
+      <dependency>
+        <groupId>io.prometheus.jmx</groupId>
+        <artifactId>jmx_prometheus_javaagent</artifactId>
+        <version>${prometheus.jmx.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson-all</artifactId>
+        <version>${redisson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson-tomcat-9</artifactId>
+        <version>${redisson.version}</version>
+      </dependency>
+
+    </dependencies>
+
+  </dependencyManagement>
+
 </project>

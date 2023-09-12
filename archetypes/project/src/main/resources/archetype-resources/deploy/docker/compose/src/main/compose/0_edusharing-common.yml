@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   cache:
-    image: "${docker.repository}/${docker.prefix}-deploy-docker-build-redis:${docker.tag}"
+    image: "${docker.edu_sharing.community.common.redis}"
     container_name: "cache_${COMPOSE_PROJECT_NAME}"
     environment:
       ALLOW_EMPTY_PASSWORD: "yes"

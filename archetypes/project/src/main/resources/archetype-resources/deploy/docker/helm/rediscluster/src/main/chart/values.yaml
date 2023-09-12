@@ -44,9 +44,11 @@ global:
 
 nameOverride: edusharing-rediscluster
 
-image:
-  prefix: ${docker.prefix}
-  tag: ${docker.tag}
+images:
+  minideb: ${docker.edu_sharing.community.common.minideb}
+  redis:
+    cluster: ${docker.edu_sharing.community.common.redis.cluster}
+    export: ${docker.edu_sharing.community.common.redis.export}
 
 ########################################################################################################################
 

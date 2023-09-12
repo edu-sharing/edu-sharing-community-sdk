@@ -20,6 +20,8 @@ global:
         permission: false
         spec: {}
 
+  debug: false
+
   image:
     pullPolicy: Always
     pullSecrets: []
@@ -33,58 +35,83 @@ global:
     servicemonitor:
       enabled: false
 
-  patroni:
-    enabled: false
-    name: &nameOverride edusharing-postgresql
-    postgres: "13"
-    replicas: 3
-    synchronous:
-      enabled: true
-      strict: true
-    team: edusharing
-
-  password: ""
-
   security: {}
 
 ########################################################################################################################
 # LOCAL
 ########################################################################################################################
 
-nameOverride: *nameOverride
+nameOverride: edusharing-repository-search-solr
 
 images:
-  postgres:
-    db: ${docker.edu_sharing.community.common.postgresql}
-    exporter: ${docker.edu_sharing.community.common.postgresql.exporter}
   minideb: ${docker.edu_sharing.community.common.minideb}
+  alfresco:
+    search:
+      service: ${docker.edu_sharing.communty.common.repository}/edu_sharing-community-common-alfresco-search-service:2.0.3
+
+########################################################################################################################
+
+replicaCount: 1
 
 ########################################################################################################################
 
 service:
 
   port:
-    api: 5432
-    metrics: 9114
+    api: 8080
+    metrics: 9090
 
 ########################################################################################################################
 
 config:
 
-  database: postgresql
-  username: postgresql
-  password: ""
+  jvm:
+    ram:
+      minPercentage: "75.0"
+      maxPercentage: "75.0"
 
-  extra:
-    max_connections: "300"
-
-  shmVolume:
+  metrics:
     enabled: true
-    sizeLimit: ""
+    relabelings: []
+
+  override:
+    application:
+      common: ""
+    logging:
+      application: ""
+      server: ""
+
+  repository:
+    host: edusharing-repository-service
+    port: 8080
+
+########################################################################################################################
+
+multistage:
+
+  enabled: false
+
+  current: ""
+
+  stages: []
+#    - name: blue
+#      spec:
+#        config:
+#          override:
+#            application:
+#              common: ""
+#    - name: green
+#      config: 
+#        common: ""
+
+########################################################################################################################
+
+debug: false
 
 ########################################################################################################################
 
 nodeAffinity: {}
+podAntiAffinity: "soft"
 
 tolerations: []
 
@@ -93,6 +120,7 @@ tolerations: []
 persistence:
 
   data:
+
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
@@ -105,7 +133,7 @@ podAnnotations: {}
 
 podSecurityContext:
 
-  fsGroup: 1001
+  fsGroup: 1000
   fsGroupChangePolicy: OnRootMismatch
 
 securityContext:
@@ -114,7 +142,7 @@ securityContext:
   capabilities:
     drop:
     - ALL
-  runAsUser: 1001
+  runAsUser: 1000
 
 ########################################################################################################################
 
@@ -172,32 +200,5 @@ init:
     securityContext:
 
       runAsUser: 0
-
-########################################################################################################################
-
-sidecar:
-
-  metrics:
-
-    enabled: true
-
-    relabelings: []
-
-    resources:
-
-      limits:
-        cpu: 125m
-        memory: 512Mi
-      requests:
-        cpu: 125m
-        memory: 512Mi
-
-    securityContext:
-
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
-      runAsUser: 1001
 
 ########################################################################################################################

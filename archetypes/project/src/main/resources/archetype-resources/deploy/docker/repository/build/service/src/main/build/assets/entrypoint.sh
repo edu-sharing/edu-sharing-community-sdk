@@ -31,6 +31,10 @@ my_home_auth_external_login_providers_url="${REPOSITORY_SERVICE_HOME_AUTH_EXTERN
 my_home_auth_external_login_provider_target_url="${REPOSITORY_SERVICE_HOME_AUTH_EXTERNAL_LOGIN_PROVIDER_TARGET_URL:-}"
 my_home_provider="${REPOSITORY_SERVICE_HOME_PROVIDER:-}"
 my_home_cookie_attr="${REPOSITORY_SERVICE_HOME_COOKIE_ATTRIBUTES:-}"
+my_allow_origin="${REPOSITORY_SERVICE_ALLOW_ORIGIN:-}"
+if [[ ! -z "$my_allow_origin" ]]; then
+  my_allow_origin=",${my_allow_origin}"
+fi
 
 my_host_internal="${REPOSITORY_SERVICE_HOST_INTERNAL:-repository-service}"
 my_port_internal="${REPOSITORY_SERVICE_PORT_INTERNAL:-8080}"
@@ -385,7 +389,7 @@ xmlstarlet ed -L \
 	-u '/properties/entry[@key="host"]' -v "${my_host_internal}" \
 	-u '/properties/entry[@key="password"]' -v "${my_admin_pass}" \
 	-u '/properties/entry[@key="port"]' -v "${my_port_internal}" \
-	-u '/properties/entry[@key="allow_origin"]' -v "${my_origin},http://localhost:54361" \
+	-u '/properties/entry[@key="allow_origin"]' -v "${my_origin},http://localhost:54361${my_allow_origin}" \
 	${homeProp}
 
 xmlstarlet ed -L \

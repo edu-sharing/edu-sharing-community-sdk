@@ -45,7 +45,7 @@ data:
         set req.hash_always_miss = true;
       }
 
-      if (req.url ~ "(\.css|\.eot|\.gif|\.ico|\.jpg|\.js|\.json|\.map|\.md|\.mjs|\.otf|\.png|\.scss|\.svg|\.svg|\.ts|\.ttf|\.txt|\.woff|\.woff2)") {
+      if (req.url ~ "(\.css|\.eot|\.gif|\.ico|\.jpg|\.js|\.map|\.md|\.mjs|\.otf|\.png|\.scss|\.svg|\.svg|\.ts|\.ttf|\.txt|\.woff|\.woff2)") {
         return (hash);
       }
     }
@@ -66,7 +66,7 @@ data:
         set beresp.do_gzip = false;
       }
       {{- end }}
-      if (bereq.url ~ "(\.css|\.eot|\.gif|\.ico|\.jpg|\.js|\.json|\.map|\.md|\.mjs|\.otf|\.png|\.scss|\.svg|\.svg|\.ts|\.ttf|\.txt|\.woff|\.woff2)") {
+      if (bereq.url ~ "(\.css|\.eot|\.gif|\.ico|\.jpg|\.js|\.map|\.md|\.mjs|\.otf|\.png|\.scss|\.svg|\.svg|\.ts|\.ttf|\.txt|\.woff|\.woff2)") {
         unset beresp.http.set-cookie;
         set beresp.ttl = {{ .Values.proxy.config.cache.ttl }}s;
         {{- if .Values.proxy.config.cache.control }}

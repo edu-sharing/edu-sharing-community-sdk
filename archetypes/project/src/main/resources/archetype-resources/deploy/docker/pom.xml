@@ -17,6 +17,11 @@
 
   <properties>
 
+
+    <docker.edu_sharing.community.repository.service>
+      community/edu_sharing-community-repository-deploy-docker-build-service
+    </docker.edu_sharing.community.repository.service>
+
     <docker.from.openjdk.11>
       dockerio.mirror.docker.edu-sharing.com/openjdk:11-jdk
     </docker.from.openjdk.11>
@@ -91,6 +96,22 @@
   </properties>
 
   <profiles>
+
+    <profile>
+      <id>docker.repository.service.remote</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.CI</name>
+        </property>
+      </activation>
+      <properties>
+        <docker.edu_sharing.community.repository.service>
+          docker.edu-sharing.com/community/edu_sharing-community-repository-deploy-docker-build-service
+        </docker.edu_sharing.community.repository.service>
+      </properties>
+    </profile>
+
     <profile>
       <id>deploy.deploy.docker.customer</id>
       <activation>
@@ -103,6 +124,7 @@
         <module>customer</module>
       </modules>
     </profile>
+
   </profiles>
 
   <build>

@@ -1,42 +1,25 @@
-FROM ${docker.edu_sharing.community.common.alfresco.repository}
+FROM ${docker.edu_sharing.community.repository.service}:${org.edu_sharing:edu_sharing-community-repository-deploy-docker-build-service:jar:sources.version}
 
 ########################################################################################################################
 
 USER root
 
 RUN set -eux \
-    && mkdir -p tomcat/shared/classes/config/defaults \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-cluster \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-elastic \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-mongo \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-remote \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-transform \
-    && mkdir -p tomcat/shared/classes/config/cluster/applications \
-    && mkdir -p tomcat/shared/classes/config/node \
-    && chown -RL worker:worker . \
-    && chown -RL worker:worker /tmp
+    && chown -RL worker:worker tomcat/shared/classes/config/plugins
 
-#USER worker
-RUN set -eux \
-    && rm \
-        tomcat/webapps/alfresco/WEB-INF/classes/logging.properties \
-        tomcat/webapps/alfresco/WEB-INF/classes/log4j.properties \
-        tomcat/webapps/alfresco/WEB-INF/lib/commons-lang3-* \
-        tomcat/webapps/alfresco/WEB-INF/lib/jackson-* \
-        tomcat/webapps/alfresco/WEB-INF/lib/slf4j-* \
-        tomcat/webapps/alfresco/WEB-INF/lib/jsr305-* \
-        tomcat/webapps/alfresco/WEB-INF/lib/woodstox-core-* \
-        tomcat/webapps/alfresco/WEB-INF/lib/owasp-java-html-sanitizer-* \
-        tomcat/webapps/alfresco/WEB-INF/lib/reload4j-1.2.18.3*
-
-COPY --chown=worker:worker artifacts/edu_sharing-community-repository-backend-tomcat-${org.edu_sharing:edu_sharing-community-repository-backend-tomcat:jar.version}.jar tomcat/lib/
 COPY --chown=worker:worker webapp/*.war tomcat/webapps/edu-sharing.war
 
 RUN set -eux \
+    && rm -rf tomcat/webapps/edu-sharing \
     && mkdir -p tomcat/webapps/edu-sharing \
 	&& unzip tomcat/webapps/edu-sharing.war -d tomcat/webapps/edu-sharing \
 	&& rm -f tomcat/webapps/edu-sharing.war \
-	&& cp tomcat/webapps/edu-sharing/META-INF/context.xml tomcat/conf/Catalina/localhost/edu-sharing.xml
+	&& cp -f tomcat/webapps/edu-sharing/META-INF/context.xml tomcat/conf/Catalina/localhost/edu-sharing.xml
 
 COPY --chown=worker:worker amps amps/
 COPY --chown=worker:worker shared tomcat/shared/
@@ -51,8 +34,6 @@ RUN set -eux \
 
 ########################################################################################################################
 
-COPY --chown=worker:worker assets/entrypoint.sh assets/reinstall.sh assets/libcheck.sh bin/
-
 COPY --chown=worker:worker assets/plugins bin/plugins/
 
 RUN set -eux \
@@ -63,13 +44,6 @@ RUN set -eux \
 USER worker
 
 STOPSIGNAL SIGWINCH
-
-EXPOSE 8009 8080 8081
-
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["catalina.sh", "run"]
-
-VOLUME [ "/opt/alfresco/alf_data", "/opt/bitnami/tomcat/shared/classes/config/cluster", "/opt/bitnami/tomcat/shared/classes/config/node" ]
 
 ########################################################################################################################
 

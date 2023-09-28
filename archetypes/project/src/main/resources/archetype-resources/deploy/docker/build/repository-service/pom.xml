@@ -25,27 +25,6 @@
         <executions>
 
           <execution>
-            <id>artifacts</id>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <includeArtifactIds>
-                alfresco-content-services-share-distribution,
-                alfresco-pdf-renderer,
-                alfresco-content-services-community-distribution,
-                edu_sharing-community-repository-backend-tomcat,
-                jmx_prometheus_javaagent,
-                postgresql,
-                redisson-all,
-                redisson-tomcat-9
-              </includeArtifactIds>
-              <outputDirectory>${project.build.directory}/build/artifacts</outputDirectory>
-            </configuration>
-          </execution>
-
-          <execution>
             <id>webapp</id>
             <goals>
               <goal>copy-dependencies</goal>
@@ -98,20 +77,6 @@
                 ${rootArtifactId}-repository-config-node
               </includeArtifactIds>
               <outputDirectory>${project.build.directory}/build/shared/assets/node</outputDirectory>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>alfresco-1</id>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <phase>package</phase>
-            <configuration>
-              <includeArtifactIds>
-                edu_sharing-community-repository-backend-alfresco-module
-              </includeArtifactIds>
-              <outputDirectory>${project.build.directory}/build/amps/alfresco/1</outputDirectory>
             </configuration>
           </execution>
 
@@ -288,6 +253,12 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>edu_sharing-community-repository-backend-tomcat</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-deploy-docker-build-service</artifactId>
+      <classifier>sources</classifier>
     </dependency>
 
     <dependency>

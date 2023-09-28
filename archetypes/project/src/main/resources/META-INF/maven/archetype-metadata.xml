@@ -121,20 +121,6 @@
                   </fileSets>
                 </module>
 
-                <module dir="transform-edu-sharing"
-                        id="${rootArtifactId}-deploy-docker-build-transform-edu-sharing"
-                        name="${rootArtifactId}-deploy-docker-build-transform-edu-sharing">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-
-
               </modules>
             </module>
             <module dir="compose"
@@ -148,12 +134,14 @@
                   </includes>
                   <excludes>
                     <exclude>main/scripts/README.md</exclude>
+                    <exclude>main/compose/3_extension-dev.yml</exclude>
                   </excludes>
                 </fileSet>
                 <fileSet encoding="UTF-8" filtered="true">
                   <directory>src</directory>
                   <includes>
                     <include>main/scripts/README.md</include>
+                    <include>main/compose/3_extension-dev.yml</include>
                   </includes>
                 </fileSet>
               </fileSets>
@@ -182,45 +170,9 @@
                     </fileSet>
                   </fileSets>
                 </module>
-                <module dir="postgresql"
-                        id="${rootArtifactId}-deploy-docker-helm-postgresql"
-                        name="${rootArtifactId}-deploy-docker-helm-postgresql">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-                <module dir="rediscluster"
-                        id="${rootArtifactId}-deploy-docker-helm-rediscluster"
-                        name="${rootArtifactId}-deploy-docker-helm-rediscluster">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
                 <module dir="repository-service"
                         id="${rootArtifactId}-deploy-docker-helm-repository-service"
                         name="${rootArtifactId}-deploy-docker-helm-repository-service">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-                <module dir="solr"
-                        id="${rootArtifactId}-deploy-docker-helm-solr"
-                        name="${rootArtifactId}-deploy-docker-helm-solr">
                   <fileSets>
                     <fileSet encoding="UTF-8">
                       <directory>src</directory>

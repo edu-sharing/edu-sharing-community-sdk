@@ -124,7 +124,7 @@ case ${answer:0:1} in
   y | Y)
     echo "Request existing revisions, please wait ..."
     echo ""
-    helm history ${RELEASE} 2>/dev/null
+    helm history ${RELEASE} 2>/dev/null || echo "skipped ..."
     ;;
   *)
     exit 0

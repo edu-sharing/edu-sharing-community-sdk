@@ -33,7 +33,7 @@ spec:
             - "/bin/bash"
             - "-ec"
             - |
-              pg_dump -U ${POSTGRESQL_USERNAME} -h {{ include "edusharing_postgresql.name" . }} --format custom --no-owner --no-privileges ${POSTGRESQL_DATABASE} > /bitnami/postgresql/dump.sql
+              pg_dump -U ${POSTGRESQL_USERNAME} -h {{ include "edusharing_postgresql.name" . }} --format custom --no-owner --no-privileges ${POSTGRESQL_DATABASE} > /bitnami/postgresql/dump-$(date +'%H%M').sql
             env:
             - name: PGPASSWORD
               valueFrom:

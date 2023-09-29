@@ -345,7 +345,7 @@ sed -i -r 's|^[#]*\s*alfresco-pdf-renderer\.exe=.*|alfresco-pdf-renderer.exe=${a
 grep -q '^[#]*\s*alfresco-pdf-renderer\.exe=' "${alfProps}" || echo 'alfresco-pdf-renderer.exe=${alfresco-pdf-renderer.root}/alfresco-pdf-renderer' >>"${alfProps}"
 
 sed -i -r 's|^[#]*\s*ooo\.enabled=.*|ooo.enabled='"${repository_transform_enabled}"'|' "${alfProps}"
-grep -q '^[#]*\s*ooo\.enabled=' "${alfProps}" || echo "ooo.enabled=true" >>"${alfProps}"
+grep -q '^[#]*\s*ooo\.enabled=' "${alfProps}" || echo "ooo.enabled=${repository_transform_enabled}" >>"${alfProps}"
 
 sed -i -r 's|^[#]*\s*ooo\.exe=.*|ooo.exe=|' "${alfProps}"
 grep -q '^[#]*\s*ooo\.exe=' "${alfProps}" || echo "ooo.exe=" >>"${alfProps}"

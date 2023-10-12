@@ -116,7 +116,10 @@ RUN set -eux \
     && mv alf_data/keystore .
 
 RUN set -eux \
-    && xmlstarlet ed -L -d '/Context/Loader' tomcat/conf/Catalina/localhost/alfresco.xml
+    && xmlstarlet ed -L \
+      -i '/Context' -t attr -n 'unloadDelay' -v "15000" \
+      -d '/Context/Loader' \
+      tomcat/conf/Catalina/localhost/alfresco.xml
 
 COPY --chown=worker:worker artifacts/alfresco-content-services-share-distribution-${org.alfresco:alfresco-content-services-share-distribution:zip.version}.zip \
     /tmp/alfresco-content-services-share-distribution.zip
@@ -137,7 +140,10 @@ RUN set -eux \
     && rm -f tomcat/webapps/share.war
 
 RUN set -eux \
-    && xmlstarlet ed -L -d '/Context/Loader' tomcat/conf/Catalina/localhost/share.xml
+    && xmlstarlet ed -L \
+      -i '/Context' -t attr -n 'unloadDelay' -v "15000" \
+      -d '/Context/Loader' \
+      tomcat/conf/Catalina/localhost/share.xml
 
 COPY --chown=worker:worker assets/share/log4j.properties tomcat/webapps/share/WEB-INF/classes/log4j.properties
 

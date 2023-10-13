@@ -74,6 +74,8 @@ my_http_server_session_timeout="${REPOSITORY_SERVICE_HTTP_SERVER_SESSION_TIMEOUT
 my_http_accesslog_enabled="${REPOSITORY_SERVICE_HTTP_ACCESSLOG_ENABLED:-}"
 my_http_jvmroute="${REPOSITORY_SERVICE_HTTP_JVMROUTE:-}"
 
+my_jobs_primary_hostname="${REPOSITORY_SERVICE_JOBS_PRIMARY_HOSTNAME:-}"
+
 cache_cluster="${CACHE_CLUSTER:-false}"
 cache_database="${CACHE_DATABASE:-0}"
 cache_host="${CACHE_HOST:-}"
@@ -694,6 +696,13 @@ xmlstarlet ed -L \
 }
 [[ -n "${my_http_server_csp_style}" ]] && {
 	hocon -f ${eduSConf} set "angular.headers.Content-Security-Policy.style-src" '"'"${my_http_server_csp_style}"'"'
+}
+
+[[ $(hocon -f ${eduSConf} get "jobs.primaryHostname" 2>/dev/null) ]] && {
+  hocon -f ${eduSConf} unset "jobs.primaryHostname"
+}
+[[ -n "${my_jobs_primary_hostname}" ]] && {
+	hocon -f ${eduSConf} set "jobs.primaryHostname" '"'"${my_jobs_primary_hostname}"'"'
 }
 
 # clean up empty lines in config after hocon commands

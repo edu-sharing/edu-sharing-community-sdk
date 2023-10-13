@@ -198,8 +198,6 @@ COPY --chown=worker:worker assets/profiler profiler/
 
 USER worker
 
-STOPSIGNAL SIGWINCH
-
 EXPOSE 8009 8080 8081
 
 ENTRYPOINT ["entrypoint.sh"]
@@ -208,7 +206,6 @@ CMD [ "/opt/bitnami/scripts/tomcat/run.sh" ]
 VOLUME [ "/opt/alfresco/alf_data", "/opt/bitnami/tomcat/shared/classes/config/cluster", "/opt/bitnami/tomcat/shared/classes/config/node" ]
 
 ########################################################################################################################
-
 
 LABEL git.branch=${git.branch}
 LABEL git.closest.tag.name=${git.closest.tag.fixed}

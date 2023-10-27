@@ -64,6 +64,9 @@ rendering_audio_formats="${SERVICES_RENDERING_AUDIO_FORMATS:-"mp3"}"
 rendering_video_formats="${SERVICES_RENDERING_VIDEO_FORMATS:-"mp4,webm"}"
 rendering_video_resolutions="${SERVICES_RENDERING_VIDEO_RESOLUTIONS:-"240,720,1080"}"
 rendering_video_default_resolution="${SERVICES_RENDERING_VIDEO_DEFAULT_RESOLUTION:-"720"}"
+rendering_video_timeout="${SERVICES_RENDERING_VIDEO_TIMEOUT:-"3600"}"
+rendering_video_threads="${SERVICES_RENDERING_VIDEO_THREADS:-"1"}"
+
 
 
 
@@ -325,6 +328,8 @@ sed -i 's|const VIDEO_FORMATS.*|const VIDEO_FORMATS = ['"${rendering_video_forma
 sed -i 's|const VIDEO_RESOLUTIONS.*|const VIDEO_RESOLUTIONS = ['"${rendering_video_resolutions}"'];|' "${videoConfFile}"
 sed -i 's|const VIDEO_DEFAULT_RESOLUTION.*|const VIDEO_DEFAULT_RESOLUTION = '\""${rendering_video_default_resolution}"\"';|' "${videoConfFile}"
 
+sed -i "s|define('FFMPEG_EXEC_TIMEOUT', '3600');.*|define('FFMPEG_EXEC_TIMEOUT', '${rendering_video_timeout}');|" "${videoConfFile}"
+sed -i "s|define('FFMPEG_THREADS', '1');.*|define('FFMPEG_THREADS', '${rendering_video_threads}');|" "${videoConfFile}"
 
 ########################################################################################################################
 

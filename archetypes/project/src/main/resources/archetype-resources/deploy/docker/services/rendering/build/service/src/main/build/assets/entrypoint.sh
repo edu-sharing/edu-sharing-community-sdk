@@ -219,22 +219,30 @@ fi
 ########################################################################################################################
 
 # rendermoodle config
-rm -f "${RS_ROOT}/modules/moodle/config.php"
-rm -f "${RS_ROOT}/modules/scorm/config.php"
+moodleConfFile="${RS_ROOT}/modules/moodle/config.php"
+scormConfFile="${RS_ROOT}/modules/scorm/config.php"
+rm -f "${moodleConfFile}"
+rm -f "${scormConfFile}"
 if [[ -n "${rendering_rendermoodle_url}" ]]; then
-  cp "${RS_ROOT}/modules/moodle/config.php.dist" "${RS_ROOT}/modules/moodle/config.php"
-  sed -i "s|define('MOODLE_BASE_DIR', '');.*|define('MOODLE_BASE_DIR', '${rendering_rendermoodle_url}');|" "${RS_ROOT}/modules/moodle/config.php"
-  sed -i "s|define('MOODLE_TOKEN', '');.*|define('MOODLE_TOKEN', '${rendering_rendermoodle_token}');|" "${RS_ROOT}/modules/moodle/config.php"
-  sed -i "s|define('MOODLE_CATEGORY_ID', '1');.*|define('MOODLE_CATEGORY_ID', '${rendering_rendermoodle_category_id}');|" "${RS_ROOT}/modules/moodle/config.php"
-  sed -i "s|define('MOODLE_TIMEOUT', '90');.*|define('MOODLE_TIMEOUT', '${rendering_rendermoodle_timeout}');|" "${RS_ROOT}/modules/moodle/config.php"
+  cp "${RS_ROOT}/modules/moodle/config.php.dist" "${moodleConfFile}"
+  sed -i "s|define('MOODLE_BASE_DIR', '');.*|define('MOODLE_BASE_DIR', '${rendering_rendermoodle_url}');|" "${moodleConfFile}"
+  sed -i "s|define('MOODLE_TOKEN', '');.*|define('MOODLE_TOKEN', '${rendering_rendermoodle_token}');|" "${moodleConfFile}"
+  sed -i "s|define('MOODLE_CATEGORY_ID', '1');.*|define('MOODLE_CATEGORY_ID', '${rendering_rendermoodle_category_id}');|" "${moodleConfFile}"
+
+  sed -i "s|define('MOODLE_TIMEOUT', .*|define('MOODLE_TIMEOUT', ${rendering_rendermoodle_timeout});|" "${moodleConfFile}"
+  grep -q "define('MOODLE_TIMEOUT'" "${moodleConfFile}" || echo "define('MOODLE_TIMEOUT', ${rendering_rendermoodle_timeout});" >> "${moodleConfFile}"
 
 
 
-  cp "${RS_ROOT}/modules/scorm/config.php.dist" "${RS_ROOT}/modules/scorm/config.php"
-  sed -i "s|define('MOODLE_BASE_DIR', '');.*|define('MOODLE_BASE_DIR', '${rendering_rendermoodle_url}');|" "${RS_ROOT}/modules/scorm/config.php"
-  sed -i "s|define('MOODLE_TOKEN', '');.*|define('MOODLE_TOKEN', '${rendering_rendermoodle_token}');|" "${RS_ROOT}/modules/scorm/config.php"
-  sed -i "s|define('MOODLE_CATEGORY_ID', '1');.*|define('MOODLE_CATEGORY_ID', '${rendering_rendermoodle_category_id}');|" "${RS_ROOT}/modules/scorm/config.php"
-  sed -i "s|define('MOODLE_TIMEOUT', '90');.*|define('MOODLE_TIMEOUT', '${rendering_rendermoodle_timeout}');|" "${RS_ROOT}/modules/scorm/config.php"
+  cp "${RS_ROOT}/modules/scorm/config.php.dist" "${scormConfFile}"
+  sed -i "s|define('MOODLE_BASE_DIR', '');.*|define('MOODLE_BASE_DIR', '${rendering_rendermoodle_url}');|" "${scormConfFile}"
+  sed -i "s|define('MOODLE_TOKEN', '');.*|define('MOODLE_TOKEN', '${rendering_rendermoodle_token}');|" "${scormConfFile}"
+  sed -i "s|define('MOODLE_CATEGORY_ID', '1');.*|define('MOODLE_CATEGORY_ID', '${rendering_rendermoodle_category_id}');|" "${scormConfFile}"
+
+  sed -i "s|define('MOODLE_TIMEOUT', .*|define('MOODLE_TIMEOUT', ${rendering_rendermoodle_timeout});|" "${scormConfFile}"
+  grep -q "define('MOODLE_TIMEOUT'" "${scormConfFile}" || echo "define('MOODLE_TIMEOUT', ${rendering_rendermoodle_timeout});" >> "${scormConfFile}"
+
+
   echo "configured rendering moodle at url ${rendering_rendermoodle_url}"
 else
   echo "disabled rendering moodle"
@@ -328,8 +336,11 @@ sed -i 's|const VIDEO_FORMATS.*|const VIDEO_FORMATS = ['"${rendering_video_forma
 sed -i 's|const VIDEO_RESOLUTIONS.*|const VIDEO_RESOLUTIONS = ['"${rendering_video_resolutions}"'];|' "${videoConfFile}"
 sed -i 's|const VIDEO_DEFAULT_RESOLUTION.*|const VIDEO_DEFAULT_RESOLUTION = '\""${rendering_video_default_resolution}"\"';|' "${videoConfFile}"
 
-sed -i "s|define('FFMPEG_EXEC_TIMEOUT', '3600');.*|define('FFMPEG_EXEC_TIMEOUT', '${rendering_video_timeout}');|" "${videoConfFile}"
-sed -i "s|define('FFMPEG_THREADS', '1');.*|define('FFMPEG_THREADS', '${rendering_video_threads}');|" "${videoConfFile}"
+sed -i "s|define('FFMPEG_EXEC_TIMEOUT', .*|define('FFMPEG_EXEC_TIMEOUT', '${rendering_video_timeout}');|" "${videoConfFile}"
+grep -q "define('FFMPEG_EXEC_TIMEOUT'" "${videoConfFile}" || echo "define('FFMPEG_EXEC_TIMEOUT', ${rendering_video_timeout});" >> "${videoConfFile}"
+
+sed -i "s|define('FFMPEG_THREADS', .*|define('FFMPEG_THREADS', ${rendering_video_threads});|" "${videoConfFile}"
+grep -q "define('FFMPEG_THREADS'" "${videoConfFile}" || echo "define('FFMPEG_THREADS', ${rendering_video_threads});" >> "${videoConfFile}"
 
 ########################################################################################################################
 

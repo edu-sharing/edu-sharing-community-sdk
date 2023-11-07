@@ -5,6 +5,7 @@ FROM ${docker.edu_sharing.community.repository.service}:${org.edu_sharing:edu_sh
 USER root
 
 RUN set -eux \
+    && mkdir -p tomcat/shared/classes/config/plugins/plugin-antivirus \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-cluster \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-elastic \
     && mkdir -p tomcat/shared/classes/config/plugins/plugin-mongo \

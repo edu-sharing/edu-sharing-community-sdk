@@ -150,7 +150,7 @@
                 edu_sharing-enterprise-repository-plugin-remote-config-defaults,
                 edu_sharing-enterprise-repository-plugin-transform-config-defaults
               </includeArtifactIds>
-              <outputDirectory>${project.build.directory}/build/config/plugins</outputDirectory>
+              <outputDirectory>${project.build.directory}/build/shared/classes/config/plugins</outputDirectory>
             </configuration>
           </execution>
 

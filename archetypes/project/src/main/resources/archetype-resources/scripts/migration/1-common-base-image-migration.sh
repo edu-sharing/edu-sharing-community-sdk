@@ -10,7 +10,7 @@ fi
 
 cd "$1"
 
-delete_folder() {
+delete() {
   if [[ -d "$1" ]] ; then
     echo "delete $1"
     rm -rf "$1"
@@ -20,18 +20,22 @@ delete_folder() {
   fi
 }
 
-delete_folder deploy/docker/build/activemq
-delete_folder deploy/docker/build/apache_exporter
-delete_folder deploy/docker/build/mailcatcher
-delete_folder deploy/docker/build/minideb
-delete_folder deploy/docker/build/postgresql
-delete_folder deploy/docker/build/postgresql_exporter
-delete_folder deploy/docker/build/redis
-delete_folder deploy/docker/build/rediscluster
-delete_folder deploy/docker/build/redis_exporter
-delete_folder deploy/docker/build/varnish
-delete_folder deploy/docker/build/varnish_exporter
+delete deploy/docker/build/activemq
+delete deploy/docker/build/apache_exporter
+delete deploy/docker/build/mailcatcher
+delete deploy/docker/build/minideb
+delete deploy/docker/build/postgresql
+delete deploy/docker/build/postgresql_exporter
+delete deploy/docker/build/redis
+delete deploy/docker/build/rediscluster
+delete deploy/docker/build/redis_exporter
+delete deploy/docker/build/varnish
+delete deploy/docker/build/varnish_exporter
 
-delete_folder deploy/docker/compose/src/main/compose/0_edusharing-remote.yml
-delete_folder deploy/docker/repository
-delete_folder deploy/docker/services
+delete deploy/docker/compose/src/main/compose/0_edusharing-remote.yml
+
+delete deploy/docker/helm/postgresql
+delete deploy/docker/helm/rediscluster
+
+delete deploy/docker/repository
+delete deploy/docker/services

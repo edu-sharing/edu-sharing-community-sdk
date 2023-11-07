@@ -1,0 +1,15 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+version: '3.7'
+
+services:
+
+  repository-service:
+    environment:
+      CACHE_HOST: ""
+      CACHE_PORT: ""
+    volumes:
+      - "${symbol_dollar}{GIT_ROOT}/deploy/repository/Backend/alfresco/module/target/${rootArtifactId}-repository-backend-alfresco-module-${symbol_dollar}{org.edu_sharing:${rootArtifactId}-repository-backend-alfresco-module:amp.version}.amp:/opt/alfresco/amps/alfresco/3/${rootArtifactId}-repository-backend-alfresco-module-${symbol_dollar}{org.edu_sharing:${rootArtifactId}-repository-backend-alfresco-module:amp.version}.amp"
+      - "${symbol_dollar}{GIT_ROOT}/deploy/repository/Backend/services/core/target/${rootArtifactId}-repository-backend-services-core-${symbol_dollar}{org.edu_sharing:${rootArtifactId}-repository-backend-services-core:jar.version}.jar:/opt/alfresco/tomcat/webapps/edu-sharing/WEB-INF/lib/${rootArtifactId}-repository-backend-services-core-${symbol_dollar}{org.edu_sharing:${rootArtifactId}-repository-backend-services-core:jar.version}.jar"
+      - "${symbol_dollar}{GIT_ROOT}/deploy/repository/config/defaults/target/classes:/opt/alfresco/tomcat/shared/classes/config/defaults"

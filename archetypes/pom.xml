@@ -18,6 +18,7 @@
   <modules>
     <module>helm</module>
     <module>project</module>
+    <module>docker</module>
   </modules>
 
   <properties>

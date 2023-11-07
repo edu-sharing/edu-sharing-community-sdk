@@ -44,19 +44,6 @@
             <configuration>
               <filesets>
                 <fileset>
-                  <directory>src/generated/ng/dist</directory>
-                </fileset>
-                <fileset>
-                  <directory>src/generated/ng/node_modules/@angular/compiler-cli/ngcc</directory>
-                  <includes>
-                    <include>**/ngcc_lock_file</include>
-                    <include>**/__ngcc_lock_file__</include>
-                  </includes>
-                </fileset>
-                <fileset>
-                  <directory>src/generated/ng/projects</directory>
-                </fileset>
-                <fileset>
                   <directory>src/generated/ng</directory>
                 </fileset>
               </filesets>
@@ -119,16 +106,6 @@
                   <goal>install-node-and-npm</goal>
                 </goals>
                 <phase>process-sources</phase>
-              </execution>
-              <execution>
-                <id>install</id>
-                <goals>
-                  <goal>npm</goal>
-                </goals>
-                <phase>process-sources</phase>
-                <configuration>
-                  <arguments>${npm.args.install}</arguments>
-                </configuration>
               </execution>
               <execution>
                 <id>build</id>

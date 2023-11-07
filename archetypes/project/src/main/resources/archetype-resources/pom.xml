@@ -139,6 +139,14 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-deploy-docker-helm-solr</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
         <artifactId>${rootArtifactId}-deploy-docker-helm-rediscluster</artifactId>
         <version>${project.version}</version>
         <type>tar.gz</type>
@@ -147,79 +155,7 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-repository-compose</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-bundle</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-service</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-repository-helm-solr4</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-services-rendering-compose</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-services-rendering-helm-bundle</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-services-rendering-helm-service</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-installer-repository-compose-debian-bullseye</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-installer-repository-distribution</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-installer-services-rendering-compose-debian-bullseye</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-installer-services-rendering-distribution</artifactId>
+        <artifactId>${rootArtifactId}-deploy-docker-helm-repository-service</artifactId>
         <version>${project.version}</version>
         <type>tar.gz</type>
         <classifier>bin</classifier>

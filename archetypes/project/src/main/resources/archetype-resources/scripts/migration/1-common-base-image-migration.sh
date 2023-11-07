@@ -32,6 +32,9 @@ delete deploy/docker/build/redis_exporter
 delete deploy/docker/build/varnish
 delete deploy/docker/build/varnish_exporter
 
+delete deploy/docker/compose/src/main/compose/0_edusharing-common.yml
+delete deploy/docker/compose/src/main/compose/0_edusharing-debug.yml
+delete deploy/docker/compose/src/main/compose/0_edusharing-productive.yml
 delete deploy/docker/compose/src/main/compose/0_edusharing-remote.yml
 
 delete deploy/docker/helm/postgresql

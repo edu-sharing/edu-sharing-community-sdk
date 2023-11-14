@@ -481,6 +481,21 @@ reload() {
 	echo "Done."
 }
 
+config() {
+	pushd "${SOURCE_PATH}/../../.." >/dev/null || exit
+	GIT_ROOT=$(pwd)
+	export GIT_ROOT
+	popd >/dev/null || exit
+
+	COMPOSE_LIST="$COMPOSE_LIST $(compose . "*" -common -debug -dev)"
+
+	echo "Use compose set: $COMPOSE_LIST"
+
+	$COMPOSE_EXEC \
+		$COMPOSE_LIST \
+		config $@ || exit
+}
+
 ci() {
 	COMPOSE_LIST="$(compose . 2 -remote)"
 
@@ -547,6 +562,9 @@ ldev)
 reload)
 	reload
 	;;
+config)
+  config $@
+  ;;
 info)
 	info
 	;;
@@ -591,6 +609,7 @@ terminal)
 	echo "  - reload [service]    reload services [edu-sharing]"
 	echo ""
 	echo "  - info                show information"
+	echo "  - config              show compose configuration"
 	echo "  - logs [service...]   show logs"
 	echo "  - ps                  show containers"
 	echo ""

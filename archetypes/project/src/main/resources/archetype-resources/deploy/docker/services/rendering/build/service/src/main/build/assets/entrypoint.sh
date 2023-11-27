@@ -18,8 +18,15 @@ my_host_external="${SERVICES_RENDERING_SERVICE_HOST_EXTERNAL:-rendering.services
 my_port_external="${SERVICES_RENDERING_SERVICE_PORT_EXTERNAL:-9100}"
 my_path_external="${SERVICES_RENDERING_SERVICE_PATH_EXTERNAL:-/esrender}"
 my_base_external="${my_prot_external}://${my_host_external}:${my_port_external}${my_path_external}"
+
+
 # used to configure dynamic domains based on the accessing domains
-my_external_url="${SERVICES_RENDERING_SERVICE_EXTERNAL_URL:-$my_base_external}"
+rendering_service_dynamic_url="${SERVICES_RENDERING_SERVICE_DYNAMIC_URL:-false}"
+
+my_external_url="${my_base_external}"
+if [[ "$rendering_service_dynamic_url" == "true" ]]; then
+  my_external_url="${my_prot_external}://'.\$_SERVER['HTTP_HOST'].':${my_port_external}${my_path_external}"
+fi
 
 my_prot_internal="${SERVICES_RENDERING_SERVICE_PROT_INTERNAL:-http}"
 my_host_internal="${SERVICES_RENDERING_SERVICE_HOST_INTERNAL:-services-rendering-service}"

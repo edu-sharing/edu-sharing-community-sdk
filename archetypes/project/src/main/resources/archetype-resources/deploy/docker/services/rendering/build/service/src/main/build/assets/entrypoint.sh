@@ -19,6 +19,15 @@ my_port_external="${SERVICES_RENDERING_SERVICE_PORT_EXTERNAL:-9100}"
 my_path_external="${SERVICES_RENDERING_SERVICE_PATH_EXTERNAL:-/esrender}"
 my_base_external="${my_prot_external}://${my_host_external}:${my_port_external}${my_path_external}"
 
+
+# used to configure dynamic domains based on the accessing domains
+rendering_service_dynamic_url="${SERVICES_RENDERING_SERVICE_DYNAMIC_URL:-false}"
+
+my_external_url="${my_base_external}"
+if [[ "$rendering_service_dynamic_url" == "true" ]]; then
+  my_external_url="${my_prot_external}://'.\$_SERVER['HTTP_X_FORWARDED_HOST'] ? \$_SERVER['HTTP_X_FORWARDED_HOST'] : \$_SERVER['HTTP_HOST'].':${my_port_external}${my_path_external}"
+fi
+
 my_prot_internal="${SERVICES_RENDERING_SERVICE_PROT_INTERNAL:-http}"
 my_host_internal="${SERVICES_RENDERING_SERVICE_HOST_INTERNAL:-services-rendering-service}"
 my_port_internal="${SERVICES_RENDERING_SERVICE_PORT_INTERNAL:-8080}"
@@ -67,7 +76,6 @@ rendering_video_resolutions="${SERVICES_RENDERING_VIDEO_RESOLUTIONS:-"240,720,10
 rendering_video_default_resolution="${SERVICES_RENDERING_VIDEO_DEFAULT_RESOLUTION:-"720"}"
 rendering_video_timeout="${SERVICES_RENDERING_VIDEO_TIMEOUT:-"3600"}"
 rendering_video_threads="${SERVICES_RENDERING_VIDEO_THREADS:-"1"}"
-
 
 
 
@@ -149,7 +157,7 @@ if [[ ! -f "${RS_CACHE}/config/version.json" ]]; then
 	cat >/tmp/config.ini <<-EOF
 		[application]
 		; url for client requests (accessible from the internet)
-		application_url_client="${my_base_external}"
+		application_url_client="${my_external_url}"
 		; url for requests from repository
 		application_url_repository="${my_base_internal}"
 		; ip of the server
@@ -271,7 +279,7 @@ sed -i -r 's|\$dbuser.*|\$dbuser = "'"${rendering_database_user}"'";|' "${dbConf
 sed -i -r 's|\$pwd.*|\$pwd = "'"${rendering_database_pass}"'";|' "${dbConf}"
 
 systemConf="${RS_ROOT}/conf/system.conf.php"
-sed -i -r 's|\$MC_URL = ['"'"'"].*|\$MC_URL = "'"${my_base_external}"'";|' "${systemConf}"
+sed -i -r 's|\$MC_URL = ['"'"'"].*|\$MC_URL = '"'${my_external_url}'"';|' "${systemConf}"
 sed -i -r 's|\$MC_DOCROOT.*|\$MC_DOCROOT = "'"${RS_ROOT}"'";|' "${systemConf}"
 sed -i -r 's|\$CC_RENDER_PATH.*|\$CC_RENDER_PATH = "'"${RS_CACHE}/data"'";|' "${systemConf}"
 

@@ -27,7 +27,7 @@ rendering_service_dynamic_url="${SERVICES_RENDERING_SERVICE_DYNAMIC_URL:-false}"
 
 my_external_url="${my_base_external}"
 if [[ "$rendering_service_dynamic_url" == "true" ]]; then
-  my_external_url="${my_prot_external}://'.\$_SERVER['HTTP_X_FORWARDED_HOST'] ? \$_SERVER['HTTP_X_FORWARDED_HOST'] : \$_SERVER['HTTP_HOST'].':${my_port_external}${my_path_external}"
+  my_external_url="${my_prot_external}://'.(\$_SERVER['HTTP_X_FORWARDED_HOST'] ? \$_SERVER['HTTP_X_FORWARDED_HOST'] : \$_SERVER['HTTP_HOST']).':${my_port_external}${my_path_external}"
 fi
 
 my_prot_internal="${SERVICES_RENDERING_SERVICE_PROT_INTERNAL:-http}"

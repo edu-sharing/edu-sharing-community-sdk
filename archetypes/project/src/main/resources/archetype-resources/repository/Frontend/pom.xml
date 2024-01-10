@@ -108,6 +108,16 @@
                 <phase>process-sources</phase>
               </execution>
               <execution>
+                <id>install</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>compile</phase>
+                <configuration>
+                  <arguments>${npm.args.install}</arguments>
+                </configuration>
+              </execution>
+              <execution>
                 <id>build</id>
                 <goals>
                   <goal>npm</goal>

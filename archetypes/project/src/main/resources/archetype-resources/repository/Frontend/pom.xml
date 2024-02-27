@@ -24,13 +24,38 @@
   <profiles>
 
     <profile>
+      <id>frontend.default</id>
+
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <build>
+
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+          </plugin>
+
+        </plugins>
+
+      </build>
+
+    </profile>
+
+    <profile>
 
       <id>frontend.overlay</id>
 
       <activation>
         <activeByDefault>false</activeByDefault>
         <file>
-          <missing>package.json</missing>
+          <exists>src/main/ng</exists>
         </file>
       </activation>
 
@@ -61,6 +86,7 @@
                 <phase>generate-sources</phase>
                 <configuration>
                   <includeArtifactIds>edu_sharing-community-repository-frontend</includeArtifactIds>
+                  <classifier>sources</classifier>
                   <outputDirectory>src/generated/ng</outputDirectory>
                 </configuration>
               </execution>
@@ -200,6 +226,7 @@
                 <phase>generate-sources</phase>
                 <configuration>
                   <includeArtifactIds>edu_sharing-community-repository-frontend</includeArtifactIds>
+                  <classifier>sources</classifier>
                   <outputDirectory>src/app/edu-sharing/Frontend</outputDirectory>
                 </configuration>
               </execution>
@@ -324,6 +351,12 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>edu_sharing-community-repository-frontend</artifactId>
       <classifier>sources</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-frontend</artifactId>
+      <type>war</type>
     </dependency>
 
   </dependencies>

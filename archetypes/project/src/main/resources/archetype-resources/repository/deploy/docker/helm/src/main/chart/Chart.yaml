@@ -18,14 +18,14 @@ dependencies:
   - name: edu_sharing-community-common-postgresql
     repository: ${helm.deploy.url}
     version: 1.x.x
-    alias: edusharing_services_rendering_postgresql
-    condition: edusharing_services_rendering_postgresql.enabled
+    alias: edusharing_repository_postgresql
+    condition: edusharing_repository_postgresql.enabled
 
   - name: edu_sharing-community-common-rediscluster
     repository: ${helm.deploy.url}
     version: 1.x.x
-    alias: edusharing_services_rendering_rediscluster
-    condition: edusharing_services_rendering_rediscluster.enabled
+    alias: edusharing_repository_rediscluster
+    condition: edusharing_repository_rediscluster.enabled
 
   - name: edu_sharing-community-repository-search-solr
     ${helm.edusharing_repository_search_solr.line2}

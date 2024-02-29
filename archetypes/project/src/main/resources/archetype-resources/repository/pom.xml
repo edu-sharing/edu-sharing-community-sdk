@@ -20,10 +20,6 @@
 
     <alfresco.sdk.version>4.7.0</alfresco.sdk.version>
 
-    <phpredis.version>5.3.7</phpredis.version>
-    <prometheus.jmx.version>0.17.2</prometheus.jmx.version>
-    <redisson.version>3.18.0</redisson.version>
-
   </properties>
 
   <build>

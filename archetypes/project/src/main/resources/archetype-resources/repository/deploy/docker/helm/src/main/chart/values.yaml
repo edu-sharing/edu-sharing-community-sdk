@@ -232,6 +232,9 @@ edusharing_repository_service:
       host: *redisclusterNameOverride
       port: *redisclusterServicePortApi
 
+    cluster:
+      enabled: ${helm.edusharing_repository_cluster.enabled}
+
     database:
       host: *postgresqlNameOverride
       port: *postgresqlServicePortApi

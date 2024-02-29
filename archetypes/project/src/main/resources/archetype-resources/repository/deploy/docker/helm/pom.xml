@@ -53,6 +53,10 @@
     <helm.edusharing_repository_antivirus.line3/>
     <helm.edusharing_repository_antivirus.line4/>
 
+    <helm.edusharing_repository_cluster.enabled>
+      false
+    </helm.edusharing_repository_cluster.enabled>
+
     <helm.edusharing_repository_mongo.enabled>
       false
     </helm.edusharing_repository_mongo.enabled>
@@ -553,6 +557,28 @@
         </dependency>
 
       </dependencies>
+
+    </profile>
+
+    <profile>
+
+      <id>repository.cluster</id>
+
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.REPOSITORY_CLUSTER_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
+
+      <properties>
+
+        <helm.edusharing_repository_cluster.enabled>
+          true
+        </helm.edusharing_repository_cluster.enabled>
+
+      </properties>
 
     </profile>
 

@@ -210,6 +210,11 @@ edusharing_repository_service:
 
   nameOverride: *serviceNameOverride
 
+  image:
+    repository: ${docker.repository}
+    name: ${docker.prefix}-deploy-docker-build-repository-service
+    tag: ${docker.tag}
+
   service:
 
     port:

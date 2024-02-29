@@ -21,7 +21,7 @@ variables:
   SERVICE_CONNECTOR_ENABLED: "${SERVICE_CONNECTOR_ENABLED}"
 
 default:
-  image: maven:3.8.5-openjdk-17
+  image: maven:3.9.2-amazoncorretto-17-debian-bullseye
   services:
     - name: "$DIND_IMAGE"
       alias: docker

@@ -104,25 +104,6 @@
             </fileSet>
           </fileSets>
           <modules>
-            <module dir="build"
-                    id="${rootArtifactId}-deploy-docker-build"
-                    name="${rootArtifactId}-deploy-docker-build">
-              <modules>
-                <module dir="repository-service"
-                        id="${rootArtifactId}-deploy-docker-build-repository-service"
-                        name="${rootArtifactId}-deploy-docker-build-repository-service">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-
-              </modules>
-            </module>
             <module dir="compose"
                     id="${rootArtifactId}-deploy-docker-compose"
                     name="${rootArtifactId}-deploy-docker-compose">
@@ -151,38 +132,12 @@
                     name="${rootArtifactId}-deploy-docker-helm">
               <fileSets>
                 <fileSet encoding="UTF-8">
-                  <directory></directory>
+                  <directory>src</directory>
                   <includes>
-                    <include>deploy.sh</include>
+                    <include>**/*</include>
                   </includes>
                 </fileSet>
               </fileSets>
-              <modules>
-                <module dir="bundle"
-                        id="${rootArtifactId}-deploy-docker-helm-bundle"
-                        name="${rootArtifactId}-deploy-docker-helm-bundle">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-                <module dir="repository-service"
-                        id="${rootArtifactId}-deploy-docker-helm-repository-service"
-                        name="${rootArtifactId}-deploy-docker-helm-repository-service">
-                  <fileSets>
-                    <fileSet encoding="UTF-8">
-                      <directory>src</directory>
-                      <includes>
-                        <include>**/*</include>
-                      </includes>
-                    </fileSet>
-                  </fileSets>
-                </module>
-              </modules>
             </module>
           </modules>
         </module>
@@ -285,6 +240,44 @@
                   </includes>
                 </fileSet>
               </fileSets>
+            </module>
+          </modules>
+        </module>
+        <module dir="deploy"
+                id="${rootArtifactId}-repository-deploy"
+                name="${rootArtifactId}-repository-deploy">
+          <modules>
+            <module dir="docker"
+                    id="${rootArtifactId}-repository-deploy-docker"
+                    name="${rootArtifactId}-repository-deploy-docker">
+              <modules>
+                <module dir="build"
+                        id="${rootArtifactId}-repository-deploy-docker-build"
+                        name="${rootArtifactId}-repository-deploy-docker-build">
+
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+                <module dir="helm"
+                        id="${rootArtifactId}-repository-deploy-docker-helm"
+                        name="${rootArtifactId}-repository-deploy-docker-helm">
+
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
+              </modules>
             </module>
           </modules>
         </module>

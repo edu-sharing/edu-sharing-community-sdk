@@ -5,7 +5,7 @@
 
   <parent>
     <groupId>${groupId}</groupId>
-    <artifactId>${rootArtifactId}</artifactId>
+    <artifactId>${rootArtifactId}-repository</artifactId>
     <version>${version}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
@@ -23,18 +23,4 @@
 
   </properties>
 
-  <profiles>
-    <profile>
-      <id>deploy.deploy.customer</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <file>
-          <exists>customer/pom.xml</exists>
-        </file>
-      </activation>
-      <modules>
-        <module>customer</module>
-      </modules>
-    </profile>
-  </profiles>
 </project>

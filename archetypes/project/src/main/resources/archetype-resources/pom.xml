@@ -131,38 +131,6 @@
 
       <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-helm-postgresql</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-helm-solr</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-helm-rediscluster</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>${rootArtifactId}-deploy-docker-helm-repository-service</artifactId>
-        <version>${project.version}</version>
-        <type>tar.gz</type>
-        <classifier>bin</classifier>
-      </dependency>
-
-      <dependency>
-        <groupId>${project.groupId}</groupId>
         <artifactId>${rootArtifactId}-repository-backend-alfresco-module</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -203,6 +171,14 @@
         <groupId>${project.groupId}</groupId>
         <artifactId>${rootArtifactId}-repository-config-node</artifactId>
         <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>${rootArtifactId}-repository-deploy-docker-helm</artifactId>
+        <version>${project.version}</version>
+        <type>tar.gz</type>
+        <classifier>bin</classifier>
       </dependency>
 
       <dependency>

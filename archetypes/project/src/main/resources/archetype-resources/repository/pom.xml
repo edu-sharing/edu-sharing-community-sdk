@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -18,6 +19,10 @@
   <properties>
 
     <alfresco.sdk.version>4.7.0</alfresco.sdk.version>
+
+    <phpredis.version>5.3.7</phpredis.version>
+    <prometheus.jmx.version>0.17.2</prometheus.jmx.version>
+    <redisson.version>3.18.0</redisson.version>
 
   </properties>
 
@@ -45,6 +50,14 @@
               <version>${alfresco.sdk.version}</version>
             </dependency>
           </dependencies>
+        </plugin>
+
+        <plugin>
+          <groupId>io.kokuwa.maven</groupId>
+          <artifactId>helm-maven-plugin</artifactId>
+          <configuration>
+            <helmVersion>${helm.version}</helmVersion>
+          </configuration>
         </plugin>
 
       </plugins>

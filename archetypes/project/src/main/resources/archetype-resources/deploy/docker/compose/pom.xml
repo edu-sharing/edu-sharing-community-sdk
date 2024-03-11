@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
@@ -358,30 +359,28 @@
 
     </profile>
 
-    <profiles>
-      <profile>
+    <profile>
 
-        <id>service.connector</id>
+      <id>service.connector</id>
 
-        <activation>
-          <activeByDefault>false</activeByDefault>
-          <property>
-            <name>env.SERVICE_CONNECTOR_ENABLED</name>
-            <value>true</value>
-          </property>
-        </activation>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <property>
+          <name>env.SERVICE_CONNECTOR_ENABLED</name>
+          <value>true</value>
+        </property>
+      </activation>
 
-        <dependencies>
+      <dependencies>
 
-          <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>edu_sharing-community-services-connector-deploy-docker-compose</artifactId>
-          </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>edu_sharing-community-services-connector-deploy-docker-compose</artifactId>
+        </dependency>
 
-        </dependencies>
+      </dependencies>
 
-      </profile>
-    </profiles>
+    </profile>
 
   </profiles>
 

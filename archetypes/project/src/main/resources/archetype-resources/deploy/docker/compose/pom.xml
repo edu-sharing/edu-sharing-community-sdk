@@ -358,6 +358,31 @@
 
     </profile>
 
+    <profiles>
+      <profile>
+
+        <id>service.connector</id>
+
+        <activation>
+          <activeByDefault>false</activeByDefault>
+          <property>
+            <name>env.SERVICE_CONNECTOR_ENABLED</name>
+            <value>true</value>
+          </property>
+        </activation>
+
+        <dependencies>
+
+          <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>edu_sharing-community-services-connector-deploy-docker-compose</artifactId>
+          </dependency>
+
+        </dependencies>
+
+      </profile>
+    </profiles>
+
   </profiles>
 
   <dependencies>

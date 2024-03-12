@@ -36,6 +36,8 @@
                 alfresco-pdf-renderer,
                 alfresco-platform-community-distributionzip,
                 edu_sharing-community-repository-backend-tomcat,
+                edu_sharing-community-repository-backend-xml-security,
+                xalan,
                 jmx_prometheus_javaagent,
                 postgresql,
                 redisson-all,

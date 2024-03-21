@@ -106,6 +106,7 @@ RUN set -eux \
       -x "WEB-INF/classes/logging.properties" \
       -x "WEB-INF/classes/log4j.properties" \
       -x "WEB-INF/lib/commons-lang3-*" \
+      -x "WEB-INF/lib/commons-jxpath-*" \
       -x "WEB-INF/lib/hazelcast-*" \
       -x "WEB-INF/lib/jackson-*" \
       -x "WEB-INF/lib/log4j-*" \
@@ -117,6 +118,7 @@ RUN set -eux \
       -x "WEB-INF/lib/xstream-*" \
       -x "WEB-INF/lib/jodconverter-*" \
       -x "WEB-INF/lib/commons-io-*" \
+      -x "WEB-INF/lib/commons-codec-*" \
       -x "WEB-INF/lib/activemq-*" \
       -x "WEB-INF/lib/xmlrpc-*" \
       -x "WEB-INF/lib/xmlbeans-*" \

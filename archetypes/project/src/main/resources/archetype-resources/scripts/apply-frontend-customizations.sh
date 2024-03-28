@@ -121,7 +121,7 @@ put() {
     # clear devDependencies since they might have internal repositories that are not available / configured
     jq 'del(.devDependencies)' src/app/extension/package.json.bak > src/app/extension/package.json
     npm i --no-package-lock
-    cp src/app/extension/package.json.bak src/app/extension/package.json
+    mv src/app/extension/package.json.bak src/app/extension/package.json
   fi
 }
 

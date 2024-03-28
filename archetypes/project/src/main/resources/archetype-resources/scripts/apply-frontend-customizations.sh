@@ -8,9 +8,12 @@ set -e
 # Relative location of the edu-sharing Git-repository root.
 REPO_ROOT="../../repository"
 # Frontend source directory, relative to $REPO_ROOT.
-FRONTEND_SRC="Frontend/src"
+FRONTEND_SRC="Frontend"
 # Relative location of the source directory of extension frontend customizations.
-EXTENSION_SRC="../repository/Frontend/src/main/ng/src"
+EXTENSION_SRC="../repository/Frontend/src/main/ng"
+
+# folders to obey and watch for changes
+EXTENSION_FOLDERS=("src/" "projects/")
 
 show_help_and_exit() {
     echo
@@ -104,17 +107,24 @@ check_git_extension() {
 }
 
 put() {
-    cp -r "$EXTENSION_SRC/." "$REPO_ROOT/$FRONTEND_SRC"
+  for i in "${EXTENSION_FOLDERS[@]}"
+      do
+         cp -r --verbose "$EXTENSION_SRC/$i." "$REPO_ROOT/$FRONTEND_SRC/$i"
+      done
 }
 
 get() {
-    rm -rf "$EXTENSION_SRC"
-    mkdir "$EXTENSION_SRC"
+    for i in "${EXTENSION_FOLDERS[@]}"
+    do
+      rm -rf "$EXTENSION_SRC/$i"
+      mkdir "$EXTENSION_SRC/$i"
+    done
     pushd "$REPO_ROOT" >/dev/null
     files=$(git add -A -n "$FRONTEND_SRC" | sed "s|^add '$FRONTEND_SRC/\(.*\)'$|\1|")
     submodule_files=$(git submodule foreach --quiet 'git add -A -n | sed "s|^add '"'"'\(.*\)'"'"'$|$name/\1|" | sed "s|^'$FRONTEND_SRC'/\(.*\)|\1|"')
     popd >/dev/null
     (echo "$files" && echo "$submodule_files") | while read file; do
+        echo $file
         if [[ ! -z "$file" && ! -d "$REPO_ROOT/$FRONTEND_SRC/$file" ]]; then
             install -D --mode=644 "$REPO_ROOT/$FRONTEND_SRC/$file" "$EXTENSION_SRC/$file"
         fi

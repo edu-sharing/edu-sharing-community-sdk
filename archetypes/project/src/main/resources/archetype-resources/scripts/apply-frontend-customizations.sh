@@ -8,6 +8,7 @@ set -e
 # Relative location of the edu-sharing Git-repository root.
 REPO_ROOT="../../repository"
 # Frontend source directory, relative to $REPO_ROOT.
+# Frontend source directory, relative to $REPO_ROOT.
 FRONTEND_SRC="Frontend"
 # Relative location of the source directory of extension frontend customizations.
 EXTENSION_SRC="../repository/Frontend/src/main/ng"
@@ -18,7 +19,7 @@ EXTENSION_FOLDERS=("src/" "projects/")
 show_help_and_exit() {
     echo
     echo "Usage:"
-    echo "        $0 put|get [--force]"
+    echo "        $0 put|get [--force] [--install]"
     echo
     echo "Modes:"
     echo "        put     Applies the contents of the extension directory to the edu-sharing"
@@ -28,6 +29,8 @@ show_help_and_exit() {
     echo
     echo "Options:"
     echo "        --force Overwrites uncommitted changes."
+    echo "Options:"
+    echo "        --install trigger npm install after put (useful if customer has a custom package.json)"
     exit 1
 }
 
@@ -50,6 +53,7 @@ read_args() {
     while [[ "$#" -gt 0 ]]; do
         case $1 in
         --force) force=1 ;;
+        --install) install=1 ;;
         *)
             echo "Unknown parameter passed: $1"
             show_help_and_exit
@@ -110,7 +114,15 @@ put() {
   for i in "${EXTENSION_FOLDERS[@]}"
       do
          cp -r --verbose "$EXTENSION_SRC/$i." "$REPO_ROOT/$FRONTEND_SRC/$i"
-      done
+  done
+  if [[ "$install" == 1 ]]; then
+    pushd $REPO_ROOT/$FRONTEND_SRC
+    mv src/app/extension/package.json src/app/extension/package.json.bak
+    # clear devDependencies since they might have internal repositories that are not available / configured
+    jq 'del(.devDependencies)' src/app/extension/package.json.bak > src/app/extension/package.json
+    npm i --no-package-lock
+    cp src/app/extension/package.json.bak src/app/extension/package.json
+  fi
 }
 
 get() {

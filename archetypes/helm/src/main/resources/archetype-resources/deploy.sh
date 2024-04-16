@@ -4,10 +4,18 @@ set -o pipefail
 
 if [[ -z $1 ]] ; then
   echo ""
-  echo "deploy.sh <release> <chart> [<version|path>]"
+  echo "deploy.sh [-s skip checks and deploy directly] <release> <chart> [<version|path>]"
   echo ""
   exit 0
 fi
+
+SKIP=false
+while getopts s: opt; do
+    case $opt in
+        s) SKIP=true
+    esac
+    shift
+done
 
 RELEASE=${1?"release required"}
 CHART=${2?"chart required"}
@@ -84,6 +92,7 @@ fi
 
 popd >/dev/null || exit
 
+if [ "$SKIP" = false ] ; then
 echo ""
 echo "--------------------------------------------------------------------------------"
 echo ""
@@ -182,6 +191,7 @@ case ${answer:0:1} in
     ;;
 esac
 
+fi
 echo ""
 echo "--------------------------------------------------------------------------------"
 echo ""

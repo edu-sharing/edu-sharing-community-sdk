@@ -3,8 +3,7 @@
 #set( $symbol_escape = '\' )
 ${symbol_pound} ${rootArtifactId} - deploy docker
 
-Prerequisites
--------------
+## Prerequisites
 
 - Docker Engine 18.06.0+
 - Apache Maven 3.8.4+
@@ -12,8 +11,7 @@ Prerequisites
 - PHP Framework 7.4 (<8)
 - Git SCM
 
-Install
--------
+## Install
 
 1. Please login with your credentials (if necessary):
 
@@ -33,8 +31,7 @@ Install
    ./deploy.sh info
    ```
 
-Build
------
+## Build
 
 1. Please add following elements to `${symbol_dollar}HOME/.m2/settings.xml` 
 
@@ -66,8 +63,7 @@ Build
    mvn clean install
    ```
 
-Test
-----
+## Test
 
 1. [Build](#build) local docker images first.
 
@@ -95,8 +91,7 @@ Test
    ./deploy.sh logs
    ```
 
-Debugging
----------
+## Debugging
 
 1. [Build](#build) local docker images first.
 
@@ -138,8 +133,7 @@ Debugging
      ./deploy.sh reload edu-sharing
      ```
 
-Uninstall
----------
+## Uninstall
 
 1. Shut down an instance by calling:
 
@@ -152,6 +146,9 @@ Uninstall
    ```
    ./deploy.sh remove
    ```
+
+## Parameters
+
 
 ---
 If you need more information, please consult

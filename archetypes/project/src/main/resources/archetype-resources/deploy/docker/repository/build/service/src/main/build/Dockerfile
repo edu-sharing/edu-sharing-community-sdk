@@ -52,6 +52,7 @@ RUN set -eux \
     && adduser --uid=1000 --home=$ALF_HOME --disabled-password --gecos "" --shell=/bin/bash worker \
     && mkdir -p bin \
     && mkdir -p alf_data \
+    && mkdir -p alf_safe \
     && mkdir -p tomcat/logs \
     && touch tomcat/logs/catalina.out \
     && mkdir -p tomcat/shared/classes/alfresco \

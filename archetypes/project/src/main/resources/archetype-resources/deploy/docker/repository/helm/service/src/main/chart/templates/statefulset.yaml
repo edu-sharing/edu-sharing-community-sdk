@@ -108,6 +108,10 @@ spec:
           mountPath: /opt/bitnami/tomcat/shared/classes/config/cluster
         - name: share-data
           mountPath: /opt/alfresco/alf_data
+        {{- if .Values.persistence.share.safe.enabled }}
+        - name: share-safe
+          mountPath: /opt/alfresco/alf_safe
+        {{- end }}
         {{- with .Values.config.override.config.application.client }}
         - name: file
           mountPath: /opt/bitnami/tomcat/shared/classes/config/defaults/client.config.override.xml
@@ -364,6 +368,11 @@ spec:
       - name: share-data
         persistentVolumeClaim:
           claimName: {{ include "edusharing_repository_service.pvc.share.data" . }}
+      {{- if .Values.persistence.share.safe.enabled }}
+      - name: share-safe
+        persistentVolumeClaim:
+          claimName: {{ include "edusharing_repository_service.pvc.share.safe" . }}
+      {{- end }}
       - name: file
         configMap:
           name: {{ include "edusharing_repository_service.name" . }}-file

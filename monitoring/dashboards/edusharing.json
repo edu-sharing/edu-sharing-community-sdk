@@ -9596,7 +9596,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}) by (pod)",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -9691,7 +9691,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-solr4.*\", container!=\"\", image!=\"\"}) by (pod)",
+              "expr": "sum(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-solr.*\", container!=\"\", image!=\"\"}) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -9786,7 +9786,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "process_open_fds{namespace=\"$namespace\",service=\"edusharing-repository-search-solr4-metrics\"}",
+              "expr": "process_open_fds{namespace=\"$namespace\",service=\"edusharing-repository-search-solr-metrics\"}",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -9835,7 +9835,7 @@
           }
         }
       ],
-      "title": "edusharing-repository-search-solr4",
+      "title": "edusharing-repository-search-solr",
       "type": "row"
     },
     {
@@ -9897,7 +9897,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_memory_bytes_used{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",area=\"heap\"}",
+              "expr": "jvm_memory_bytes_used{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",area=\"heap\"}",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -9992,7 +9992,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_memory_bytes_committed{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",area=\"heap\"}",
+              "expr": "jvm_memory_bytes_committed{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",area=\"heap\"}",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -10087,7 +10087,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_memory_bytes_max{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",area=\"heap\"}",
+              "expr": "jvm_memory_bytes_max{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",area=\"heap\"}",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -10182,7 +10182,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_memory_bytes_used{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",area=\"nonheap\"}",
+              "expr": "jvm_memory_bytes_used{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",area=\"nonheap\"}",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -10277,7 +10277,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_memory_bytes_committed{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",area=\"nonheap\"}",
+              "expr": "jvm_memory_bytes_committed{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",area=\"nonheap\"}",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -10372,7 +10372,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(jvm_gc_collection_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}[$__rate_interval])) by (pod)",
+              "expr": "sum(rate(jvm_gc_collection_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -10467,7 +10467,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(jvm_gc_collection_seconds_sum{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}[$__rate_interval])) by (pod)",
+              "expr": "sum(rate(jvm_gc_collection_seconds_sum{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\"}[$__rate_interval])) by (pod)",
               "interval": "",
               "legendFormat": "{{pod}}",
               "refId": "A"
@@ -10562,7 +10562,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_threads_current{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}",
+              "expr": "jvm_threads_current{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -10658,7 +10658,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_threads_daemon{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}",
+              "expr": "jvm_threads_daemon{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -10754,7 +10754,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "jvm_threads_peak{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\"}",
+              "expr": "jvm_threads_peak{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -10803,7 +10803,7 @@
           }
         }
       ],
-      "title": "edusharing-repository-search-solr4 (jvm)",
+      "title": "edusharing-repository-search-solr (jvm)",
       "type": "row"
     },
     {
@@ -10865,7 +10865,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(solr_cache_size_kb{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\"}) by (cache)",
+              "expr": "sum(solr_cache_size_kb{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\"}) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -10961,7 +10961,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(solr_cache_hit_ratio{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\"}) by (cache)",
+              "expr": "sum(solr_cache_hit_ratio{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\"}) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -11057,7 +11057,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_cache_eviction_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\"}[$__rate_interval])) by (cache)",
+              "expr": "sum(rate(solr_cache_eviction_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\"}[$__rate_interval])) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -11153,7 +11153,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_handler_request_milliseconds_count{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\"}[$__rate_interval])) by (handler)",
+              "expr": "sum(rate(solr_handler_request_milliseconds_count{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\"}[$__rate_interval])) by (handler)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{handler}}",
@@ -11249,7 +11249,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_handler_request_milliseconds_sum{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\"}[$__rate_interval])) by (handler)",
+              "expr": "sum(rate(solr_handler_request_milliseconds_sum{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\"}[$__rate_interval])) by (handler)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{handler}}",
@@ -11345,7 +11345,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_handler_request_error_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\"}[$__rate_interval])) by (cache)",
+              "expr": "sum(rate(solr_handler_request_error_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\"}[$__rate_interval])) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -11441,7 +11441,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "solr_searcher_doc_current{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\",searcher=\"searcher\"}",
+              "expr": "solr_searcher_doc_current{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\",searcher=\"searcher\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -11537,7 +11537,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(solr_searcher_doc_deleted{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"alfresco\",searcher=\"searcher\"}) by (pod)",
+              "expr": "sum(solr_searcher_doc_deleted{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"alfresco\",searcher=\"searcher\"}) by (pod)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -11586,7 +11586,7 @@
           }
         }
       ],
-      "title": "edusharing-repository-search-solr4 (alfresco)",
+      "title": "edusharing-repository-search-solr (alfresco)",
       "type": "row"
     },
     {
@@ -11648,7 +11648,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(solr_cache_size_kb{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\"}) by (cache)",
+              "expr": "sum(solr_cache_size_kb{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\"}) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -11744,7 +11744,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(solr_cache_hit_ratio{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\"}) by (cache)",
+              "expr": "sum(solr_cache_hit_ratio{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\"}) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -11840,7 +11840,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_cache_eviction_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\"}[$__rate_interval])) by (cache)",
+              "expr": "sum(rate(solr_cache_eviction_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\"}[$__rate_interval])) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -11936,7 +11936,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_handler_request_milliseconds_count{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\"}[$__rate_interval])) by (handler)",
+              "expr": "sum(rate(solr_handler_request_milliseconds_count{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\"}[$__rate_interval])) by (handler)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{handler}}",
@@ -12032,7 +12032,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_handler_request_milliseconds_sum{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\"}[$__rate_interval])) by (handler)",
+              "expr": "sum(rate(solr_handler_request_milliseconds_sum{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\"}[$__rate_interval])) by (handler)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{handler}}",
@@ -12128,7 +12128,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(rate(solr_handler_request_error_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\"}[$__rate_interval])) by (cache)",
+              "expr": "sum(rate(solr_handler_request_error_total{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\"}[$__rate_interval])) by (cache)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{cache}}",
@@ -12224,7 +12224,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "solr_searcher_doc_current{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\",searcher=\"searcher\"}",
+              "expr": "solr_searcher_doc_current{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\",searcher=\"searcher\"}",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -12320,7 +12320,7 @@
           "targets": [
             {
               "exemplar": true,
-              "expr": "sum(solr_searcher_doc_deleted{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr4.*\",core=\"archive\",searcher=\"searcher\"}) by (pod)",
+              "expr": "sum(solr_searcher_doc_deleted{cluster=\"$cluster\", namespace=\"$namespace\",pod=~\"edusharing-repository-search-solr.*\",core=\"archive\",searcher=\"searcher\"}) by (pod)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
@@ -12369,7 +12369,7 @@
           }
         }
       ],
-      "title": "edusharing-repository-search-solr4 (archive)",
+      "title": "edusharing-repository-search-solr (archive)",
       "type": "row"
     },
     {

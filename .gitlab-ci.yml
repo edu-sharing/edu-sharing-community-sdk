@@ -9,7 +9,7 @@ stages:
   - lint
   - deploy
 
-check-readme:
+check-helmreadme:
   stage: lint
   image: node:lts-alpine3.20
   script:

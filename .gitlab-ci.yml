@@ -6,7 +6,22 @@ default:
   image: maven:3.8.4-jdk-8
 
 stages:
+  - lint
   - deploy
+
+check-helmreadme:
+  stage: lint
+  image: node:lts-alpine3.20
+  script:
+    - wget -qO- https://github.com/bitnami/readme-generator-for-helm/archive/refs/tags/2.6.1.tar.gz | tar -xz -C /tmp
+    - ln -s $CI_PROJECT_DIR/archetypes/project/src/main/resources/archetype-resources/deploy/docker/helm/src/main/chart /tmp/deploy
+    - ln -s $CI_PROJECT_DIR/archetypes/project/src/main/resources/archetype-resources/repository/deploy/docker/helm/src/main/chart /tmp/repository
+    - cp /tmp/deploy/README.md /tmp/README_deploy.md && cp /tmp/repository/README.md /tmp/README_repository.md
+    - cd /tmp; npm install ./readme-generator-for-helm-2.6.1; cd readme-generator-for-helm-2.6.1
+    - ./bin/index.js -v /tmp/deploy/values.yaml -r /tmp/README_deploy.md
+    - ./bin/index.js -v /tmp/repository/values.yaml -r /tmp/README_repository.md
+    - diff /tmp/README_deploy.md /tmp/deploy/README.md         || (echo "README was not generated before committing." && exit 1)
+    - diff /tmp/README_repository.md /tmp/repository/README.md || (echo "README was not generated before committing." && exit 1)
 
 deploy:
   stage: deploy

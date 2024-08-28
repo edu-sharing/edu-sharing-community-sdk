@@ -36,9 +36,12 @@ while getopts sdte opt; do
           WIZARD=false
           DEPLOY=true
           ;;
-        *);;
+        *)
+          ;;
     esac
 done
+
+shift $(( "$OPTIND" - 1))
 
 RELEASE=${1?"release required"}
 CHART=${2?"chart required"}

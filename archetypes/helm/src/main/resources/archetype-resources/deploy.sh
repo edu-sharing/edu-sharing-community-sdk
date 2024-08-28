@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 set -o pipefail
 
 if [[ -z $1 ]] ; then

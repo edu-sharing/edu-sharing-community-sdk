@@ -265,14 +265,16 @@ runAsWizard() {
 if [[ $WIZARD == "true" ]] ; then
   runAsWizard
 else
-  [[ $DIFF == "true" ]] && {
+  if [[ $DIFF == "true" ]] ; then
     diff
-  }
-  [[ $TRY_RUN == "true" ]] && {
-    tryRun
-  }
+  fi
 
-  [[ $DEPLOY == "true" ]] && {
+  if [[ $TRY_RUN == "true" ]] ; then
+    tryRun
+  fi
+
+  if [[ $DEPLOY == "true" ]] ; then
     execute
-  }
+  fi
+
 fi

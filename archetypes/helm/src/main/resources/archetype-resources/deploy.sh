@@ -121,7 +121,10 @@ popd >/dev/null || exit
 diff() {
   echo "Request diff from last revision, please wait ..."
   echo ""
+  # temporarily disable the script from exiting on a non-zero status code
+  set +e
   helm diff upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}"
+  set -e
 }
 
 tryRun(){
@@ -262,14 +265,16 @@ runAsWizard() {
 if [[ $WIZARD == "true" ]] ; then
   runAsWizard
 else
-  [[ $DIFF == "true" ]] && {
+  if [[ $DIFF == "true" ]] ; then
     diff
-  }
-  [[ $TRY_RUN == "true" ]] && {
-    tryRun
-  }
+  fi
 
-  [[ $DEPLOY == "true" ]] && {
+  if [[ $TRY_RUN == "true" ]] ; then
+    tryRun
+  fi
+
+  if [[ $DEPLOY == "true" ]] ; then
     execute
-  }
+  fi
+
 fi

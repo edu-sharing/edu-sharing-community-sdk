@@ -6,11 +6,11 @@ default:
   image: maven:3.8.4-jdk-8
 
 stages:
-  - lint
+  - test
   - deploy
 
 check-helmreadme:
-  stage: lint
+  stage: test
   image: node:lts-alpine3.20
   script:
     - wget -qO- https://github.com/bitnami/readme-generator-for-helm/archive/refs/tags/2.6.1.tar.gz | tar -xz -C /tmp

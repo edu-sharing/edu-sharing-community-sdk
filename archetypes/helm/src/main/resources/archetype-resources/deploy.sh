@@ -4,18 +4,44 @@ set -o pipefail
 
 if [[ -z $1 ]] ; then
   echo ""
-  echo "deploy.sh [-s skip checks and deploy directly] <release> <chart> [<version|path>]"
+  echo "deploy.sh [options] <release> <chart> [<version|path>]"
+  echo "  options:"
+  echo "     -s                       # skip checks and deploy directly"
+  echo "     -d                       # run diff"
+  echo "     -t                       # run try run"
+  echo "     -e                       # run execute deployment"
   echo ""
   exit 0
 fi
 
 SKIP=false
-while getopts s: opt; do
+WIZARD=true
+DIFF=false
+TRY_RUN=false
+DEPLOY=false
+while getopts sdte opt; do
     case $opt in
-        s) SKIP=true
+        s)
+          SKIP=true
+          ;;
+        d)
+          WIZARD=false
+          DIFF=true
+          ;;
+        t)
+          WIZARD=false
+          TRY_RUN=true
+          ;;
+        e)
+          WIZARD=false
+          DEPLOY=true
+          ;;
+        *)
+          ;;
     esac
-    shift
 done
+
+shift $(( "$OPTIND" - 1))
 
 RELEASE=${1?"release required"}
 CHART=${2?"chart required"}
@@ -92,127 +118,163 @@ fi
 
 popd >/dev/null || exit
 
-if [ "$SKIP" = false ] ; then
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-echo "cluster:       ${CONTEXT}"
-echo "namespace:     ${NAMESPACE}"
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-read -p "---> kubectl context ok [y/N] " answer
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-case ${answer:0:1} in
-  y | Y)
-    echo "Request existing releases, please wait ..."
+diff() {
+  echo "Request diff from last revision, please wait ..."
+  echo ""
+  # temporarily disable the script from exiting on a non-zero status code
+  set +e
+  helm diff upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}"
+  set -e
+}
+
+tryRun(){
+  echo "Dry-run, please wait ..."
+  echo ""
+  helm upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}" --dry-run --debug
+}
+
+execute(){
+  echo "Execute, please wait ..."
+  echo ""
+  helm upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}" --timeout=30m
+}
+
+
+runAsWizard() {
+  if [ "$SKIP" = false ] ; then
     echo ""
-    helm repo update >/dev/null
-    helm ls -a
-    ;;
-  *)
-    exit 0
-    ;;
-esac
-
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-echo "release:       ${RELEASE}"
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-read -p "---> helm release ok [y/N] " answer
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-
-case ${answer:0:1} in
-  y | Y)
-    echo "Request existing revisions, please wait ..."
+    echo "--------------------------------------------------------------------------------"
     echo ""
-    helm history ${RELEASE} 2>/dev/null || echo "skipped ..."
-    ;;
-  *)
-    exit 0
-    ;;
-esac
+    echo "cluster:       ${CONTEXT}"
+    echo "namespace:     ${NAMESPACE}"
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    read -p "---> kubectl context ok [y/N] " answer
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    case ${answer:0:1} in
+      y | Y)
+        echo "Request existing releases, please wait ..."
+        echo ""
+        helm repo update >/dev/null
+        helm ls -a
+        ;;
+      *)
+        exit 0
+        ;;
+    esac
 
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-echo "chart:         ${CHART}"
-echo "version:       ${VERSION}"
-echo "options:       ${ARGS[@]}"
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-read -p "---> helm parameter ok [y/N] " answer
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    echo "release:       ${RELEASE}"
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    read -p "---> helm release ok [y/N] " answer
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
 
-if [[ ! -f ${CHART} ]] ; then
+    case ${answer:0:1} in
+      y | Y)
+        echo "Request existing revisions, please wait ..."
+        echo ""
+        helm history ${RELEASE} 2>/dev/null || echo "skipped ..."
+        ;;
+      *)
+        exit 0
+        ;;
+    esac
 
-  ARGS+=("--version")
-  ARGS+=("${VERSION}")
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    echo "chart:         ${CHART}"
+    echo "version:       ${VERSION}"
+    echo "options:       ${ARGS[*]}"
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    read -p "---> helm parameter ok [y/N] " answer
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+
+    if [[ ! -f ${CHART} ]] ; then
+
+      ARGS+=("--version")
+      ARGS+=("${VERSION}")
+
+    fi
+
+    case ${answer:0:1} in
+      y | Y)
+        diff
+        ;;
+      *)
+        exit 0
+        ;;
+    esac
+
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+    read -p "---> perform test [y/N] " answer
+    echo ""
+    echo "--------------------------------------------------------------------------------"
+    echo ""
+
+    case ${answer:0:1} in
+      y | Y)
+        tryRun
+        ;;
+      *)
+        echo "skipped ..."
+        ;;
+    esac
+
+  fi
+  echo ""
+  echo "--------------------------------------------------------------------------------"
+  echo ""
+  read -p "---> perform deployment [y/N] " answer
+  echo ""
+  echo "--------------------------------------------------------------------------------"
+  echo ""
+
+  case ${answer:0:1} in
+    y | Y)
+      execute
+      ;;
+    *)
+      echo "skipped ..."
+      ;;
+  esac
+
+  echo ""
+  echo "--------------------------------------------------------------------------------"
+  echo ""
+  echo "done"
+  echo ""
+}
+
+
+if [[ $WIZARD == "true" ]] ; then
+  runAsWizard
+else
+  if [[ $DIFF == "true" ]] ; then
+    diff
+  fi
+
+  if [[ $TRY_RUN == "true" ]] ; then
+    tryRun
+  fi
+
+  if [[ $DEPLOY == "true" ]] ; then
+    execute
+  fi
 
 fi
-
-case ${answer:0:1} in
-  y | Y)
-    echo "Request diff from last revision, please wait ..."
-    echo ""
-    helm diff upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}"
-    ;;
-  *)
-    exit 0
-    ;;
-esac
-
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-read -p "---> perform test [y/N] " answer
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-
-case ${answer:0:1} in
-  y | Y)
-    echo "Dry-run, please wait ..."
-    echo ""
-    helm upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}" --dry-run --debug
-    ;;
-  *)
-    echo "skipped ..."
-    ;;
-esac
-
-fi
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-read -p "---> perform deployment [y/N] " answer
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-
-case ${answer:0:1} in
-  y | Y)
-    echo "Run, please wait ..."
-    echo ""
-    helm upgrade --install "${RELEASE}" "${CHART}" "${ARGS[@]}" --timeout=30m
-    ;;
-  *)
-    echo "skipped ..."
-    ;;
-esac
-
-echo ""
-echo "--------------------------------------------------------------------------------"
-echo ""
-echo "done"
-echo ""

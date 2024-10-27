@@ -44,13 +44,13 @@
       dockerio.mirror.docker.edu-sharing.com/bitnami/postgresql:${postgresql.version}
     </docker.from.postgresql.server>
     <docker.from.redis.exporter>
-      dockerio.mirror.docker.edu-sharing.com/bitnami/redis-exporter:1.45.0
+      dockerio.mirror.docker.edu-sharing.com/bitnami/redis-exporter:1.65.0
     </docker.from.redis.exporter>
     <docker.from.redis.server>
-      dockerio.mirror.docker.edu-sharing.com/bitnami/redis:6.2.7
+      dockerio.mirror.docker.edu-sharing.com/bitnami/redis:7.4.1
     </docker.from.redis.server>
     <docker.from.rediscluster.server>
-      dockerio.mirror.docker.edu-sharing.com/bitnami/redis-cluster:6.2.7
+      dockerio.mirror.docker.edu-sharing.com/bitnami/redis-cluster:7.4.1
     </docker.from.rediscluster.server>
     <!--suppress UnresolvedMavenProperty -->
     <docker.from.tomcat>

@@ -76,15 +76,22 @@ spec:
           - "-ec"
           - |
             cp /opt/bitnami/redis/etc/redis-default.conf /opt/bitnami/redis/etc/redis.conf
-            if [[ "${HOSTNAME##*-}" == "0" ]]; then
+
+            echo '# cluster-announce-hostname localhost' >> /opt/bitnami/redis/etc/redis.conf
+            echo '# cluster-preferred-endpoint-type hostname' >> /opt/bitnami/redis/etc/redis.conf
+
+            if [[ "${POD_NAME##*-}" == "0" ]]; then
               export REDIS_CLUSTER_CREATOR="yes"
             fi
+
+            export REDIS_CLUSTER_ANNOUNCE_HOSTNAME="$POD_NAME.{{ include "edusharing_rediscluster.name" $ }}-headless"
+
             /opt/bitnami/scripts/redis-cluster/entrypoint.sh /opt/bitnami/scripts/redis-cluster/run.sh
         env:
-          - name: REDIS_CLUSTER_ANNOUNCE_IP
+          - name: POD_NAME
             valueFrom:
               fieldRef:
-                fieldPath: status.podIP
+                fieldPath: metadata.name
         envFrom:
         - configMapRef:
             name: {{ include "edusharing_rediscluster.name" . }}-env

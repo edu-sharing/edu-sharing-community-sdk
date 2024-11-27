@@ -34,8 +34,9 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- if (default .Values.global.cluster.storage.share.permission .Values.persistence.share.permission) }}
+      {{- if (or (default .Values.global.cluster.storage.share.permission .Values.persistence.share.permission) .Values.ingress.admin.enabled) }}
       initContainers:
+      {{- if (default .Values.global.cluster.storage.share.permission .Values.persistence.share.permission) }}
       - name: {{ include "edusharing_repository_service.name" . }}-init-permission
         image: {{ include "edusharing_repository_service.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-minideb:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.global.image.pullPolicy }}
@@ -74,6 +75,37 @@ spec:
         {{- with .Values.init.permission.securityContext }}
         securityContext: {{ toYaml . | nindent 10 }}
         {{- end }}
+      {{- end }}
+      {{- if .Values.ingress.admin.enabled }}
+      - name: {{ include "edusharing_repository_service.name" . }}-init-label
+        image: {{ include "edusharing_repository_service.image" . }}{{ .Values.image.prefix }}-deploy-docker-build-kubectl:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+        command:
+          - "/bin/bash"
+          - "-ec"
+          - |
+            if [[ "${POD_NAME##*-}" == "0" ]]; then
+              export POD_ROLE="admin"
+            else
+              export POD_ROLE="worker"
+            fi
+            kubectl label pod ${POD_NAME} role=${POD_ROLE} -n ${POD_NAMESPACE} --server=kubernetes.default --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) --certificate-authority=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt)
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        {{- with .Values.init.label.resources }}
+        resources: {{ toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.init.label.securityContext }}
+        securityContext: {{ toYaml . | nindent 10 }}
+        {{- end }}
+      {{- end }}
       {{- end }}
       containers:
       - name: {{ include "edusharing_repository_service.name" . }}-server
@@ -341,6 +373,9 @@ spec:
       {{- end }}
       {{- with merge .Values.podSecurityContext .Values.global.security }}
       securityContext: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.serviceAccountName }}
+      serviceAccountName: {{ . }}
       {{- end }}
       {{- with .Values.tolerations }}
       tolerations: {{ toYaml . | nindent 8 }}

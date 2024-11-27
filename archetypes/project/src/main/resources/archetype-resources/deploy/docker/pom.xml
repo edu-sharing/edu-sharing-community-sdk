@@ -30,6 +30,9 @@
     <docker.from.minideb>
       dockerio.mirror.docker.edu-sharing.com/bitnami/bitnami-shell:11
     </docker.from.minideb>
+    <docker.from.kubectl>
+      dockerio.mirror.docker.edu-sharing.com/bitnami/kubectl:1.24
+    </docker.from.kubectl>
     <docker.from.openjdk.8>
       dockerio.mirror.docker.edu-sharing.com/openjdk:8-jdk
     </docker.from.openjdk.8>

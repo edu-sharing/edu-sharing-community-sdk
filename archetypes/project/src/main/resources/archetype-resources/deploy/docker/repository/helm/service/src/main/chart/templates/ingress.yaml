@@ -1,4 +1,125 @@
 {{- if not .Values.global.cluster.istio.enabled }}
+{{- if .Values.ingress.admin.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "edusharing_repository_service.name" . }}-admin-exact
+  labels: {{ include "edusharing_repository_service.labels.app" . | nindent 4 }}
+  {{- with merge .Values.ingress.annotations .Values.global.cluster.cert.annotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.global.cluster.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.global.cluster.ingress.ingressClassName | quote }}
+  {{- end }}
+  {{- with .Values.ingress.admin.tls }}
+  tls: {{ toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+  {{- range .Values.ingress.admin.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: {{ include "edusharing_repository_service.name" $ }}-admin
+                port:
+                  number: {{ $.Values.service.port.api.external }}
+  {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "edusharing_repository_service.name" . }}-admin-prefix
+  labels: {{ include "edusharing_repository_service.labels.app" . | nindent 4 }}
+  {{- with merge .Values.ingress.annotations .Values.global.cluster.cert.annotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.global.cluster.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.global.cluster.ingress.ingressClassName | quote }}
+  {{- end }}
+  {{- with .Values.ingress.admin.tls }}
+  tls: {{ toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+  {{- range .Values.ingress.admin.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+      {{- range $.Values.ingress.paths }}
+          - path: {{ . }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "edusharing_repository_service.name" $ }}-admin
+                port:
+                  number: {{ $.Values.service.port.api.external }}
+      {{- end }}
+  {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "edusharing_repository_service.name" . }}-worker-exact
+  labels: {{ include "edusharing_repository_service.labels.app" . | nindent 4 }}
+  {{- with merge .Values.ingress.annotations .Values.global.cluster.cert.annotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.global.cluster.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.global.cluster.ingress.ingressClassName | quote }}
+  {{- end }}
+  {{- with .Values.ingress.tls }}
+  tls: {{ toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: {{ include "edusharing_repository_service.name" $ }}-worker
+                port:
+                  number: {{ $.Values.service.port.api.external }}
+  {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "edusharing_repository_service.name" . }}-worker-prefix
+  labels: {{ include "edusharing_repository_service.labels.app" . | nindent 4 }}
+  {{- with merge .Values.ingress.annotations .Values.global.cluster.cert.annotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.global.cluster.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.global.cluster.ingress.ingressClassName | quote }}
+  {{- end }}
+  {{- with .Values.ingress.tls }}
+  tls: {{ toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+      {{- range $.Values.ingress.paths }}
+          - path: {{ . }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "edusharing_repository_service.name" $ }}-worker
+                port:
+                  number: {{ $.Values.service.port.api.external }}
+      {{- end }}
+  {{- end }}
+{{- else }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -58,4 +179,5 @@ spec:
               number: {{ $.Values.service.port.api.external }}
       {{- end }}
   {{- end }}
+{{- end }}
 {{- end }}

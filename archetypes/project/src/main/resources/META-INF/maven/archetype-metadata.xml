@@ -117,6 +117,18 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module dir="kubectl"
+                        id="${rootArtifactId}-deploy-docker-build-kubectl"
+                        name="${rootArtifactId}-deploy-docker-build-kubectl">
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module dir="mailcatcher"
                         id="${rootArtifactId}-deploy-docker-build-mailcatcher"
                         name="${rootArtifactId}-deploy-docker-build-mailcatcher">

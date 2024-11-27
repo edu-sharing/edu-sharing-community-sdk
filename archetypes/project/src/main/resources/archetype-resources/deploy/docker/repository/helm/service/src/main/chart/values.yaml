@@ -117,6 +117,18 @@ ingress:
   paths:
   - /edu-sharing
 
+  admin:
+
+    enabled: false
+
+    hosts:
+      - admin.repository.127.0.0.1.nip.io
+
+    tls: []
+  #  - secretName: admin-edusharing-repository-tls
+  #    hosts:
+  #    - admin.repository.127.0.0.1.nip.io
+
 ########################################################################################################################
 
 proxy:
@@ -371,6 +383,8 @@ securityContext:
     - ALL
   runAsUser: 1000
 
+# serviceAccountName: default
+
 ########################################################################################################################
 
 terminationGracePeriod: 120
@@ -427,6 +441,21 @@ init:
     securityContext:
 
       runAsUser: 0
+
+  label:
+
+    resources:
+
+      limits:
+        cpu: 125m
+        memory: 512Mi
+      requests:
+        cpu: 125m
+        memory: 512Mi
+
+    securityContext:
+
+      runAsUser: 1001
 
 ########################################################################################################################
 

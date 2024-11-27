@@ -32,7 +32,8 @@ spec:
     - name: http-api-internal
       port: {{ .Values.service.port.api.internal }}
       targetPort: api-internal
-{{- else }}
+---
+{{- end }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -48,7 +49,6 @@ spec:
   - name: http-api-internal
     port: {{ .Values.service.port.api.internal }}
     targetPort: api-internal
-{{- end }}
 ---
 apiVersion: v1
 kind: Service

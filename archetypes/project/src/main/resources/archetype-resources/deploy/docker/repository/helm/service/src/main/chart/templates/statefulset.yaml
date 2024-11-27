@@ -89,16 +89,12 @@ spec:
             else
               export POD_ROLE="worker"
             fi
-            kubectl label pod ${POD_NAME} role=${POD_ROLE} -n ${POD_NAMESPACE} --server=kubernetes.default --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) --certificate-authority=$(cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt)
+            kubectl label pod ${POD_NAME} role=${POD_ROLE} --overwrite
         env:
           - name: POD_NAME
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
         {{- with .Values.init.label.resources }}
         resources: {{ toYaml . | nindent 10 }}
         {{- end }}

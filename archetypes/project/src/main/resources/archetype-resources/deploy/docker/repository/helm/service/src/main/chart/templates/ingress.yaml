@@ -1,5 +1,6 @@
 {{- if not .Values.global.cluster.istio.enabled }}
 {{- if .Values.ingress.admin.enabled }}
+{{- if .Values.ingress.admin.hosts }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -60,6 +61,7 @@ spec:
       {{- end }}
   {{- end }}
 ---
+{{- end }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

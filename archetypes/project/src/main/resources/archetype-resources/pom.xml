@@ -195,6 +195,14 @@
         <type>war</type>
       </dependency>
 
+      <!-- common docker deployment -->
+      <dependency>
+        <groupId>org.edu_sharing</groupId>
+        <artifactId>edu_sharing-community-common-deployment-mongodb-compose</artifactId>
+        <version>develop-SNAPSHOT</version>
+      </dependency>
+
+
     </dependencies>
 
   </dependencyManagement>

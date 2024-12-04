@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    image: "dockerio.mirror.docker.edu-sharing.com/nginxproxy/nginx-proxy:alpine"
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro

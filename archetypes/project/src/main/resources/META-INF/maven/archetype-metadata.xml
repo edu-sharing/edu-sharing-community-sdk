@@ -39,6 +39,12 @@
     <requiredProperty key="REPOSITORY_TRANSFORM_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>
+    <requiredProperty key="SERVICE_RENDERING_ENABLED">
+      <defaultValue>true</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="SERVICE_RENDERING2_ENABLED">
+      <defaultValue>false</defaultValue>
+    </requiredProperty>
     <requiredProperty key="SERVICE_CONNECTOR_ENABLED">
       <defaultValue>false</defaultValue>
     </requiredProperty>

@@ -54,6 +54,18 @@
       ${docker.registry}/${docker.common}/${docker.edu_sharing.community.common.mongodb.name}:${docker.edu_sharing.community.common.mongodb.tag}
     </docker.edu_sharing.community.common.mongodb>
 
+    <docker.edu_sharing.community.common.onyx.name>
+      edu_sharing-community-common-docker-onyx
+    </docker.edu_sharing.community.common.onyx.name>
+
+    <docker.edu_sharing.community.common.onyx.tag>
+      12.2.0.1-0
+    </docker.edu_sharing.community.common.onyx.tag>
+
+    <docker.edu_sharing.community.common.onyx>
+      ${docker.registry}/${docker.common}/${docker.edu_sharing.community.common.onyx.name}:${docker.edu_sharing.community.common.onyx.tag}
+    </docker.edu_sharing.community.common.onyx>
+
     <helm.kube.version>&gt;= 1.20.0-0</helm.kube.version>
     <helm.version>3.14.2</helm.version>
 

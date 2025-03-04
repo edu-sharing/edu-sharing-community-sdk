@@ -37,7 +37,7 @@
       dockerio.mirror.docker.edu-sharing.com/openjdk:8-jdk
     </docker.from.openjdk.8>
     <docker.from.openjdk.11>
-      dockerio.mirror.docker.edu-sharing.com/openjdk:11-jdk
+      dockerio.mirror.docker.edu-sharing.com/openjdk:11.0.15-jdk
     </docker.from.openjdk.11>
     <docker.from.postgresql.exporter>
       quay.mirror.docker.edu-sharing.com/prometheuscommunity/postgres-exporter:v0.11.1

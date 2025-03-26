@@ -164,16 +164,16 @@ edusharing_services_rendering2:
   ## @param edusharing_services_rendering2.enabled Enable rendering service
   enabled: false
 
-  edusharing_services_rendering_rediscluster:
+  edusharing_services_rendering2_rediscluster:
 
     ## @param edusharing_services_rendering2.edusharing_services_rendering_rediscluster.enabled Enable rediscluster rendering service
     enabled: false
 
-  edusharing_services_rendering_service:
+  edusharing_services_rendering2_service:
 
     config:
 
-      cache:
+      redis:
         ## @param edusharing_services_rendering2.edusharing_services_rendering_service.config.cache.host Set host for rendering service cache
         host: *redisclusterNameOverride
         ## @param edusharing_services_rendering2.edusharing_services_rendering_service.config.cache.port Set port for rendering service cache

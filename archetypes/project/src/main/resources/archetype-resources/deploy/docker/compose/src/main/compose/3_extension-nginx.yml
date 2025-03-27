@@ -4,6 +4,9 @@ services:
 
   nginx:
     image: "dockerio.mirror.docker.edu-sharing.com/nginxproxy/nginx-proxy:alpine"
+    environment:
+      DEFAULT_HOST: "${NGINX_DEFAULT_HOST:-*.127.0.0.1.nip.io,localhost}"
+    network_mode: "host"
     ports:
       - "80:80"
     volumes:

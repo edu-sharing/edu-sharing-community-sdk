@@ -134,7 +134,7 @@ edusharing_repository:
 edusharing_services_rendering:
 
   ## @param edusharing_services_rendering.enabled Enable rendering service
-  enabled: true
+  enabled: ${helm.edusharing_services_rendering.enabled}
 
   edusharing_services_rendering_rediscluster:
 
@@ -162,7 +162,7 @@ edusharing_services_rendering:
 edusharing_services_rendering2:
 
   ## @param edusharing_services_rendering2.enabled Enable rendering service
-  enabled: false
+  enabled: ${helm.edusharing_services_rendering2.enabled}
 
   edusharing_services_rendering2_rediscluster:
 

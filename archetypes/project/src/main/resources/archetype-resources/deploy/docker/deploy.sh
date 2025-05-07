@@ -31,7 +31,13 @@ popd >/dev/null || exit
 	cp -f ".env" "${COMPOSE_DIR}"
 }
 
-export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-$(echo "${COMPOSE_PROJECT}-docker-$(git rev-parse --abbrev-ref HEAD)" | sed 's|[\/\.]|-|g' | tr '[:upper:]' '[:lower:]')}"
+if [[ -f ".composeProjectName" ]] ; then
+  gitBranchName="$(cat .composeProjectName)"
+else
+  gitBranchName="$(git rev-parse --abbrev-ref HEAD)"
+fi
+
+export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-$(echo "${COMPOSE_PROJECT}-docker-${gitBranchName}" | sed 's|[\/\.]|-|g' | tr '[:upper:]' '[:lower:]')}"
 
 case "$(uname)" in
 MINGW*)

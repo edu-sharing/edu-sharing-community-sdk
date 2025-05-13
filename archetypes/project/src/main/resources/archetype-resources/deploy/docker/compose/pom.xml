@@ -209,6 +209,26 @@
               <finalName>docker-compose.debug.yml</finalName>
             </configuration>
           </execution>
+
+          <execution>
+            <id>proxy</id>
+            <phase>package</phase>
+            <goals>
+              <goal>merge</goal>
+            </goals>
+            <configuration>
+              <fileSets>
+                <fileSet>
+                  <directory>${project.build.directory}/compose</directory>
+                  <includes>
+                    <include>*-nginx.yml</include>
+                  </includes>
+                </fileSet>
+              </fileSets>
+              <outputDirectory>${project.build.directory}/edu-sharing</outputDirectory>
+              <finalName>docker-compose.proxy.yml</finalName>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 

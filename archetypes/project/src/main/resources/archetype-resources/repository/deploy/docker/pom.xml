@@ -71,7 +71,7 @@
     </docker.edu_sharing.community.common.mongodb.name>
 
     <docker.edu_sharing.community.common.mongodb.tag>
-      7.0.15
+      8.0.12
     </docker.edu_sharing.community.common.mongodb.tag>
 
     <docker.edu_sharing.community.common.mongodb.exporter.name>
@@ -79,7 +79,7 @@
     </docker.edu_sharing.community.common.mongodb.exporter.name>
 
     <docker.edu_sharing.community.common.mongodb.exporter.tag>
-      0.30.0
+      0.47.0
     </docker.edu_sharing.community.common.mongodb.exporter.tag>
 
     <helm.kube.version>&gt;= 1.20.0-0</helm.kube.version>

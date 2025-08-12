@@ -47,7 +47,7 @@
     </docker.edu_sharing.community.common.mongodb.name>
 
     <docker.edu_sharing.community.common.mongodb.tag>
-      7.0.15
+      8.0.12
     </docker.edu_sharing.community.common.mongodb.tag>
 
     <docker.edu_sharing.community.common.mongodb>

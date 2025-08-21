@@ -16083,7 +16083,7 @@
       "panels": [
         {
           "aliasColors": {},
-          "bars": true,
+          "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": {

@@ -270,6 +270,19 @@
                     </fileSet>
                   </fileSets>
                 </module>
+                <module dir="frontend-server"
+                        id="${rootArtifactId}-repository-deploy-docker-frontend-server"
+                        name="${rootArtifactId}-repository-deploy-docker-frontend-server">
+
+                  <fileSets>
+                    <fileSet encoding="UTF-8">
+                      <directory>src</directory>
+                      <includes>
+                        <include>**/*</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                </module>
                 <module dir="helm"
                         id="${rootArtifactId}-repository-deploy-docker-helm"
                         name="${rootArtifactId}-repository-deploy-docker-helm">

@@ -410,6 +410,30 @@ edusharing_repository_service:
 
 ########################################################################################################################
 
+edusharing_repository_frontend_server:
+
+  ## @param edusharing_repository_frontend_server.enabled Enable repository frontend server
+  enabled: true
+
+  ## @param edusharing_repository_frontend_server.nameOverride Override repository frontend server name
+  nameOverride: edusharing-repository-frontend-server
+
+  image:
+    ## @param edusharing_repository_frontend_server.image.repository Set repository frontend server image repository
+    repository: ${docker.repository}
+    ## @param edusharing_repository_frontend_server.image.name Set repository frontend server image name
+    name: ${docker.prefix}-deploy-docker-build-repository-frontend-server
+    ## @param edusharing_repository_frontend_server.image.tag Set repository frontend server image tag
+    tag: ${docker.tag}
+
+  config:
+
+    backend:
+      ## @param edusharing_repository_frontend_server.config.backend.host Set host of the repository service
+      host: *serviceNameOverride
+
+########################################################################################################################
+
 edusharing_repository_search_elastic_tracker:
 
   ## @param edusharing_repository_search_elastic_tracker.enabled Enable search repositories elastic tracker

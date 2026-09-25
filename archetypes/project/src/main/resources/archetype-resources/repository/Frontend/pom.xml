@@ -15,6 +15,10 @@
 
   <name>${artifactId}</name>
 
+  <!-- in every profile the root of this war is the complete angular dist (community app
+       + project customizations). repository/deploy/docker/frontend-server unpacks it into
+       the frontend server image, repository/webapp takes only assets/i18n and assets/images -->
+
   <build>
 
     <finalName>edu-sharing</finalName>

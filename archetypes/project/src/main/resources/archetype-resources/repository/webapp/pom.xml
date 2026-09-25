@@ -26,6 +26,26 @@
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <overlays>
+            <overlay>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${rootArtifactId}-repository-backend-services-webapp</artifactId>
+            </overlay>
+            <!-- the angular app is delivered by the frontend server image
+                 (repository/deploy/docker/frontend-server). What the backend reads out of
+                 the war itself stays - the project's versions of:
+                 - assets/i18n: I18nAngular (mails, mediatype labels, exports) and the bundle of
+                   /rest/config/v1/language/defaults
+                 - assets/images: embedded into mails by {{image:/assets/images/...}} of the mail templates -->
+            <overlay>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${rootArtifactId}-repository-frontend</artifactId>
+              <includes>
+                <include>assets/i18n/**</include>
+                <include>assets/images/**</include>
+              </includes>
+            </overlay>
+          </overlays>
           <webResources>
             <resource>
               <directory>src/main/templates</directory>

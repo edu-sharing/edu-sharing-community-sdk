@@ -2,5 +2,8 @@ version: '3.7'
 
 services:
 
+  repository-frontend-server:
+    image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-build-repository-frontend-server:${docker.tag}"
+
   repository-service:
     image: "${docker.registry}/${docker.repository}/${docker.prefix}-deploy-docker-build-repository-service:${docker.tag}"

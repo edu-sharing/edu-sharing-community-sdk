@@ -14,3 +14,13 @@ To insert/override:
 You have to add your angular code under src/main/ng/src.
 Also place the assets into src/main/ng/src/assets folder.
 
+## Delivery
+
+The UI is delivered by the frontend server, not by Tomcat. The war built here is its
+`dist`: `repository/deploy/docker/frontend-server` replaces `/app/dist` of the community
+frontend server image with the content of this war (the server itself stays the community
+one). `repository/webapp` only takes `assets/i18n` and `assets/images` of it (mails,
+translations served by the backend).
+
+For local development (`./deploy.sh ldev`) the dev compose mounts the `Frontend/dist` of the
+community checkout into the frontend server container, see `scripts/apply-frontend-customizations.sh`.

@@ -369,6 +369,42 @@
 
         <plugins>
 
+          <!-- Without project overrides (src/edu-sharing-override) the app and the web components
+               would be rebuilt identical to the community build - they come from the community
+               frontend war (war overlay) instead, only storybook is built. With overrides the app
+               is built as before, so the customizations reach it. Decided here because a profile
+               cannot require two files (storybook.build AND src/edu-sharing-override), and
+               src/edu-sharing-override alone also belongs to frontend.native.
+               The properties are deliberately not declared in the pom: declared ones would be
+               interpolated before this script sets them. -->
+          <plugin>
+            <groupId>org.codehaus.gmavenplus</groupId>
+            <artifactId>gmavenplus-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>storybook-app-build</id>
+                <goals>
+                  <goal>execute</goal>
+                </goals>
+                <phase>initialize</phase>
+                <configuration>
+                  <scripts>
+                    <script><![CDATA[
+                      // only calls on existing objects, no class literals: the groovy 3.0.9 of the
+                      // super pom cannot read jdk 21 class files (as the other scripts of the sdk)
+                      def overrides = project.basedir.toPath().resolve('src/edu-sharing-override').toFile().exists()
+                      project.properties.setProperty('frontend.storybook.skipApp', (!overrides).toString())
+                      project.properties.setProperty('frontend.storybook.skipLibs', overrides.toString())
+                      log.info(overrides
+                        ? 'frontend.storybook: src/edu-sharing-override present - building app, web components and storybook'
+                        : 'frontend.storybook: no overrides - building storybook only, app and web components from the community frontend war')
+                    ]]></script>
+                  </scripts>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-clean-plugin</artifactId>
@@ -430,6 +466,8 @@
                 </goals>
                 <phase>process-classes</phase>
                 <configuration>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <skip>${frontend.storybook.skipApp}</skip>
                   <resources>
                     <resource>
                       <directory>src/app/edu-sharing/Frontend/src/assets/i18n</directory>
@@ -478,7 +516,23 @@
                 </goals>
                 <phase>compile</phase>
                 <configuration>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <skip>${frontend.storybook.skipApp}</skip>
                   <arguments>${npm.args.build}</arguments>
+                </configuration>
+              </execution>
+              <!-- storybook alone still needs the libraries (edu-sharing-api, -ui, rendering-service-*),
+                   which `npm run build` otherwise builds in its prebuild -->
+              <execution>
+                <id>storybook-libraries</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>compile</phase>
+                <configuration>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <skip>${frontend.storybook.skipLibs}</skip>
+                  <arguments>run prebuild</arguments>
                 </configuration>
               </execution>
               <execution>
@@ -498,6 +552,8 @@
                 </goals>
                 <phase>process-classes</phase>
                 <configuration>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <skip>${frontend.storybook.skipApp}</skip>
                   <arguments>run print-licenses</arguments>
                 </configuration>
               </execution>

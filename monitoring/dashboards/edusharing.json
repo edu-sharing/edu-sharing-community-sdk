@@ -2449,6 +2449,2153 @@
         "x": 0,
         "y": 13
       },
+      "id": 641,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 14
+          },
+          "id": 642,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Container - CPU Usage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 14
+          },
+          "id": 643,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(container_memory_working_set_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\", container!=\"\", image!=\"\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Container - Memory Usage",
+          "type": "timeseries"
+        }
+      ],
+      "title": "edusharing-repository-frontend-server",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 644,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 15
+          },
+          "id": 645,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "max(nodejs_eventloop_lag_p99_seconds{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "nodejs - Lag of event loop (p99)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 15
+          },
+          "id": 646,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(nodejs_heap_size_used_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}} used",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(nodejs_heap_size_total_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}} total",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "nodejs - heap used / total",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 23
+          },
+          "id": 647,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(process_resident_memory_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "nodejs - resident memory",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "seconds of garbage collection per second, by gc kind",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 23
+          },
+          "id": 648,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(nodejs_gc_duration_seconds_sum{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (pod, kind)",
+              "instant": false,
+              "legendFormat": "{{pod}} {{kind}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "nodejs - time spent in GC",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 31
+          },
+          "id": 649,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(nodejs_active_handles_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}} handles",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(nodejs_active_resources_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}} resources",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "nodejs - active handles / resources",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 31
+          },
+          "id": 650,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(process_open_fds{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "nodejs - open file descriptors",
+          "type": "timeseries"
+        }
+      ],
+      "title": "edusharing-repository-frontend-server (nodejs)",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 651,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "1 while the repository answers, 0 while browsers get the \"service unavailable\" page (components/error/503)",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short",
+              "min": 0,
+              "max": 1
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 16
+          },
+          "id": 652,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "min(frontend_server_backend_reachable{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Backend reachable",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "outages by what noticed them (poll, config, proxy) - also those shorter than the scrape interval",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 16
+          },
+          "id": 653,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(frontend_server_backend_unreachable_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (source)",
+              "instant": false,
+              "legendFormat": "{{source}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Backend turned unreachable",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "app pages (page) and proxied requests (proxy) answered with 503 because the repository is unreachable",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 24
+          },
+          "id": 654,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(frontend_server_unavailable_responses_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (kind)",
+              "instant": false,
+              "legendFormat": "{{kind}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "503 answers - backend unreachable",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "no-config: no backend config loadable, no-csp: config without angular.headers Content-Security-Policy - should stay 0",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 24
+          },
+          "id": 655,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(frontend_server_shell_without_csp_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (cause)",
+              "instant": false,
+              "legendFormat": "{{cause}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Shell pages without CSP",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 32
+          },
+          "id": 656,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(http_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (route)",
+              "instant": false,
+              "legendFormat": "{{route}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Requests by route",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 32
+          },
+          "id": 657,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(http_request_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (status_code)",
+              "instant": false,
+              "legendFormat": "{{status_code}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Requests by status",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 40
+          },
+          "id": 658,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (le, route))",
+              "instant": false,
+              "legendFormat": "{{route}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Request duration p95 by route",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "requests proxied to the repository; reason=\"unmatched\" is the transitional fallback (PROXY_UNMATCHED)",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 40
+          },
+          "id": 659,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(frontend_server_proxy_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (reason, status_code)",
+              "instant": false,
+              "legendFormat": "{{reason}} {{status_code}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Proxied requests by reason / status",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 48
+          },
+          "id": 660,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.95, sum(rate(frontend_server_proxy_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (le, reason))",
+              "instant": false,
+              "legendFormat": "{{reason}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Proxy duration p95",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "paths neither app nor known backend path - should reach 0 before PROXY_UNMATCHED is switched off",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 48
+          },
+          "id": 661,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(frontend_server_proxy_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\", reason=\"unmatched\"}[$__rate_interval])) by (pod)",
+              "instant": false,
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Unmatched paths (transitional fallback)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "node metadata fetches of render / collection views (LRMI, oEmbed): ok, missing, failed",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "reqps"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 56
+          },
+          "id": 662,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(frontend_server_shell_enrichment_duration_seconds_count{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (result)",
+              "instant": false,
+              "legendFormat": "{{result}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Shell enrichment by result",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "the render / collection view waits for it, bounded by ENRICH_TIMEOUT_MS",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 56
+          },
+          "id": 663,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.95, sum(rate(frontend_server_shell_enrichment_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (le))",
+              "instant": false,
+              "legendFormat": "p95",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Shell enrichment duration p95",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "description": "age of the cached backend config per domain - no series means no config loaded yet",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 64
+          },
+          "id": 664,
+          "options": {
+            "alertThreshold": true,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.4.5",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "max(frontend_server_config_age_seconds{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (domain)",
+              "instant": false,
+              "legendFormat": "{{domain}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Config age by domain",
+          "type": "timeseries"
+        }
+      ],
+      "title": "edusharing-repository-frontend-server (app)",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
       "id": 32,
       "panels": [
         {
@@ -2657,7 +4804,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 17
       },
       "id": 36,
       "panels": [
@@ -3766,7 +5913,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 18
       },
       "id": 49,
       "panels": [
@@ -3976,7 +6123,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 19
       },
       "id": 56,
       "panels": [
@@ -4886,7 +7033,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 20
       },
       "id": 66,
       "panels": [
@@ -5096,7 +7243,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 21
       },
       "id": 70,
       "panels": [
@@ -5896,7 +8043,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 22
       },
       "id": 79,
       "panels": [
@@ -6985,7 +9132,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 23
       },
       "id": 91,
       "panels": [
@@ -7389,7 +9536,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 24
       },
       "id": 96,
       "panels": [
@@ -8671,7 +10818,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 25
       },
       "id": 108,
       "panels": [
@@ -8883,7 +11030,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 26
       },
       "id": 128,
       "panels": [
@@ -9721,7 +11868,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 27
       },
       "id": 134,
       "panels": [
@@ -10275,7 +12422,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 28
       },
       "id": 182,
       "panels": [
@@ -10485,7 +12632,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 29
       },
       "id": 186,
       "panels": [
@@ -11099,7 +13246,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 30
       },
       "id": 193,
       "panels": [
@@ -12007,7 +14154,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 31
       },
       "id": 204,
       "panels": [
@@ -13680,7 +15827,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 32
       },
       "id": 220,
       "panels": [
@@ -13893,7 +16040,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 33
       },
       "id": 223,
       "panels": [
@@ -14007,7 +16154,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 34
       },
       "id": 225,
       "panels": [
@@ -14312,7 +16459,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 35
       },
       "id": 488,
       "panels": [
@@ -15149,7 +17296,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 36
       },
       "id": 489,
       "panels": [
@@ -15668,7 +17815,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 37
       },
       "id": 350,
       "panels": [
@@ -15878,7 +18025,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 38
       },
       "id": 354,
       "panels": [
@@ -16890,7 +19037,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 39
       },
       "id": 555,
       "panels": [
@@ -17106,7 +19253,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 40
       },
       "id": 556,
       "panels": [
@@ -18036,7 +20183,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 41
       },
       "id": 569,
       "panels": [
@@ -18252,7 +20399,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 42
       },
       "id": 568,
       "panels": [
@@ -18874,7 +21021,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 43
       },
       "id": 360,
       "panels": [
@@ -19086,7 +21233,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 44
       },
       "id": 364,
       "panels": [
@@ -19996,7 +22143,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 45
       },
       "id": 374,
       "panels": [
@@ -20206,7 +22353,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 46
       },
       "id": 378,
       "panels": [
@@ -20820,7 +22967,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 44
+        "y": 47
       },
       "id": 385,
       "panels": [
@@ -21432,7 +23579,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 48
       },
       "id": 392,
       "panels": [
@@ -21646,7 +23793,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 49
       },
       "id": 396,
       "panels": [
@@ -22933,7 +25080,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 50
       },
       "id": 402,
       "panels": [
@@ -23147,7 +25294,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 51
       },
       "id": 406,
       "panels": [
@@ -23672,7 +25819,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 52
       },
       "id": 409,
       "panels": [
@@ -23886,7 +26033,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 53
       },
       "id": 413,
       "panels": [
@@ -24511,7 +26658,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 51
+        "y": 54
       },
       "id": 625,
       "panels": [
@@ -25116,7 +27263,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 55
       },
       "id": 631,
       "panels": [
@@ -25643,7 +27790,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 56
       },
       "id": 431,
       "panels": [
@@ -25857,7 +28004,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 57
       },
       "id": 435,
       "panels": [
@@ -26985,7 +29132,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 55
+        "y": 58
       },
       "id": 463,
       "panels": [
@@ -27199,7 +29346,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 56
+        "y": 59
       },
       "id": 467,
       "panels": [
@@ -28198,7 +30345,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 60
       },
       "id": 474,
       "panels": [
@@ -28412,7 +30559,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 61
       },
       "id": 478,
       "panels": [
@@ -29422,7 +31569,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 62
       },
       "id": 484,
       "panels": [
@@ -33474,7 +35621,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 63
       },
       "id": 640,
       "panels": [
@@ -34269,7 +36416,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 61
+        "y": 64
       },
       "id": 420,
       "panels": [
@@ -34483,7 +36630,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 65
       },
       "id": 601,
       "panels": [

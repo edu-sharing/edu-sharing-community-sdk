@@ -2447,7 +2447,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 16
       },
       "id": 641,
       "panels": [
@@ -2659,7 +2659,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 17
       },
       "id": 644,
       "panels": [
@@ -3291,7 +3291,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 18
       },
       "id": 651,
       "panels": [
@@ -4490,105 +4490,6 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "description": "age of the cached backend config per domain - no series means no config loaded yet",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "barWidthFactor": 0.6,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "s"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 64
-          },
-          "id": 664,
-          "options": {
-            "alertThreshold": true,
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "11.4.5",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "expr": "max(frontend_server_config_age_seconds{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (domain)",
-              "instant": false,
-              "legendFormat": "{{domain}}",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Config age by domain",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
           "description": "hit: from memory, miss: read and compressed now (once per file and pod), bypass: larger than STATIC_CACHE_MAX_FILE_MB, range requests, missing files",
           "fieldConfig": {
             "defaults": {
@@ -4649,9 +4550,9 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 72
+            "y": 64
           },
-          "id": 579,
+          "id": 664,
           "options": {
             "alertThreshold": true,
             "legend": {
@@ -4670,7 +4571,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(rate(frontend_server_static_cache_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval])) by (result)",
@@ -4686,7 +4587,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "description": "should approach 100 % soon after a pod started; lower means the budget (STATIC_CACHE_MAX_MB) is too small for the files in use",
           "fieldConfig": {
@@ -4750,9 +4651,9 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 72
+            "y": 64
           },
-          "id": 580,
+          "id": 665,
           "options": {
             "alertThreshold": true,
             "legend": {
@@ -4771,7 +4672,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "sum(rate(frontend_server_static_cache_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\", result=\"hit\"}[$__rate_interval])) / sum(rate(frontend_server_static_cache_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}[$__rate_interval]))",
@@ -4787,7 +4688,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "description": "all encodings together; auto budget = 20 % of the container memory limit (16-256 MB), logged at startup as \"static file cache\"",
           "fieldConfig": {
@@ -4849,9 +4750,9 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 80
+            "y": 72
           },
-          "id": 581,
+          "id": 666,
           "options": {
             "alertThreshold": true,
             "legend": {
@@ -4870,7 +4771,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "max(frontend_server_static_cache_bytes{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
@@ -4886,7 +4787,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
+            "uid": "prometheus"
           },
           "description": "",
           "fieldConfig": {
@@ -4948,9 +4849,9 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 80
+            "y": 72
           },
-          "id": 582,
+          "id": 667,
           "options": {
             "alertThreshold": true,
             "legend": {
@@ -4969,7 +4870,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "max(frontend_server_static_cache_entries{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-frontend-server.*\"}) by (pod)",
@@ -4992,7 +4893,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 19
       },
       "id": 32,
       "panels": [
@@ -5202,7 +5103,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 20
       },
       "id": 36,
       "panels": [
@@ -6311,7 +6212,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 21
       },
       "id": 49,
       "panels": [
@@ -6521,7 +6422,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 22
       },
       "id": 56,
       "panels": [
@@ -7431,7 +7332,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 23
       },
       "id": 66,
       "panels": [
@@ -7641,7 +7542,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 24
       },
       "id": 70,
       "panels": [
@@ -8441,7 +8342,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 25
       },
       "id": 79,
       "panels": [
@@ -9530,7 +9431,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 26
       },
       "id": 91,
       "panels": [
@@ -9934,7 +9835,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 27
       },
       "id": 96,
       "panels": [
@@ -11216,7 +11117,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 28
       },
       "id": 108,
       "panels": [
@@ -11428,7 +11329,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 29
       },
       "id": 128,
       "panels": [
@@ -12266,7 +12167,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 30
       },
       "id": 134,
       "panels": [
@@ -12820,7 +12721,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 31
       },
       "id": 182,
       "panels": [
@@ -13030,7 +12931,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 32
       },
       "id": 186,
       "panels": [
@@ -13644,7 +13545,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 33
       },
       "id": 193,
       "panels": [
@@ -14552,7 +14453,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 34
       },
       "id": 204,
       "panels": [
@@ -16225,7 +16126,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 35
       },
       "id": 220,
       "panels": [
@@ -16438,7 +16339,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 36
       },
       "id": 223,
       "panels": [
@@ -16552,7 +16453,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 37
       },
       "id": 225,
       "panels": [
@@ -16857,7 +16758,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 38
       },
       "id": 488,
       "panels": [
@@ -17694,7 +17595,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 39
       },
       "id": 489,
       "panels": [
@@ -18213,7 +18114,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 37
+        "y": 40
       },
       "id": 350,
       "panels": [
@@ -18423,7 +18324,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 41
       },
       "id": 354,
       "panels": [
@@ -19435,7 +19336,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 42
       },
       "id": 555,
       "panels": [
@@ -19651,7 +19552,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 40
+        "y": 43
       },
       "id": 556,
       "panels": [
@@ -20581,7 +20482,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 41
+        "y": 44
       },
       "id": 569,
       "panels": [
@@ -20797,7 +20698,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 42
+        "y": 45
       },
       "id": 568,
       "panels": [
@@ -21419,7 +21320,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 46
       },
       "id": 360,
       "panels": [
@@ -21631,7 +21532,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 44
+        "y": 47
       },
       "id": 364,
       "panels": [
@@ -22541,7 +22442,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 48
       },
       "id": 374,
       "panels": [
@@ -22751,7 +22652,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 49
       },
       "id": 378,
       "panels": [
@@ -23365,7 +23266,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 50
       },
       "id": 385,
       "panels": [
@@ -23977,7 +23878,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 51
       },
       "id": 392,
       "panels": [
@@ -24191,7 +24092,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 52
       },
       "id": 396,
       "panels": [
@@ -25478,7 +25379,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 53
       },
       "id": 402,
       "panels": [
@@ -25692,7 +25593,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 51
+        "y": 54
       },
       "id": 406,
       "panels": [
@@ -26217,7 +26118,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 52
+        "y": 55
       },
       "id": 409,
       "panels": [
@@ -26431,7 +26332,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 53
+        "y": 56
       },
       "id": 413,
       "panels": [
@@ -27056,7 +26957,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 54
+        "y": 57
       },
       "id": 625,
       "panels": [
@@ -27661,7 +27562,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 55
+        "y": 58
       },
       "id": 631,
       "panels": [
@@ -28188,7 +28089,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 56
+        "y": 59
       },
       "id": 431,
       "panels": [
@@ -28402,7 +28303,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 57
+        "y": 60
       },
       "id": 435,
       "panels": [
@@ -29530,7 +29431,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 61
       },
       "id": 463,
       "panels": [
@@ -29744,7 +29645,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 62
       },
       "id": 467,
       "panels": [
@@ -30743,7 +30644,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 60
+        "y": 63
       },
       "id": 474,
       "panels": [
@@ -30957,7 +30858,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 61
+        "y": 64
       },
       "id": 478,
       "panels": [
@@ -31967,7 +31868,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 62
+        "y": 65
       },
       "id": 484,
       "panels": [
@@ -36019,7 +35920,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 66
       },
       "id": 640,
       "panels": [
@@ -36814,7 +36715,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 64
+        "y": 67
       },
       "id": 420,
       "panels": [
@@ -37028,7 +36929,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 68
       },
       "id": 601,
       "panels": [

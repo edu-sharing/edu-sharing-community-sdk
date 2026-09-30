@@ -1,0 +1,21 @@
+FROM ${docker.from}community/edu_sharing-community-repository-deploy-docker-build-frontend-server:${org.edu_sharing:edu_sharing-community-repository-deploy-docker-build-frontend-server:jar:sources.version}
+
+########################################################################################################################
+
+# The project adds nothing to the angular app (no src/main/ng, no package.json, no
+# src/edu-sharing-override, no storybook.build, no src/main/webapp), so this image is the
+# community one - re-tagged under the project's name, registry and version, with no layer
+# of its own. Nothing is copied; the layers are shared with the base image.
+#
+# A chart referencing the community image directly would avoid even this manifest, but it
+# needs the community image tag as a property in the helm module - not wired yet.
+
+########################################################################################################################
+
+LABEL git.branch=${git.branch} \
+git.closest.tag.name=${git.closest.tag.fixed} \
+git.commit.id=${git.commit.id} \
+git.dirty=${git.dirty} \
+mvn.project.artifactId=${project.artifactId} \
+mvn.project.groupId=${project.groupId} \
+mvn.project.version=${project.version}

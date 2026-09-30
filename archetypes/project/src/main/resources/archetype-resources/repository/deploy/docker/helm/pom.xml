@@ -352,45 +352,6 @@
         <groupId>org.codehaus.gmavenplus</groupId>
         <artifactId>gmavenplus-plugin</artifactId>
         <executions>
-          <!-- A project without any frontend customization builds no frontend server image
-               (see ../frontend-server): the chart then must not override the image of the
-               community subchart, whose defaults already name the community one. Same
-               condition as the script in ../frontend-server/pom.xml - keep both in sync.
-               The property is deliberately not declared: a declared one would be
-               interpolated before this script sets it. -->
-          <execution>
-            <id>frontend-server-image</id>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <phase>initialize</phase>
-            <configuration>
-              <scripts>
-                <script><![CDATA[
-                  // only calls on existing objects, no class literals: the groovy 3.0.9 of
-                  // the super pom cannot read jdk 21 class files (as the other sdk scripts)
-                  def frontend = project.basedir.toPath().resolve('../../../Frontend')
-                  def additions = frontend.resolve('src/main/ng').toFile().exists() ||
-                                  frontend.resolve('package.json').toFile().exists() ||
-                                  frontend.resolve('src/edu-sharing-override').toFile().exists() ||
-                                  frontend.resolve('storybook.build').toFile().exists() ||
-                                  frontend.resolve('src/main/webapp').toFile().exists()
-                  def props = project.properties
-                  def block = additions ? ('  image:\n' +
-                      '    ## @param edusharing_repository_frontend_server.image.repository Set repository frontend server image repository\n' +
-                      '    repository: ' + props.getProperty('docker.repository') + '\n' +
-                      '    ## @param edusharing_repository_frontend_server.image.name Set repository frontend server image name\n' +
-                      '    name: ' + props.getProperty('docker.prefix') + '-deploy-docker-build-repository-frontend-server\n' +
-                      '    ## @param edusharing_repository_frontend_server.image.tag Set repository frontend server image tag\n' +
-                      '    tag: ' + props.getProperty('docker.tag')) : ''
-                  props.setProperty('frontend.server.image.block', block)
-                  log.info(additions
-                    ? 'helm: frontend server image overridden with the project one'
-                    : 'helm: no frontend customizations - keeping the community frontend server image of the subchart')
-                ]]></script>
-              </scripts>
-            </configuration>
-          </execution>
           <execution>
             <id>frontend-server</id>
             <goals>

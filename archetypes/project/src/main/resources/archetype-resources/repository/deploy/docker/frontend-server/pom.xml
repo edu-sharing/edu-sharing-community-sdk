@@ -58,9 +58,8 @@
                                   frontend.resolve('src/main/webapp').toFile().exists()
                   project.properties.setProperty('frontend.server.dist.full', rebuilt.toString())
                   project.properties.setProperty('frontend.server.dist.delta', (!rebuilt).toString())
-                  project.properties.setProperty('frontend.server.image.skip', (!additions).toString())
                   project.properties.setProperty('frontend.server.dockerfile',
-                      rebuilt ? 'Dockerfile' : 'Dockerfile.delta')
+                      !additions ? 'Dockerfile.none' : rebuilt ? 'Dockerfile' : 'Dockerfile.delta')
                   log.info(!additions
                     ? 'frontend-server: no project customizations - no image is built, helm references the community one'
                     : rebuilt
@@ -96,9 +95,11 @@
             </configuration>
           </execution>
 
-          <!-- app not rebuilt: everything but storybook is the community build, so only
-               storybook is taken from the war. The static overrides come straight from the
-               Frontend sources below, as repository/webapp reads them too -->
+          <!-- app not rebuilt but the project adds something: everything but storybook is
+               the community build, so only storybook is taken from the war. The static
+               overrides come straight from the Frontend sources below, as repository/webapp
+               reads them too. Without any addition Dockerfile.none is used and both stay
+               empty, which is harmless - it copies nothing. -->
           <execution>
             <id>frontend-storybook</id>
             <goals>
@@ -138,9 +139,6 @@
           </execution>
         </executions>
         <configuration>
-          <!-- without any project customization the image would be the community one under
-               another name - helm references that one directly instead, see the chart -->
-          <skip>${frontend.server.image.skip}</skip>
           <images>
             <image>
               <name>${docker.repository}/${docker.prefix}-deploy-docker-build-repository-frontend-server:${docker.tag}</name>

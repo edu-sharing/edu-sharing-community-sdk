@@ -418,7 +418,13 @@ edusharing_repository_frontend_server:
   ## @param edusharing_repository_frontend_server.nameOverride Override repository frontend server name
   nameOverride: edusharing-repository-frontend-server
 
-${frontend.server.image.block}
+  image:
+    ## @param edusharing_repository_frontend_server.image.repository Set repository frontend server image repository
+    repository: ${docker.repository}
+    ## @param edusharing_repository_frontend_server.image.name Set repository frontend server image name
+    name: ${docker.prefix}-deploy-docker-build-repository-frontend-server
+    ## @param edusharing_repository_frontend_server.image.tag Set repository frontend server image tag
+    tag: ${docker.tag}
 
   config:
 

@@ -27,14 +27,59 @@
 
     <plugins>
 
+      <!-- Decides whether the project rebuilt the angular app. Only then does the image
+           have to replace /app/dist; otherwise the app IS the community one and just the
+           additions are copied on top, which saves copying ~200 MB per build.
+           Mirrors the activation of the repository/Frontend profiles - as a script because
+           a profile cannot express "none of these three exist". The property is
+           deliberately not declared: a declared one would be interpolated before this
+           script sets it (same reason as in repository/Frontend). -->
+      <plugin>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>frontend-dist-mode</id>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <phase>initialize</phase>
+            <configuration>
+              <scripts>
+                <script><![CDATA[
+                  // only calls on existing objects, no class literals: the groovy 3.0.9 of
+                  // the super pom cannot read jdk 21 class files (as the other sdk scripts)
+                  def frontend = project.basedir.toPath().resolve('../../../Frontend')
+                  def rebuilt = frontend.resolve('src/main/ng').toFile().exists() ||
+                                frontend.resolve('package.json').toFile().exists() ||
+                                frontend.resolve('src/edu-sharing-override').toFile().exists()
+                  def additions = rebuilt ||
+                                  frontend.resolve('storybook.build').toFile().exists() ||
+                                  frontend.resolve('src/main/webapp').toFile().exists()
+                  project.properties.setProperty('frontend.server.dist.full', rebuilt.toString())
+                  project.properties.setProperty('frontend.server.dist.delta', (!rebuilt).toString())
+                  project.properties.setProperty('frontend.server.image.skip', (!additions).toString())
+                  project.properties.setProperty('frontend.server.dockerfile',
+                      rebuilt ? 'Dockerfile' : 'Dockerfile.delta')
+                  log.info(!additions
+                    ? 'frontend-server: no project customizations - no image is built, helm references the community one'
+                    : rebuilt
+                      ? 'frontend-server: app rebuilt by the project - replacing /app/dist'
+                      : 'frontend-server: app not rebuilt - copying only the project additions onto the community dist')
+                ]]></script>
+              </scripts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
 
-          <!-- the project frontend war holds the complete angular dist (community app
-               + project customizations) at its root - it replaces /app/dist of the
-               community frontend server image -->
+          <!-- app rebuilt: the war holds the complete angular dist at its root and
+               replaces /app/dist of the community frontend server image -->
           <execution>
             <id>frontend</id>
             <goals>
@@ -42,11 +87,31 @@
             </goals>
             <phase>package</phase>
             <configuration>
+              <skip>${frontend.server.dist.delta}</skip>
               <includeArtifactIds>
                 ${rootArtifactId}-repository-frontend
               </includeArtifactIds>
               <excludes>META-INF/**,WEB-INF/**</excludes>
               <outputDirectory>${project.build.directory}/build/dist</outputDirectory>
+            </configuration>
+          </execution>
+
+          <!-- app not rebuilt: everything but storybook is the community build, so only
+               storybook is taken from the war. The static overrides come straight from the
+               Frontend sources below, as repository/webapp reads them too -->
+          <execution>
+            <id>frontend-storybook</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <skip>${frontend.server.dist.full}</skip>
+              <includeArtifactIds>
+                ${rootArtifactId}-repository-frontend
+              </includeArtifactIds>
+              <includes>storybook/**</includes>
+              <outputDirectory>${project.build.directory}/build/overrides</outputDirectory>
             </configuration>
           </execution>
 
@@ -73,9 +138,17 @@
           </execution>
         </executions>
         <configuration>
+          <!-- without any project customization the image would be the community one under
+               another name - helm references that one directly instead, see the chart -->
+          <skip>${frontend.server.image.skip}</skip>
           <images>
             <image>
               <name>${docker.repository}/${docker.prefix}-deploy-docker-build-repository-frontend-server:${docker.tag}</name>
+              <build>
+                <!-- Dockerfile (replaces /app/dist) or Dockerfile.delta (copies the
+                     additions on top), chosen by frontend-dist-mode above -->
+                <dockerFile>${frontend.server.dockerfile}</dockerFile>
+              </build>
             </image>
           </images>
         </configuration>
@@ -100,6 +173,28 @@
         <configuration>
           <outputDirectory>${project.build.directory}/build</outputDirectory>
         </configuration>
+        <executions>
+          <!-- app not rebuilt: the static overrides of the project, read from the same
+               source repository/webapp reads them from - the war would only carry them
+               merged into the community dist, and they cannot be told apart there -->
+          <execution>
+            <id>frontend-overrides</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <skip>${frontend.server.dist.full}</skip>
+              <outputDirectory>${project.build.directory}/build/overrides</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/../../../Frontend/src/main/webapp</directory>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
     </plugins>

@@ -17,7 +17,14 @@
 
   <!-- in every profile the root of this war is the complete angular dist (community app
        + project customizations). repository/deploy/docker/frontend-server unpacks it into
-       the frontend server image, repository/webapp takes only assets/i18n and assets/images -->
+       the frontend server image; repository/webapp copies assets/i18n and assets/images
+       from the sources, not from this war -->
+
+  <properties>
+    <!-- the war is only consumed by the frontend server image of this reactor;
+         nothing pulls it from the maven repository, so the upload is skipped -->
+    <maven.deploy.skip>true</maven.deploy.skip>
+  </properties>
 
   <build>
 

@@ -12,6 +12,10 @@ stages:
 check-helmreadme:
   stage: test
   image: node:lts-alpine3.20
+  rules:
+    - if: $SKIP_TESTS == "true"
+      when: never
+    - when: on_success
   script:
     - wget -qO- https://github.com/bitnami/readme-generator-for-helm/archive/refs/tags/2.6.1.tar.gz | tar -xz -C /tmp
     - ln -s $CI_PROJECT_DIR/archetypes/project/src/main/resources/archetype-resources/deploy/docker/helm/src/main/chart /tmp/deploy

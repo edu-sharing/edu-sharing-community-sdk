@@ -1,0 +1,31 @@
+FROM ${docker.from}community/edu_sharing-community-repository-deploy-docker-build-frontend-server:${org.edu_sharing:edu_sharing-community-repository-deploy-docker-build-frontend-server:jar:sources.version}
+
+########################################################################################################################
+
+# The project did not rebuild the angular app (see repository/Frontend): its app is the
+# community one, so only what the project adds on top is copied in - no rm -rf, the
+# community dist stays. Docker merges a COPY into an existing directory.
+#
+# Verified for this setup: community image and community frontend war hold the same 3313
+# files, 3308 of them byte identical; the project war adds only its own paths on top.
+#
+# Consequence: a project can override and add assets this way, but not REMOVE a community
+# one. Projects that need that have to rebuild the app (src/main/ng), which uses Dockerfile.
+
+USER root
+
+COPY --chown=node:node overrides/ /app/dist/
+
+########################################################################################################################
+
+USER node
+
+########################################################################################################################
+
+LABEL git.branch=${git.branch} \
+git.closest.tag.name=${git.closest.tag.fixed} \
+git.commit.id=${git.commit.id} \
+git.dirty=${git.dirty} \
+mvn.project.artifactId=${project.artifactId} \
+mvn.project.groupId=${project.groupId} \
+mvn.project.version=${project.version}

@@ -15,6 +15,31 @@
 
   <name>${artifactId}</name>
 
+  <!--
+    The angular app is delivered by the frontend server image (repository/deploy/docker/frontend-server).
+    What the backend reads out of the war itself stays - the project's versions of:
+    - assets/i18n: I18nAngular (mails, mediatype labels, exports) and the bundle of
+      /rest/config/v1/language/defaults
+    - assets/images: embedded into mails by {{image:/assets/images/...}} of the mail templates
+
+    Both are plain copies of source files (the angular build only copies them), so they are
+    assembled here from the sources - the community frontend sources plus the project
+    overrides in ../Frontend - instead of the built project frontend war. The webapp does not
+    depend on the angular build any more: with `mvn -T 1C` backend and frontend build in parallel.
+
+    The precedence is the one of the frontend war (maven-war-plugin, first copy wins:
+    webResources = dist, then src/main/webapp, then the community war overlay):
+    - no frontend build (profile frontend.default): Frontend/src/main/webapp over community
+    - frontend.overlay / .native / .storybook: the override (src/main/ng/src/assets resp.
+      src/edu-sharing-override/assets) over community over Frontend/src/main/webapp
+  -->
+
+  <properties>
+    <frontend.assets.directory>${project.build.directory}/frontend-assets</frontend.assets.directory>
+    <frontend.assets.community>${project.build.directory}/frontend-assets-community/src/assets</frontend.assets.community>
+    <frontend.module>${project.basedir}/../Frontend</frontend.module>
+  </properties>
+
   <build>
 
     <finalName>edu-sharing</finalName>
@@ -23,13 +48,43 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>frontend-assets-community</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <includeArtifactIds>edu_sharing-community-repository-frontend</includeArtifactIds>
+              <includeClassifiers>sources</includeClassifiers>
+              <includes>src/assets/i18n/**,src/assets/images/**</includes>
+              <outputDirectory>${project.build.directory}/frontend-assets-community</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <overlays>
+            <overlay>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${rootArtifactId}-repository-backend-services-webapp</artifactId>
+            </overlay>
+          </overlays>
           <webResources>
             <resource>
               <directory>src/main/templates</directory>
               <filtering>true</filtering>
+            </resource>
+            <resource>
+              <directory>${frontend.assets.directory}</directory>
+              <filtering>false</filtering>
             </resource>
           </webResources>
         </configuration>
@@ -70,6 +125,184 @@
 
   </build>
 
+  <profiles>
+
+    <!-- no frontend build (Frontend profile frontend.default): Frontend/src/main/webapp over community -->
+    <profile>
+      <id>frontend-assets.default</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>frontend-assets</id>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <phase>process-resources</phase>
+                <configuration>
+                  <outputDirectory>${frontend.assets.directory}/assets</outputDirectory>
+                  <overwrite>true</overwrite>
+                  <!-- later resources overwrite earlier ones -->
+                  <resources>
+                    <resource>
+                      <directory>${frontend.assets.community}</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                    <resource>
+                      <directory>${frontend.module}/src/main/webapp/assets</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Frontend profile frontend.overlay: src/main/ng/src/assets over community over Frontend/src/main/webapp -->
+    <profile>
+      <id>frontend-assets.overlay</id>
+      <activation>
+        <file>
+          <exists>${basedir}/../Frontend/src/main/ng</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>frontend-assets</id>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <phase>process-resources</phase>
+                <configuration>
+                  <outputDirectory>${frontend.assets.directory}/assets</outputDirectory>
+                  <overwrite>true</overwrite>
+                  <resources>
+                    <resource>
+                      <directory>${frontend.module}/src/main/webapp/assets</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                    <resource>
+                      <directory>${frontend.assets.community}</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                    <resource>
+                      <directory>${frontend.module}/src/main/ng/src/assets</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Frontend profiles frontend.native / frontend.storybook: src/edu-sharing-override/assets over community over Frontend/src/main/webapp -->
+    <profile>
+      <id>frontend-assets.native</id>
+      <activation>
+        <file>
+          <exists>${basedir}/../Frontend/package.json</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>frontend-assets</id>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <phase>process-resources</phase>
+                <configuration>
+                  <outputDirectory>${frontend.assets.directory}/assets</outputDirectory>
+                  <overwrite>true</overwrite>
+                  <resources>
+                    <resource>
+                      <directory>${frontend.module}/src/main/webapp/assets</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                    <resource>
+                      <directory>${frontend.assets.community}</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                    <resource>
+                      <directory>${frontend.module}/src/edu-sharing-override/assets</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>frontend-assets.storybook</id>
+      <activation>
+        <file>
+          <exists>${basedir}/../Frontend/storybook.build</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>frontend-assets</id>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <phase>process-resources</phase>
+                <configuration>
+                  <outputDirectory>${frontend.assets.directory}/assets</outputDirectory>
+                  <overwrite>true</overwrite>
+                  <resources>
+                    <resource>
+                      <directory>${frontend.module}/src/main/webapp/assets</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                    <resource>
+                      <directory>${frontend.assets.community}</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                    <resource>
+                      <directory>${frontend.module}/src/edu-sharing-override/assets</directory>
+                      <includes><include>i18n/**</include><include>images/**</include></includes>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+
   <dependencies>
 
     <!-- compile -->
@@ -80,10 +313,12 @@
       <type>war</type>
     </dependency>
 
+    <!-- provided: only unpacked for assets/i18n + assets/images, never packaged into WEB-INF/lib -->
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>${rootArtifactId}-repository-frontend</artifactId>
-      <type>war</type>
+      <artifactId>edu_sharing-community-repository-frontend</artifactId>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>

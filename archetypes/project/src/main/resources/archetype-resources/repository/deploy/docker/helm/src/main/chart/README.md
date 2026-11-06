@@ -108,6 +108,12 @@
 | `edusharing_repository_service.config.transform.server.enabled`           | Enable repository service transform server             | `${helm.edusharing_repository_transform.enabled}`                 |
 | `edusharing_repository_service.config.transform.server.host`              | Set host for repository service transform server       | `edusharing-repository-transform`                                 |
 | `edusharing_repository_service.config.transform.server.port`              | Set port for repository service transform server       | `8080`                                                            |
+| `edusharing_repository_frontend_server.enabled`                           | Enable repository frontend server                      | `true`                                                            |
+| `edusharing_repository_frontend_server.nameOverride`                      | Override repository frontend server name               | `edusharing-repository-frontend-server`                           |
+| `edusharing_repository_frontend_server.image.repository`                  | Set repository frontend server image repository        | `${docker.repository}`                                            |
+| `edusharing_repository_frontend_server.image.name`                        | Set repository frontend server image name              | `${docker.prefix}-deploy-docker-build-repository-frontend-server` |
+| `edusharing_repository_frontend_server.image.tag`                         | Set repository frontend server image tag               | `${docker.tag}`                                                   |
+| `edusharing_repository_frontend_server.config.backend.host`               | Set host of the repository service                     | `edusharing-repository-service`                                   |
 | `edusharing_repository_search_elastic_tracker.enabled`                    | Enable search repositories elastic tracker             | `${helm.edusharing_repository_search_elastic_tracker.enabled}`    |
 | `edusharing_repository_search_elastic_tracker.config.repository.host`     | Set host of search repositories elastic tracker        | `edusharing-repository-service`                                   |
 | `edusharing_repository_search_elastic_tracker.config.repository.port`     | Set port of search repositories elastic tracker        | `8080`                                                            |

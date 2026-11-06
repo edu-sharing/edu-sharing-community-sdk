@@ -21,6 +21,12 @@
 
   <properties>
 
+    <helm.edusharing_repository_frontend_server.line2>
+      <!--suppress UnresolvedMavenProperty -->
+      version:
+      ${symbol_dollar}{org.edu_sharing:edu_sharing-community-repository-deploy-docker-helm-frontend-server:tar.gz:bin.range}
+    </helm.edusharing_repository_frontend_server.line2>
+
     <helm.edusharing_repository_search_solr.line2>
       <!--suppress UnresolvedMavenProperty -->
       version:
@@ -136,6 +142,22 @@
               <classifier>bin</classifier>
               <outputDirectory>
                 ${project.build.directory}/chart/charts/edu_sharing-enterprise-repository-plugin-antivirus
+              </outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>edusharing_repository_frontend_server</id>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <includeArtifactIds>
+                edu_sharing-community-repository-deploy-docker-helm-frontend-server
+              </includeArtifactIds>
+              <type>tar.gz</type>
+              <classifier>bin</classifier>
+              <outputDirectory>${project.build.directory}/chart/charts/edu_sharing-community-repository-frontend-server
               </outputDirectory>
             </configuration>
           </execution>
@@ -331,6 +353,23 @@
         <artifactId>gmavenplus-plugin</artifactId>
         <executions>
           <execution>
+            <id>frontend-server</id>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+              <scripts>
+                <!--suppress UnresolvedMavenProperty -->
+                <script><![CDATA[
+                      def version = project.properties['org.edu_sharing:edu_sharing-community-repository-deploy-docker-helm-frontend-server:tar.gz:bin.version']
+                      ${git.semver}
+                      project.properties.setProperty('org.edu_sharing:edu_sharing-community-repository-deploy-docker-helm-frontend-server:tar.gz:bin.range', semver)
+                    ]]></script>
+              </scripts>
+            </configuration>
+          </execution>
+          <execution>
             <id>service</id>
             <goals>
               <goal>execute</goal>
@@ -432,6 +471,13 @@
   </build>
 
   <dependencies>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>edu_sharing-community-repository-deploy-docker-helm-frontend-server</artifactId>
+      <type>tar.gz</type>
+      <classifier>bin</classifier>
+    </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>

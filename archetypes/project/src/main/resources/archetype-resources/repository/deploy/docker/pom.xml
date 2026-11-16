@@ -31,7 +31,7 @@
     </docker.edu_sharing.community.common.postgresql.name>
 
     <docker.edu_sharing.community.common.postgresql.tag>
-      16.6.0-3
+      16.6.0-4
     </docker.edu_sharing.community.common.postgresql.tag>
 
     <docker.edu_sharing.community.common.postgresql.exporter.name>
@@ -71,7 +71,7 @@
     </docker.edu_sharing.community.common.mongodb.name>
 
     <docker.edu_sharing.community.common.mongodb.tag>
-      8.0.34-2
+      8.0.34-3
     </docker.edu_sharing.community.common.mongodb.tag>
 
     <docker.edu_sharing.community.common.mongodb.exporter.name>

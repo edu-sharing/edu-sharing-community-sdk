@@ -21,12 +21,6 @@
 
   <properties>
 
-    <helm.edusharing_repository_search_solr.line2>
-      <!--suppress UnresolvedMavenProperty -->
-      version:
-      ${symbol_dollar}{org.edu_sharing:edu_sharing-community-repository-deploy-docker-helm-search-solr:tar.gz:bin.range}
-    </helm.edusharing_repository_search_solr.line2>
-
     <helm.edusharing_repository_service.line2>
       <!--suppress UnresolvedMavenProperty -->
       version:
@@ -170,22 +164,6 @@
               <classifier>bin</classifier>
               <outputDirectory>
                 ${project.build.directory}/chart/charts/edu_sharing-community-repository-plugin-elastic-tracker
-              </outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>edusharing_repository_search_solr</id>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <includeArtifactIds>
-                edu_sharing-community-repository-deploy-docker-helm-search-solr
-              </includeArtifactIds>
-              <type>tar.gz</type>
-              <classifier>bin</classifier>
-              <outputDirectory>${project.build.directory}/chart/charts/edu_sharing-community-repository-search-solr
               </outputDirectory>
             </configuration>
           </execution>
@@ -348,23 +326,6 @@
             </configuration>
           </execution>
           <execution>
-            <id>solr</id>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <scripts>
-                <!--suppress UnresolvedMavenProperty -->
-                <script><![CDATA[
-                      def version = project.properties['org.edu_sharing:edu_sharing-community-repository-deploy-docker-helm-search-solr:tar.gz:bin.version']
-                      ${git.semver}
-                      project.properties.setProperty('org.edu_sharing:edu_sharing-community-repository-deploy-docker-helm-search-solr:tar.gz:bin.range', semver)
-                    ]]></script>
-              </scripts>
-            </configuration>
-          </execution>
-          <execution>
             <id>transform-aio</id>
             <goals>
               <goal>execute</goal>
@@ -432,13 +393,6 @@
   </build>
 
   <dependencies>
-
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>edu_sharing-community-repository-deploy-docker-helm-search-solr</artifactId>
-      <type>tar.gz</type>
-      <classifier>bin</classifier>
-    </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>

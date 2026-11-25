@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 158,
+  "id": 16,
   "links": [],
   "panels": [
     {
@@ -116,11 +116,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.5",
+      "pluginVersion": "11.5.5",
       "targets": [
         {
           "datasource": {
@@ -213,11 +214,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.5",
+      "pluginVersion": "11.5.5",
       "targets": [
         {
           "datasource": {
@@ -822,7 +824,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 53925
+            "y": 53938
           },
           "id": 12,
           "options": {
@@ -919,7 +921,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 53925
+            "y": 53938
           },
           "id": 13,
           "options": {
@@ -1016,7 +1018,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 53925
+            "y": 53938
           },
           "id": 14,
           "options": {
@@ -1113,7 +1115,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 53933
+            "y": 53946
           },
           "id": 15,
           "options": {
@@ -1210,7 +1212,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 53933
+            "y": 53946
           },
           "id": 16,
           "options": {
@@ -1322,7 +1324,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 70150
+            "y": 70163
           },
           "id": 18,
           "options": {
@@ -1420,7 +1422,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 70150
+            "y": 70163
           },
           "id": 19,
           "options": {
@@ -1725,7 +1727,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 39136
+            "y": 39149
           },
           "id": 24,
           "options": {
@@ -1822,7 +1824,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 39136
+            "y": 39149
           },
           "id": 25,
           "options": {
@@ -1919,7 +1921,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 39136
+            "y": 39149
           },
           "id": 26,
           "options": {
@@ -2016,7 +2018,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 39143
+            "y": 39156
           },
           "id": 27,
           "options": {
@@ -2113,7 +2115,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 39143
+            "y": 39156
           },
           "id": 28,
           "options": {
@@ -2210,7 +2212,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 39143
+            "y": 39156
           },
           "id": 29,
           "options": {
@@ -2307,7 +2309,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 39151
+            "y": 39164
           },
           "id": 30,
           "options": {
@@ -2404,7 +2406,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 39151
+            "y": 39164
           },
           "id": 31,
           "options": {
@@ -4962,7 +4964,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 70152
+            "y": 70165
           },
           "id": 33,
           "options": {
@@ -5060,7 +5062,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 70152
+            "y": 70165
           },
           "id": 34,
           "options": {
@@ -5369,7 +5371,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 5163
+            "y": 5176
           },
           "id": 39,
           "options": {
@@ -5472,7 +5474,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 7789
+            "y": 7802
           },
           "id": 40,
           "options": {
@@ -5571,7 +5573,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 7789
+            "y": 7802
           },
           "id": 41,
           "options": {
@@ -5670,7 +5672,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 7948
+            "y": 7961
           },
           "id": 42,
           "options": {
@@ -5769,7 +5771,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 7948
+            "y": 7961
           },
           "id": 43,
           "options": {
@@ -5868,7 +5870,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 7948
+            "y": 7961
           },
           "id": 44,
           "options": {
@@ -5966,7 +5968,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 7956
+            "y": 7969
           },
           "id": 45,
           "options": {
@@ -6066,7 +6068,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 7956
+            "y": 7969
           },
           "id": 46,
           "options": {
@@ -6166,7 +6168,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 7956
+            "y": 7969
           },
           "id": 47,
           "options": {
@@ -6281,7 +6283,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 77159
+            "y": 77172
           },
           "id": 50,
           "options": {
@@ -6379,7 +6381,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 77159
+            "y": 77172
           },
           "id": 51,
           "options": {
@@ -6474,8 +6476,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -6572,8 +6573,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -6670,8 +6670,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -6768,8 +6767,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -6785,7 +6783,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 25
+            "y": 38
           },
           "id": 60,
           "options": {
@@ -6866,8 +6864,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -6883,7 +6880,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 25
+            "y": 38
           },
           "id": 61,
           "options": {
@@ -6964,8 +6961,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -6981,7 +6977,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 25
+            "y": 38
           },
           "id": 62,
           "options": {
@@ -7062,8 +7058,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -7079,7 +7074,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 33
+            "y": 46
           },
           "id": 63,
           "options": {
@@ -7173,8 +7168,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -7190,7 +7184,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 33
+            "y": 46
           },
           "id": 64,
           "options": {
@@ -7272,8 +7266,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -7289,7 +7282,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 33
+            "y": 46
           },
           "id": 65,
           "options": {
@@ -7401,7 +7394,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 77169
+            "y": 77182
           },
           "id": 67,
           "options": {
@@ -7499,7 +7492,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 77169
+            "y": 77182
           },
           "id": 69,
           "options": {
@@ -7610,7 +7603,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 77170
+            "y": 77183
           },
           "id": 71,
           "options": {
@@ -7708,7 +7701,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 77170
+            "y": 77183
           },
           "id": 72,
           "options": {
@@ -7806,7 +7799,7 @@
             "h": 16,
             "w": 8,
             "x": 16,
-            "y": 77170
+            "y": 77183
           },
           "id": 73,
           "options": {
@@ -7906,7 +7899,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 78030
+            "y": 78043
           },
           "id": 74,
           "options": {
@@ -8004,7 +7997,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 78030
+            "y": 78043
           },
           "id": 75,
           "options": {
@@ -8103,7 +8096,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 78444
+            "y": 78457
           },
           "id": 76,
           "options": {
@@ -8201,7 +8194,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 78444
+            "y": 78457
           },
           "id": 77,
           "options": {
@@ -8298,7 +8291,7 @@
             "h": 9,
             "w": 24,
             "x": 0,
-            "y": 78451
+            "y": 78464
           },
           "id": 78,
           "options": {
@@ -8410,7 +8403,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 12269
+            "y": 12282
           },
           "id": 80,
           "options": {
@@ -8507,7 +8500,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 12269
+            "y": 12282
           },
           "id": 81,
           "options": {
@@ -8604,7 +8597,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 12269
+            "y": 12282
           },
           "id": 82,
           "options": {
@@ -8702,7 +8695,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 12277
+            "y": 12290
           },
           "id": 83,
           "options": {
@@ -8800,7 +8793,7 @@
             "h": 7,
             "w": 4,
             "x": 8,
-            "y": 12277
+            "y": 12290
           },
           "id": 84,
           "options": {
@@ -8898,7 +8891,7 @@
             "h": 7,
             "w": 4,
             "x": 12,
-            "y": 12277
+            "y": 12290
           },
           "id": 85,
           "options": {
@@ -8996,7 +8989,7 @@
             "h": 7,
             "w": 4,
             "x": 16,
-            "y": 12277
+            "y": 12290
           },
           "id": 86,
           "options": {
@@ -9094,7 +9087,7 @@
             "h": 7,
             "w": 4,
             "x": 20,
-            "y": 12277
+            "y": 12290
           },
           "id": 87,
           "options": {
@@ -9192,7 +9185,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 12284
+            "y": 12297
           },
           "id": 88,
           "options": {
@@ -9290,7 +9283,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 12284
+            "y": 12297
           },
           "id": 89,
           "options": {
@@ -9388,7 +9381,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 12284
+            "y": 12297
           },
           "id": 90,
           "options": {
@@ -9500,7 +9493,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 27731
+            "y": 27744
           },
           "id": 92,
           "options": {
@@ -9598,7 +9591,7 @@
             "h": 7,
             "w": 4,
             "x": 12,
-            "y": 27731
+            "y": 27744
           },
           "id": 93,
           "options": {
@@ -9695,7 +9688,7 @@
             "h": 7,
             "w": 4,
             "x": 16,
-            "y": 27731
+            "y": 27744
           },
           "id": 94,
           "options": {
@@ -9792,7 +9785,7 @@
             "h": 7,
             "w": 4,
             "x": 20,
-            "y": 27731
+            "y": 27744
           },
           "id": 95,
           "options": {
@@ -9903,7 +9896,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 27732
+            "y": 27745
           },
           "id": 97,
           "options": {
@@ -10096,7 +10089,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 27732
+            "y": 27745
           },
           "id": 98,
           "options": {
@@ -10289,7 +10282,7 @@
             "h": 7,
             "w": 4,
             "x": 0,
-            "y": 30187
+            "y": 30200
           },
           "id": 99,
           "options": {
@@ -10387,7 +10380,7 @@
             "h": 7,
             "w": 4,
             "x": 4,
-            "y": 30187
+            "y": 30200
           },
           "id": 100,
           "options": {
@@ -10485,7 +10478,7 @@
             "h": 7,
             "w": 4,
             "x": 8,
-            "y": 30187
+            "y": 30200
           },
           "id": 101,
           "options": {
@@ -10583,7 +10576,7 @@
             "h": 7,
             "w": 6,
             "x": 12,
-            "y": 30187
+            "y": 30200
           },
           "id": 102,
           "options": {
@@ -10681,7 +10674,7 @@
             "h": 7,
             "w": 6,
             "x": 18,
-            "y": 30187
+            "y": 30200
           },
           "id": 103,
           "options": {
@@ -10779,7 +10772,7 @@
             "h": 7,
             "w": 6,
             "x": 0,
-            "y": 30194
+            "y": 30207
           },
           "id": 104,
           "options": {
@@ -10877,7 +10870,7 @@
             "h": 7,
             "w": 6,
             "x": 6,
-            "y": 30194
+            "y": 30207
           },
           "id": 105,
           "options": {
@@ -10975,7 +10968,7 @@
             "h": 7,
             "w": 6,
             "x": 12,
-            "y": 30194
+            "y": 30207
           },
           "id": 106,
           "options": {
@@ -11073,7 +11066,7 @@
             "h": 7,
             "w": 6,
             "x": 18,
-            "y": 30194
+            "y": 30207
           },
           "id": 107,
           "options": {
@@ -11186,7 +11179,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 81510
+            "y": 81523
           },
           "id": 109,
           "options": {
@@ -11284,7 +11277,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 81510
+            "y": 81523
           },
           "id": 110,
           "options": {
@@ -11397,7 +11390,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 5164
+            "y": 5177
           },
           "id": 129,
           "options": {
@@ -11508,7 +11501,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 5164
+            "y": 5177
           },
           "id": 130,
           "options": {
@@ -11617,7 +11610,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 5164
+            "y": 5177
           },
           "id": 131,
           "options": {
@@ -11716,7 +11709,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 6545
+            "y": 6558
           },
           "id": 511,
           "options": {
@@ -11816,7 +11809,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 6545
+            "y": 6558
           },
           "id": 512,
           "options": {
@@ -11916,7 +11909,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 6545
+            "y": 6558
           },
           "id": 513,
           "options": {
@@ -12015,7 +12008,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 6581
+            "y": 6594
           },
           "id": 132,
           "options": {
@@ -12124,7 +12117,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 6581
+            "y": 6594
           },
           "id": 133,
           "options": {
@@ -12223,7 +12216,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -12239,7 +12233,7 @@
             "h": 13,
             "w": 12,
             "x": 0,
-            "y": 6595
+            "y": 25
           },
           "id": 140,
           "options": {
@@ -12251,11 +12245,12 @@
               "showLegend": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "multi",
               "sort": "none"
             }
           },
-          "pluginVersion": "11.4.5",
+          "pluginVersion": "11.5.5",
           "targets": [
             {
               "datasource": {
@@ -12264,179 +12259,11 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "avg(aclTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
+              "expr": "avg(trackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (tracker)",
               "interval": "",
-              "legendFormat": "acl {{pod}}",
+              "legendFormat": "{{tracker}}",
               "range": true,
               "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(authoritiesTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "authorities {{pod}}",
-              "range": true,
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(cascadeTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "cascade {{pod}}",
-              "range": true,
-              "refId": "C"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(collectionSyncTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "collectionSync {{pod}}",
-              "range": true,
-              "refId": "D"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(contentTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "content {{pod}}",
-              "range": true,
-              "refId": "E"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(mainTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "main {{pod}}",
-              "range": true,
-              "refId": "F"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(previewTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "preview {{pod}}",
-              "range": true,
-              "refId": "G"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(relationTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "relation {{pod}}",
-              "range": true,
-              "refId": "H"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(shareTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "share {{pod}}",
-              "range": true,
-              "refId": "I"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(statisticsAlfrescoTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "statisticsAlfresco {{pod}}",
-              "range": true,
-              "refId": "J"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(statisticsTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "statistics {{pod}}",
-              "range": true,
-              "refId": "K"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(suggestionTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "suggestion {{pod}}",
-              "range": true,
-              "refId": "L"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(userActivitiesTrackerProgress{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "userActivities {{pod}}",
-              "range": true,
-              "refId": "M"
             }
           ],
           "title": "Tracker Progress",
@@ -12492,7 +12319,8 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -12508,7 +12336,7 @@
             "h": 13,
             "w": 12,
             "x": 12,
-            "y": 6595
+            "y": 25
           },
           "id": 145,
           "options": {
@@ -12520,11 +12348,12 @@
               "showLegend": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "multi",
               "sort": "none"
             }
           },
-          "pluginVersion": "11.4.5",
+          "pluginVersion": "11.5.5",
           "targets": [
             {
               "datasource": {
@@ -12533,179 +12362,11 @@
               },
               "editorMode": "code",
               "exemplar": true,
-              "expr": "avg(aclTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
+              "expr": "avg(trackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (tracker)",
               "interval": "",
-              "legendFormat": "acl {{pod}}",
+              "legendFormat": "{{tracker}}",
               "range": true,
               "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(authoritiesTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "authorities {{pod}}",
-              "range": true,
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(cascadeTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "cascade {{pod}}",
-              "range": true,
-              "refId": "C"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(collectionSyncTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "collectionSync {{pod}}",
-              "range": true,
-              "refId": "D"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(contentTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "content {{pod}}",
-              "range": true,
-              "refId": "E"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(mainTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "main {{pod}}",
-              "range": true,
-              "refId": "F"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(previewTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "preview {{pod}}",
-              "range": true,
-              "refId": "G"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(relationTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "relation {{pod}}",
-              "range": true,
-              "refId": "H"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(shareTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "share {{pod}}",
-              "range": true,
-              "refId": "I"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(statisticsAlfrescoTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "statisticsAlfresco {{pod}}",
-              "range": true,
-              "refId": "J"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(statisticsTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "statistics {{pod}}",
-              "range": true,
-              "refId": "K"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(suggestionTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "suggestion {{pod}}",
-              "range": true,
-              "refId": "L"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "avg(userActivitiesTrackerDelay{cluster=\"$cluster\", namespace=\"$namespace\", pod=~\"edusharing-repository-search-elastic-tracker.*\", container!=\"\"}) by (pod)",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "userActivities {{pod}}",
-              "range": true,
-              "refId": "M"
             }
           ],
           "title": "Tracker Delay",
@@ -12790,7 +12451,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27737
+            "y": 27750
           },
           "id": 183,
           "options": {
@@ -12888,7 +12549,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27737
+            "y": 27750
           },
           "id": 184,
           "options": {
@@ -12999,7 +12660,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27738
+            "y": 27751
           },
           "id": 187,
           "options": {
@@ -13109,7 +12770,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27738
+            "y": 27751
           },
           "id": 188,
           "options": {
@@ -13207,7 +12868,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28501
+            "y": 28514
           },
           "id": 189,
           "options": {
@@ -13305,7 +12966,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28501
+            "y": 28514
           },
           "id": 190,
           "options": {
@@ -13403,7 +13064,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28509
+            "y": 28522
           },
           "id": 191,
           "options": {
@@ -13501,7 +13162,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28509
+            "y": 28522
           },
           "id": 192,
           "options": {
@@ -13614,7 +13275,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5169
+            "y": 5182
           },
           "id": 194,
           "options": {
@@ -13714,7 +13375,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5169
+            "y": 5182
           },
           "id": 195,
           "options": {
@@ -13814,7 +13475,7 @@
             "h": 16,
             "w": 8,
             "x": 16,
-            "y": 5169
+            "y": 5182
           },
           "id": 196,
           "options": {
@@ -13914,7 +13575,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5820
+            "y": 5833
           },
           "id": 197,
           "options": {
@@ -14014,7 +13675,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5820
+            "y": 5833
           },
           "id": 198,
           "options": {
@@ -14114,7 +13775,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 5828
+            "y": 5841
           },
           "id": 199,
           "options": {
@@ -14212,7 +13873,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 5828
+            "y": 5841
           },
           "id": 200,
           "options": {
@@ -14310,7 +13971,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 5882
+            "y": 5895
           },
           "id": 201,
           "options": {
@@ -14409,7 +14070,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 5882
+            "y": 5895
           },
           "id": 202,
           "options": {
@@ -14517,7 +14178,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27740
+            "y": 27753
           },
           "id": 205,
           "options": {
@@ -14612,7 +14273,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27740
+            "y": 27753
           },
           "id": 206,
           "options": {
@@ -14708,7 +14369,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28140
+            "y": 28153
           },
           "id": 496,
           "options": {
@@ -14808,7 +14469,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28140
+            "y": 28153
           },
           "id": 497,
           "options": {
@@ -14907,7 +14568,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28148
+            "y": 28161
           },
           "id": 209,
           "options": {
@@ -15004,7 +14665,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28148
+            "y": 28161
           },
           "id": 210,
           "options": {
@@ -15102,7 +14763,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28156
+            "y": 28169
           },
           "id": 207,
           "options": {
@@ -15200,7 +14861,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28156
+            "y": 28169
           },
           "id": 208,
           "options": {
@@ -15294,7 +14955,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28164
+            "y": 28177
           },
           "id": 211,
           "options": {
@@ -15394,7 +15055,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28164
+            "y": 28177
           },
           "id": 212,
           "options": {
@@ -15492,7 +15153,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28172
+            "y": 28185
           },
           "id": 213,
           "options": {
@@ -15591,7 +15252,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28172
+            "y": 28185
           },
           "id": 214,
           "options": {
@@ -15689,7 +15350,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28180
+            "y": 28193
           },
           "id": 215,
           "options": {
@@ -15787,7 +15448,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28180
+            "y": 28193
           },
           "id": 216,
           "options": {
@@ -15885,7 +15546,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 28188
+            "y": 28201
           },
           "id": 217,
           "options": {
@@ -15984,7 +15645,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 28188
+            "y": 28201
           },
           "id": 218,
           "options": {
@@ -16083,7 +15744,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 28196
+            "y": 28209
           },
           "id": 219,
           "options": {
@@ -16194,7 +15855,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 78034
+            "y": 78047
           },
           "id": 221,
           "options": {
@@ -16293,7 +15954,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 78034
+            "y": 78047
           },
           "id": 222,
           "options": {
@@ -16408,7 +16069,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 78035
+            "y": 78048
           },
           "id": 224,
           "options": {
@@ -16521,7 +16182,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 15950
+            "y": 15963
           },
           "id": 226,
           "options": {
@@ -16618,7 +16279,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 15958
+            "y": 15971
           },
           "id": 229,
           "options": {
@@ -16715,7 +16376,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 15958
+            "y": 15971
           },
           "id": 230,
           "options": {
@@ -16826,7 +16487,7 @@
             "h": 13,
             "w": 8,
             "x": 0,
-            "y": 5174
+            "y": 5187
           },
           "id": 238,
           "options": {
@@ -16926,7 +16587,7 @@
             "h": 13,
             "w": 8,
             "x": 8,
-            "y": 5174
+            "y": 5187
           },
           "id": 239,
           "options": {
@@ -17027,7 +16688,7 @@
             "h": 13,
             "w": 8,
             "x": 16,
-            "y": 5174
+            "y": 5187
           },
           "id": 240,
           "options": {
@@ -17153,7 +16814,7 @@
             "h": 13,
             "w": 8,
             "x": 0,
-            "y": 5317
+            "y": 5330
           },
           "id": 490,
           "options": {
@@ -17254,7 +16915,7 @@
             "h": 13,
             "w": 8,
             "x": 8,
-            "y": 5317
+            "y": 5330
           },
           "id": 491,
           "options": {
@@ -17355,7 +17016,7 @@
             "h": 13,
             "w": 8,
             "x": 16,
-            "y": 5317
+            "y": 5330
           },
           "id": 492,
           "options": {
@@ -17455,7 +17116,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 5543
+            "y": 5556
           },
           "id": 227,
           "options": {
@@ -17552,7 +17213,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 5543
+            "y": 5556
           },
           "id": 228,
           "options": {
@@ -17664,7 +17325,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27745
+            "y": 27758
           },
           "id": 487,
           "options": {
@@ -17765,7 +17426,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27745
+            "y": 27758
           },
           "id": 493,
           "options": {
@@ -17866,7 +17527,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 27981
+            "y": 27994
           },
           "id": 485,
           "options": {
@@ -17967,7 +17628,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 27981
+            "y": 27994
           },
           "id": 486,
           "options": {
@@ -18068,7 +17729,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 27981
+            "y": 27994
           },
           "id": 494,
           "options": {
@@ -18183,7 +17844,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27746
+            "y": 27759
           },
           "id": 351,
           "options": {
@@ -18281,7 +17942,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27746
+            "y": 27759
           },
           "id": 352,
           "options": {
@@ -18392,7 +18053,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 6551
+            "y": 6564
           },
           "id": 355,
           "options": {
@@ -18491,7 +18152,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 6551
+            "y": 6564
           },
           "id": 498,
           "options": {
@@ -18591,7 +18252,7 @@
             "h": 14,
             "w": 8,
             "x": 16,
-            "y": 6551
+            "y": 6564
           },
           "id": 357,
           "options": {
@@ -18691,7 +18352,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 6558
+            "y": 6571
           },
           "id": 356,
           "options": {
@@ -18790,7 +18451,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 6558
+            "y": 6571
           },
           "id": 499,
           "options": {
@@ -18891,7 +18552,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 6565
+            "y": 6578
           },
           "id": 500,
           "options": {
@@ -18991,7 +18652,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 6565
+            "y": 6578
           },
           "id": 501,
           "options": {
@@ -19091,7 +18752,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 6565
+            "y": 6578
           },
           "id": 516,
           "options": {
@@ -19190,7 +18851,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 6573
+            "y": 6586
           },
           "id": 358,
           "options": {
@@ -19290,7 +18951,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 6573
+            "y": 6586
           },
           "id": 502,
           "options": {
@@ -19389,8 +19050,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -19406,7 +19066,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 61
+            "y": 74
           },
           "id": 557,
           "options": {
@@ -19490,8 +19150,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -19507,7 +19166,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 61
+            "y": 74
           },
           "id": 558,
           "options": {
@@ -19604,8 +19263,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -19621,7 +19279,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 70
+            "y": 83
           },
           "id": 559,
           "options": {
@@ -19704,8 +19362,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -19721,7 +19378,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 70
+            "y": 83
           },
           "id": 560,
           "options": {
@@ -19804,8 +19461,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -19821,7 +19477,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 70
+            "y": 83
           },
           "id": 561,
           "options": {
@@ -19904,8 +19560,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -19921,7 +19576,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 211
+            "y": 224
           },
           "id": 562,
           "options": {
@@ -20004,8 +19659,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20021,7 +19675,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 211
+            "y": 224
           },
           "id": 563,
           "options": {
@@ -20104,8 +19758,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20121,7 +19774,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 211
+            "y": 224
           },
           "id": 564,
           "options": {
@@ -20204,8 +19857,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20221,7 +19873,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 219
+            "y": 232
           },
           "id": 565,
           "options": {
@@ -20319,8 +19971,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20336,7 +19987,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 219
+            "y": 232
           },
           "id": 372,
           "options": {
@@ -20420,8 +20071,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20437,7 +20087,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 219
+            "y": 232
           },
           "id": 567,
           "options": {
@@ -20535,8 +20185,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20552,7 +20201,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 63
+            "y": 76
           },
           "id": 570,
           "options": {
@@ -20636,8 +20285,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20653,7 +20301,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 63
+            "y": 76
           },
           "id": 571,
           "options": {
@@ -20751,8 +20399,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20768,7 +20415,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 64
+            "y": 77
           },
           "id": 572,
           "options": {
@@ -20852,8 +20499,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20869,7 +20515,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 64
+            "y": 77
           },
           "id": 573,
           "options": {
@@ -20954,8 +20600,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -20971,7 +20616,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 72
+            "y": 85
           },
           "id": 574,
           "options": {
@@ -21056,8 +20701,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21073,7 +20717,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 72
+            "y": 85
           },
           "id": 575,
           "options": {
@@ -21157,8 +20801,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21174,7 +20817,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 80
+            "y": 93
           },
           "id": 576,
           "options": {
@@ -21258,8 +20901,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21275,7 +20917,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 80
+            "y": 93
           },
           "id": 577,
           "options": {
@@ -21373,8 +21015,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21390,7 +21031,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 5301
+            "y": 5314
           },
           "id": 361,
           "options": {
@@ -21472,8 +21113,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21489,7 +21129,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 5301
+            "y": 5314
           },
           "id": 362,
           "options": {
@@ -21584,8 +21224,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21601,7 +21240,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 229
+            "y": 242
           },
           "id": 365,
           "options": {
@@ -21682,8 +21321,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21699,7 +21337,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 229
+            "y": 242
           },
           "id": 366,
           "options": {
@@ -21780,8 +21418,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21797,7 +21434,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 229
+            "y": 242
           },
           "id": 367,
           "options": {
@@ -21878,8 +21515,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21895,7 +21531,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 237
+            "y": 250
           },
           "id": 368,
           "options": {
@@ -21976,8 +21612,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -21993,7 +21628,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 237
+            "y": 250
           },
           "id": 369,
           "options": {
@@ -22074,8 +21709,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -22091,7 +21725,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 237
+            "y": 250
           },
           "id": 370,
           "options": {
@@ -22172,8 +21806,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -22189,7 +21822,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 245
+            "y": 258
           },
           "id": 371,
           "options": {
@@ -22283,8 +21916,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -22300,7 +21932,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 245
+            "y": 258
           },
           "id": 566,
           "options": {
@@ -22382,8 +22014,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -22399,7 +22030,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 245
+            "y": 258
           },
           "id": 373,
           "options": {
@@ -22511,7 +22142,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 77183
+            "y": 77196
           },
           "id": 375,
           "options": {
@@ -22609,7 +22240,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 77183
+            "y": 77196
           },
           "id": 376,
           "options": {
@@ -22720,7 +22351,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 77432
+            "y": 77445
           },
           "id": 379,
           "options": {
@@ -22830,7 +22461,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 77432
+            "y": 77445
           },
           "id": 380,
           "options": {
@@ -22928,7 +22559,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 77472
+            "y": 77485
           },
           "id": 381,
           "options": {
@@ -23026,7 +22657,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 77472
+            "y": 77485
           },
           "id": 382,
           "options": {
@@ -23124,7 +22755,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 77480
+            "y": 77493
           },
           "id": 383,
           "options": {
@@ -23222,7 +22853,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 77480
+            "y": 77493
           },
           "id": 384,
           "options": {
@@ -23319,8 +22950,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -23336,7 +22966,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 101
+            "y": 114
           },
           "id": 386,
           "options": {
@@ -23418,8 +23048,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -23435,7 +23064,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 101
+            "y": 114
           },
           "id": 387,
           "options": {
@@ -23518,8 +23147,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -23535,7 +23163,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 109
+            "y": 122
           },
           "id": 388,
           "options": {
@@ -23620,8 +23248,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -23637,7 +23264,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 109
+            "y": 122
           },
           "id": 389,
           "options": {
@@ -23719,8 +23346,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -23736,7 +23362,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 117
+            "y": 130
           },
           "id": 390,
           "options": {
@@ -23818,8 +23444,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -23835,7 +23460,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 117
+            "y": 130
           },
           "id": 391,
           "options": {
@@ -23947,7 +23572,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27753
+            "y": 27766
           },
           "id": 393,
           "options": {
@@ -24047,7 +23672,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27753
+            "y": 27766
           },
           "id": 394,
           "options": {
@@ -24160,7 +23785,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 27754
+            "y": 27767
           },
           "id": 397,
           "options": {
@@ -24259,7 +23884,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 27754
+            "y": 27767
           },
           "id": 504,
           "options": {
@@ -24359,7 +23984,7 @@
             "h": 14,
             "w": 8,
             "x": 16,
-            "y": 27754
+            "y": 27767
           },
           "id": 399,
           "options": {
@@ -24459,7 +24084,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 27822
+            "y": 27835
           },
           "id": 398,
           "options": {
@@ -24558,7 +24183,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 27822
+            "y": 27835
           },
           "id": 505,
           "options": {
@@ -24658,7 +24283,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 27829
+            "y": 27842
           },
           "id": 400,
           "options": {
@@ -24757,7 +24382,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 27829
+            "y": 27842
           },
           "id": 503,
           "options": {
@@ -24857,7 +24482,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 27837
+            "y": 27850
           },
           "id": 591,
           "options": {
@@ -24953,7 +24578,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 27837
+            "y": 27850
           },
           "id": 592,
           "options": {
@@ -25049,7 +24674,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 27837
+            "y": 27850
           },
           "id": 593,
           "options": {
@@ -25145,7 +24770,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 27845
+            "y": 27858
           },
           "id": 594,
           "options": {
@@ -25241,7 +24866,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 27845
+            "y": 27858
           },
           "id": 595,
           "options": {
@@ -25337,7 +24962,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 27845
+            "y": 27858
           },
           "id": 596,
           "options": {
@@ -25448,7 +25073,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27755
+            "y": 27768
           },
           "id": 403,
           "options": {
@@ -25548,7 +25173,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27755
+            "y": 27768
           },
           "id": 404,
           "options": {
@@ -25662,7 +25287,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 70229
+            "y": 70242
           },
           "id": 407,
           "options": {
@@ -25762,7 +25387,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 70229
+            "y": 70242
           },
           "id": 408,
           "options": {
@@ -25862,7 +25487,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 70237
+            "y": 70250
           },
           "id": 597,
           "options": {
@@ -25980,7 +25605,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 70237
+            "y": 70250
           },
           "id": 598,
           "options": {
@@ -26076,7 +25701,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 70237
+            "y": 70250
           },
           "id": 599,
           "options": {
@@ -26187,7 +25812,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 27757
+            "y": 27770
           },
           "id": 410,
           "options": {
@@ -26287,7 +25912,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 27757
+            "y": 27770
           },
           "id": 411,
           "options": {
@@ -26401,7 +26026,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 70231
+            "y": 70244
           },
           "id": 414,
           "options": {
@@ -26501,7 +26126,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 70231
+            "y": 70244
           },
           "id": 416,
           "options": {
@@ -26602,7 +26227,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 70284
+            "y": 70297
           },
           "id": 415,
           "options": {
@@ -26701,7 +26326,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 70292
+            "y": 70305
           },
           "id": 588,
           "options": {
@@ -26797,7 +26422,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 70292
+            "y": 70305
           },
           "id": 589,
           "options": {
@@ -26893,7 +26518,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 70292
+            "y": 70305
           },
           "id": 590,
           "options": {
@@ -27026,7 +26651,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 52
+            "y": 65
           },
           "id": 619,
           "options": {
@@ -27120,7 +26745,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 52
+            "y": 65
           },
           "id": 620,
           "options": {
@@ -27218,7 +26843,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 60
+            "y": 73
           },
           "id": 621,
           "options": {
@@ -27316,7 +26941,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 60
+            "y": 73
           },
           "id": 622,
           "options": {
@@ -27410,7 +27035,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 68
+            "y": 81
           },
           "id": 623,
           "options": {
@@ -27519,7 +27144,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 68
+            "y": 81
           },
           "id": 624,
           "options": {
@@ -27627,7 +27252,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 53
+            "y": 66
           },
           "id": 626,
           "options": {
@@ -27716,6 +27341,7 @@
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -27732,8 +27358,7 @@
                   }
                 ]
               },
-              "unit": "percentunit",
-              "min": 0
+              "unit": "percentunit"
             },
             "overrides": []
           },
@@ -27741,7 +27366,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 53
+            "y": 66
           },
           "id": 627,
           "options": {
@@ -27819,6 +27444,8 @@
                 }
               },
               "mappings": [],
+              "max": 1,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -27831,9 +27458,7 @@
                   }
                 ]
               },
-              "unit": "short",
-              "min": 0,
-              "max": 1
+              "unit": "short"
             },
             "overrides": []
           },
@@ -27841,7 +27466,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 61
+            "y": 74
           },
           "id": 628,
           "options": {
@@ -27919,6 +27544,8 @@
                 }
               },
               "mappings": [],
+              "max": 1,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -27927,9 +27554,7 @@
                   }
                 ]
               },
-              "unit": "short",
-              "min": 0,
-              "max": 1
+              "unit": "short"
             },
             "overrides": []
           },
@@ -27937,7 +27562,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 61
+            "y": 74
           },
           "id": 629,
           "options": {
@@ -28046,7 +27671,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 61
+            "y": 74
           },
           "id": 630,
           "options": {
@@ -28158,7 +27783,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 8170
+            "y": 8183
           },
           "id": 432,
           "options": {
@@ -28258,7 +27883,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 8170
+            "y": 8183
           },
           "id": 433,
           "options": {
@@ -28372,7 +27997,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 7961
+            "y": 7974
           },
           "id": 436,
           "options": {
@@ -28472,7 +28097,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 7961
+            "y": 7974
           },
           "id": 437,
           "options": {
@@ -28572,7 +28197,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 8031
+            "y": 8044
           },
           "id": 438,
           "options": {
@@ -28675,7 +28300,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 8037
+            "y": 8050
           },
           "id": 439,
           "options": {
@@ -28776,7 +28401,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 8037
+            "y": 8050
           },
           "id": 440,
           "options": {
@@ -28877,7 +28502,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 8045
+            "y": 8058
           },
           "id": 441,
           "options": {
@@ -28978,7 +28603,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 8045
+            "y": 8058
           },
           "id": 442,
           "options": {
@@ -29079,7 +28704,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 8045
+            "y": 8058
           },
           "id": 443,
           "options": {
@@ -29179,7 +28804,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 8053
+            "y": 8066
           },
           "id": 444,
           "options": {
@@ -29281,7 +28906,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 8053
+            "y": 8066
           },
           "id": 445,
           "options": {
@@ -29383,7 +29008,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 8053
+            "y": 8066
           },
           "id": 446,
           "options": {
@@ -29500,7 +29125,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 7962
+            "y": 7975
           },
           "id": 464,
           "options": {
@@ -29600,7 +29225,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 7962
+            "y": 7975
           },
           "id": 465,
           "options": {
@@ -29714,7 +29339,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 7993
+            "y": 8006
           },
           "id": 468,
           "options": {
@@ -29814,7 +29439,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 7993
+            "y": 8006
           },
           "id": 469,
           "options": {
@@ -29914,7 +29539,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 7993
+            "y": 8006
           },
           "id": 470,
           "options": {
@@ -30014,7 +29639,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 8017
+            "y": 8030
           },
           "id": 471,
           "options": {
@@ -30115,7 +29740,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 8017
+            "y": 8030
           },
           "id": 472,
           "options": {
@@ -30215,7 +29840,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 8017
+            "y": 8030
           },
           "id": 473,
           "options": {
@@ -30314,7 +29939,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 8025
+            "y": 8038
           },
           "id": 584,
           "options": {
@@ -30410,7 +30035,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 8025
+            "y": 8038
           },
           "id": 585,
           "options": {
@@ -30506,7 +30131,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 8025
+            "y": 8038
           },
           "id": 586,
           "options": {
@@ -30602,7 +30227,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 8033
+            "y": 8046
           },
           "id": 600,
           "options": {
@@ -30713,7 +30338,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 7964
+            "y": 7977
           },
           "id": 475,
           "options": {
@@ -30813,7 +30438,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 7964
+            "y": 7977
           },
           "id": 476,
           "options": {
@@ -30926,7 +30551,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 5324
+            "y": 5337
           },
           "id": 479,
           "options": {
@@ -31025,7 +30650,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 5324
+            "y": 5337
           },
           "id": 506,
           "options": {
@@ -31124,7 +30749,7 @@
             "h": 14,
             "w": 8,
             "x": 16,
-            "y": 5324
+            "y": 5337
           },
           "id": 481,
           "options": {
@@ -31224,7 +30849,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 5467
+            "y": 5480
           },
           "id": 480,
           "options": {
@@ -31323,7 +30948,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 5467
+            "y": 5480
           },
           "id": 507,
           "options": {
@@ -31423,7 +31048,7 @@
             "h": 7,
             "w": 8,
             "x": 0,
-            "y": 5474
+            "y": 5487
           },
           "id": 508,
           "options": {
@@ -31523,7 +31148,7 @@
             "h": 7,
             "w": 8,
             "x": 8,
-            "y": 5474
+            "y": 5487
           },
           "id": 509,
           "options": {
@@ -31623,7 +31248,7 @@
             "h": 7,
             "w": 8,
             "x": 16,
-            "y": 5474
+            "y": 5487
           },
           "id": 510,
           "options": {
@@ -31722,7 +31347,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 5481
+            "y": 5494
           },
           "id": 514,
           "options": {
@@ -31822,7 +31447,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 5481
+            "y": 5494
           },
           "id": 515,
           "options": {
@@ -31936,7 +31561,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 5325
+            "y": 5338
           },
           "id": 525,
           "options": {
@@ -32032,7 +31657,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 5333
+            "y": 5346
           },
           "id": 524,
           "options": {
@@ -32128,7 +31753,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5341
+            "y": 5354
           },
           "id": 522,
           "options": {
@@ -32224,7 +31849,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5341
+            "y": 5354
           },
           "id": 521,
           "options": {
@@ -32320,7 +31945,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5341
+            "y": 5354
           },
           "id": 523,
           "options": {
@@ -32416,7 +32041,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5349
+            "y": 5362
           },
           "id": 526,
           "options": {
@@ -32512,7 +32137,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5349
+            "y": 5362
           },
           "id": 527,
           "options": {
@@ -32608,7 +32233,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5349
+            "y": 5362
           },
           "id": 528,
           "options": {
@@ -32704,7 +32329,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5357
+            "y": 5370
           },
           "id": 529,
           "options": {
@@ -32800,7 +32425,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5357
+            "y": 5370
           },
           "id": 530,
           "options": {
@@ -32918,7 +32543,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5357
+            "y": 5370
           },
           "id": 531,
           "options": {
@@ -33014,7 +32639,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5365
+            "y": 5378
           },
           "id": 532,
           "options": {
@@ -33110,7 +32735,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5365
+            "y": 5378
           },
           "id": 533,
           "options": {
@@ -33217,7 +32842,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5365
+            "y": 5378
           },
           "id": 534,
           "options": {
@@ -33324,7 +32949,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5373
+            "y": 5386
           },
           "id": 535,
           "options": {
@@ -33442,7 +33067,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5373
+            "y": 5386
           },
           "id": 536,
           "options": {
@@ -33538,7 +33163,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5373
+            "y": 5386
           },
           "id": 537,
           "options": {
@@ -33634,7 +33259,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5381
+            "y": 5394
           },
           "id": 538,
           "options": {
@@ -33752,7 +33377,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5381
+            "y": 5394
           },
           "id": 539,
           "options": {
@@ -33848,7 +33473,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5381
+            "y": 5394
           },
           "id": 540,
           "options": {
@@ -33944,7 +33569,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5389
+            "y": 5402
           },
           "id": 541,
           "options": {
@@ -34040,7 +33665,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5389
+            "y": 5402
           },
           "id": 542,
           "options": {
@@ -34136,7 +33761,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5389
+            "y": 5402
           },
           "id": 543,
           "options": {
@@ -34232,7 +33857,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5397
+            "y": 5410
           },
           "id": 544,
           "options": {
@@ -34328,7 +33953,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5397
+            "y": 5410
           },
           "id": 545,
           "options": {
@@ -34424,7 +34049,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5397
+            "y": 5410
           },
           "id": 546,
           "options": {
@@ -34531,7 +34156,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5405
+            "y": 5418
           },
           "id": 547,
           "options": {
@@ -34660,7 +34285,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5405
+            "y": 5418
           },
           "id": 548,
           "options": {
@@ -34756,7 +34381,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5405
+            "y": 5418
           },
           "id": 549,
           "options": {
@@ -34852,7 +34477,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5413
+            "y": 5426
           },
           "id": 550,
           "options": {
@@ -34948,7 +34573,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5413
+            "y": 5426
           },
           "id": 551,
           "options": {
@@ -35044,7 +34669,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5413
+            "y": 5426
           },
           "id": 552,
           "options": {
@@ -35140,7 +34765,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5421
+            "y": 5434
           },
           "id": 553,
           "options": {
@@ -35236,7 +34861,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5421
+            "y": 5434
           },
           "id": 554,
           "options": {
@@ -35354,7 +34979,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5429
+            "y": 5442
           },
           "id": 578,
           "options": {
@@ -35450,7 +35075,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5429
+            "y": 5442
           },
           "id": 579,
           "options": {
@@ -35568,7 +35193,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5429
+            "y": 5442
           },
           "id": 580,
           "options": {
@@ -35664,7 +35289,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 5437
+            "y": 5450
           },
           "id": 581,
           "options": {
@@ -35782,7 +35407,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 5437
+            "y": 5450
           },
           "id": 582,
           "options": {
@@ -35878,7 +35503,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 5437
+            "y": 5450
           },
           "id": 583,
           "options": {
@@ -35985,7 +35610,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 61
+            "y": 74
           },
           "id": 632,
           "options": {
@@ -36063,6 +35688,7 @@
                 }
               },
               "mappings": [],
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -36079,8 +35705,7 @@
                   }
                 ]
               },
-              "unit": "percentunit",
-              "min": 0
+              "unit": "percentunit"
             },
             "overrides": []
           },
@@ -36088,7 +35713,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 61
+            "y": 74
           },
           "id": 633,
           "options": {
@@ -36166,6 +35791,8 @@
                 }
               },
               "mappings": [],
+              "max": 1,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -36178,9 +35805,7 @@
                   }
                 ]
               },
-              "unit": "short",
-              "min": 0,
-              "max": 1
+              "unit": "short"
             },
             "overrides": []
           },
@@ -36188,7 +35813,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 69
+            "y": 82
           },
           "id": 634,
           "options": {
@@ -36266,6 +35891,8 @@
                 }
               },
               "mappings": [],
+              "max": 1,
+              "min": 0,
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -36278,9 +35905,7 @@
                   }
                 ]
               },
-              "unit": "short",
-              "min": 0,
-              "max": 1
+              "unit": "short"
             },
             "overrides": []
           },
@@ -36288,7 +35913,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 69
+            "y": 82
           },
           "id": 635,
           "options": {
@@ -36382,7 +36007,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 77
+            "y": 90
           },
           "id": 636,
           "options": {
@@ -36476,7 +36101,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 77
+            "y": 90
           },
           "id": 637,
           "options": {
@@ -36574,7 +36199,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 77
+            "y": 90
           },
           "id": 638,
           "options": {
@@ -36672,7 +36297,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 85
+            "y": 98
           },
           "id": 639,
           "options": {
@@ -36784,7 +36409,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 5883
+            "y": 5896
           },
           "id": 421,
           "options": {
@@ -36884,7 +36509,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 5883
+            "y": 5896
           },
           "id": 422,
           "options": {
@@ -36997,7 +36622,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 60
+            "y": 73
           },
           "id": 602,
           "options": {
@@ -37093,7 +36718,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 60
+            "y": 73
           },
           "id": 603,
           "options": {
@@ -37189,7 +36814,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 60
+            "y": 73
           },
           "id": 604,
           "options": {
@@ -37285,7 +36910,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 68
+            "y": 81
           },
           "id": 605,
           "options": {
@@ -37403,7 +37028,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 68
+            "y": 81
           },
           "id": 606,
           "options": {
@@ -37499,7 +37124,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 68
+            "y": 81
           },
           "id": 607,
           "options": {
@@ -37606,7 +37231,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 76
+            "y": 89
           },
           "id": 608,
           "options": {
@@ -37724,7 +37349,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 76
+            "y": 89
           },
           "id": 609,
           "options": {
@@ -37820,7 +37445,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 76
+            "y": 89
           },
           "id": 610,
           "options": {
@@ -37927,7 +37552,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 84
+            "y": 97
           },
           "id": 611,
           "options": {
@@ -38034,7 +37659,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 84
+            "y": 97
           },
           "id": 612,
           "options": {
@@ -38130,7 +37755,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 84
+            "y": 97
           },
           "id": 613,
           "options": {
@@ -38226,7 +37851,7 @@
             "h": 8,
             "w": 8,
             "x": 0,
-            "y": 92
+            "y": 105
           },
           "id": 614,
           "options": {
@@ -38322,7 +37947,7 @@
             "h": 8,
             "w": 8,
             "x": 8,
-            "y": 92
+            "y": 105
           },
           "id": 615,
           "options": {
@@ -38418,7 +38043,7 @@
             "h": 8,
             "w": 8,
             "x": 16,
-            "y": 92
+            "y": 105
           },
           "id": 616,
           "options": {
@@ -38525,7 +38150,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 100
+            "y": 113
           },
           "id": 617,
           "options": {
@@ -38621,7 +38246,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 100
+            "y": 113
           },
           "id": 618,
           "options": {
@@ -38727,6 +38352,6 @@
   "timezone": "",
   "title": "edusharing",
   "uid": "gAT9YMl8m",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
